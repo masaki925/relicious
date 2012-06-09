@@ -16,7 +16,9 @@
     <%= link_to "Facebook でログイン", "/auth/facebook " %>
   <% end %>
 
-<%= yield %>
+  <%= yield %>
 
+  <%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

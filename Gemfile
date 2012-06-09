@@ -51,3 +51,5 @@ end
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'factory_girl_rails'
+

@@ -3,9 +3,14 @@ require 'spec_helper'
 describe SessionsController do
 
   describe "GET 'callback'" do
-    it "returns http success" do
-      get 'callback'
-      response.should be_success
+    context "with valid env" do
+      it "returns http success" do
+        get 'callback'
+        response.should be_success
+      end
+    end
+    context "with invalid env" do
+      it "raise error"
     end
   end
 

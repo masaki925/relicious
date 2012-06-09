@@ -1,0 +1,52 @@
+- ログイン/ログアウト 部分をつくる
+-- GET /auth/facebook したとき、facebook の認証ページにリダイレクト
+-- GET /auth/facebook/callback したとき、
+   環境変数request.env["omniauth.auth"] に認証情報が入っていて、
+     まだユーザ登録されていなければ、ユーザ登録をしてsession にuser_id を格納して、トップにリダイレクト
+     もうユーザ登録されていれば、session にuser_id を格納して、トップにリダイレクト
+   環境変数request.env["omniauth.auth"] に認証情報が入っていなければ、エラーを表示
+-- /logout に飛んだら、session[:user_id] を削除して、トップにリダイレクト
+
+- マイページをつくる
+-- トップにアクセスしたとき、
+     ログイン(current_user が存在) していなかったら、
+       facebook ログインへのリンクを表示する
+ 
+     ログイン(current_user が存在) していたら、
+       名前を表示して、
+       meetup へのリンクを表示する
+
+- meetup のCRUD をつくる
+-- ログイン(current_user が存在) していなかったら、
+--- GET /meetups/ したとき、meetup の一覧を表示する
+--- GET /meetups/new したとき、トップページにリダイレクトして、エラーメッセージを表示する
+--- POST /meetups/create にアクセスしたとき、トップページにリダイレクトして、エラーメッセージを表示する
+--- GET /meetups/:meetup_id したとき、トップページにリダイレクトして、エラーメッセージを表示する
+--- GET /meetups/:meetup_id/edit したとき、トップページにリダイレクトして、エラーメッセージを表示する
+--- PUT /meetups/:meetup_id したとき、トップページにリダイレクトして、エラーメッセージを表示する
+--- DELETE /meetups/:meetup_id したとき、トップページにリダイレクトして、エラーメッセージを表示する
+
+-- ログイン(current_user が存在) していたら、
+--- GET /meetups/ したとき、meetup の一覧を表示する
+--- GET /meetups/new したとき、
+     meetup 作成フォームを表示して、
+       もしクエリストリングに値があれば、フォームのデフォルト値にセットする
+--- POST /meetups/create にアクセスしたとき、
+     validate に通ったら、meetup を保存して、/meetups にリダイレクトする
+     validate に通らなかったら、
+       通った部分だけクエリストリングにくっつけて、GET /meetups/new にリダイレクトする
+--- GET /meetups/:meetup_id したとき、
+     Meetup.find(:meetup_id) が存在すれば、@meetup に格納して、表示する
+     Meetup.find(:meetup_id) が存在しなければ、404 エラーメッセージを表示する
+--- GET /meetups/:meetup_id/edit したとき、
+     Meetup.find(:meetup_id) が存在すれば、@meetup の内容を、フォームのデフォルト値を入れて表示する
+     Meetup.find(:meetup_id) が存在しなければ、404 エラーメッセージを表示する
+--- PUT /meetups/:meetup_id したとき、
+     Meetup.find(:meetup_id) が存在すれば、@meetup に格納して
+       validate が通れば、@meetup を保存して、/meetups/:meetup_id にリダイレクトする
+       validate が通らなければ、GET /meetups/:meetup_id/edit にリダイレクトして、エラーメッセージを表示する
+     Meetup.find(:meetup_id) が存在しなければ、404 エラーメッセージを表示する
+--- DELETE /meetups/:meetup_id したとき、
+     Meetup.find(:meetup_id) が存在すれば、@meetup を削除して、/meetups にリダイレクト
+     Meetup.find(:meetup_id) が存在しなければ、404 エラーメッセージを表示する
+
