@@ -8,17 +8,22 @@
 </head>
 <body>
 
-  <% if current_user %>
-    <%= current_user.name %> さん |
-    <%= link_to "ログアウト", logout_path %>
-  <% else %>
-    <%#= link_to "Twitter でログイン", "/auth/twitter" %>
-    <%= link_to "Facebook でログイン", "/auth/facebook " %>
-  <% end %>
+  <div class='header'>
+    <%= link_to 'Relicious', root_path %><br/>
+    <% if current_user %>
+      <%= current_user.name %> さん |
+      <%= link_to "ログアウト", logout_path %>
+    <% else %>
+      <%#= link_to "Twitter でログイン", "/auth/twitter" %>
+      <%= link_to "Facebook でログイン", "/auth/facebook " %>
+    <% end %>
+  </div>
 
   <%= yield %>
 
-  <%= render 'layouts/footer' %>
+  <div class='footer'>
+    <%= render 'layouts/footer' %>
+  </div>
   <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

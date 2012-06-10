@@ -11,20 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120603134224) do
+ActiveRecord::Schema.define(:version => 20120610133322) do
 
   create_table "users", :force => true do |t|
+    t.string   "name",                      :null => false
+    t.string   "screen_name"
+    t.string   "email"
     t.string   "provider",                  :null => false
     t.integer  "provider_uid", :limit => 8, :null => false
-    t.string   "screen_name"
-    t.string   "name",                      :null => false
-    t.string   "email"
+    t.string   "auth_token",                :null => false
     t.datetime "birthday"
     t.text     "introduction"
     t.string   "education"
     t.string   "work"
-    t.string   "auth_token",                :null => false
-    t.string   "device_token"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

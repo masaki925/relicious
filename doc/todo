@@ -1,11 +1,11 @@
-- ログイン/ログアウト 部分をつくる
--- GET /auth/facebook したとき、facebook の認証ページにリダイレクト
--- GET /auth/facebook/callback したとき、
+x ログイン/ログアウト 部分をつくる
+xx GET /auth/facebook したとき、facebook の認証ページにリダイレクト
+xx GET /auth/facebook/callback したとき、
    環境変数request.env["omniauth.auth"] に認証情報が入っていて、
      まだユーザ登録されていなければ、ユーザ登録をしてsession にuser_id を格納して、トップにリダイレクト
      もうユーザ登録されていれば、session にuser_id を格納して、トップにリダイレクト
    環境変数request.env["omniauth.auth"] に認証情報が入っていなければ、エラーを表示
--- /logout に飛んだら、session[:user_id] を削除して、トップにリダイレクト
+xx /logout に飛んだら、session[:user_id] を削除して、トップにリダイレクト
 
 - マイページをつくる
 -- トップにアクセスしたとき、

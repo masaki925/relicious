@@ -1,4 +1,6 @@
 Relicious::Application.routes.draw do
+  resources :users
+
   get "top/index"
 
   match "/auth/:provider/callback" => "sessions#callback"
