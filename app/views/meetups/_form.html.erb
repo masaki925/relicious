@@ -1,0 +1,34 @@
+<%= form_for(@meetup) do |f| %>
+  <% if @meetup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meetup.errors.count, "error") %> prohibited this meetup from being saved:</h2>
+
+      <ul>
+      <% @meetup.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :begin_at %><br />
+    <%= f.datetime_select :begin_at %>
+  </div>
+  <div class="field">
+    <%= f.label :end_at %><br />
+    <%= f.datetime_select :end_at %>
+  </div>
+  <div class="field">
+    <%= f.label :public %><br />
+    <%= f.check_box :public %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

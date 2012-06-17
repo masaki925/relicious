@@ -19,8 +19,8 @@ describe "users/show" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
     rendered.should match(/Email/)
-    rendered.should match(/Provider/)
-    rendered.should match(/1/)
+    rendered.should_not match(/Provider/)
+    rendered.should_not match(/Provider uid/)
     rendered.should match(/MyText/)
     rendered.should match(/Education/)
     rendered.should match(/Work/)

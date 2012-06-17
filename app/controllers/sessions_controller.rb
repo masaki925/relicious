@@ -5,12 +5,15 @@ class SessionsController < ApplicationController
 
     if @user = User.find_by_provider_and_provider_uid(auth["provider"], auth["uid"])
       @user.auth_token = auth["credentials"]["token"]
-      raise "error: cannot update auth token" unless @user.save
+      unless @user.save
+        raise "error: cannot update auth token"
+      end
     else
       @user = User.create_with_omniauth(auth)
     end 
     session[:user_id] = @user.id
-    redirect_to root_path
+    #redirect_to users_path, :id => @user
+    redirect_to @user
   end
 
   def destroy

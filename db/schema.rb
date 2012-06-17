@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120610133322) do
+ActiveRecord::Schema.define(:version => 20120610232645) do
+
+  create_table "meetups", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "begin_at"
+    t.datetime "end_at"
+    t.boolean  "public"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "meetups", ["user_id"], :name => "index_meetups_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                      :null => false

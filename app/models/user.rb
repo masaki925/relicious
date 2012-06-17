@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :screen_name, :email, :birthday, :introduction, :provider, :provider_uid, :auth_token, :education, :work
+  attr_accessible :name, :screen_name, :email, :birthday, :introduction, :education, :work
   email_regex    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,         :presence => true
@@ -17,10 +17,10 @@ class User < ActiveRecord::Base
       :email         => auth["info"]["email"],
       :birthday      => auth["info"]["birthday"],
       :screen_name   => auth["info"]["nickname"],
-      :provider      => auth["provider"],
-      :provider_uid  => auth["uid"],
-      :auth_token    => auth["credentials"]["token"]
     )
+    user.provider      = auth["provider"]
+    user.provider_uid  = auth["uid"]
+    user.auth_token    = auth["credentials"]["token"]
 
     raise user.errors.messages.to_s unless user.save
 

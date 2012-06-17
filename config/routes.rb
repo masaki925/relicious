@@ -1,4 +1,6 @@
 Relicious::Application.routes.draw do
+  resources :meetups
+
   resources :users
 
   get "top/index"

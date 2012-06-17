@@ -40,6 +40,7 @@ gem 'ruby-debug19', :require => 'ruby-debug'
 #------------------------------
 # original
 #
+gem "simplecov"
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
 end
