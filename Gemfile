@@ -40,17 +40,17 @@ gem 'ruby-debug19', :require => 'ruby-debug'
 #------------------------------
 # original
 #
-gem "simplecov"
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
+  gem "capybara"
 end
 
 group :test do
   gem 'spork', '~> 0.9.0.rc'
+  gem 'factory_girl_rails'
+  gem "simplecov"
 end
 
 gem 'omniauth'
 gem 'omniauth-facebook'
-
-gem 'factory_girl_rails'
 

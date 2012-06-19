@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
       @user = User.create_with_omniauth(auth)
     end 
     session[:user_id] = @user.id
-    #redirect_to users_path, :id => @user
     redirect_to @user
   end
 

@@ -1,5 +1,5 @@
 all:
-	rspec spec/controllers/sessions_controller_spec.rb
+	rspec ./spec/controllers/meetup_comments_controller_spec.rb
 
 model:
 	rake spec:models

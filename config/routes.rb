@@ -1,5 +1,7 @@
 Relicious::Application.routes.draw do
-  resources :meetups
+  resources :meetups do
+    resources :meetup_comments
+  end
 
   resources :users
 

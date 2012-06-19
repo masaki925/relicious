@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   validates :provider_uid, :presence => true
   validates :auth_token,   :presence => true
 
+  has_many :meetups
+  has_many :meetup_comments
+
   def self.create_with_omniauth(auth)
     user = User.new(
       :name          => auth["info"]["name"],

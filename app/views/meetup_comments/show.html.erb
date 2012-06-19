@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @meetup_comment.user %>
+</p>
+
+<p>
+  <b>Meetup:</b>
+  <%= @meetup_comment.meetup %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @meetup_comment.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_meetup_comment_path(@meetup_comment) %> |
+<%= link_to 'Back', meetup_comments_path %>

@@ -36,7 +36,7 @@ describe MeetupsController do
 
   describe "GET index" do
     it "assigns all meetups as @meetups" do
-      meetup = Meetup.create! valid_attributes
+      meetup = FactoryGirl.create(:meetup)
       get :index, {}, valid_session
       assigns(:meetups).should eq([meetup])
     end
@@ -44,7 +44,7 @@ describe MeetupsController do
 
   describe "GET show" do
     it "assigns the requested meetup as @meetup" do
-      meetup = Meetup.create! valid_attributes
+      meetup = FactoryGirl.create(:meetup)
       get :show, {:id => meetup.to_param}, valid_session
       assigns(:meetup).should eq(meetup)
     end
@@ -59,7 +59,7 @@ describe MeetupsController do
 
   describe "GET edit" do
     it "assigns the requested meetup as @meetup" do
-      meetup = Meetup.create! valid_attributes
+      meetup = FactoryGirl.create(:meetup)
       get :edit, {:id => meetup.to_param}, valid_session
       assigns(:meetup).should eq(meetup)
     end
@@ -113,7 +113,7 @@ describe MeetupsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested meetup" do
-        meetup = Meetup.create! valid_attributes
+        meetup = FactoryGirl.create(:meetup)
         # Assuming there are no other meetups in the database, this
         # specifies that the Meetup created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -123,13 +123,13 @@ describe MeetupsController do
       end
 
       it "assigns the requested meetup as @meetup" do
-        meetup = Meetup.create! valid_attributes
+        meetup = FactoryGirl.create(:meetup)
         put :update, {:id => meetup.to_param, :meetup => valid_attributes}, valid_session
         assigns(:meetup).should eq(meetup)
       end
 
       it "redirects to the meetup" do
-        meetup = Meetup.create! valid_attributes
+        meetup = FactoryGirl.create(:meetup)
         put :update, {:id => meetup.to_param, :meetup => valid_attributes}, valid_session
         response.should redirect_to(meetup)
       end
@@ -137,7 +137,7 @@ describe MeetupsController do
 
     describe "with invalid params" do
       it "assigns the meetup as @meetup" do
-        meetup = Meetup.create! valid_attributes
+        meetup = FactoryGirl.create(:meetup)
         # Trigger the behavior that occurs when invalid params are submitted
         Meetup.any_instance.stub(:save).and_return(false)
         put :update, {:id => meetup.to_param, :meetup => {}}, valid_session
@@ -145,7 +145,7 @@ describe MeetupsController do
       end
 
       it "re-renders the 'edit' template" do
-        meetup = Meetup.create! valid_attributes
+        meetup = FactoryGirl.create(:meetup)
         # Trigger the behavior that occurs when invalid params are submitted
         Meetup.any_instance.stub(:save).and_return(false)
         put :update, {:id => meetup.to_param, :meetup => {}}, valid_session
@@ -156,14 +156,14 @@ describe MeetupsController do
 
   describe "DELETE destroy" do
     it "destroys the requested meetup" do
-      meetup = Meetup.create! valid_attributes
+      meetup = FactoryGirl.create(:meetup)
       expect {
         delete :destroy, {:id => meetup.to_param}, valid_session
       }.to change(Meetup, :count).by(-1)
     end
 
     it "redirects to the meetups list" do
-      meetup = Meetup.create! valid_attributes
+      meetup = FactoryGirl.create(:meetup)
       delete :destroy, {:id => meetup.to_param}, valid_session
       response.should redirect_to(meetups_url)
     end

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120610232645) do
+ActiveRecord::Schema.define(:version => 20120617234309) do
+
+  create_table "meetup_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meetup_id"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "meetup_comments", ["meetup_id"], :name => "index_meetup_comments_on_meetup_id"
+  add_index "meetup_comments", ["user_id"], :name => "index_meetup_comments_on_user_id"
 
   create_table "meetups", :force => true do |t|
     t.string   "title"
