@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :provider,      :null => false
       t.integer :provider_uid, :null => false, :limit => 8
       t.string :auth_token,    :null => false
-      t.datetime :birthday
+      t.date :birthday
       t.text :introduction
       t.string :education
       t.string :work

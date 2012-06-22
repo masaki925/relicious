@@ -66,47 +66,41 @@ describe MeetupsController do
   end
 
   describe "POST create" do
+    before { @user = FactoryGirl.create(:user) }
+
     describe "with valid params" do
-      it "creates a new Meetup"
-    #  it "creates a new Meetup" do
-    #    @u = FactoryGirl.create(:user)
-    #    p @u
-    #    expect {
-    #      post :create, { :meetup => FactoryGirl.attributes_for(:meetup) }, valid_session
-    #    }.to change(Meetup, :count).by(1)
-    #  end
+      it "creates a new Meetup" do
+        expect {
+          post :create, { :meetup => FactoryGirl.attributes_for(:meetup) }, {:user_id => @user.id}
+        }.to change(Meetup, :count).by(1)
+      end
 
-      it "assigns a newly created meetup as @meetup"
-    #  it "assigns a newly created meetup as @meetup" do
-    #    post :create, {:meetup => valid_attributes}, valid_session
-    #    p User.find(1)
-    #    #assigns(:meetup).should be_a(Meetup)
-    #    #assigns(:meetup).should be_persisted
-    #  end
+      it "assigns a newly created meetup as @meetup" do
+        post :create, {:meetup => FactoryGirl.attributes_for(:meetup)}, {:user_id => @user.id}
+        assigns(:meetup).should be_a(Meetup)
+        assigns(:meetup).should be_persisted
+      end
 
-      it "redirects to the created meetup"
-    #  it "redirects to the created meetup" do
-    #    post :create, {:meetup => valid_attributes}, valid_session
-    #    response.should redirect_to(Meetup.last)
-    #  end
+      it "redirects to the created meetup" do
+        post :create, {:meetup => FactoryGirl.attributes_for(:meetup)}, {:user_id => @user.id}
+        response.should redirect_to(Meetup.last)
+      end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved meetup as @meetup"
-      #it "assigns a newly created but unsaved meetup as @meetup" do
-      #  # Trigger the behavior that occurs when invalid params are submitted
-      #  Meetup.any_instance.stub(:save).and_return(false)
-      #  post :create, {:meetup => {}}, valid_session
-      #  assigns(:meetup).should be_a_new(Meetup)
-      #end
+      it "assigns a newly created but unsaved meetup as @meetup" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        Meetup.any_instance.stub(:save).and_return(false)
+        post :create, {:meetup => {}}, {:user_id => @user.id}
+        assigns(:meetup).should be_a_new(Meetup)
+      end
 
-      it "re-renders the 'new' template"
-      #it "re-renders the 'new' template" do
-      #  # Trigger the behavior that occurs when invalid params are submitted
-      #  Meetup.any_instance.stub(:save).and_return(false)
-      #  post :create, {:meetup => {}}, valid_session
-      #  response.should render_template("new")
-      #end
+      it "re-renders the 'new' template" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        Meetup.any_instance.stub(:save).and_return(false)
+        post :create, {:meetup => {}}, {:user_id => @user.id}
+        response.should render_template("new")
+      end
     end
   end
 

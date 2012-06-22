@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20120617234309) do
     t.string   "provider",                  :null => false
     t.integer  "provider_uid", :limit => 8, :null => false
     t.string   "auth_token",                :null => false
-    t.datetime "birthday"
+    t.date     "birthday"
     t.text     "introduction"
     t.string   "education"
     t.string   "work"
