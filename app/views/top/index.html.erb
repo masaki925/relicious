@@ -1,2 +1,8 @@
-<h1>Top#index</h1>
-<p>Find me in app/views/top/index.html.erb</p>
+<% if @user %>
+<h1>User Home</h1>
+<li>Profile</li>
+<li>scheduled meetups</li>
+<% else %>
+<h1>Relicious Top</h1>
+<% end %>
+

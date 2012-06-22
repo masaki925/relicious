@@ -6,14 +6,14 @@ FactoryGirl.define do
   end
 
   factory :user do
-    name         "MyString"
+    name         "username"
     email        { generate(:email) }
     provider     "facebook"
     provider_uid 100
     auth_token   "MyString"
     birthday     "2012-06-10"
     introduction "MyText"
-    education    "MyString"
-    work         "MyString"
+    education    "Education"
+    work         "Work"
   end
 end

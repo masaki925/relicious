@@ -19,7 +19,7 @@ describe SessionsController do
     {}
   end
 
-  context "when user NOT logged in" do
+  context "when user is NOT registered yet" do
     describe "GET 'callback'" do
       context "with valid env" do
         before do
@@ -50,11 +50,12 @@ describe SessionsController do
   end
 
   #
-  context "when user logged in" do
+  context "when user already registered" do
+    before { @user = FactoryGirl.create(:user) }
+
     describe "GET 'callback'" do
-      context "has valid session" do
+      context "has valid params" do
         before do
-          @user = FactoryGirl.create(:user)
           @auth_token_prev = @user.auth_token
           request.env["omniauth.auth"] = valid_auth_info
           get 'callback'
@@ -64,9 +65,13 @@ describe SessionsController do
         specify { response.should redirect_to( root_path ) }
       end
 
-      context "has invalid session" do
-        it "update auth token"
-        it "returns http success"
+      context "has invalid params" do
+        before do
+          request.env["omniauth.auth"] = invalid_auth_info
+          get 'callback'
+        end
+
+        specify { response.should redirect_to( root_path ) }
       end
     end
 
