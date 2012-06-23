@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "layouts/application.html.erb" do
+  before { view.stub(:current_user) { @user } }
+
   context "when user is NOT logged in" do
     it "renders log in link" do
       render
@@ -9,10 +11,7 @@ describe "layouts/application.html.erb" do
   end
 
   context "when user logged in" do
-    before do
-      @user = FactoryGirl.create(:user)
-      assign(:user, @user)
-    end
+    before { @user = FactoryGirl.create(:user) }
 
     it "renders log out link" do
       render

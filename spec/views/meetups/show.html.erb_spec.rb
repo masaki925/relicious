@@ -1,20 +1,25 @@
 require 'spec_helper'
 
 describe "meetups/show" do
-  before(:each) do
-    @user = FactoryGirl.build(:user)
-    @meetup = assign(:meetup, stub_model(Meetup,
-      :title => "Title",
-      :user => @user,
-      :public => false
-    ))
+  context "when user is NOT logged in" do
+    it "reject any operations"
   end
 
-  it "renders attributes in <p>" do
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Title/)
-    rendered.should match(/User/)
-    rendered.should match(/false/)
+  context "when user logged in" do
+    before(:each) do
+      @meetup_comment = FactoryGirl.create(:meetup_comment)
+      @meetup = @meetup_comment.meetup
+      @user = @meetup.user
+    end
+
+    it "renders attributes in renered HTML" do
+      render
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      rendered.should match(/Title/)
+      rendered.should match(/User/)
+      rendered.should match(/Public/)
+      rendered.should match(/Comments/)
+      rendered.should match(/Add a Comment/)
+    end
   end
 end

@@ -10,8 +10,8 @@
 
   <div class='header'>
     <%= link_to 'Relicious', root_path %><br/>
-    <% if @user %>
-      <%= @user.name %> さん |
+    <% if current_user %>
+      <%= current_user.name %> さん |
       <%= link_to "ログアウト", logout_path %>
     <% else %>
       <%#= link_to "Twitter でログイン", "/auth/twitter" %>

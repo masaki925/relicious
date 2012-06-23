@@ -1,4 +1,6 @@
 class MeetupsController < ApplicationController
+  before_filter :require_authentication
+
   # GET /meetups
   # GET /meetups.json
   def index

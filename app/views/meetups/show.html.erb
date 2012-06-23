@@ -25,6 +25,13 @@
   <%= @meetup.public %>
 </p>
 
+<p>
+  <b>Comments:</b>
+  <%= render @meetup.meetup_comments %>
+</p>
+
+<h2>Add a Comment:</h2>
+<%= render "meetup_comments/form" %>
 
 <%= link_to 'Edit', edit_meetup_path(@meetup) %> |
 <%= link_to 'Back', meetups_path %>

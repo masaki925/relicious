@@ -1,13 +1,19 @@
 require 'spec_helper'
 
 describe "MeetupComments" do
-  describe "GET /meetup_comments" do
-    before { @meetup_comment = FactoryGirl.create(:meetup_comment) }
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      meetup = @meetup_comment.meetup
-      get meetup_meetup_comments_path(meetup)
-      response.status.should be(200)
+  before { @meetup = FactoryGirl.create(:meetup) }
+
+  context "when user is NOT logged in" do
+    describe "POST /meetups/:meeup_id/meetup_comments" do
+      before { post meetup_meetup_comments_path(meetup_id: @meetup.id) }
+
+      specify { response.status.should be(401) }
+    end
+  end
+
+  context "when user is logged in" do
+    describe "POST /meetups/:meeup_id/meetup_comments" do
+      it "post request should be success. but before that, should confirm how to manage session[:user_id] as RSpec request seems not support sessions"
     end
   end
 end

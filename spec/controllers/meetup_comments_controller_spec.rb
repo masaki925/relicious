@@ -34,136 +34,94 @@ describe MeetupCommentsController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all meetup_comments as @meetup_comments" do
-      meetup_comment = FactoryGirl.create(:meetup_comment)
-      get :index, {}, valid_session
-      assigns(:meetup_comments).should eq([meetup_comment])
-    end
+  context "when user is NOT logged in" do
+    it "reject any operations"
   end
 
-  describe "GET show" do
-    it "assigns the requested meetup_comment as @meetup_comment" do
-      meetup_comment = FactoryGirl.create(:meetup_comment)
-      get :show, {:id => meetup_comment.to_param}, valid_session
-      assigns(:meetup_comment).should eq(meetup_comment)
-    end
-  end
+  context "when user logged in" do
+    describe "POST create" do
+      before { @meetup = FactoryGirl.create(:meetup) }
 
-  describe "GET new" do
-    it "assigns a new meetup_comment as @meetup_comment" do
-      get :new, {}, valid_session
-      assigns(:meetup_comment).should be_a_new(MeetupComment)
-    end
-  end
+      describe "with valid params" do
+        it "creates a new MeetupComment" do
+          expect {
+            post :create, {meetup_comment: FactoryGirl.attributes_for(:meetup_comment), meetup_id: @meetup.id}, {user_id: @meetup.user.id}
+          }.to change(MeetupComment, :count).by(1)
+        end
 
-  describe "GET edit" do
-    it "assigns the requested meetup_comment as @meetup_comment" do
-      meetup_comment = FactoryGirl.create(:meetup_comment)
-      get :edit, {:id => meetup_comment.to_param}, valid_session
-      assigns(:meetup_comment).should eq(meetup_comment)
-    end
-  end
+        it "assigns a newly created meetup_comment as @meetup_comment" do
+          post :create, {meetup_comment: FactoryGirl.attributes_for(:meetup_comment), meetup_id: @meetup.id}, {user_id: @meetup.user.id}
+          assigns(:meetup_comment).should be_a(MeetupComment)
+          assigns(:meetup_comment).should be_persisted
+        end
 
-  describe "POST create" do
-    before do
-      @meetup = FactoryGirl.create(:meetup)
+        it "redirects to the related meetup detail page" do
+          post :create, {meetup_comment: FactoryGirl.attributes_for(:meetup_comment), meetup_id: @meetup.id}, {user_id: @meetup.user.id}
+          response.should redirect_to(meetup_path(@meetup))
+        end
+      end
+
+      describe "with invalid params" do
+        before  { post :create, { meetup_id: @meetup.id }, {user_id: @meetup.user.id } }
+
+        specify { response.should redirect_to(meetup_path(@meetup)) }
+      end
     end
 
-    describe "with valid params" do
-      it "creates a new MeetupComment" do
+    describe "PUT update" do
+      before { @meetup_comment = FactoryGirl.create(:meetup_comment) }
+
+      describe "with valid params" do
+        it "updates the requested meetup_comment" do
+          # Assuming there are no other meetup_comments in the database, this
+          # specifies that the MeetupComment created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          MeetupComment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:meetup_id => @meetup_comment.meetup_id, :id => @meetup_comment.id, :meetup_comment => {'these' => 'params'}}, {:user_id => @meetup_comment.user.id}
+        end
+
+        it "assigns the requested meetup_comment as @meetup_comment" do
+          put :update, {:meetup_id => @meetup_comment.meetup_id, :id => @meetup_comment.id, :meetup_comment => valid_attributes}, {:user_id => @meetup_comment.user.id}
+          assigns(:meetup_comment).should eq(@meetup_comment)
+        end
+
+        it "redirects to the related meetup detail page" do
+          put :update, {:meetup_id => @meetup_comment.meetup_id, :id => @meetup_comment.id, :meetup_comment => valid_attributes}, {:user_id => @meetup_comment.user.id}
+          response.should redirect_to(meetup_path(@meetup_comment.meetup))
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the meetup_comment as @meetup_comment" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          MeetupComment.any_instance.stub(:save).and_return(false)
+          put :update, {:meetup_id => @meetup_comment.meetup_id, :id => @meetup_comment.id, :meetup_comment => {}}, {:user_id => @meetup_comment.user.id}
+          assigns(:meetup_comment).should eq(@meetup_comment)
+        end
+
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          MeetupComment.any_instance.stub(:save).and_return(false)
+          put :update, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id, meetup_comment: {}}, {user_id: @meetup_comment.user.id}
+          response.should redirect_to(meetup_path(@meetup_comment.meetup))
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      before { @meetup_comment = FactoryGirl.create(:meetup_comment) }
+
+      it "destroys the requested meetup_comment" do
         expect {
-          post :create, {:meetup_comment => FactoryGirl.attributes_for(:meetup_comment), :meetup_id => @meetup.id}, {:user_id => @meetup.user.id}
-        }.to change(MeetupComment, :count).by(1)
+          delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @meetup_comment.user.id}
+        }.to change(MeetupComment, :count).by(-1)
       end
 
-      it "assigns a newly created meetup_comment as @meetup_comment" do
-        post :create, {:meetup_comment => FactoryGirl.attributes_for(:meetup_comment), :meetup_id => @meetup.id}, {:user_id => @meetup.user.id}
-        assigns(:meetup_comment).should be_a(MeetupComment)
-        assigns(:meetup_comment).should be_persisted
-      end
-
-      it "redirects to the created meetup_comment" do
-        post :create, {:meetup_comment => FactoryGirl.attributes_for(:meetup_comment), :meetup_id => @meetup.id}, {:user_id => @meetup.user.id}
-        response.should redirect_to(meetup_meetup_comments_url)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved meetup_comment as @meetup_comment" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        MeetupComment.any_instance.stub(:save).and_return(false)
-        post :create, {:meetup_comment => {}}, {:user_id => @meetup.user.id}
-        assigns(:meetup_comment).should be_a_new(MeetupComment)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        MeetupComment.any_instance.stub(:save).and_return(false)
-        post :create, {:meetup_comment => {}}, {:user_id => @meetup.user.id}
-        response.should render_template("new")
+      it "redirects to the meetup detail page" do
+        delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @meetup_comment.user.id}
+        response.should redirect_to(meetup_path(@meetup_comment.meetup))
       end
     end
   end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested meetup_comment" do
-        meetup_comment = FactoryGirl.create(:meetup_comment)
-        # Assuming there are no other meetup_comments in the database, this
-        # specifies that the MeetupComment created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        MeetupComment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => meetup_comment.to_param, :meetup_comment => {'these' => 'params'}}, valid_session
-      end
-
-      it "assigns the requested meetup_comment as @meetup_comment" do
-        meetup_comment = FactoryGirl.create(:meetup_comment)
-        put :update, {:id => meetup_comment.to_param, :meetup_comment => valid_attributes}, valid_session
-        assigns(:meetup_comment).should eq(meetup_comment)
-      end
-
-      it "redirects to the meetup_comment" do
-        meetup_comment = FactoryGirl.create(:meetup_comment)
-        put :update, {:id => meetup_comment.to_param, :meetup_comment => valid_attributes}, valid_session
-        response.should redirect_to(meetup_meetup_comments_path(meetup_comment.id))
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the meetup_comment as @meetup_comment" do
-        meetup_comment = FactoryGirl.create(:meetup_comment)
-        # Trigger the behavior that occurs when invalid params are submitted
-        MeetupComment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => meetup_comment.to_param, :meetup_comment => {}}, valid_session
-        assigns(:meetup_comment).should eq(meetup_comment)
-      end
-
-      it "re-renders the 'edit' template" do
-        meetup_comment = FactoryGirl.create(:meetup_comment)
-        # Trigger the behavior that occurs when invalid params are submitted
-        MeetupComment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => meetup_comment.to_param, :meetup_comment => {}}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested meetup_comment" do
-      meetup_comment = FactoryGirl.create(:meetup_comment)
-      expect {
-        delete :destroy, {:id => meetup_comment.to_param}, valid_session
-      }.to change(MeetupComment, :count).by(-1)
-    end
-
-    it "redirects to the meetup_comments list" do
-      meetup_comment = FactoryGirl.create(:meetup_comment)
-      meetup = meetup_comment.meetup
-      delete :destroy, {:id => meetup_comment.to_param}, valid_session
-      response.should redirect_to(meetup_meetup_comments_path(meetup))
-    end
-  end
-
 end

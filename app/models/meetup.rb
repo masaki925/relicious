@@ -1,5 +1,6 @@
 class Meetup < ActiveRecord::Base
   belongs_to :user
+  has_many   :meetup_comments
   attr_accessible :begin_at, :end_at, :public, :title
 
   validates :user_id, :presence => true
