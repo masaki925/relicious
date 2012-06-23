@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+if ENV["RAILS_ENV"] != "test"
+  ["Tokyo", "Kyoto", "Kanagawa", "Nagoya", "Fukuoka", "Hokkaido"].each do |pref|
+    Area.create({name: pref})
+  end
+end
+
