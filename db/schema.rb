@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623090313) do
+ActiveRecord::Schema.define(:version => 20120623095125) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(:version => 20120623090313) do
   end
 
   add_index "meetups", ["user_id"], :name => "index_meetups_on_user_id"
+
+  create_table "user_avails", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "area_id"
+    t.time     "avail_from"
+    t.time     "avail_to"
+    t.string   "option"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_avails", ["area_id"], :name => "index_user_avails_on_area_id"
+  add_index "user_avails", ["user_id"], :name => "index_user_avails_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                      :null => false
