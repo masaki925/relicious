@@ -112,15 +112,32 @@ describe MeetupCommentsController do
     describe "DELETE destroy" do
       before { @meetup_comment = FactoryGirl.create(:meetup_comment) }
 
-      it "destroys the requested meetup_comment" do
-        expect {
-          delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @meetup_comment.user.id}
-        }.to change(MeetupComment, :count).by(-1)
+      context "when the comment is created by OTHER user" do
+        before { @other_user = FactoryGirl.create(:user) }
+
+        it "rejected" do
+          expect {
+            delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @other_user.id}
+          }.to change(MeetupComment, :count).by(0)
+        end
+
+        it "redirects to the meetup detail page" do
+          delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @other_user.id}
+          response.should redirect_to(meetup_path(@meetup_comment.meetup))
+        end
       end
 
-      it "redirects to the meetup detail page" do
-        delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @meetup_comment.user.id}
-        response.should redirect_to(meetup_path(@meetup_comment.meetup))
+      context "when the comment is created by user own" do
+        it "destroys the requested meetup_comment" do
+          expect {
+            delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @meetup_comment.user.id}
+          }.to change(MeetupComment, :count).by(-1)
+        end
+
+        it "redirects to the meetup detail page" do
+          delete :destroy, {meetup_id: @meetup_comment.meetup_id, id: @meetup_comment.id}, {user_id: @meetup_comment.user.id}
+          response.should redirect_to(meetup_path(@meetup_comment.meetup))
+        end
       end
     end
   end

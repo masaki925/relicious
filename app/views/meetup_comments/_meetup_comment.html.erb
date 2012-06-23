@@ -8,3 +8,7 @@
   <%= meetup_comment.body %>
 </p>
 
+<p>
+  <%= link_to 'Delete Comment', [meetup_comment.meetup, meetup_comment], :confirm => 'Are you sure?', :method => :delete %>
+</p>
+

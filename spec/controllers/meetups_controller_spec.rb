@@ -146,17 +146,32 @@ describe MeetupsController do
     end
 
     describe "DELETE destroy" do
-      it "destroys the requested meetup" do
-        meetup = FactoryGirl.create(:meetup)
-        expect {
-          delete :destroy, {:id => @meetup.id}, {:user_id => @user.id}
-        }.to change(Meetup, :count).by(-1)
+      context "when the meetup is created by OTHER user" do
+        before { @other_user = FactoryGirl.create(:user) }
+
+        it "rejected" do
+          expect {
+            delete :destroy, {:id => @meetup.id}, {:user_id => @other_user.id}
+          }.to change(Meetup, :count).by(0)
+        end
+    
+        it "redirects to the meetups list" do
+          delete :destroy, {:id => @meetup.id}, {:user_id => @other_user.id}
+          response.should redirect_to(meetups_url)
+        end
       end
 
-      it "redirects to the meetups list" do
-        meetup = FactoryGirl.create(:meetup)
-        delete :destroy, {:id => @meetup.id}, {:user_id => @user.id}
-        response.should redirect_to(meetups_url)
+      context "when the meetup is created by user own" do
+        it "destroys the requested meetup" do
+          expect {
+            delete :destroy, {:id => @meetup.id}, {:user_id => @user.id}
+          }.to change(Meetup, :count).by(-1)
+        end
+    
+        it "redirects to the meetups list" do
+          delete :destroy, {:id => @meetup.id}, {:user_id => @user.id}
+          response.should redirect_to(meetups_url)
+        end
       end
     end
   end

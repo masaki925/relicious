@@ -39,8 +39,10 @@ class MeetupCommentsController < ApplicationController
   # DELETE /meetup_comments/1.json
   def destroy
     @meetup_comment = MeetupComment.find(params[:id])
-    @meetup = @meetup_comment.meetup
-    @meetup_comment.destroy
+    if @meetup_comment.user_id == current_user.id
+      @meetup = @meetup_comment.meetup
+      @meetup_comment.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to meetup_path(id: params[:meetup_id]), notice: 'Meetup comment was successfully deleted.' }
