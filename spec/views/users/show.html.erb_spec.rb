@@ -2,16 +2,7 @@ require 'spec_helper'
 
 describe "users/show" do
   before(:each) do
-    @user = assign(:user, stub_model(User,
-      :name => "Name",
-      :email => "Email",
-      :provider => "Provider",
-      :provider_uid => 1,
-      :auth_token => "Auth Token",
-      :introduction => "MyText",
-      :education => "Education",
-      :work => "Work"
-    ))
+    @user = assign(:user, FactoryGirl.create(:user) )
   end
 
   it "renders attributes in <p>" do
@@ -24,5 +15,6 @@ describe "users/show" do
     rendered.should match(/MyText/)
     rendered.should match(/Education/)
     rendered.should match(/Work/)
+    rendered.should match(/Location/)
   end
 end

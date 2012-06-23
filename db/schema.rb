@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20120617234309) do
     t.text     "introduction"
     t.string   "education"
     t.string   "work"
+    t.string   "location"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

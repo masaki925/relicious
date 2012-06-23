@@ -12,5 +12,6 @@ describe "users/index" do
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
     assert_select "tr>td", :text => "Education".to_s, :count => 2
     assert_select "tr>td", :text => "Work".to_s, :count => 2
+    assert_select "tr>td", :text => "Location".to_s, :count => 2
   end
 end
