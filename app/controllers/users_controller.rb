@@ -35,6 +35,18 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+
+    fb_user = FbGraph::User.fetch('me', access_token: @user.auth_token)
+
+    if fb_user.education
+      fb_user.education.each do |edu_graph|
+        @user.education = edu_graph.school.name if edu_graph.type == "College" 
+      end 
+    end 
+
+    if fb_user.work
+      @user.work = fb_user.work[0].employer.name
+    end 
   end
 
   # POST /users
