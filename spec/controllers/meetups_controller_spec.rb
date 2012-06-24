@@ -42,6 +42,7 @@ describe MeetupsController do
     before do
       @meetup = FactoryGirl.create(:meetup)
       @user = @meetup.user
+      @area = @meetup.area
     end
 
     describe "GET index" do
@@ -73,18 +74,18 @@ describe MeetupsController do
       describe "with valid params" do
         it "creates a new Meetup" do
           expect {
-            post :create, { :meetup => FactoryGirl.attributes_for(:meetup) }, {:user_id => @user.id}
+            post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id) }, {:user_id => @user.id}
           }.to change(Meetup, :count).by(1)
         end
 
         it "assigns a newly created meetup as @meetup" do
-          post :create, {:meetup => FactoryGirl.attributes_for(:meetup)}, {:user_id => @user.id}
+          post :create, {:meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id)}, {:user_id => @user.id}
           assigns(:meetup).should be_a(Meetup)
           assigns(:meetup).should be_persisted
         end
 
         it "redirects to the created meetup" do
-          post :create, {:meetup => FactoryGirl.attributes_for(:meetup)}, {:user_id => @user.id}
+          post :create, {:meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id)}, {:user_id => @user.id}
           response.should redirect_to(Meetup.last)
         end
       end

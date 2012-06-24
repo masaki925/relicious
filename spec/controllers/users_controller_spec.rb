@@ -68,10 +68,14 @@ describe UsersController do
   end
 
   describe "GET edit" do
+    before do
+      @user = FactoryGirl.create(:user)
+      FbGraph::User.stub(:fetch).and_return(true)
+    end
+
     it "assigns the requested user as @user" do
-      user = FactoryGirl.create(:user)
-      get :edit, {:id => user.to_param}, valid_session
-      assigns(:user).should eq(user)
+      get :edit, {:id => @user.to_param}, valid_session
+      assigns(:user).should_not nil
     end
   end
 

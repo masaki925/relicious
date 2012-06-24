@@ -16,5 +16,7 @@ describe "users/show" do
     rendered.should match(/Education/)
     rendered.should match(/Work/)
     rendered.should match(/Location/)
+    rendered.should match(/Gender/)
+    rendered.should match(/Locale/)
   end
 end

@@ -15,6 +15,8 @@ FactoryGirl.define do
     introduction "MyText"
     education    "Education"
     work         "Work"
+    gender       "male"
+    locale       "en_US"
     location     "Location"
   end
 end

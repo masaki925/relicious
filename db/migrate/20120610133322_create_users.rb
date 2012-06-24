@@ -11,6 +11,8 @@ class CreateUsers < ActiveRecord::Migration
       t.text :introduction
       t.string :education
       t.string :work
+      t.string :gender
+      t.string :locale
       t.string :location
 
       t.timestamps

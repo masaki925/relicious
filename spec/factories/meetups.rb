@@ -6,6 +6,7 @@ FactoryGirl.define do
     user
     begin_at "2012-06-11 08:26:45"
     end_at "2012-06-11 08:26:45"
+    area
     public false
   end
 end

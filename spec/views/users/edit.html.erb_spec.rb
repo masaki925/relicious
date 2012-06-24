@@ -16,6 +16,8 @@ describe "users/edit" do
       assert_select "textarea#user_introduction", :name => "user[introduction]"
       assert_select "input#user_education", :name => "user[education]"
       assert_select "input#user_work", :name => "user[work]"
+      assert_select "input#user_gender", :name => "user[gender]"
+      assert_select "input#user_locale", :name => "user[locale]"
       assert_select "select#user_avail_avail_from_4i", :name => "user_avail[avail_from]"
       assert_select "select#user_avail_avail_to_4i", :name => "user_avail[avail_to]"
       assert_select "select#user_avail_avail_option", :name => "user_avail[avail_option]"

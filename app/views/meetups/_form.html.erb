@@ -25,6 +25,9 @@
     <%= f.datetime_select :end_at %>
   </div>
   <div class="field">
+    Area  : <%= f.collection_select(:area_id, Area.all, :id, :name) %>
+  </div>
+  <div class="field">
     <%= f.label :public %><br />
     <%= f.check_box :public %>
   </div>

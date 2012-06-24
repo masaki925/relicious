@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623095125) do
+ActiveRecord::Schema.define(:version => 20120624083409) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "languages", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "languages", ["code"], :name => "index_languages_on_code"
 
   create_table "meetup_comments", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20120623095125) do
   create_table "meetups", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
+    t.integer  "area_id"
     t.datetime "begin_at"
     t.datetime "end_at"
     t.boolean  "public"
@@ -66,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20120623095125) do
     t.text     "introduction"
     t.string   "education"
     t.string   "work"
+    t.string   "gender"
+    t.string   "locale"
     t.string   "location"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
