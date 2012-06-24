@@ -3,7 +3,11 @@ Relicious::Application.routes.draw do
     resources :meetup_comments
   end
 
-  resources :users
+  resources :users do
+    post   "avails"     => "user_avails#create"
+    put    "avails/:id" => "user_avails#update"
+    delete "avails/:id" => "user_avails#destroy"
+  end
 
   get "top/index"
 

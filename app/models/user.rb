@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_many :meetups
   has_many :meetup_comments
+  has_many :user_avails
 
   def self.create_with_omniauth(auth)
     user = User.new(

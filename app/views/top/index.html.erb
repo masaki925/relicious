@@ -1,8 +1,14 @@
 <% if @user %>
-<h1>User Home</h1>
-<li>Profile</li>
-<li>scheduled meetups</li>
+  <h1>User Home</h1>
+  <li>Profile</li>
+  <li>scheduled meetups</li>
+  <li>Availability</li>
+  <% @user_avails.each do |avail| %>
+    from   : <%= avail.avail_from %>
+    to     : <%= avail.avail_to %>
+    option : <%= avail.avail_option %>
+  <% end if @user_avails %>
 <% else %>
-<h1>Relicious Top</h1>
+  <h1>Relicious Top</h1>
 <% end %>
 

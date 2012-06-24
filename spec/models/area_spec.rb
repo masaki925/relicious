@@ -10,8 +10,8 @@ describe Area do
     end
 
     context 'with duplicate registration of name' do
-      before { @dup_area = FactoryGirl.build(:area) }
-       
+      before { @dup_area = FactoryGirl.build(:area, name: @area.name) }
+      
       subject  { @dup_area } 
       it { should have(1).errors_on(:name) }
     end

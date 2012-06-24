@@ -5,7 +5,7 @@ class CreateUserAvails < ActiveRecord::Migration
       t.references :area
       t.time :avail_from
       t.time :avail_to
-      t.string :option
+      t.string :avail_option
 
       t.timestamps
     end

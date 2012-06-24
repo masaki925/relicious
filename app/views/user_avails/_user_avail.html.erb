@@ -1,0 +1,19 @@
+<p>
+  <b>From:</b>
+  <%= user_avail.avail_from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= user_avail.avail_to %>
+</p>
+
+<p>
+  <b>Option:</b>
+  <%= user_avail.avail_option %>
+</p>
+
+<p>
+  <%= link_to 'Delete Availability', url_for(controller: :user_avails, action: :destroy, user_id: @user.id, id: user_avail.id ), confirm: 'Are you sure?', method: :delete %>
+</p>
+

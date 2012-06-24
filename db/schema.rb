@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(:version => 20120623095125) do
     t.integer  "area_id"
     t.time     "avail_from"
     t.time     "avail_to"
-    t.string   "option"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "avail_option"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   add_index "user_avails", ["area_id"], :name => "index_user_avails_on_area_id"

@@ -17,6 +17,7 @@ describe "top/index.html.erb" do
     it "render user home" do
       render
       rendered.should match(/User Home/)
+      rendered.should match(/Availability/)
     end
   end
 end
