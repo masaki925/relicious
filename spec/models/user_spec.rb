@@ -47,10 +47,6 @@ describe User do
       specify { @user.should have(1).errors_on(:name) }
     end
 
-    context 'without email' do
-      before { @user.email = '' }
-      specify { @user.should have_at_least(1).errors_on(:email) }
-    end
     context 'with invalid email' do
       it 'should raise error' do
         addresses = %w[user@foo,com user_at_foo.org example.user@foo.]

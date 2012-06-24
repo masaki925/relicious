@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :screen_name, :email, :birthday, :gender, :locale, :introduction, :education, :work, :location
-  email_regex    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  email_regex    = /\A([\w+\-.]+@[a-z\d\-.]+\.[a-z]+|)\z/i
 
   validates :name,         presence: true
-  validates :email,        presence: true,
-                             format: { with: email_regex },
-                             uniqueness: true
+  validates :email,        uniqueness: true, format: { with: email_regex }
   validates :provider,     presence: true
   validates :provider_uid, presence: true
   validates :auth_token,   presence: true

@@ -38,21 +38,21 @@ class UsersController < ApplicationController
 
     fb_user = FbGraph::User.fetch('me', access_token: @user.auth_token)
 
-    if @user.gender.blank? and fb_user.gender
+    if @user.gender.blank? and !fb_user.gender.blank?
       @user.gender = fb_user.gender
     end
 
-    if @user.education.blank? and fb_user.education
+    if @user.education.blank? and !fb_user.education.blank?
       fb_user.education.each do |edu_graph|
         @user.education = edu_graph.school.name if edu_graph.type == "College" 
       end 
     end 
 
-    if @user.work.blank? and fb_user.work
+    if @user.work.blank? and !fb_user.work.blank?
       @user.work = fb_user.work[0].employer.name
     end
 
-    if @user.locale.blank? and fb_user.locale
+    if @user.locale.blank? and !fb_user.locale.blank?
       @user.locale = fb_user.locale
     end
   end

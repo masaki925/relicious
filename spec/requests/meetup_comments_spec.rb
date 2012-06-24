@@ -7,7 +7,7 @@ describe "MeetupComments" do
     describe "POST /meetups/:meeup_id/meetup_comments" do
       before { post meetup_meetup_comments_path(meetup_id: @meetup.id) }
 
-      specify { response.status.should be(401) }
+      specify { response.status.should be(302) }
     end
   end
 

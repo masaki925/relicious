@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  scope = 'read_stream, publish_stream, user_photos'
+  scope = 'read_stream, publish_stream'
   #ca_file_centos = "/etc/pki/tls/certs/ca-bundle.crt"
   #ca_file_ubuntu = "/etc/ssl/certs"
   ca_file_mac     = "/System/Library/OpenSSL/certs"
