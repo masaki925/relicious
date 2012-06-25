@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :screen_name, :email, :birthday, :gender, :locale, :introduction, :education, :work, :location
+  attr_accessible :name, :screen_name, :email, :birthday, :gender, :locale, :introduction, :education, :work, :location, :likes
   email_regex    = /\A([\w+\-.]+@[a-z\d\-.]+\.[a-z]+|)\z/i
 
   validates :name,         presence: true
@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :meetups
   has_many :meetup_comments
   has_many :user_avails
+  has_many :user_languages
+  has_many :languages, through: :user_languages
 
   def self.create_with_omniauth(auth)
     user = User.new(

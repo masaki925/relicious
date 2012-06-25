@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :gender
       t.string :locale
       t.string :location
+      t.text :likes
 
       t.timestamps
     end

@@ -26,11 +26,6 @@
 </p>
 
 <p>
-  <b>Introduction:</b>
-  <%= @user.introduction %>
-</p>
-
-<p>
   <b>Education:</b>
   <%= @user.education %>
 </p>
@@ -43,6 +38,23 @@
 <p>
   <b>Location:</b>
   <%= @user.location %>
+</p>
+
+<p>
+  <b>Languages:</b>
+  <% @user.languages.each do |l| %>
+    <%= l.name %>,
+  <% end %>
+</p>
+
+<p>
+  <b>Likes:</b>
+  <%= @user.likes %>
+</p>
+
+<p>
+  <b>Introduction:</b>
+  <%= @user.introduction %>
 </p>
 
 <p>

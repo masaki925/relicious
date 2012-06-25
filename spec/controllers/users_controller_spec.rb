@@ -60,22 +60,29 @@ describe UsersController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new user as @user" do
-      get :new, {}, valid_session
-      assigns(:user).should be_a_new(User)
-    end
-  end
-
   describe "GET edit" do
     before do
       @user = FactoryGirl.create(:user)
-      FbGraph::User.stub(:fetch).and_return(true)
+      @all_languages = FactoryGirl.create_list(:language, 2)
+      @user.languages = @all_languages
+      @user_languages = @user.languages
+
+      FbGraph::User.stub(:fetch).and_return(User.new)
+      User.any_instance.stub(:likes).and_return(Array.new)
+      get :edit, {:id => @user.to_param}, valid_session
     end
 
-    it "assigns the requested user as @user" do
-      get :edit, {:id => @user.to_param}, valid_session
+    it "assigns @user" do
       assigns(:user).should_not nil
+    end
+    it "assigns @user_languages" do
+      assigns(:user_languages).should eq @user_languages
+    end
+    it "assigns @all_languages" do
+      assigns(:all_languages).should eq @all_languages
+    end
+    it "assigns @likes" do
+      assigns(:likes).should_not nil
     end
   end
 

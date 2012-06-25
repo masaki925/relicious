@@ -21,26 +21,25 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
-  def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
-  end
-
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @user_languages = @user.languages
+    @all_languages = Language.all
 
     fb_user = FbGraph::User.fetch('me', access_token: @user.auth_token)
 
     if @user.gender.blank? and !fb_user.gender.blank?
       @user.gender = fb_user.gender
     end
+
+    likes = Array.new
+    if @user.likes.blank? and !fb_user.likes.blank?
+      fb_user.likes.each do |like|
+        likes << like.name
+      end 
+    end 
+    @likes = likes.join(',')
 
     if @user.education.blank? and !fb_user.education.blank?
       fb_user.education.each do |edu_graph|
@@ -70,6 +69,18 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+
+    unless params[:languages].blank?
+      @user.languages.clear
+      params[:languages].each do |lang_id|
+        if @user.languages.include? Language.find(lang_id)
+          redirect_to edit_user_path(@user), notice: "ERROR: Language data invalid"
+          return
+        else
+          @user.languages << Language.find(lang_id)
+        end
+      end
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

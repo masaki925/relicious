@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -42,6 +43,24 @@
   <div class="field">
     <%= f.label :location %><br />
     <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    Languages : <br>
+    <% if @user_languages.blank? %>
+        <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), { }, { name: "languages[]" }  %>
+    <% else %>
+      <% @user_languages.each do |ul| %>
+        <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, ul.id), { }, { name: "languages[]" }  %><br>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :likes %><br />
+    <% if @likes.blank? %>
+      <%= f.text_area :likes, size: "40x5" %>
+    <% else %>
+      <%= f.text_area :likes, value: @likes, size: "40x5" %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :introduction %><br />

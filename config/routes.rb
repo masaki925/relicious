@@ -7,6 +7,9 @@ Relicious::Application.routes.draw do
     post   "avails"     => "user_avails#create"
     put    "avails/:id" => "user_avails#update"
     delete "avails/:id" => "user_avails#destroy"
+
+    post   "languages"     => "user_languages#create"
+    delete "languages/:id" => "user_languages#destroy"
   end
 
   get "top/index"

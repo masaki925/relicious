@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120624083409) do
+ActiveRecord::Schema.define(:version => 20120624134513) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(:version => 20120624083409) do
   add_index "user_avails", ["area_id"], :name => "index_user_avails_on_area_id"
   add_index "user_avails", ["user_id"], :name => "index_user_avails_on_user_id"
 
+  create_table "user_languages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "language_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_languages", ["language_id"], :name => "index_user_languages_on_language_id"
+  add_index "user_languages", ["user_id"], :name => "index_user_languages_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "name",                      :null => false
     t.string   "screen_name"
@@ -79,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120624083409) do
     t.string   "gender"
     t.string   "locale"
     t.string   "location"
+    t.text     "likes"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

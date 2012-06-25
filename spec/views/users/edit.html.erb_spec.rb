@@ -3,7 +3,11 @@ require 'spec_helper'
 describe "users/edit" do
   before(:each) do
     @user = FactoryGirl.create(:user)
+    @all_languages = FactoryGirl.create_list(:language, 2)
+    @user.languages = @all_languages
+    @user_languages = @user.languages
     assign(:user, @user)
+    assign(:all_languages, @all_languages)
   end
 
   it "renders the edit user form" do
@@ -18,6 +22,7 @@ describe "users/edit" do
       assert_select "input#user_work", :name => "user[work]"
       assert_select "input#user_gender", :name => "user[gender]"
       assert_select "input#user_locale", :name => "user[locale]"
+      assert_select "select#user_languages", :name => "languages[]"
       assert_select "select#user_avail_avail_from_4i", :name => "user_avail[avail_from]"
       assert_select "select#user_avail_avail_to_4i", :name => "user_avail[avail_to]"
       assert_select "select#user_avail_avail_option", :name => "user_avail[avail_option]"

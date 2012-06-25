@@ -71,5 +71,10 @@ describe User do
     before { @user_avails = FactoryGirl.create_list(:user_avail, 2, user_id: @user.id) }
     specify { @user.user_avails.should eq @user_avails }
   end
+
+  describe "User#user_languages" do
+    before { @user_languages = FactoryGirl.create_list(:user_language, 2, user_id: @user.id) }
+    specify { @user.user_languages.should eq @user_languages }
+  end
 end
 
