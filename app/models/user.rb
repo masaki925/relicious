@@ -33,4 +33,12 @@ class User < ActiveRecord::Base
     #update_notifications_newcomer(user)
     user
   end
+
+  def self.search(queries)
+    if queries
+      find(:all, conditions: [ 'location LIKE ?', "%#{queries[:location]}%" ] )
+    else
+      find(:all)
+    end
+  end
 end

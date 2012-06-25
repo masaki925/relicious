@@ -44,114 +44,120 @@ describe UsersController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all users as @users" do
-      user = FactoryGirl.create(:user)
-      get :index, {}, valid_session
-      assigns(:users).should eq([user])
-    end
+  context "when user is NOT logged in" do
+    it "allow some actions and reject others"
   end
 
-  describe "GET show" do
-    it "assigns the requested user as @user" do
-      user = FactoryGirl.create(:user)
-      get :show, {:id => user.to_param}, valid_session
-      assigns(:user).should eq(user)
-    end
-  end
+  context "when user is logged in" do
+    before { @user = FactoryGirl.create(:user) }
 
-  describe "GET edit" do
-    before do
-      @user = FactoryGirl.create(:user)
-      @all_languages = FactoryGirl.create_list(:language, 2)
-      @user.languages = @all_languages
-      @user_languages = @user.languages
-
-      FbGraph::User.stub(:fetch).and_return(User.new)
-      User.any_instance.stub(:likes).and_return(Array.new)
-      get :edit, {:id => @user.to_param}, valid_session
-    end
-
-    it "assigns @user" do
-      assigns(:user).should_not nil
-    end
-    it "assigns @user_languages" do
-      assigns(:user_languages).should eq @user_languages
-    end
-    it "assigns @all_languages" do
-      assigns(:all_languages).should eq @all_languages
-    end
-    it "assigns @likes" do
-      assigns(:likes).should_not nil
-    end
-  end
-
-  describe "POST create" do
-    describe "with any params" do
-      it "reject because we only accept Facebook OAuth" do
-        post :create, {}, valid_session
-        response.should redirect_to(root_path)
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested user" do
-        user = FactoryGirl.create(:user)
-        # Assuming there are no other users in the database, this
-        # specifies that the User created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        User.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => user.to_param, :user => {'these' => 'params'}}, valid_session
+    describe "GET index" do
+      context "without search params" do
+        it "assigns all users as @users" do
+          get :index, {}, valid_session
+          assigns(:users).should eq([@user])
+        end
       end
 
+      context "with search params" do
+        it "assigns searched users as @users" do
+          get :index, {search: { location: "tokyo"} }, valid_session
+          assigns(:users).should eq([@user])
+        end
+      end
+    end
+
+    describe "GET show" do
       it "assigns the requested user as @user" do
-        user = FactoryGirl.create(:user)
-        put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
-        assigns(:user).should eq(user)
-      end
-
-      it "redirects to the user" do
-        user = FactoryGirl.create(:user)
-        put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
-        response.should redirect_to(user)
+        get :show, {:id => @user.to_param}, valid_session
+        assigns(:user).should eq(@user)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the user as @user" do
-        user = FactoryGirl.create(:user)
-        # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-        put :update, {:id => user.to_param, :user => {}}, valid_session
-        assigns(:user).should eq(user)
+    describe "GET edit" do
+      before do
+        @all_languages = FactoryGirl.create_list(:language, 2)
+        @user.languages = @all_languages
+        @user_languages = @user.languages
+
+        FbGraph::User.stub(:fetch).and_return(User.new)
+        User.any_instance.stub(:likes).and_return(Array.new)
+        get :edit, {:id => @user.to_param}, valid_session
       end
 
-      it "re-renders the 'edit' template" do
-        user = FactoryGirl.create(:user)
-        # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-        put :update, {:id => user.to_param, :user => {}}, valid_session
-        response.should render_template("edit")
+      it "assigns @user" do
+        assigns(:user).should_not nil
+      end
+      it "assigns @user_languages" do
+        assigns(:user_languages).should eq @user_languages
+      end
+      it "assigns @all_languages" do
+        assigns(:all_languages).should eq @all_languages
+      end
+      it "assigns @likes" do
+        assigns(:likes).should_not nil
+      end
+    end
+
+    describe "POST create" do
+      describe "with any params" do
+        it "reject because we only accept Facebook OAuth" do
+          post :create, {}, valid_session
+          response.should redirect_to(root_path)
+        end
+      end
+    end
+
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested user" do
+          # Assuming there are no other users in the database, this
+          # specifies that the User created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          User.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => @user.to_param, :user => {'these' => 'params'}}, valid_session
+        end
+
+        it "assigns the requested user as @user" do
+          put :update, {:id => @user.to_param, :user => valid_attributes}, valid_session
+          assigns(:user).should eq(@user)
+        end
+
+        it "redirects to the user" do
+          put :update, {:id => @user.to_param, :user => valid_attributes}, valid_session
+          response.should redirect_to(@user)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the user as @user" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          User.any_instance.stub(:save).and_return(false)
+          put :update, {:id => @user.to_param, :user => {}}, valid_session
+          assigns(:user).should eq(@user)
+        end
+
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          User.any_instance.stub(:save).and_return(false)
+          put :update, {:id => @user.to_param, :user => {}}, valid_session
+          response.should render_template("edit")
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "destroys the requested user" do
+        expect {
+          delete :destroy, {:id => @user.to_param}, valid_session
+        }.to change(User, :count).by(-1)
+      end
+
+      it "redirects to the users list" do
+        delete :destroy, {:id => @user.to_param}, valid_session
+        response.should redirect_to(users_url)
       end
     end
   end
-
-  describe "DELETE destroy" do
-    it "destroys the requested user" do
-      user = FactoryGirl.create(:user)
-      expect {
-        delete :destroy, {:id => user.to_param}, valid_session
-      }.to change(User, :count).by(-1)
-    end
-
-    it "redirects to the users list" do
-      user = FactoryGirl.create(:user)
-      delete :destroy, {:id => user.to_param}, valid_session
-      response.should redirect_to(users_url)
-    end
-  end
-
 end

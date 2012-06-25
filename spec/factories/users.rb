@@ -17,6 +17,6 @@ FactoryGirl.define do
     work         "Work"
     gender       "male"
     locale       "en_US"
-    location     "Location"
+    location     "Tokyo"
   end
 end

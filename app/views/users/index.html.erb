@@ -1,5 +1,12 @@
 <h1>Listing users</h1>
 
+<%= form_tag users_path, :method => 'get' do %>
+  <p>
+    Location: <%= text_field_tag "search[location]" %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <table>
   <tr>
     <th>Name</th>
