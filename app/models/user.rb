@@ -8,10 +8,11 @@ class User < ActiveRecord::Base
   validates :provider_uid, presence: true
   validates :auth_token,   presence: true
 
-  has_many :meetups
   has_many :meetup_comments
   has_many :user_avails
   has_many :user_languages
+  has_many :user_meetup_permissions
+  has_many :meetups,   through: :user_meetup_permissions
   has_many :languages, through: :user_languages
 
   def self.create_with_omniauth(auth)

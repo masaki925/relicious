@@ -78,6 +78,12 @@ describe MeetupsController do
           }.to change(Meetup, :count).by(1)
         end
 
+        it "creates a new Meetup" do
+          expect {
+            post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id) }, {:user_id => @user.id}
+          }.to change(@user.meetups, :count).by(1)
+        end
+
         it "assigns a newly created meetup as @meetup" do
           post :create, {:meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id)}, {:user_id => @user.id}
           assigns(:meetup).should be_a(Meetup)

@@ -3,12 +3,23 @@
 <% if @user %>
   <h1>User Home</h1>
   <li>Profile</li>
+    name: <%= @user.name %><br>
+    birthday: <%= @user.birthday %><br>
+    likes: <%= @user.likes %><br>
   <li>scheduled meetups</li>
+  <% if @user_meetups %>
+    <% @user_meetups.each do |meetup| %>
+      <%= meetup.title %><br>
+      <%= meetup.begin_at %><br>
+      <%= meetup.end_at %><br>
+      <%= meetup.area.name %><br>
+    <% end %>
+  <% end %>
   <li>Availability</li>
   <% @user_avails.each do |avail| %>
-    from   : <%= avail.avail_from %>
-    to     : <%= avail.avail_to %>
-    option : <%= avail.avail_option %>
+    from   : <%= avail.avail_from %><br>
+    to     : <%= avail.avail_to %><br>
+    option : <%= avail.avail_option %><br>
   <% end if @user_avails %>
 <% else %>
   <h1>Relicious Top</h1>
