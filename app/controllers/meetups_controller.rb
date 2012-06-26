@@ -16,6 +16,7 @@ class MeetupsController < ApplicationController
   # GET /meetups/1.json
   def show
     @meetup = Meetup.find(params[:id])
+    @not_joined_yet = true unless @meetup.users.include? current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,6 +38,19 @@ class MeetupsController < ApplicationController
   # GET /meetups/1/edit
   def edit
     @meetup = Meetup.find(params[:id])
+  end
+
+  # PUT /meetups/1/join
+  def join
+    @meetup = Meetup.find(params[:id])
+    if current_user.meetups.include? @meetup
+      flash[:notice] = "WARN: you already joined this meetup"
+    else
+      current_user.meetups << @meetup
+      flash[:notice] = "you successfully joined this meetup!"
+    end
+
+    redirect_to meetup_path(@meetup)
   end
 
   # POST /meetups

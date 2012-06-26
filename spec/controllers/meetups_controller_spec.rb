@@ -70,6 +70,29 @@ describe MeetupsController do
       specify { assigns(:meetup).should eq(@meetup) }
     end
 
+    describe "GET join" do
+      before do
+        @other_user = FactoryGirl.create(:user)
+        @other_meetup = FactoryGirl.create(:meetup, user: @other_user)
+      end
+
+      it "add meetup to user.meetups" do
+        expect {
+          get :join, {:id => @other_meetup.id }, { :user_id => @user.id }
+        }.to change(@user.meetups, :count).by(1)
+      end
+
+      it "add user to meetup.users" do
+        expect {
+          get :join, {:id => @other_meetup.id }, { :user_id => @user.id }
+        }.to change(@other_meetup.users, :count).by(1)
+      end
+
+      it "redirect to meetup detail page" do
+        redirect_to ( meetup_path(@other_meetup) )
+      end
+    end
+
     describe "POST create" do
       describe "with valid params" do
         it "creates a new Meetup" do
@@ -78,7 +101,7 @@ describe MeetupsController do
           }.to change(Meetup, :count).by(1)
         end
 
-        it "creates a new Meetup" do
+        it "add meetup to user.meetups" do
           expect {
             post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id) }, {:user_id => @user.id}
           }.to change(@user.meetups, :count).by(1)

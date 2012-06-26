@@ -1,13 +1,23 @@
 <p id="notice"><%= notice %></p>
 
+<% if @not_joined_yet %>
+  <%= link_to "join this meetup", join_meetups_path(@meetup) %>
+<% end %>
+
 <p>
   <b>Title:</b>
   <%= @meetup.title %>
 </p>
 
 <p>
-  <b>User:</b>
-  <%= @meetup.user.name %>
+  <b>Member:</b>
+  <% @meetup.users.each_with_index do |user, idx| %>
+    <% if idx == 0 %>
+      <%= user.name %>
+    <% else %>
+      ,<%= user.name %>
+    <% end %>
+  <% end %>
 </p>
 
 <p>

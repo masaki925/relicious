@@ -16,7 +16,7 @@ describe "meetups/show" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       rendered.should match(/Title/)
-      rendered.should match(/User/)
+      rendered.should match(/Member/)
       rendered.should match(/Begin/)
       rendered.should match(/End/)
       rendered.should match(/Area/)
