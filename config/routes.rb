@@ -4,10 +4,6 @@ Relicious::Application.routes.draw do
   end
 
   resources :users do
-    collection do
-      get 'search'
-    end
-
     post   "avails"     => "user_avails#create"
     put    "avails/:id" => "user_avails#update"
     delete "avails/:id" => "user_avails#destroy"
