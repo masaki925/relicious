@@ -8,19 +8,14 @@ describe UserAvail do
       specify { @user_avail.should have(1).errors_on(:user_id) }
     end
 
+    context 'without day' do
+      before { @user_avail.day = '' }
+      specify { @user_avail.should have(1).errors_on(:day) }
+    end
+
     context 'without area_id' do
       before { @user_avail.area_id = '' }
       specify { @user_avail.should have(1).errors_on(:area_id) }
-    end
-
-    context 'without avail_from' do
-      before { @user_avail.avail_from = '' }
-      specify { @user_avail.should have(1).errors_on(:avail_from) }
-    end
-
-    context 'without avail_to' do
-      before { @user_avail.avail_to = '' }
-      specify { @user_avail.should have(1).errors_on(:avail_to) }
     end
   end
 

@@ -1,12 +1,17 @@
 <% @user_avail = @user.user_avails.build %>
 <%= form_for([@user, @user_avail], url: user_avails_path(@user)) do |f| %>
   <div class="field">
+    Day: <%= f.select :day, optoins: ["anyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
+  </div>
+  <div class="field">
     Area  : <%= f.collection_select(:area_id, Area.all, :id, :name) %>
   </div>
   <div class="field">
+    <%# Time's yyyy,mm,dd is dummy %>
     From  : <%= f.time_select :avail_from, default: Time.new(2012,01,01, 11, 00, 00) %>
   </div>
   <div class="field">
+    <%# Time's yyyy,mm,dd is dummy %>
     To    : <%= f.time_select :avail_to, default: Time.new(2012,01,01, 14, 00, 00)  %>
   </div>
   <div class="field">

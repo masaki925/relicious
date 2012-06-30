@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120626223657) do
   create_table "user_avails", :force => true do |t|
     t.integer  "user_id"
     t.integer  "area_id"
+    t.string   "day"
     t.time     "avail_from"
     t.time     "avail_to"
     t.string   "avail_option"

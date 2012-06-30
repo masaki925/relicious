@@ -3,6 +3,7 @@ class CreateUserAvails < ActiveRecord::Migration
     create_table :user_avails do |t|
       t.references :user
       t.references :area
+      t.string :day
       t.time :avail_from
       t.time :avail_to
       t.string :avail_option
