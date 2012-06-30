@@ -1,0 +1,33 @@
+<h1>Listing user_reviews</h1>
+
+<table>
+  <tr>
+    <th>Recommend</th>
+    <th>About user</th>
+    <th>About experience</th>
+    <th>Eval personal</th>
+    <th>Eval language</th>
+    <th>Eval gourmet</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_reviews.each do |user_review| %>
+  <tr>
+    <td><%= user_review.recommend %></td>
+    <td><%= user_review.about_user %></td>
+    <td><%= user_review.about_experience %></td>
+    <td><%= user_review.eval_personal %></td>
+    <td><%= user_review.eval_language %></td>
+    <td><%= user_review.eval_gourmet %></td>
+    <td><%= link_to 'Show', user_review_path(user_id: @user.id, id: user_review.id) %></td>
+    <td><%= link_to 'Edit', edit_user_review_path(user_id: @user.id, id: user_review.id) %></td>
+    <td><%= link_to 'Destroy', user_review_path(user_id: @user.id, id: user_review.id), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User review', new_user_review_path(user_id: @user.id) %>

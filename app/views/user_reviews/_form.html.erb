@@ -1,0 +1,46 @@
+<% @user_review = @reviewed_user.received_reviews.build unless @user_review %>
+<%= form_for( [@reviewed_user, @user_review], url: user_reviews_path(user_id: @reviewed_user.id) ) do |f| %>
+  <% if @user_review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_review.errors.count, "error") %> prohibited this user_review from being saved:</h2>
+
+      <ul>
+      <% @user_review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :reviewed_user_id %><br />
+    <%= f.select :reviewed_user_id, [1] %>
+  </div>
+  <div class="field">
+    <%= f.label :recommend %><br />
+    <%= f.select :recommend, [["yes", 1], ["no", 0]] %>
+  </div>
+  <div class="field">
+    <%= f.label :about_user %><br />
+    <%= f.text_area :about_user %>
+  </div>
+  <div class="field">
+    <%= f.label :about_experience %><br />
+    <%= f.text_area :about_experience %>
+  </div>
+  <div class="field">
+    <%= f.label :eval_personal %><br />
+    <%= f.select :eval_personal, [1,2,3,4,5] %>
+  </div>
+  <div class="field">
+    <%= f.label :eval_language %><br />
+    <%= f.select :eval_language, [1,2,3,4,5] %>
+  </div>
+  <div class="field">
+    <%= f.label :eval_gourmet %><br />
+    <%= f.select :eval_gourmet, [1,2,3,4,5] %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

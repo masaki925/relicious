@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626122957) do
+ActiveRecord::Schema.define(:version => 20120626223657) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,24 @@ ActiveRecord::Schema.define(:version => 20120626122957) do
 
   add_index "user_meetup_permissions", ["meetup_id"], :name => "index_user_meetup_permissions_on_meetup_id"
   add_index "user_meetup_permissions", ["user_id"], :name => "index_user_meetup_permissions_on_user_id"
+
+  create_table "user_reviews", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meetup_id"
+    t.integer  "reviewed_user_id"
+    t.boolean  "recommend"
+    t.text     "about_user"
+    t.text     "about_experience"
+    t.integer  "eval_personal"
+    t.integer  "eval_language"
+    t.integer  "eval_gourmet"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "user_reviews", ["meetup_id"], :name => "index_user_reviews_on_meetup_id"
+  add_index "user_reviews", ["reviewed_user_id"], :name => "index_user_reviews_on_reviewed_user_id"
+  add_index "user_reviews", ["user_id"], :name => "index_user_reviews_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                      :null => false

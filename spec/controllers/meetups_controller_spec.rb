@@ -53,7 +53,11 @@ describe MeetupsController do
     end
 
     describe "GET show" do
-      before { get :show, {:id => @meetup.id}, { :user_id => @user.id } }
+      before do
+        @other_user = FactoryGirl.create(:user)
+
+        get :show, {:id => @meetup.id}, { :user_id => @user.id }
+      end
 
       specify { assigns(:meetup).should eq(@meetup) }
     end

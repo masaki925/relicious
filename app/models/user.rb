@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :user_meetup_permissions
   has_many :meetups,   through: :user_meetup_permissions
   has_many :languages, through: :user_languages
+  has_many :sent_reviews,     :foreign_key => 'user_id',          :class_name => "UserReview"
+  has_many :received_reviews, :foreign_key => 'reviewed_user_id', :class_name => "UserReview"
+
 
   def self.create_with_omniauth(auth)
     user = User.new(

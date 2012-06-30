@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Received user:</b>
+  <%= @user_review.reviewed_user_id %>
+</p>
+
+<p>
+  <b>Recommend:</b>
+  <%= @user_review.recommend %>
+</p>
+
+<p>
+  <b>About user:</b>
+  <%= @user_review.about_user %>
+</p>
+
+<p>
+  <b>About experience:</b>
+  <%= @user_review.about_experience %>
+</p>
+
+<p>
+  <b>Eval personal:</b>
+  <%= @user_review.eval_personal %>
+</p>
+
+<p>
+  <b>Eval language:</b>
+  <%= @user_review.eval_language %>
+</p>
+
+<p>
+  <b>Eval gourmet:</b>
+  <%= @user_review.eval_gourmet %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_review_path(user_id: @reviewed_user.id, id: @user_review) %> |
+<%= link_to 'Back', user_reviews_path(user_id: @reviewed_user.id) %>

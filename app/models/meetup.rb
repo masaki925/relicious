@@ -7,6 +7,7 @@ class Meetup < ActiveRecord::Base
   has_many   :meetup_comments, dependent: :destroy
   has_many   :user_meetup_permissions
   has_many   :users, through: :user_meetup_permissions
+  has_many   :user_reviews
 
   validates :user_id, :presence => true
   validates :area_id, :presence => true
