@@ -20,5 +20,10 @@ describe UserReview do
       before { @user_review.reviewed_user_id = '' }
       specify { @user_review.should have(1).errors_on(:reviewed_user_id) }
     end
+
+    context 'without familiarity for area' do
+      before { @user_review.familiarity_for_area = '' }
+      specify { @user_review.should have(1).errors_on(:familiarity_for_area) }
+    end
   end
 end

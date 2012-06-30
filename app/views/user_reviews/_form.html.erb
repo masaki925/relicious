@@ -13,6 +13,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :familiarity_for_area %><br />
+    <%= f.select :familiarity_for_area, ["local", "non-local"] %>
+  </div>
+  <div class="field">
     <%= f.label :meetup_id %><br />
     <%= f.select :meetup_id, options_for_select(@meetup_candidates.map {|m| [ m.title, m.id ]}) %>
   </div>

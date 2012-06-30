@@ -11,5 +11,6 @@ FactoryGirl.define do
     eval_personal 1
     eval_language 2
     eval_gourmet  3
+    familiarity_for_area "local"
   end
 end

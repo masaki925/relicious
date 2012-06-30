@@ -24,6 +24,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    unless params[:id].to_i == current_user.id
+      redirect_to users_path, notice: "Forbidden access"
+    end
+
     @user = User.find(params[:id])
     @user_languages = @user.languages
     @all_languages = Language.all

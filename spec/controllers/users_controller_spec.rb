@@ -82,7 +82,9 @@ describe UsersController do
 
         FbGraph::User.stub(:fetch).and_return(User.new)
         User.any_instance.stub(:likes).and_return(Array.new)
-        get :edit, {:id => @user.to_param}, valid_session
+        UserReviewsController.stub(:current_user) { @user }
+
+        get :edit, {:id => @user.to_param}, {user_id: @user.id}
       end
 
       it "assigns @user" do

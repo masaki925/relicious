@@ -96,8 +96,9 @@ ActiveRecord::Schema.define(:version => 20120626223657) do
     t.integer  "eval_personal"
     t.integer  "eval_language"
     t.integer  "eval_gourmet"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "familiarity_for_area"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   add_index "user_reviews", ["meetup_id"], :name => "index_user_reviews_on_meetup_id"

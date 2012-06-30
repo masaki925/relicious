@@ -10,6 +10,7 @@ class CreateUserReviews < ActiveRecord::Migration
       t.integer :eval_personal
       t.integer :eval_language
       t.integer :eval_gourmet
+      t.string  :familiarity_for_area
 
       t.timestamps
     end

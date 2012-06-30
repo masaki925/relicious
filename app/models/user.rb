@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   email_regex    = /\A([\w+\-.]+@[a-z\d\-.]+\.[a-z]+|)\z/i
 
   validates :name,         presence: true
-  validates :email,        uniqueness: true, format: { with: email_regex }
   validates :provider,     presence: true
   validates :provider_uid, presence: true
   validates :auth_token,   presence: true
+  validates :email,        uniqueness: true, format: { with: email_regex }
 
   has_many :meetup_comments
   has_many :user_avails
