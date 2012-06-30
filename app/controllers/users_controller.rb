@@ -73,6 +73,7 @@ class UsersController < ApplicationController
     unless params[:languages].blank?
       @user.languages.clear
       params[:languages].each do |lang_id|
+        next if lang_id.blank?
         if @user.languages.include? Language.find(lang_id)
           redirect_to edit_user_path(@user), notice: "ERROR: Language data invalid"
           return

@@ -109,7 +109,7 @@ describe UsersController do
     end
 
     describe "PUT update" do
-      describe "with valid params" do
+      context "with valid params" do
         it "updates the requested user" do
           # Assuming there are no other users in the database, this
           # specifies that the User created on the previous line
@@ -130,7 +130,7 @@ describe UsersController do
         end
       end
 
-      describe "with invalid params" do
+      context "with invalid params" do
         it "assigns the user as @user" do
           # Trigger the behavior that occurs when invalid params are submitted
           User.any_instance.stub(:save).and_return(false)
@@ -143,6 +143,13 @@ describe UsersController do
           User.any_instance.stub(:save).and_return(false)
           put :update, {:id => @user.to_param, :user => {}}, valid_session
           response.should render_template("edit")
+        end
+      end
+
+      context "with empty language" do
+        it "redirect successfully" do
+          put :update, {:id => @user.to_param, :user => valid_attributes, languages: [""]}, valid_session
+          response.should redirect_to(@user)
         end
       end
     end

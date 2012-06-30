@@ -46,11 +46,11 @@
   </div>
   <div class="field">
     Languages : <br>
-    <% if @user_languages.blank? %>
-        <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), { }, { name: "languages[]" }  %>
-    <% else %>
-      <% @user_languages.each do |ul| %>
-        <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, ul.id), { }, { name: "languages[]" }  %><br>
+    <% (0..1).each do |i| %>
+      <% if @user_languages[i] %>
+          <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, @user_languages[i].id), {include_blank: true}, { name: "languages[]" }  %><br>
+      <% else %>
+          <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), {include_blank: true}, { name: "languages[]" }  %>
       <% end %>
     <% end %>
   </div>
