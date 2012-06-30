@@ -1,9 +1,10 @@
 class UserReviewsController < ApplicationController
+  before_filter :load_reviewed_user
+
   # GET /user_reviews
   # GET /user_reviews.json
   def index
-    @user = User.find(params[:user_id])
-    @user_reviews = UserReview.all
+    @user_reviews = UserReview.find_all_by_reviewed_user_id(params[:user_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +15,6 @@ class UserReviewsController < ApplicationController
   # GET /user_reviews/1
   # GET /user_reviews/1.json
   def show
-    @reviewed_user = User.find(params[:user_id])
     @user_review = UserReview.find(params[:id])
 
     respond_to do |format|
@@ -27,6 +27,8 @@ class UserReviewsController < ApplicationController
   # GET /user_reviews/new.json
   def new
     @user_review = UserReview.new
+    @meetup_candidates = current_user.meetups and @reviewed_user.meetups
+    redirect_to user_path(@reviewe_user) if @meetup_candidates.blank?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,19 +38,21 @@ class UserReviewsController < ApplicationController
 
   # GET /user_reviews/1/edit
   def edit
-    @reviewed_user = User.find(params[:user_id])
     @user_review = UserReview.find(params[:id])
+    @meetup_candidates = current_user.meetups and @reviewed_user.meetups
+    redirect_to user_path(@reviewe_user) if @meetup_candidates.blank?
   end
 
   # POST /user_reviews
   # POST /user_reviews.json
   def create
-    @user = User.find(params[:user_id])
     @user_review = UserReview.new(params[:user_review])
+    @user_review.user_id = current_user.id
+    @user_review.reviewed_user_id = params[:user_id]
 
     respond_to do |format|
       if @user_review.save
-        format.html { redirect_to user_reviews_path(user_id: @user.id, id: @user_review.id), notice: 'User review was successfully created.' }
+        format.html { redirect_to user_reviews_path(user_id: params[:user_id], id: @user_review.id), notice: 'User review was successfully created.' }
         format.json { render json: @user_review, status: :created, location: @user_review }
       else
         format.html { render action: "new" }
@@ -60,12 +64,11 @@ class UserReviewsController < ApplicationController
   # PUT /user_reviews/1
   # PUT /user_reviews/1.json
   def update
-    @user = User.find(params[:user_id])
     @user_review = UserReview.find(params[:id])
 
     respond_to do |format|
       if @user_review.update_attributes(params[:user_review])
-        format.html { redirect_to user_reviews_path(user_id: @user.id, id: @user_review.id), notice: 'User review was successfully updated.' }
+        format.html { redirect_to user_reviews_path(user_id: @reviewed_user.id, id: @user_review.id), notice: 'User review was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -84,5 +87,10 @@ class UserReviewsController < ApplicationController
       format.html { redirect_to user_reviews_path }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  def load_reviewed_user
+    @reviewed_user = User.find(params[:user_id])
   end
 end

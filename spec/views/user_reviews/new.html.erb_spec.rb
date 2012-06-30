@@ -4,6 +4,11 @@ describe "user_reviews/new" do
   before(:each) do
     @user       = FactoryGirl.create(:user)
     @other_user = assign(:reviewed_user, FactoryGirl.create(:user))
+    @meetup = FactoryGirl.create(:meetup)
+    @user.meetups << @meetup
+    @other_user.meetups << @meetup
+    @meetup_candidates = @user.meetups and @other_user.meetups
+    assign(:meetup_candidates, @meetup_candidates)
   end
 
   it "renders new user_review form" do
@@ -11,7 +16,6 @@ describe "user_reviews/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => user_reviews_path(user_id: @other_user.id), :method => "post" do
-      assert_select "select#user_review_reviewed_user_id", :name => "user_review[reviewed_user_id]"
       assert_select "select#user_review_recommend", :name => "user_review[recommend]"
       assert_select "textarea#user_review_about_user", :name => "user_review[about_user]"
       assert_select "textarea#user_review_about_experience", :name => "user_review[about_experience]"

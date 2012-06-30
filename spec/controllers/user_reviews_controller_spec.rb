@@ -36,59 +36,59 @@ describe UserReviewsController do
 
   before do
     @user       = FactoryGirl.create(:user)
-    @other_user = FactoryGirl.create(:user)
+    @reviewed_user = FactoryGirl.create(:user)
     @meetup     = FactoryGirl.create(:meetup)
     @user.meetups << @meetup
+    @user_review = FactoryGirl.create(:user_review, user_id: @user.id, meetup_id: @meetup.id, reviewed_user_id: @reviewed_user.id)
   end
 
   describe "GET index" do
     it "assigns all user_reviews as @user_reviews" do
-      user_review = UserReview.create! valid_attributes
-      get :index, {user_id: @other_user.id}, {user_id: @user.id}
-      assigns(:user_reviews).should eq([user_review])
+      get :index, {user_id: @reviewed_user.id}, {user_id: @user.id}
+      assigns(:user_reviews).should eq([@user_review])
     end
   end
 
   describe "GET show" do
     it "assigns the requested user_review as @user_review" do
-      user_review = UserReview.create! valid_attributes
-      get :show, {user_id: @user.id, :id => user_review.to_param}, {user_id: @user.id}
-      assigns(:user_review).should eq(user_review)
+      get :show, {user_id: @reviewed_user.id, :id => @user_review.to_param}, {user_id: @user.id}
+      assigns(:user_review).should eq(@user_review)
     end
   end
 
   describe "GET new" do
     it "assigns a new user_review as @user_review" do
-      get :new, {user_id: @user.id}, {user_id: @user.id}
+      get :new, {user_id: @reviewed_user.id}, {user_id: @user.id}
       assigns(:user_review).should be_a_new(UserReview)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested user_review as @user_review" do
-      user_review = UserReview.create! valid_attributes
-      get :edit, {user_id: @user.id, :id => user_review.to_param}, {user_id: @user.id}
-      assigns(:user_review).should eq(user_review)
+      get :edit, {user_id: @reviewed_user.id, :id => @user_review.to_param}, {user_id: @user.id}
+      assigns(:user_review).should eq(@user_review)
     end
   end
 
   describe "POST create" do
+    before { UserReviewsController.stub(:current_user) { @user } }
+
     describe "with valid params" do
       it "creates a new UserReview" do
         expect {
-          post :create, {user_review: valid_attributes, user_id: @other_user.id}, {user_id: @user.id}
+          post :create, {user_review: FactoryGirl.attributes_for(:user_review, meetup_id: @meetup.id), user_id: @reviewed_user.id}, {user_id: @user.id}
         }.to change(UserReview, :count).by(1)
       end
 
       it "assigns a newly created user_review as @user_review" do
-        post :create, {user_review: valid_attributes, user_id: @user.id}, {user_id: @user.id}
+        post :create, {user_review: FactoryGirl.attributes_for(:user_review, meetup_id: @meetup.id), user_id: @reviewed_user.id}, {user_id: @user.id}
         assigns(:user_review).should be_a(UserReview)
         assigns(:user_review).should be_persisted
       end
 
       it "redirects to the created user_review" do
-        post :create, {user_review: valid_attributes, user_id: @other_user.id}, {user_id: @user.id}
-        response.should redirect_to( user_reviews_path(user_id: @other_user.id, id: assigns(:user_review).id) )
+        post :create, {user_review: FactoryGirl.attributes_for(:user_review, meetup_id: @meetup.id), user_id: @reviewed_user.id}, {user_id: @user.id}
+        response.should redirect_to( user_reviews_path(user_id: @reviewed_user.id, id: assigns(:user_review).id) )
       end
     end
 
@@ -96,14 +96,14 @@ describe UserReviewsController do
       it "assigns a newly created but unsaved user_review as @user_review" do
         # Trigger the behavior that occurs when invalid params are submitted
         UserReview.any_instance.stub(:save).and_return(false)
-        post :create, {user_review: {}, user_id: @other_user.id}, {user_id: @user.id}
+        post :create, {user_review: {}, user_id: @reviewed_user.id}, {user_id: @user.id}
         assigns(:user_review).should be_a_new(UserReview)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         UserReview.any_instance.stub(:save).and_return(false)
-        post :create, {user_id: @other_user.id, user_review: {}}, {user_id: @user.id}
+        post :create, {user_id: @reviewed_user.id, user_review: {}}, {user_id: @user.id}
         response.should render_template("new")
       end
     end
@@ -112,42 +112,37 @@ describe UserReviewsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested user_review" do
-        user_review = UserReview.create! valid_attributes
         # Assuming there are no other user_reviews in the database, this
         # specifies that the UserReview created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         UserReview.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {user_id: @other_user.id, :id => user_review.to_param, :user_review => {'these' => 'params'}}, valid_session
+        put :update, {user_id: @reviewed_user.id, :id => @user_review.to_param, :user_review => {'these' => 'params'}}, valid_session
       end
 
       it "assigns the requested user_review as @user_review" do
-        user_review = UserReview.create! valid_attributes
-        put :update, {id: user_review.to_param, user_review: valid_attributes, user_id: @other_user.id}, {user_id: @user.id}
-        assigns(:user_review).should eq(user_review)
+        put :update, {id: @user_review.to_param, user_review: valid_attributes, user_id: @reviewed_user.id}, {user_id: @user.id}
+        assigns(:user_review).should eq(@user_review)
       end
 
       it "redirects to the user_review" do
-        user_review = UserReview.create! valid_attributes
-        put :update, {user_id: @other_user.id, id: user_review.to_param, user_review: valid_attributes}, {user_id: @user.id}
-        response.should redirect_to(user_reviews_path(user_id: @other_user.id, id: user_review.id))
+        put :update, {user_id: @reviewed_user.id, id: @user_review.to_param, user_review: valid_attributes}, {user_id: @user.id}
+        response.should redirect_to(user_reviews_path(user_id: @reviewed_user.id, id: @user_review.id))
       end
     end
 
     describe "with invalid params" do
       it "assigns the user_review as @user_review" do
-        user_review = UserReview.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         UserReview.any_instance.stub(:save).and_return(false)
-        put :update, {user_id: @other_user.id, id: user_review.to_param, user_review: {}}, {user_id: @user.id}
-        assigns(:user_review).should eq(user_review)
+        put :update, {user_id: @reviewed_user.id, meetup_id: @meetup.id, id: @user_review.to_param, user_review: {}}, {user_id: @user.id}
+        assigns(:user_review).should eq(@user_review)
       end
 
       it "re-renders the 'edit' template" do
-        user_review = UserReview.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         UserReview.any_instance.stub(:save).and_return(false)
-        put :update, {user_id: @other_user.id, id: user_review.to_param, user_review: {}}, {user_id: @user.id}
+        put :update, {user_id: @reviewed_user.id, meetup_id: @meetup.id, id: @user_review.to_param, user_review: {}}, {user_id: @user.id}
         response.should render_template("edit")
       end
     end
@@ -155,15 +150,13 @@ describe UserReviewsController do
 
   describe "DELETE destroy" do
     it "destroys the requested user_review" do
-      user_review = UserReview.create! valid_attributes
       expect {
-        delete :destroy, {user_id: @other_user.id, :id => user_review.to_param}, {user_id: @user.id}
+        delete :destroy, {user_id: @reviewed_user.id, :id => @user_review.to_param}, {user_id: @user.id}
       }.to change(UserReview, :count).by(-1)
     end
 
     it "redirects to the user_reviews list" do
-      user_review = UserReview.create! valid_attributes
-      delete :destroy, {user_id: @other_user.id, :id => user_review.to_param}, {user_id: @user.id}
+      delete :destroy, {user_id: @reviewed_user.id, :id => @user_review.to_param}, {user_id: @user.id}
       response.should redirect_to(user_reviews_path)
     end
   end

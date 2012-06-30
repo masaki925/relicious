@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :user_review do
     user
     meetup
-    association :reviewed_user, factory: :user
+    association :reviewed_user_id, factory: :user
     recommend  true
     about_user "about_user"
     about_experience  "about_experience"

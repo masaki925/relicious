@@ -14,8 +14,10 @@
   <% @meetup.users.each_with_index do |user, idx| %>
     <% if idx == 0 %>
       <%= user.name %>
+      <%= link_to "review", new_user_review_path(user_id: user.id) %>
     <% else %>
       ,<%= user.name %>
+      <%= link_to "review", new_user_review_path(user_id: user.id) %>
     <% end %>
   <% end %>
 </p>

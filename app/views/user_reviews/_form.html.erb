@@ -13,8 +13,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :reviewed_user_id %><br />
-    <%= f.select :reviewed_user_id, [1] %>
+    <%= f.label :meetup_id %><br />
+    <%= f.select :meetup_id, options_for_select(@meetup_candidates.map {|m| [ m.title, m.id ]}) %>
   </div>
   <div class="field">
     <%= f.label :recommend %><br />
