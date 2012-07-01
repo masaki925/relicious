@@ -16,6 +16,8 @@ class MeetupsController < ApplicationController
   # GET /meetups/1.json
   def show
     @meetup = Meetup.find(params[:id])
+    @meetup_users = @meetup.users
+    @meetup_comments = @meetup.meetup_comments
     @not_joined_yet = true unless @meetup.users.include? current_user
 
     respond_to do |format|

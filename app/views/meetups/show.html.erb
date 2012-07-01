@@ -1,54 +1,110 @@
+<%= stylesheet_link_tag "views/message", :media => "all" %>
+
 <p id="notice"><%= notice %></p>
+
+<!-- breadcrumb -->
+<nav id="breadcrumb">
+<p><a href="/" rel="index up">TOP</a> > <a href="/meetups" rel="up">Message</a> > Conversation with
+<% @meetup_users.each do |u| %>
+  <% next if u == current_user %>
+  <%= link_to u.name, user_path(u) %>,
+<% end %>
+</p>
+</nav>
+<!-- /breadcrumb -->
 
 <% if @not_joined_yet %>
   <%= link_to "join this meetup", join_meetups_path(@meetup) %>
 <% end %>
 
-<p>
-  <b>Title:</b>
-  <%= @meetup.title %>
-</p>
+<!-- conversation -->
+<div id="conversation">
+  <h2>Conversation with
+    <% @meetup_users.each do |u| %>
+      <% next if u == current_user %>
+      <%= link_to u.name, user_path(u) %>,
+    <% end %>
+  </h2>
 
-<p>
-  <b>Member:</b>
-  <% @meetup.users.each_with_index do |user, idx| %>
-    <% if idx == 0 %>
-      <%= user.name %>
-      <%= link_to "review", new_user_review_path(user_id: user.id) %>
+  <!-- addressee -->
+  <div id="addressee">
+    <div class="addresseeDetail">
+      <div class="imgArea">
+        <% @meetup_users.each do |u| %>
+          <%= link_to image_tag("http://graph.facebook.com/#{u.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture"), user_path(u) %>
+        <% end %>
+      </div>
+      <div class="detailArea">
+        <p><%= @meetup.title %><br>
+        <%= @meetup.area.name %><br>
+        <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</p>
+      </div>
+    </div>
+  </div>
+  <!-- /addressee -->
+
+  <% @meetup_comments.each do |comment| %>
+    <% if comment.user == current_user %>
+      <!-- yourAreae -->
+      <div class="yourArea">
+        <div class="imgArea">
+          <figure>
+          <%= link_to image_tag("http://graph.facebook.com/#{comment.user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
+          <figcaption>you</figcaption>
+          </figure>
+        </div>
+
+        <div class="detailArea">
+          <div class="arrowBoxL">
+            <textarea name=""><%= comment.body %></textarea>
+            <div class="col2">
+              <div class="leftCol">
+                <ul>
+                  <li><input type="button" value="?" class="btn1" /></li>
+                </ul>
+              </div>
+              <div class="rightCol">
+                <p><time><%= comment.created_at %></time></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /yourAreae -->
     <% else %>
-      ,<%= user.name %>
-      <%= link_to "review", new_user_review_path(user_id: user.id) %>
+      <!-- addresseeArea -->
+      <div class="addresseeArea">
+        <div class="imgArea">
+          <figure>
+          <%= link_to image_tag("http://graph.facebook.com/#{comment.user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
+          <figcaption><%= comment.user.name %></figcaption>
+          </figure>
+        </div>
+        <div class="detailArea">
+          <div class="arrowBoxR">
+            <p><%= comment.body %></p>
+            <div class="col2">
+              <div class="leftCol">
+                <ul>
+                  <li><input type="button" value="?" class="btn1" /></li>
+                </ul>
+              </div>
+              <div class="rightCol">
+                <p><time><%= comment.created_at %></time></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- addresseeArea -->
     <% end %>
   <% end %>
-</p>
 
-<p>
-  <b>Begin at:</b>
-  <%= @meetup.begin_at %>
-</p>
-
-<p>
-  <b>End at:</b>
-  <%= @meetup.end_at %>
-</p>
-
-<p>
-  <b>Area:</b>
-  <%= @meetup.area.name %>
-</p>
-
-<p>
-  <b>Public:</b>
-  <%= @meetup.public %>
-</p>
-
-<p>
-  <b>Comments:</b>
-  <%= render @meetup.meetup_comments %>
-</p>
-
-<h2>Add a Comment:</h2>
+<h2>Add a Message:</h2>
 <%= render "meetup_comments/form" %>
+
+</div>
+<!-- /conversation -->
 
 <%= link_to 'Edit', edit_meetup_path(@meetup) %> |
 <%= link_to 'Back', meetups_path %>
