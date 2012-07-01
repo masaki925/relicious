@@ -1,7 +1,9 @@
 class TopController < ApplicationController
   def index
-    @user = current_user
-    @user_avails = @user.user_avails if @user
-    @user_meetups = @user.meetups if @user
+    @recent_meetups = Meetup.all(limit: 3)
+    if @user = current_user
+      @user_avails = @user.user_avails 
+      @user_meetups = @user.meetups
+    end
   end
 end

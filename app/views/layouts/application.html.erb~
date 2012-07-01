@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="Relicious, lunch" />
+  <meta name="description" content="Relicious Connect to the foreign local over the dining table!" />
+
+  <title>Relicious - log in / Sign in -</title>
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body id="login">
+  <div class='header'>
+  <header id="header">
+    <div id="headerArea">
+        <div id="logo">
+            <h1 id="logoTitle"><%= link_to image_tag("/assets/logo.png", width: "105", height: "60", alt: "Relicious"), root_path %></h1>
+        </div>
+        <nav>
+            <ul id="nav">
+                <li><a href="/users">Find<br> <strong>Local</strong><br> People</a></li>
+                <li><a href="/users">Find<br> <strong>Foreign</strong><br> travelers</a></li>
+            </ul>
+        </nav>
+        <div id="subInfo">
+          <ul id="subInfoTop">
+                <li id="logout"><%= link_to "Log Out", logout_path %></li>
+                <li> <%= select_tag :language, options_for_select( [["English", "English"], ["日本語", "Japanese"]] ) %> </li>
+            </ul>
+            <ul id="subInfoBottom">
+                <li class="messageLink"><a href="#">Message<span>1</span></a></li>
+                <li>
+                    <form id="searchHeader" action="" method="get">
+                        <input type="text" id="" name="" autocomplete="" placeholder='Country, City, and more' class="textarea" /><input type="submit" id="" value='Search' class="btn1" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </header>
+<!-- /header -->
+
+
+
+
+    <%= link_to 'Relicious', root_path %><br/>
+    <% if current_user %>
+      <%= link_to current_user.name, user_path(current_user) %> |
+      <%= link_to "logout", logout_path %>
+    <% else %>
+      <%#= link_to "Twitter でログイン", "/auth/twitter" %>
+      <%= link_to "Login with Facebook", "/auth/facebook " %>
+    <% end %>
+  </div>
+
+  <div class='sub-header'>
+    <%= link_to 'meetups', meetups_path %>
+    <%= link_to 'users', users_path %>
+  </div>
+
+  <%= yield %>
+
+  <!-- footer -->
+  <div class='footer' id="footer">
+    <%= render 'layouts/footer' %>
+  </div>
+  <!-- /footer -->
+
+  <%= debug(params) if Rails.env.development? %>
+</body>
+</html>

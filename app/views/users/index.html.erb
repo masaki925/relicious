@@ -1,13 +1,13 @@
 <h1>Listing users</h1>
 
-<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' %>
+<%#= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
 <%= stylesheet_link_tag 'jquery-ui-1.7.3.custom.css' %>
 
 <%= form_tag users_path, :method => 'get' do %>
   <p>
   Location: <%= text_field_tag "search[location]", "", placeholder: "Tokyo" %>
-    Date :    <%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %>
+  Date :    <%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %>
   </p>
 
   <%= submit_tag "Search", :name => nil %>

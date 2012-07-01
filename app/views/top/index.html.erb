@@ -1,27 +1,204 @@
 <p id="notice"><%= notice %></p>
 
 <% if @user %>
-  <h1>User Home</h1>
-  <li>Profile</li>
-    name: <%= @user.name %><br>
-    birthday: <%= @user.birthday %><br>
-    likes: <%= @user.likes %><br>
-  <li>scheduled meetups</li>
-  <% if @user_meetups %>
-    <% @user_meetups.each do |meetup| %>
-      <%= meetup.title %><br>
-      <%= meetup.begin_at %><br>
-      <%= meetup.end_at %><br>
-      <%= meetup.area.name %><br>
-    <% end %>
-  <% end %>
+  <%= stylesheet_link_tag "views/top", :media => "all" %>
+  <% @user_picture_url = "http://graph.facebook.com/#{@user.provider_uid}/picture?type=square" %>
+
+  <!-- top -->
+  <div id="top">
+    <div id="leftArea">
+      <div id="profileImg">
+        <h2>Hi <%= @user.name %>!! Welcome back!!</h2>
+        <div class="flexslider">
+          <ul class="slides">
+            <li><%= image_tag @user_picture_url, width:"175", height:"175", alt:"picture" %></li>
+          </ul>
+        </div>
+        <p class="textC"><%= link_to "Edit Profole", edit_user_path(@user) %></p>
+      </div>
+      <div id="upcomingArea">
+        <h3>Upcoming Dining</h3>
+        <ul>
+          <% @user_meetups.each do |meetup| %>
+            <li>
+            <div class="recentStreamBox">
+              <div class="imgArea">
+                <%= image_tag "http://graph.facebook.com/#{@user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture" %>
+              </div>
+              <div class="detailArea">
+                With <a href="#">XXXXXX</a><br>
+                and <a href="#">3 pepole</a><br>
+                <time><%= meetup.begin_at %></time>
+                <%= meetup.title %>
+              </div>
+            </div>
+            </li>
+          <% end if @user_meetups %>
+        </ul>
+      </div>
+      <div id="doingArea">
+        <h3>Things to do</h3>
+        <ul>
+          <li><a href="#">XXXXXXXX XXXXXXXX</a></li>
+          <li><a href="#">XXXXXXXX XXXXXXXX</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div id="rightArea">
+      <h2>Find Local People?</h2>
+      <!-- localSearch -->
+      <div id="localSearch">
+        <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
+        <%= stylesheet_link_tag 'jquery-ui-1.7.3.custom.css' %>
+        <script type="text/javascript">
+          $(function() {
+              $("#datepicker").datepicker();
+              });
+            </script>
+
+        <%= form_tag users_path, :method => 'get' do %>
+          <ul class="findSearch">
+            <li> Location: <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
+            <li class="date"><label>Date<br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
+            <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select([["Breakfast", 0], ["Lunch", 1], ["Tea time", 2], ["Dinner", 3], ["Drink", 4]]) %> </label></li>
+            <li><%= submit_tag "Search", :name => nil, class: "btn1 searchBtn" %></li>
+          </ul>
+        <% end %>
+      </div>
+
+      <h2>Intercultural dining around you</h2>
+      <% @recent_meetups.each do |meetup| %>
+        <!-- recentStreamBox -->
+        <div class="recentStreamBox">
+          <div class="imgArea">
+            <div class="colBox"> <%= link_to image_tag @user_picture_url, width:"75", height:"75", alt: @user.name %></div>
+            <div class="colBox"> <%= link_to image_tag @user_picture_url, width:"75", height:"75", alt: @user.name %></div>
+          </div>
+          <div class="detailArea">
+            <p><time ><%= meetup.begin_at %></time><br>
+            <%= meetup.title %><br>
+            TODO: @Asakusa</p>
+            <% unless meetup.users.include? current_user %>
+              <p class="textR"><a href=<%= "/meetups/#{meetup.id}/join" %> class="btn1">Join this dining</a></p>
+            <% end %>
+          </div>
+        </div>
+        <!-- /recentStreamBox -->
+      <% end if @recent_meetups %>
+    </div>
+  </div>
+  <!-- /top -->
+
+
   <li>Availability</li>
   <% @user_avails.each do |avail| %>
     from   : <%= avail.avail_from %><br>
     to     : <%= avail.avail_to %><br>
     option : <%= avail.avail_option %><br>
   <% end if @user_avails %>
+
 <% else %>
-  <h1>Relicious Top</h1>
+  <%= stylesheet_link_tag "views/login", :media => "all" %>
+
+  <!-- Facebook plug in -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  <!-- /Facebook plug in -->
+  
+  <!-- topArea -->
+  <div id="topArea">
+  
+    <!-- topTitle -->
+    <div id="topTitle">
+      <h1><%= link_to image_tag("logo.png", width:"315", height:"200", alt:"Relicious"), root_path %></h1>
+      <p>Connect to the foreign local over the dining table!</p>
+    </div>
+    <!-- /topTitle -->
+  
+    <!-- greetingArea -->
+    <div id="greetingArea">
+  
+      <!-- topNavArea -->
+      <div id="topNavArea">
+        <nav>
+        <ul>
+          <li><a href="/auth/facebook" class="login">Sing Up / Log in</a></li>
+          <li><a href="#" class="privay">Privcy Policy</a></li>
+          <li><a href="#" class="info">How it works</a></li>
+          <li><select name="language">
+            <option value="Japanese">Japanese</option>
+            <option value="English">English</option>
+          </select></li>
+        </ul>
+        </nav>
+      </div>
+      <!-- /topNavArea -->
+  
+      <!-- greeting -->
+      <div id="greeting">
+        <h2>Have LOCAL dining with LOCAL people, make your daily dining intercutural.</h2>
+        <p>"Relicious" is a platform for foreign travelers to find the local people to have local food together, and for local people to find chances to communicate with foreign people through thier daily dinings.</p>
+        <p><a class="btn-auth btn-facebook large" href="/auth/facebook">Sign in with <b>Facebook</b></a></p>
+      </div>
+      <!-- /greeting -->
+  
+    </div>
+    <!-- /greetingArea -->
+  
+  </div>
+  <!-- topArea -->
+  
+  <!-- bottomArea -->
+  <div id="bottomArea">
+  
+    <!-- recentStream -->
+    <div id="recentStream">
+      <h2>Intercultural dining in these days</h2>
+      <!-- recentStreamBox -->
+      <% @recent_meetups.each do |meetup| %>
+        <div class="recentStreamBox">
+          <div class="imgArea">
+            <div class="colBox">
+              <a href="#"><img width="35" height="35" alt="Kentaro" src="search/images/sampleImg01.jpg">
+                <span>Kentaro</span></a>
+            </div>
+            <div class="colBox">
+              <a href="#"><img width="35" height="35" alt="Kentaro" src="search/images/sampleImg01.jpg">
+                <span>Kentaro</span></a>
+            </div>
+            <div class="colBox">
+              <a href="#"><img width="35" height="35" alt="Kentaro" src="search/images/sampleImg01.jpg">
+                <span>Kentaro</span></a>
+            </div>
+            <p class="more">and <a href="#">3 people</a></p>
+          </div>
+          <div class="detailArea">
+            <p class="lunch"><time datetime="2012-06-30">30/6/2012</time><br>
+            Having SUSHI<br>
+            @Asakusa</p>
+            <p class="textC"><a href="#" class="btn1">Join this dining</a></p>
+          </div>
+        </div>
+      <% end if @recent_meetups %>
+      <!-- /recentStreamBox -->
+    </div>
+    <!-- /recentStream -->
+  
+    <!-- Facebook social plugin -->
+    <div id="fbPlugin">
+      <div class="fb-activity" data-width="475" data-height="300" data-header="true" data-recommendations="false"></div>
+    </div>
+    <!-- /Facebook social plugin -->
+  
+  </div>
+  <!-- /bottomArea -->
 <% end %>
 
