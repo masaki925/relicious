@@ -6,8 +6,8 @@
 
 <%= form_tag users_path, :method => 'get' do %>
   <p>
-    Location: <%= text_field_tag "search[location]" %>
-    Date :    <%= text_field_tag "search[date]", "", id: 'datepicker' %>
+  Location: <%= text_field_tag "search[location]", "", placeholder: "Tokyo" %>
+    Date :    <%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %>
   </p>
 
   <%= submit_tag "Search", :name => nil %>
