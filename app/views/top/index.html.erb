@@ -94,13 +94,18 @@
         <!-- recentStreamBox -->
         <div class="recentStreamBox">
           <div class="imgArea">
-            <div class="colBox"> <%= link_to image_tag @user_picture_url_square, width:"75", height:"75", alt: @user.name %></div>
-            <div class="colBox"> <%= link_to image_tag @user_picture_url_square, width:"75", height:"75", alt: @user.name %></div>
+            <% meetup.users.each_with_index do |user, idx| %>
+              <div class="colBox">
+                <% if idx == 1 %> <strong>&</strong> <% end %>
+                <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"75", height:"75", alt:"picture"), user_path(user) %>
+              </div>
+              <% break if idx > 1 %>
+            <% end %>
           </div>
           <div class="detailArea">
             <p><time ><%= meetup.begin_at %></time><br>
             <%= meetup.title %><br>
-            TODO: @Asakusa</p>
+            <%= meetup.area.name %></p>
             <% unless meetup.users.include? current_user %>
               <p class="textR"><a href=<%= "/meetups/#{meetup.id}/join" %> class="btn1">Join this dining</a></p>
             <% end %>
@@ -111,14 +116,6 @@
     </div>
   </div>
   <!-- /top -->
-
-
-  <li>Availability</li>
-  <% @user_avails.each do |avail| %>
-    from   : <%= avail.avail_from %><br>
-    to     : <%= avail.avail_to %><br>
-    option : <%= avail.avail_option %><br>
-  <% end if @user_avails %>
 
 <% else %>
   <%= stylesheet_link_tag "views/login", :media => "all" %>
