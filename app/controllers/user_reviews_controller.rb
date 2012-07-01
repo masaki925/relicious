@@ -50,7 +50,6 @@ class UserReviewsController < ApplicationController
     @user_review.user_id = current_user.id
     @user_review.reviewed_user_id = params[:user_id]
 
-    debugger
     respond_to do |format|
       if @user_review.save
         #format.html { redirect_to user_reviews_path(user_id: params[:user_id], id: @user_review.id), notice: 'User review was successfully created.' }
