@@ -35,7 +35,7 @@
       <td>
         <p>Choose languages and skill you can use</p>
         <ul>
-          <% (0..1).each do |i| %>
+          <% (0..2).each do |i| %>
             <li>
             <% if @user_languages[i] %>
               <label> Languages : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, @user_languages[i].id), {include_blank: true}, { name: "languages[]" }  %></label>
@@ -52,6 +52,19 @@
       <th>Avaliability</th>
       <td>
         <p>Choose dining you can have with foreign traveler <span class="notes">(In your normal life, of course you can decline someone's request even though someone send request when you're available on this form)</span></p>
+          <% (0..2).each do |i| %>
+            <li>
+            <% if @user_avails[i] %>
+              <label>Day: <%= select :user_avail, :day, options_for_select(["anyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], @user_avails[i].day), {include_blank: true}, {name: "user_avails[day][]"} %></label>
+              <label>Time: <%= select :user_avail, :option, options_for_select(["anytime", "Breakfast", "Lunch", "Dinner", "Cafe", "Drink"], @user_avails[i].avail_option), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label>
+              <label>Area  : <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, @user_avails[i].area_id), {}, {name: "user_avails[area_id][]"} %> </label>
+            <% else %>
+              <label>Day: <%= select :user_avail, :day, options_for_select(["anyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]), {include_blank: true}, {name: "user_avails[day][]"} %></label>
+              <label>Time: <%= select :user_avail, :option, options_for_select(["anytime", "Breakfast", "Lunch", "Dinner", "Cafe", "Drink"]), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label>
+              <label>Area  : <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}), {}, {name: "user_avails[area_id][]"} %> </label>
+            <% end %>
+            </li>
+          <% end %>
       </td>
     </tr>
     <tr>

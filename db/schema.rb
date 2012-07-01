@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(:version => 20120626223657) do
     t.integer  "area_id"
     t.datetime "begin_at"
     t.datetime "end_at"
-    t.boolean  "public"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "public",     :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "meetups", ["user_id"], :name => "index_meetups_on_user_id"

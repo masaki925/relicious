@@ -6,7 +6,7 @@ class CreateMeetups < ActiveRecord::Migration
       t.references :area
       t.datetime :begin_at
       t.datetime :end_at
-      t.boolean :public
+      t.boolean :public, default: true
 
       t.timestamps
     end

@@ -47,7 +47,11 @@
 
 
   <div id="rightArea">
-    <h2>Hi, I'm <%= @user.name %>!<a href=<%= "/meetups/new?member=#{@user.id}" %> class="btn1">Have dining with</a><span>Member since <%= @user.created_at %></span></h2>
+    <h2>Hi, I'm <%= @user.name %>!
+      <% unless @user == current_user %>
+        <a href=<%= "/meetups/new?member=#{@user.id}" %> class="btn1">Have dining with</a><span>Member since <%= @user.created_at %></span>
+      <% end %>
+    </h2>
     <dl class="dlStyle2">
       <dt>Name</dt>
       <% if @user.name.blank? %>
@@ -82,9 +86,12 @@
       <% end %>
 
       <dt>Avaliability</dt>
-      <dd>
-      <%= render @user.user_avails %>
-      </dd>
+      <% if @user.user_avails.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= render @user.user_avails %></dd>
+      <% end %>
+
       <dt>Message</dt>
       <% if @user.introduction.blank? %>
         <dd>-</dd>

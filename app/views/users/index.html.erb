@@ -26,7 +26,7 @@
         <ul class="findSearch">
           <li> Location: <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
           <li class="date"><label>Date<br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
-          <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select([["Breakfast", 0], ["Lunch", 1], ["Tea time", 2], ["Dinner", 3], ["Drink", 4]]) %> </label></li>
+          <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select([["Breakfast", 0], ["Lunch", 1], ["Tea time", 2], ["Dinner", 3], ["Drink", 4]]), {include_blank: true} %> </label></li>
           <li><%= submit_tag "Search", :name => nil, class: "btn1 searchBtn" %></li>
         </ul>
       <% end %>
@@ -44,7 +44,7 @@
   <% @users.each do |user| %>
     <div class="findPeopleArea">
       <div class="imgArea">
-        <p><%= image_tag "http://graph.facebook.com/#{user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture" %></p>
+        <p><%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture"), user_path(user) %></p>
         <%= user.name %><br>
         (<%= user.gender %>)</p>
       </div>
@@ -65,12 +65,19 @@
           <dt>Reply Rate:</dt>
           <dd>FIXME: 100%</dd>
         </dl>
+
         <h3>About</h3>
         <dl class="cotegory3">
           <dt>Basics:</dt>
           <dd><%= user.birthday%>, <%= user.gender %>, <%= user.location %></dd>
+
           <dt>Availability:</dt>
-          <dd><%= render user.user_avails %></dd>
+          <% if user.user_avails.blank? %>
+            <dd>-</dd>
+          <% else %>
+            <dd><%= render user.user_avails %></dd>
+          <% end %>
+
           <dt>Language:</dt>
           <% if user.languages.blank? %>
             <dd>-</dd>
@@ -84,7 +91,9 @@
 
         </dl>
       </div>
-      <p class="btnArea"><a href=<%= "/meetups/new?member=#{user.id}" %> class="btn1">Have dining with</a></p>
+      <% unless user == current_user %>
+        <p class="btnArea"><a href=<%= "/meetups/new?member=#{user.id}" %> class="btn1">Have dining with</a></p>
+      <% end %>
     </div>
   <% end if @users %>
   <!-- /findPeopleArea -->

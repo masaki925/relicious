@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     @user_languages = @user.languages
+    @user_avails = @user.user_avails
     @all_languages = Language.all
 
     fb_user = FbGraph::User.fetch('me', access_token: @user.auth_token)
@@ -88,9 +89,30 @@ class UsersController < ApplicationController
       end
     end
 
+    unless params[:user_avails].blank?
+      @user.user_avails.clear
+
+      unless params[:user_avails][:day].blank?
+        params[:user_avails][:day].each_with_index do |avail_day, idx|
+          next if avail_day.blank?
+          next if params[:user_avails][:avail_option][idx].blank?
+
+          user_avail = UserAvail.new(
+            day:          avail_day,
+            area_id:      params[:user_avails][:area_id][idx],
+            avail_option: params[:user_avails][:avail_option][idx]
+          )
+          unless @user.user_avails << user_avail
+            redirect_to user_path(@user), notice: "ERROR: invalid params"
+            return
+          end
+        end
+      end
+    end
+
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'User profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
