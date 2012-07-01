@@ -1,15 +1,19 @@
-<p>
-  <b>comment by:</b>
-  <%= user_review.user.name %>
-</p>
+<div class="box1">
+  <h4>From <%= link_to user_review.user.name, user_path(user_review.user) %></a></h4>
+  <div class="aboutBox">
+    <div class="imgArea">
+      <% @review_user_picture_url = "http://graph.facebook.com/#{user_review.user.provider_uid}/picture?type=square" %>
+      <%= image_tag @review_user_picture_url, width:"100", height:"100", alt:"" %>
+    </div>
 
-<p>
-  <b>recommend:</b>
-  <%= user_review.recommend %>
-</p>
-
-<p>
-  <b>about experience:</b>
-  <%= user_review.about_experience %>
-</p>
-
+    <div class="positiveArea">
+      <h5>Recommend: <%= user_review.recommend %></h5>
+      <dl>
+        <dt>About <%= @user.name %></dt>
+        <dd><%= user_review.about_user %></dd>
+        <dt>What we did</dt>
+        <dd><%= user_review.about_experience %></dd>
+      </dl>
+    </div>
+  </div>
+</div>

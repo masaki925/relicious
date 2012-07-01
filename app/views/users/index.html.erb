@@ -1,23 +1,95 @@
-<h1>Listing users</h1>
+<%= stylesheet_link_tag "views/search", :media => "all" %>
 
 <%#= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
 <%= stylesheet_link_tag 'jquery-ui-1.7.3.custom.css' %>
-
-<%= form_tag users_path, :method => 'get' do %>
-  <p>
-  Location: <%= text_field_tag "search[location]", "", placeholder: "Tokyo" %>
-  Date :    <%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %>
-  </p>
-
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
-
 <script type="text/javascript">
   $(function() {
       $("#datepicker").datepicker();
       });
 </script>
+
+<!-- breadcrumb -->
+<nav id="breadcrumb">
+<p><a href="../" rel="index up">TOP</a> > Find Local People</p>
+</nav>
+<!-- /breadcrumb -->
+
+<!-- findLocal -->
+<div id="findLocal">
+
+  <h2>Find Local People you wanna have a dining together!!</h2>    
+  <!-- localSearch -->
+  <div id="localSearch">
+    <div id="localSearch">
+      <%= form_tag users_path, :method => 'get' do %>
+        <ul class="findSearch">
+          <li> Location: <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
+          <li class="date"><label>Date<br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
+          <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select([["Breakfast", 0], ["Lunch", 1], ["Tea time", 2], ["Dinner", 3], ["Drink", 4]]) %> </label></li>
+          <li><%= submit_tag "Search", :name => nil, class: "btn1 searchBtn" %></li>
+        </ul>
+      <% end %>
+
+      <dl class="interest">
+        <dt>We're gonna recommend person you may like!!</dt>
+        <dd><a href="#" class="btn3">Interest Match (coming soon)</a></dd>
+      </dl>
+
+    </form>
+  </div>
+  <!-- /localSearch -->
+
+  <!-- findPeopleArea -->
+  <% @users.each do |user| %>
+    <div class="findPeopleArea">
+      <div class="imgArea">
+        <p><%= image_tag "http://graph.facebook.com/#{user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture" %></p>
+        <%= user.name %><br>
+        (<%= user.gender %>)</p>
+      </div>
+      <div class="detailArea">
+        <div class="arrowBoxL">
+          <p><strong>Hey,I'm <%= user.name %>!!</strong><br>
+          <%= user.introduction %></p>
+        </div>
+        <dl class="cotegory1">
+          <dt>Area:</dt>
+          <dd>FIXME: Asakusa, Shibuya, Ikebukuro, Odaiba</dd>
+        </dl>
+        <dl class="cotegory2">
+          <dt>Review:</dt>
+          <dd><%= user.received_reviews.size %></dd>
+          <dt>Pictures:</dt>
+          <dd>FIXME: 25</dd>
+          <dt>Reply Rate:</dt>
+          <dd>FIXME: 100%</dd>
+        </dl>
+        <h3>About</h3>
+        <dl class="cotegory3">
+          <dt>Basics:</dt>
+          <dd><%= user.birthday%>, <%= user.gender %>, <%= user.location %></dd>
+          <dt>Availability:</dt>
+          <dd><%= render user.user_avails %></dd>
+          <dt>Language:</dt>
+          <% if user.languages.blank? %>
+            <dd>-</dd>
+          <% else %>
+            <dd>
+            <% user.languages.each do |l| %>
+              <%= l.name %>,
+            <% end %>
+            </dd>
+          <% end %>
+
+        </dl>
+      </div>
+      <p class="btnArea"><a href=<%= "/meetups/new?member=#{user.id}" %> class="btn1">Have dining with</a></p>
+    </div>
+  <% end if @users %>
+  <!-- /findPeopleArea -->
+</div>
+<!-- /findLocal -->
 
 <table>
   <tr>

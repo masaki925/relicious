@@ -572,7 +572,7 @@ float:right;
   display: inline-block;
   margin-bottom: 10px;
   padding: 2px 45px 2px 65px;
-  background: #ffffff url(../images/edit_on.png) no-repeat 40px 2px;
+  background: #ffffff url(/assets/edit_on.png) no-repeat 40px 2px;
   min-height: 20px;
   color: #0f90ba;
   border: 1px solid #0f90ba;
@@ -582,59 +582,59 @@ float:right;
   font-weight: normal;
 }
 .edit:hover {
-  background: #0f90ba url(../images/edit.png) no-repeat 40px 2px;
+  background: #0f90ba url(/assets/edit.png) no-repeat 40px 2px;
   color: #ffffff;
   text-decoration: none;
 }
 
 .facebook {
-  background: url(../images/facebook.png) no-repeat 7px 3px;
+  background: url(/assets/facebook.png) no-repeat 7px 3px;
 }
 
 .linkedin {
-  background: url(../images/linkedin.png) no-repeat 7px 3px;
+  background: url(/assets/linkedIn.png) no-repeat 7px 3px;
 }
 .twitter {
-  background: url(../images/twitter.png) no-repeat 7px 3px;
+  background: url(/assets/twitter.png) no-repeat 7px 3px;
 }
 
 .gplus {
-  background: url(../images/gplus.png) no-repeat 7px 3px;
+  background: url(/assets/gplus.png) no-repeat 7px 3px;
 }
 
 .check {
   display: block;
   width: 20px;
   height: 22px;
-  background: url(../images/check.png) no-repeat 0 0;
+  background: url(/assets/check.png) no-repeat 0 0;
 }
 .cross {
   display: block;
   width: 20px;
   height: 22px;
-  background: url(../images/cross.png) no-repeat 0 0;
+  background: url(/assets/cross.png) no-repeat 0 0;
 }
 .good {
   display: block;
   width: 20px;
   height: 22px;
-  background: url(../images/good.png) no-repeat 0 0;
+  background: url(/assets/good.png) no-repeat 0 0;
 }
 .breakfast {
   padding-left: 23px;
-  background: url(../images/breakfast.png) no-repeat 0 0;
+  background: url(/assets/breakfast.png) no-repeat 0 0;
 }
 .lunch {
   padding-left: 23px;
-  background: url(../images/lunch.png) no-repeat 0 0;
+  background: url(/assets/lunch.png) no-repeat 0 0;
 }
 .tea {
   padding-left: 23px;
-  background: url(../images/tea.png) no-repeat 0 0;
+  background: url(/assets/tea.png) no-repeat 0 0;
 }
 .dinner {
   padding-left: 23px;
-  background: url(../images/dinner.png) no-repeat 0 0;
+  background: url(/assets/dinner.png) no-repeat 0 0;
 }
 
 /* clearfix */

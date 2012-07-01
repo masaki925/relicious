@@ -1,71 +1,115 @@
+<%= stylesheet_link_tag "views/profile", :media => "all" %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<!-- breadcrumb -->
+<nav id="breadcrumb">
+  <p><a href="/" rel="index">TOP</a> > Profile</p>
+</nav>
+<!-- /breadcrumb -->
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<% @user_picture_url_normal = "http://graph.facebook.com/#{@user.provider_uid}/picture?type=normal" %>
 
-<p>
-  <b>Birthday:</b>
-  <%= @user.birthday %>
-</p>
+<div id="profile">
+  <div id="leftArea">
+    <div id="profileImg">
+      <div class="flexslider">
+        <ul class="slides">
+          <li><%= image_tag @user_picture_url_normal, width:"175", height:"175", alt:"picture" %></li>
+        </ul>
+      </div>
+      <p class="textC"><%= link_to "Edit Profole", edit_user_path(@user) %></p>
+    </div>
+    <div id="vertificationArea">
+      <h3>Vertification</h3>
+      <div class="detail">
+        <ul>
+          <li class="facebook">Facebook Connected<br>
+          <i class="check"> </i></li>
+          <li class="linkedin">Positively Reviewed<br>
+          <span>TODO: 11 Reviews</span><i class="good"> </i></li>
+        </ul>
+      </div>
+    </div>
+    <div id="school">
+      <h3>School</h3>
+      <div class="detail">
+        <ul> <li><%= @user.education %></li> </ul>
+      </div>
+    </div>
+    <div id="work">
+      <h3>Work</h3>
+      <div class="detail">
+        <ul> <li><%= @user.work %></li> </ul>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <b>Gender:</b>
-  <%= @user.gender %>
-</p>
 
-<p>
-  <b>Locale:</b>
-  <%= @user.locale %>
-</p>
+  <div id="rightArea">
+    <h2>Hi, I'm <%= @user.name %>!<a href=<%= "/meetups/new?member=#{@user.id}" %> class="btn1">Have dining with</a><span>Member since <%= @user.created_at %></span></h2>
+    <dl class="dlStyle2">
+      <dt>Name</dt>
+      <% if @user.name.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= @user.name %></dd>
+      <% end %>
 
-<p>
-  <b>Education:</b>
-  <%= @user.education %>
-</p>
+      <dt>Gender</dt>
+      <% if @user.gender.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= @user.gender %></dd>
+      <% end %>
 
-<p>
-  <b>Work:</b>
-  <%= @user.work %>
-</p>
+      <dt>Birthdate</dt>
+      <% if @user.birthday.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= @user.birthday %></dd>
+      <% end %>
 
-<p>
-  <b>Location:</b>
-  <%= @user.location %>
-</p>
+      <dt>Language</dt>
+      <% if @user.languages.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd>
+        <% @user.languages.each do |l| %>
+          <%= l.name %>,
+        <% end %>
+        </dd>
+      <% end %>
 
-<p>
-  <b>Languages:</b>
-  <% @user.languages.each do |l| %>
-    <%= l.name %>,
-  <% end %>
-</p>
+      <dt>Avaliability</dt>
+      <dd>
+      <%= render @user.user_avails %>
+      </dd>
+      <dt>Message</dt>
+      <% if @user.introduction.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= @user.introduction %></dd>
+      <% end %>
 
-<p>
-  <b>Likes:</b>
-  <%= @user.likes %>
-</p>
+      <dt>Interest</dt>
+      <% if @user.likes.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= @user.likes %></dd>
+      <% end %>
+    </dl>
 
-<p>
-  <b>Introduction:</b>
-  <%= @user.introduction %>
-</p>
+    <h3>About <%= @user.name %></h3>
+    <!-- aboutArea -->
+    <div id="aboutArea">
 
-<p>
-  <b>About:</b>
-  <%= render @user.received_reviews %>
-</p>
-
-<p>
-  <b>Availability:</b>
-  <%= render @user.user_avails %>
-</p>
+      <%= render @user.received_reviews %>
+    </div>
+    <!-- /aboutArea -->
+  </div>
+</div>
+<!-- /profile -->
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
