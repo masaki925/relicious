@@ -29,14 +29,28 @@
         <h3>Upcoming Dining</h3>
         <ul>
           <% @user_meetups.each do |meetup| %>
+            <% meetup.users.each do |u|
+                 next if u == current_user
+                 @target_user = u
+                 break
+               end
+               if @target_user.blank?
+                 @target_user = current_user
+               end
+               target_user_picture_url_square = "http://graph.facebook.com/#{@target_user.provider_uid}/picture?type=square"
+               other_members_num = meetup.users.size - 2
+            %>
+
             <li>
             <div class="recentStreamBox">
               <div class="imgArea">
-                <%= image_tag "http://graph.facebook.com/#{@user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture" %>
+                <%= image_tag "http://graph.facebook.com/#{@target_user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture" %>
               </div>
               <div class="detailArea">
-                With <a href="#">XXXXXX</a><br>
-                and <a href="#">3 pepole</a><br>
+                With <%= link_to @target_user.name, user_path(@target_user) %><br>
+                <% if other_members_num > 0 %>
+                  and <%= other_members_num %> pepole<br>
+                <% end %>
                 <time><%= meetup.begin_at %></time>
                 <%= link_to meetup.title, meetup_path(meetup) %>
               </div>
@@ -48,8 +62,14 @@
       <div id="doingArea">
         <h3>Things to do</h3>
         <ul>
-          <li><a href="#">XXXXXXXX XXXXXXXX</a></li>
-          <li><a href="#">XXXXXXXX XXXXXXXX</a></li>
+          <% if @user.attributes.has_value?(nil) %>
+            <li><%= link_to "complete your profile", user_path(@user) %></li>
+          <% end %>
+          <% if @review_to_write %>
+            <% @review_to_write.each do |r| %>
+              <li><%= link_to "write review for #{r[2]}", new_user_review_path(user_id: r[1]) %></li>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>

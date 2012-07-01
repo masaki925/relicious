@@ -23,6 +23,10 @@
       <td><%= f.text_field :email %></td>
     </tr>
     <tr>
+      <th>gender</th>
+      <td><%= f.text_field :gender %></td>
+    </tr>
+    <tr>
       <th>Birthday</th>
       <td><%= f.date_select :birthday, start_year: Time.now.year - 100 %></td>
     </tr>
@@ -46,6 +50,11 @@
             </li>
           <% end %>
         </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><label> <%= f.select :locale, options_for_select(["en_US"]) %></label>
       </td>
     </tr>
     <tr>
