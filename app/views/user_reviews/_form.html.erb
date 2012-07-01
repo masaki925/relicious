@@ -1,5 +1,15 @@
-<% @user_review = @reviewed_user.received_reviews.build unless @user_review %>
-<%= form_for( [@reviewed_user, @user_review], url: user_reviews_path(user_id: @reviewed_user.id) ) do |f| %>
+<%= stylesheet_link_tag "views/review", :media => "all" %>
+
+<%
+  if @user_review 
+    @form_url = user_review_path(user_id: @reviewed_user.id, id: @user_review.id)
+  else
+    @user_review = @reviewed_user.received_reviews.build
+    @form_url = user_reviews_path(user_id: @reviewed_user.id)
+  end
+%>
+
+<%= form_for( [@reviewed_user, @user_review], url: @form_url ) do |f| %>
   <% if @user_review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user_review.errors.count, "error") %> prohibited this user_review from being saved:</h2>
@@ -12,39 +22,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :familiarity_for_area %><br />
-    <%= f.select :familiarity_for_area, ["local", "non-local"] %>
+  <!-- reviewArea -->
+  <div id="reviewArea">
+    <div class="reviewHead">
+      <%= link_to image_tag("http://graph.facebook.com/#{@reviewed_user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture"), user_path(@reviewed_user) %>
+      <h1><%= link_to @reviewed_user.name, user_path(@reviewed_user) %></h1>
+      <h2>Stayed at The Finest place to know old Tokyo!</h2>
+    </div>
+    <form class="form">
+      <ul id="impression">
+        <li>
+        <h3>What did you experience with the local person</h3>
+          <%= f.text_area :about_experience %>
+        </li>
+        <li>
+        <h3>Please explain the person briefly!</h3>
+        <%= f.text_area :about_user %>
+        </li>
+        <li>
+        <h3>Communication</h3>
+        <p>How clealy did the guest communicate their plans, questions, and concerns? (1: Low .. 5: Hi)</p>
+        <%= f.select :eval_personal, [1,2,3,4,5] %>
+        </li>
+        <li>
+        <h3>Would you recommend this guest?</h3>
+        <ul class="recommendFlag">
+          <%= f.select :recommend, [["yes", 1], ["no", 0]] %>
+        </ul>
+        </li>
+      </ul>
+
+      <div class="field">
+        <%= f.label :meetup_id %><br />
+        <%= f.select :meetup_id, options_for_select(@meetup_candidates.map {|m| [ m.title, m.id ]}) %>
+      </div>
+      <div class="field">
+        <%= f.label :familiarity_for_area %><br />
+        <%= f.select :familiarity_for_area, ["local", "non-local"] %>
+      </div>
+      <div class="field">
+        <%= f.label :eval_personal %><br />
+        <%= f.select :eval_personal, [1,2,3,4,5] %>
+      </div>
+      <div class="field">
+        <%= f.label :eval_language %><br />
+        <%= f.select :eval_language, [1,2,3,4,5] %>
+      </div>
+      <div class="field">
+        <%= f.label :eval_gourmet %><br />
+        <%= f.select :eval_gourmet, [1,2,3,4,5] %>
+      </div>
+      <p class="textC"><%= f.submit "submit", class: "btn2" %></p>
+    </form>
   </div>
-  <div class="field">
-    <%= f.label :meetup_id %><br />
-    <%= f.select :meetup_id, options_for_select(@meetup_candidates.map {|m| [ m.title, m.id ]}) %>
-  </div>
-  <div class="field">
-    <%= f.label :recommend %><br />
-    <%= f.select :recommend, [["yes", 1], ["no", 0]] %>
-  </div>
-  <div class="field">
-    <%= f.label :about_user %><br />
-    <%= f.text_area :about_user %>
-  </div>
-  <div class="field">
-    <%= f.label :about_experience %><br />
-    <%= f.text_area :about_experience %>
-  </div>
-  <div class="field">
-    <%= f.label :eval_personal %><br />
-    <%= f.select :eval_personal, [1,2,3,4,5] %>
-  </div>
-  <div class="field">
-    <%= f.label :eval_language %><br />
-    <%= f.select :eval_language, [1,2,3,4,5] %>
-  </div>
-  <div class="field">
-    <%= f.label :eval_gourmet %><br />
-    <%= f.select :eval_gourmet, [1,2,3,4,5] %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <!-- /reviewArea -->
 <% end %>

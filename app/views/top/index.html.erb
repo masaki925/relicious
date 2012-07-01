@@ -81,7 +81,7 @@
       <div id="localSearch">
         <%= form_tag users_path, :method => 'get' do %>
           <ul class="findSearch">
-            <li> Location: <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
+            <li><%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
             <li class="date"><label>Date<br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
             <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select([["Breakfast", 0], ["Lunch", 1], ["Tea time", 2], ["Dinner", 3], ["Drink", 4]]), {include_blank: true} %> </label></li>
             <li><%= submit_tag "Search", :name => nil, class: "btn1 searchBtn" %></li>

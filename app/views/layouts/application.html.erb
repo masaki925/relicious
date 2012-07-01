@@ -43,9 +43,12 @@
       <ul id="subInfoBottom">
         <li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li>
         <li>
-        <form id="searchHeader" action="" method="get">
-          <input type="text" id="" name="" autocomplete="" placeholder='Country, City, and more' class="textarea" /><input type="submit" id="" value='Search' class="btn1" />
-        </form>
+        <%= form_tag users_path, :method => 'get', id: "searchHeader" do %>
+          <ul class="findSearch">
+            <li> <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textarea" %> </li>
+            <li><%= submit_tag "Search", :name => nil, class: "btn1" %></li>
+          </ul>
+        <% end %>
         </li>
       </ul>
     </div>

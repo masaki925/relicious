@@ -64,6 +64,9 @@ class MeetupsController < ApplicationController
     respond_to do |format|
       if @meetup.save
         current_user.meetups << @meetup
+        unless params[:member].blank?
+          User.find(params[:member]).meetups << @meetup
+        end
         format.html { redirect_to @meetup, notice: 'Meetup was successfully created.' }
         format.json { render json: @meetup, status: :created, location: @meetup }
       else

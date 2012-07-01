@@ -17,6 +17,10 @@
   </div>
 
   <div class="field">
+    <%= label_tag :member %><br />
+    <%= select_tag :member, options_for_select(User.all.map {|u| next if u == current_user; [u.name, u.id]}, params[:member]) %>
+  </div>
+  <div class="field">
     <%= f.label :begin_at %><br />
     <%= f.datetime_select :begin_at %>
   </div>
