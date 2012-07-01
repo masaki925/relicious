@@ -1,72 +1,87 @@
 <p id="notice"><%= notice %></p>
-<%= form_for(@user) do |f| %>
+
+<%= form_for(@user, html: {id: "registration"}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :locale %><br />
-    <%= f.text_field :locale %>
-  </div>
-  <div class="field">
-    <%= f.label :education %><br />
-    <%= f.text_field :education %>
-  </div>
-  <div class="field">
-    <%= f.label :work %><br />
-    <%= f.text_field :work %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    Languages : <br>
-    <% (0..1).each do |i| %>
-      <% if @user_languages[i] %>
-          <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, @user_languages[i].id), {include_blank: true}, { name: "languages[]" }  %><br>
-      <% else %>
-          <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), {include_blank: true}, { name: "languages[]" }  %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="field">
-    <%= f.label :likes %><br />
-    <% if @likes.blank? %>
-      <%= f.text_area :likes, size: "40x5" %>
-    <% else %>
-      <%= f.text_area :likes, value: @likes, size: "40x5" %>
-    <% end %>
-  </div>
-  <div class="field">
-    <%= f.label :introduction %><br />
-    <%= f.text_area :introduction %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <th>email</th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <th>Birthday</th>
+      <td><%= f.date_select :birthday, start_year: Time.now.year - 100 %></td>
+    </tr>
+    <tr>
+      <th>location</th>
+      <td><%= f.text_field :location %></td>
+    </tr>
+    <tr>
+      <th>Language</th>
+      <td>
+        <p>Choose languages and skill you can use</p>
+        <ul>
+          <% (0..1).each do |i| %>
+            <li>
+            <% if @user_languages[i] %>
+              <label> Languages : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, @user_languages[i].id), {include_blank: true}, { name: "languages[]" }  %></label>
+            <% else %>
+              <label> Languages : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), {include_blank: true}, { name: "languages[]" }  %></label>
+            <% end %>
+            <label>Skill:<%= select :user, :languages, options_for_select(["expert","Intermediate","beginner"]), {include_blank: true}, { name: "language_skills[]" } %> </label>
+            </li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>Avaliability</th>
+      <td>
+        <p>Choose dining you can have with foreign traveler <span class="notes">(In your normal life, of course you can decline someone's request even though someone send request when you're available on this form)</span></p>
+      </td>
+    </tr>
+    <tr>
+      <th>Message</th>
+      <td>
+        <p>Enter your message to other user!! e.g.)Explanation of yourself, when you hope for Relicious, etc...</p>
+        <%= f.text_area :introduction, size: "40x5" %>
+      </td>
+    </tr>
+    <tr>
+      <th>Interest</th>
+      <td>
+        <ul class="tagList">
+          <% if @likes.blank? %>
+            <%= f.text_area :likes, size: "40x5" %>
+          <% else %>
+            <%= f.text_area :likes, value: @likes, size: "40x5" %>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>School</th>
+      <td> <%= f.text_field :education %> </td>
+    </tr>
+    <tr>
+      <th>Work</th>
+      <td> <%= f.text_field :work %> </td>
+    </tr>
+  </table>
+
+  <p class="textC"><%= f.submit "Register", {class: "btn1"} %></p>
 <% end %>
