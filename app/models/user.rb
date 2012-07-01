@@ -40,7 +40,9 @@ class User < ActiveRecord::Base
 
   def self.search(queries)
     if queries
-      if !queries[:date].blank?
+      if !queries[:time].blank?
+        find(:all, joins: :user_avails, conditions: ["user_avails.avail_option = ? or user_avails.avail_option = ?", queries[:time], "anyday"] )
+      elsif !queries[:date].blank?
         m,d,y = queries[:date].split('/')
         weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         w_index = Date.new(y.to_i,m.to_i,d.to_i).wday
