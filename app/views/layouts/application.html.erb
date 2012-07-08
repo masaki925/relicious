@@ -17,6 +17,8 @@
 </head>
 
 <body id="login">
+
+<% if current_user %>
   <!-- header -->
   <header id="header">
   <div id="headerArea">
@@ -31,14 +33,8 @@
     </nav>
     <div id="subInfo">
       <ul id="subInfoTop">
-        <% if current_user %>
           <%= link_to current_user.name, user_path(current_user) %> |
           <%= link_to "logout", logout_path %>
-          <li> <%= select_tag :language, options_for_select( [["English", "English"], ["日本語", "Japanese"]] ) %> </li>
-        <% else %>
-          <%#= link_to "Twitter でログイン", "/auth/twitter" %>
-          <%= link_to "Login with Facebook", "/auth/facebook " %>
-        <% end %>
       </ul>
       <ul id="subInfoBottom">
         <li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li>
@@ -55,6 +51,7 @@
   </div>
   </header>
   <!-- /header -->
+<% end %>
 
   <div id="contents">
     <%= yield %>

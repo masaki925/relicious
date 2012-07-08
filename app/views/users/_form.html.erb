@@ -54,7 +54,11 @@
     </tr>
     <tr>
       <th>locale</th>
-      <td><label> <%= f.select :locale, options_for_select(["en_US"]) %></label>
+      <% if @user.locale.blank? %>
+        <td><label> <%= f.select :locale, options_for_select([["english", "en_US"], ["日本語", "ja_JP"]]) %></label>
+      <% else %>
+        <td><label> <%= f.select :locale, options_for_select([["english", "en_US"], ["日本語", "ja_JP"]], @user.locale) %></label>
+      <% end %>
       </td>
     </tr>
     <tr>
