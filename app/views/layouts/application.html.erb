@@ -14,6 +14,8 @@
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+
+  <%= render 'layouts/google_analytics' if Rails.env.production? %>
 </head>
 
 <body id="login">
