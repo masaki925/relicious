@@ -59,3 +59,5 @@ gem 'fb_graph'
 gem 'execjs'
 gem 'therubyracer'
 
+gem 'mail'
+

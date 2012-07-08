@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :provider,     presence: true
   validates :provider_uid, presence: true
   validates :auth_token,   presence: true
-  validates :email,        format: { with: email_regex } #, uniqueness: true
+  validates :email,        presence: true, uniqueness: true, format: { with: email_regex }
 
   has_many :meetup_comments
   has_many :user_avails

@@ -203,6 +203,7 @@ DEPENDENCIES
   factory_girl_rails
   fb_graph
   jquery-rails
+  mail
   mysql2
   omniauth
   omniauth-facebook
