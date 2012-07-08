@@ -76,7 +76,7 @@
 
 
     <div id="rightArea">
-      <h2>Find Local People?</h2>
+      <h2>Find People</h2>
       <!-- localSearch -->
       <div id="localSearch">
         <%= form_tag users_path, :method => 'get' do %>
@@ -137,7 +137,6 @@
     <!-- topTitle -->
     <div id="topTitle">
       <h1><%= link_to image_tag("logo.png", width:"315", height:"200", alt:"Relicious"), root_path %></h1>
-      <p>Connect to the foreign local over the dining table!</p>
     </div>
     <!-- /topTitle -->
   
@@ -179,7 +178,7 @@
   
     <!-- recentStream -->
     <div id="recentStream">
-      <h2>Intercultural dining in these days</h2>
+      <h2>Relicious dining in these days</h2>
       <!-- recentStreamBox -->
       <% @recent_meetups.each do |meetup| %>
         <div class="recentStreamBox">
