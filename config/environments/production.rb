@@ -46,7 +46,7 @@ Relicious::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( login.css message.css profile.css registration.css review.css search.css top.css )
+  config.assets.precompile += %w( views/login.css views/message.css views/profile.css views/registration.css views/review.css views/search.css views/top.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
