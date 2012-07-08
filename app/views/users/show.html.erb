@@ -57,7 +57,7 @@
       <% if @user.name.blank? %>
         <dd>-</dd>
       <% else %>
-        <dd><%= @user.name %> | <%= link_to image_tag('facebook.png'), "https://facebook.com/#{@user.provider_uid}" %></dd>
+        <dd><%= @user.name %> | <%= link_to image_tag('social_balloon-14.png', size: "20x20"), "https://facebook.com/#{@user.provider_uid}" %></dd>
       <% end %>
 
       <dt>Gender</dt>
