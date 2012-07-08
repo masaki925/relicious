@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_reviews = @user.received_reviews
-    @positive_reviews = @user_reviews.find(:all, conditions: ["recommend = ?", true])
+    @positive_reviews = @user_reviews.find(:all, conditions: ["recommend = ?", true]) || []
 
     respond_to do |format|
       format.html # show.html.erb
