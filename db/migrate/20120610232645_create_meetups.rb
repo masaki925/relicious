@@ -7,6 +7,8 @@ class CreateMeetups < ActiveRecord::Migration
       t.datetime :begin_at
       t.datetime :end_at
       t.boolean :public, default: true
+      t.string :place
+      t.string :url
 
       t.timestamps
     end

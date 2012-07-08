@@ -104,11 +104,12 @@
           </div>
           <div class="detailArea">
             <p><time ><%= meetup.begin_at %></time><br>
-            <%= meetup.title %><br>
-            <%= meetup.area.name %></p>
-            <% unless meetup.users.include? current_user %>
-              <p class="textR"><a href=<%= "/meetups/#{meetup.id}/join" %> class="btn1">Join this dining</a></p>
+            <% if meetup.public %>
+              <%= link_to meetup.title, meetup_path(meetup) %><br>
+            <% else %>
+              <%= meetup.title %><br>
             <% end %>
+            <%= meetup.area.name %></p>
           </div>
         </div>
         <!-- /recentStreamBox -->

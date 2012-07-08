@@ -3,18 +3,18 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    @url  = user_url(@user)
 
     mail(:to => user.email,
-         :subject => "Welcome to Relicious")
+         :subject => "[Relicious]Thank your for your registration in Relicious!!")
   end
 
   def meetup_comment_email(user, commented_user, meetup)
     @user           = user
+    @meetup         = meetup
     @commented_user = commented_user
-    @meetup_url     = meetup_url(meetup)
+    @meetup_url     = meetup_url(@meetup)
 
     mail(:to => @user.email,
-         :subject => "Your meetup has updated")
+         :subject => "[Relicious]You got a message from #{@commented_user.name} about #{@meetup.title}")
   end
 end

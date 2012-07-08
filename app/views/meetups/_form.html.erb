@@ -32,6 +32,14 @@
     Area  : <%= f.collection_select(:area_id, Area.all, :id, :name) %>
   </div>
   <div class="field">
+    <%= f.label :place %><br />
+    <%= f.text_field :place %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
     <%= f.label :public %><br />
     <%= f.check_box :public %>
   </div>

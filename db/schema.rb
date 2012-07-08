@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20120626223657) do
     t.datetime "begin_at"
     t.datetime "end_at"
     t.boolean  "public",     :default => true
+    t.string   "place"
+    t.string   "url"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end

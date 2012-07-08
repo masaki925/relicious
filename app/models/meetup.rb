@@ -1,5 +1,5 @@
 class Meetup < ActiveRecord::Base
-  attr_accessible :begin_at, :end_at, :public, :title, :area_id
+  attr_accessible :begin_at, :end_at, :public, :title, :area_id, :place, :url
 
   belongs_to :user
   belongs_to :area

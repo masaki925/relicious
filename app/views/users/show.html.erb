@@ -29,7 +29,7 @@
           <li class="facebook">Facebook Connected<br>
           <i class="check"> </i></li>
           <li class="linkedin">Positively Reviewed<br>
-          <span>TODO: 11 Reviews</span><i class="good"> </i></li>
+          <span><%= @positive_reviews.size %> Reviews</span><i class="good"> </i></li>
         </ul>
       </div>
     </div>
@@ -119,5 +119,3 @@
 </div>
 <!-- /profile -->
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
