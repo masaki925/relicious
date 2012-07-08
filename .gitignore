@@ -17,4 +17,6 @@
 coverage/*
 
 config/.htdigest
+config/database.yml
+config/initializers/omniauth.rb
 
