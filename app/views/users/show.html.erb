@@ -69,11 +69,21 @@
         <dd><%= @user.gender %></dd>
       <% end %>
 
+      <dt>Age</dt>
+      <% if @user.birthday.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <% @years = Time.now.strftime("%Y").to_i - @user.birthday.strftime("%Y").to_i %>
+        <% @monthes = Time.now.strftime("%m%d").to_i - @user.birthday.strftime("%m%d").to_i %>
+        <% @years -= 1 if @monthes < 1 %>
+        <dd><%= @years %></dd>
+      <% end %>
+
       <dt>Birthdate</dt>
       <% if @user.birthday.blank? %>
         <dd>-</dd>
       <% else %>
-        <dd><%= @user.birthday %></dd>
+        <dd><%= @user.birthday.strftime("%m/%d") %></dd>
       <% end %>
 
       <dt>Language</dt>
