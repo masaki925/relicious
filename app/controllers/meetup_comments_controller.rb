@@ -10,6 +10,18 @@ class MeetupCommentsController < ApplicationController
 
     respond_to do |format|
       if @meetup_comment.save
+        @commented_user    = current_user
+        @meetup  = @meetup_comment.meetup
+        @members = Array.new
+        @meetup.users.each do |m|
+          next if m == current_user
+          @members << m
+        end
+
+        @members.each do |user_to_email|
+          UserMailer.meetup_comment_email(user_to_email, @commented_user, @meetup).deliver
+        end
+
         format.html { redirect_to meetup_path(id: params[:meetup_id]) }
         format.json { render json: @meetup_comment, status: :created, location: meetup_path(:id => params[:meetup_id]) }
       else
