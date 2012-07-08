@@ -18,7 +18,9 @@
           <li><%= image_tag @user_picture_url_normal, width:"175", height:"175", alt:"picture" %></li>
         </ul>
       </div>
-      <p class="textC"><%= link_to "Edit Profole", edit_user_path(@user) %></p>
+      <% if @user == current_user %>
+        <p class="textC"><%= link_to "Edit Profole", edit_user_path(@user) %></p>
+      <% end %>
     </div>
     <div id="vertificationArea">
       <h3>Vertification</h3>
