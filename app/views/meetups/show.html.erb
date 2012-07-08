@@ -38,6 +38,7 @@
         <p><%= @meetup.title %><br>
         <%= @meetup.area.name %><br>
         <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</p>
+        <%= link_to 'Edit', edit_meetup_path(@meetup) %>
       </div>
     </div>
   </div>
@@ -56,7 +57,7 @@
 
         <div class="detailArea">
           <div class="arrowBoxL">
-            <textarea name=""><%= comment.body %></textarea>
+            <p><%= comment.body %></p>
             <div class="col2">
               <div class="leftCol">
                 <ul>
@@ -106,5 +107,4 @@
 </div>
 <!-- /conversation -->
 
-<%= link_to 'Edit', edit_meetup_path(@meetup) %> |
 <%= link_to 'Back', meetups_path %>
