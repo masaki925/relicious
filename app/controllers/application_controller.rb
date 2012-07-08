@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :set_locale
+
   helper_method :current_user
 
   def require_authentication
@@ -19,4 +21,12 @@ class ApplicationController < ActionController::Base
       reset_session
     end 
   end 
+
+  def set_locale
+    if current_user
+      if current_user.locale =~ /ja/
+        I18n.locale = :ja
+      end
+    end
+  end
 end

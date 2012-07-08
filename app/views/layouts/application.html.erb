@@ -18,40 +18,15 @@
 
 <body id="login">
 
-<% if current_user %>
   <!-- header -->
-  <header id="header">
-  <div id="headerArea">
-    <div id="logo">
-      <h1 id="logoTitle"><%= link_to image_tag("/assets/logo.png", width: "105", height: "60", alt: "Relicious"), root_path %></h1>
-    </div>
-    <nav>
-    <ul id="nav">
-      <li><a href="/users">Find<br> <strong>Local</strong><br> People</a></li>
-      <li><a href="/users">Find<br> <strong>Foreign</strong><br> travelers</a></li>
-    </ul>
-    </nav>
-    <div id="subInfo">
-      <ul id="subInfoTop">
-          <%= link_to current_user.name, user_path(current_user) %> |
-          <%= link_to "logout", logout_path %>
-      </ul>
-      <ul id="subInfoBottom">
-        <li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li>
-        <li>
-        <%= form_tag users_path, :method => 'get', id: "searchHeader" do %>
-          <ul class="findSearch">
-            <li> <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textarea" %> </li>
-            <li><%= submit_tag "Search", :name => nil, class: "btn1" %></li>
-          </ul>
-        <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-  </header>
+  <% if current_user %>
+    <% if current_user.locale and current_user.locale == "ja_JP" %>
+      <%= render 'layouts/header-ja' %>
+    <% else %>
+      <%= render 'layouts/header-en' %>
+    <% end %>
+  <% end %>
   <!-- /header -->
-<% end %>
 
   <div id="contents">
     <%= yield %>

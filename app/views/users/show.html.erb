@@ -53,7 +53,7 @@
       <% end %>
     </h2>
     <dl class="dlStyle2">
-      <dt>Name</dt>
+      <dt><%= User.human_attribute_name("name") %></dt>
       <% if @user.name.blank? %>
         <dd>-</dd>
       <% else %>
