@@ -40,6 +40,11 @@ class UsersController < ApplicationController
       @user.gender = fb_user.gender
     end
 
+    if @user.birthday.blank? and !fb_user.birthday.blank?
+      m,d,y = fb_user.raw_attributes[:birthday].split('/')
+      @user.birthday = Time.new(y,m,d,0,0,0)
+    end
+
     likes = Array.new
     if @user.likes.blank? and !fb_user.likes.blank?
       fb_user.likes.each do |like|
