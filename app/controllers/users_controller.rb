@@ -45,6 +45,10 @@ class UsersController < ApplicationController
       @user.birthday = Time.new(y,m,d,0,0,0)
     end
 
+    if @user.location.blank? and !fb_user.location.blank?
+      @user.location = fb_user.location.name
+    end
+
     likes = Array.new
     if @user.likes.blank? and !fb_user.likes.blank?
       fb_user.likes.each do |like|
@@ -118,7 +122,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User profile was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'User profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

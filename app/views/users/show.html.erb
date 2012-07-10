@@ -86,7 +86,14 @@
         <dd><%= @user.birthday.strftime("%m/%d") %></dd>
       <% end %>
 
-      <dt>Language</dt>
+      <dt>Location</dt>
+      <% if @user.location.blank? %>
+        <dd>-</dd>
+      <% else %>
+        <dd><%= @user.location %></dd>
+      <% end %>
+
+       <dt>Language</dt>
       <% if @user.languages.blank? %>
         <dd>-</dd>
       <% else %>
