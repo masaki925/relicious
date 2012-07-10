@@ -90,30 +90,35 @@
       </div>
 
       <h2>Relicious dining around you</h2>
-      <% @recent_meetups.each do |meetup| %>
-        <!-- recentStreamBox -->
-        <div class="recentStreamBox">
-          <div class="imgArea">
-            <% meetup.users.each_with_index do |user, idx| %>
-              <div class="colBox">
-                <% if idx == 1 %> <strong>&</strong> <% end %>
-                <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"75", height:"75", alt:"picture"), user_path(user) %>
-              </div>
-              <% break if idx > 1 %>
-            <% end %>
+      <% if @recent_meetups %>
+        <% @recent_meetups.each do |meetup| %>
+          <!-- recentStreamBox -->
+          <div class="recentStreamBox">
+            <div class="imgArea">
+              <% meetup.users.each_with_index do |user, idx| %>
+                <div class="colBox">
+                  <% if idx == 1 %> <strong>&</strong> <% end %>
+                  <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"75", height:"75", alt:"picture"), user_path(user) %>
+                </div>
+                <% break if idx > 1 %>
+              <% end %>
+            </div>
+            <div class="detailArea">
+              <p><time ><%= meetup.begin_at %></time><br>
+              <% if meetup.public %>
+                <%= link_to meetup.title, meetup_path(meetup) %><br>
+              <% else %>
+                <%= meetup.title %><br>
+              <% end %>
+              <%= meetup.area.name %></p>
+            </div>
           </div>
-          <div class="detailArea">
-            <p><time ><%= meetup.begin_at %></time><br>
-            <% if meetup.public %>
-              <%= link_to meetup.title, meetup_path(meetup) %><br>
-            <% else %>
-              <%= meetup.title %><br>
-            <% end %>
-            <%= meetup.area.name %></p>
-          </div>
-        </div>
-        <!-- /recentStreamBox -->
-      <% end if @recent_meetups %>
+          <!-- /recentStreamBox -->
+        <% end %>
+        <div style="text-align: center;"><%= link_to "see more", meetups_path %></div>
+      <% else %>
+        <p>meetup not found for now.</p>
+      <% end %>
     </div>
   </div>
   <!-- /top -->

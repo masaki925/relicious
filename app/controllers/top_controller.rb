@@ -1,6 +1,6 @@
 class TopController < ApplicationController
   def index
-    @recent_meetups = Meetup.all(limit: 3)
+    @recent_meetups = Meetup.all(limit: 3, order: 'id DESC')
     if @user = current_user
       @user_avails = @user.user_avails 
       @user_meetups = @user.meetups
