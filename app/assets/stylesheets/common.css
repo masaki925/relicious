@@ -90,7 +90,7 @@
 #logout a {
 	display: block;
 	padding: 2px 0 0 20px;
-	background: url(../images/logout.png) 0 3px no-repeat;
+	background: url(/assets/logout.png) 0 3px no-repeat;
 	text-shadow:2px 2px 0px #ffffff;
 }
 #logout a:hover {
@@ -119,11 +119,11 @@ select {
 	display: block;
 	width: 25px;
 	height: 25px;
-	background: url(../images/headerIc02.png) no-repeat 0 0;
+	background: url(/assets/headerIc02.png) no-repeat 0 0;
 	text-indent: -9999px;
 }
 .messageLink a:hover {
-	background: url(../images/headerIc02on.png) no-repeat 0 0;
+	background: url(/assets/headerIc02on.png) no-repeat 0 0;
 }
 .messageLink a span {
 	position: absolute;

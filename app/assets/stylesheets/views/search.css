@@ -24,12 +24,12 @@
 	padding: 5px 15px 5px 35px;
 	background: #ffcc6b; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-	background: url(../images/heart.png) no-repeat 42px 50%, -moz-linear-gradient(top, #ffcc6b 0%, #ffcc6b 50%, #ff942f 51%, #ff942f 100%); /* FF3.6+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffcc6b), color-stop(50%,#ffcc6b), color-stop(51%,#ff942f), color-stop(100%,#ff942f)); /* Chrome,Safari4+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -webkit-linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* Chrome10+,Safari5.1+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -o-linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* Opera 11.10+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -ms-linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* IE10+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* W3C */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -moz-linear-gradient(top, #ffcc6b 0%, #ffcc6b 50%, #ff942f 51%, #ff942f 100%); /* FF3.6+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffcc6b), color-stop(50%,#ffcc6b), color-stop(51%,#ff942f), color-stop(100%,#ff942f)); /* Chrome,Safari4+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -webkit-linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* Chrome10+,Safari5.1+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -o-linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* Opera 11.10+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -ms-linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* IE10+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, linear-gradient(top, #ffcc6b 0%,#ffcc6b 50%,#ff942f 51%,#ff942f 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc6b', endColorstr='#ff942f',GradientType=0 ); /* IE6-8 */
 	border:1px solid #f37813;
 	-webkit-border-radius: 3px;
@@ -46,11 +46,11 @@
 }
 .interest .btn3:hover {
 	background: #ff942f; /* Old browsers */
-	background: url(../images/heart.png) no-repeat 42px 50%, -moz-linear-gradient(top, #ff942f 0%, #ff942f 50%, #ffcc6b 51%, #ffcc6b 100%); /* FF3.6+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff942f), color-stop(50%,#ff942f), color-stop(51%,#ffcc6b), color-stop(100%,#ffcc6b)); /* Chrome,Safari4+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -webkit-linear-gradient(top, #ff942f 0%,#ff942f 50%,#ffcc6b 51%,#ffcc6b 100%); /* Chrome10+,Safari5.1+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, -o-linear-gradient(top, #ff942f 0%,#ff942f 50%,#ffcc6b 51%,#ffcc6b 100%); /* Opera 11.10+ */
-	background: url(../images/heart.png) no-repeat 42px 50%, linear-gradient(top, #ff942f 0%,#ff942f 50%,#ffcc6b 51%,#ffcc6b 100%); /* W3C */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -moz-linear-gradient(top, #ff942f 0%, #ff942f 50%, #ffcc6b 51%, #ffcc6b 100%); /* FF3.6+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff942f), color-stop(50%,#ff942f), color-stop(51%,#ffcc6b), color-stop(100%,#ffcc6b)); /* Chrome,Safari4+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -webkit-linear-gradient(top, #ff942f 0%,#ff942f 50%,#ffcc6b 51%,#ffcc6b 100%); /* Chrome10+,Safari5.1+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, -o-linear-gradient(top, #ff942f 0%,#ff942f 50%,#ffcc6b 51%,#ffcc6b 100%); /* Opera 11.10+ */
+	background: url(/assets/heart.png) no-repeat 42px 50%, linear-gradient(top, #ff942f 0%,#ff942f 50%,#ffcc6b 51%,#ffcc6b 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff942f', endColorstr='#ffcc6b',GradientType=0 ); /* IE6-8 */
 	text-decoration: none;
 	border: 1px solid #ff942f;

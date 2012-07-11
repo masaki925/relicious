@@ -4,7 +4,7 @@
 
 #login {
 	background-color: #ffffff;
-	/*background: url(../../images/food-world.png) no-repeat 50% 50%;*/
+	/*background: url(/assets/food-world.png) no-repeat 50% 50%;*/
 }
 
 #login #contents {
@@ -47,17 +47,17 @@
 #topNavArea ul li a {
 	display: block;
 	padding-left: 22px;
-	background: url(../images/ic03.png) no-repeat 0 50%;
+	background: url(/assets/ic03.png) no-repeat 0 50%;
 }
 .login {
-	background: url(../images/login.png) no-repeat 0 2px !important;
+	background: url(/assets/login.png) no-repeat 0 2px !important;
 }
 .privay {
-	background: url(../images/privacy.png) no-repeat 0 2px !important;
+	background: url(/assets/privacy.png) no-repeat 0 2px !important;
 }
 .info {
 	padding-left: 15px !important;
-	background: url(../images/info.png) no-repeat 0 2px !important;
+	background: url(/assets/info.png) no-repeat 0 2px !important;
 }
 
 /* facebookbtn */
@@ -105,7 +105,7 @@
     float: left;
     width: 22px;
     height: 22px;
-    background: url(../images/auth-icons.png) no-repeat 99px 99px;
+    background: url(/assets/auth-icons.png) no-repeat 99px 99px;
 }
 
 .btn-auth.large {
@@ -187,7 +187,7 @@
 	float: left;
 	width: 210px;
 	/*border-top: 1px solid #D8DFEA;
-	background: url(../images/and.png) no-repeat 50% 28px;
+	background: url(/assets/and.png) no-repeat 50% 28px;
 	text-align: center;*/
 }
 .more {
