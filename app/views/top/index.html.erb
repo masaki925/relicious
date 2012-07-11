@@ -187,31 +187,34 @@
     <div id="recentStream">
       <h2>Relicious dining in these days</h2>
       <!-- recentStreamBox -->
-      <% @recent_meetups.each do |meetup| %>
-        <div class="recentStreamBox">
-          <div class="imgArea">
-            <div class="colBox">
-              <a href="#"><img width="35" height="35" alt="Kentaro" src="search/images/sampleImg01.jpg">
-                <span>Kentaro</span></a>
+      <% if @recent_meetups %>
+        <% @recent_meetups.each do |meetup| %>
+          <!-- recentStreamBox -->
+          <div class="recentStreamBox">
+            <div class="imgArea">
+              <% meetup.users.each_with_index do |user, idx| %>
+                <div class="colBox">
+                  <% if idx == 1 %> <strong>&</strong> <% end %>
+                  <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"75", height:"75", alt:"picture"), user_path(user) %>
+                </div>
+                <% break if idx > 1 %>
+              <% end %>
             </div>
-            <div class="colBox">
-              <a href="#"><img width="35" height="35" alt="Kentaro" src="search/images/sampleImg01.jpg">
-                <span>Kentaro</span></a>
+            <div class="detailArea">
+              <p><time ><%= meetup.begin_at %></time><br>
+              <% if meetup.public %>
+                <%= link_to meetup.title, meetup_path(meetup) %><br>
+              <% else %>
+                <%= meetup.title %><br>
+              <% end %>
+              <%= meetup.area.name %></p>
             </div>
-            <div class="colBox">
-              <a href="#"><img width="35" height="35" alt="Kentaro" src="search/images/sampleImg01.jpg">
-                <span>Kentaro</span></a>
-            </div>
-            <p class="more">and <a href="#">3 people</a></p>
           </div>
-          <div class="detailArea">
-            <p class="lunch"><time datetime="2012-06-30">30/6/2012</time><br>
-            Having SUSHI<br>
-            @Asakusa</p>
-            <p class="textC"><a href="#" class="btn1">Join this dining</a></p>
-          </div>
-        </div>
-      <% end if @recent_meetups %>
+          <!-- /recentStreamBox -->
+        <% end %>
+      <% else %>
+        <p>meetup not found for now.</p>
+      <% end %>
       <!-- /recentStreamBox -->
     </div>
     <!-- /recentStream -->
