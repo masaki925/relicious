@@ -1,7 +1,8 @@
 /* registration.css */
 
 #registration {
-	margin: 0 110px;
+	width: 850px;
+	margin: 0 auto
 }
 #registration p {
 	margin-bottom: 10px;

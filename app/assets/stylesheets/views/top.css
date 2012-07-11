@@ -33,6 +33,10 @@
 	border-bottom: 1px solid #cccccc;
 }
 
+#top #localSearch {
+	margin: 55px 0;
+}
+
 #topImg {
 	padding-bottom: 30px;
 	border: 1px solid #cccccc;
@@ -46,7 +50,7 @@
 
 #top #profileImg h2 {
 	margin-bottom: 0;
-	padding: 0 5px;
+	padding: 2px 5px;
 	background-color: #f2f2f2;
 	font-size: 14px;
 }
@@ -158,7 +162,7 @@
 	padding-left: 23px;
 	margin-bottom: 5px;
 	min-height: 23px;
-	background: url(/assets/ic04.png) no-repeat 0 0;
+	background: url(../images/ic04.png) no-repeat 0 0;
 }
 
 /* clearfix */

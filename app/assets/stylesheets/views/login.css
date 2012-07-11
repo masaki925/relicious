@@ -1,56 +1,63 @@
 /* login.css */
 
+
+
 #login {
-  /*background: url(../../images/food-world.png) no-repeat 50% 50%;*/
+	background-color: #ffffff;
+	/*background: url(../../images/food-world.png) no-repeat 50% 50%;*/
+}
+
+#login #contents {
+	width: 980px;
 }
 #topArea {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 #topArea #topTitle {
-  float: left;
-  width: 475px;
-  padding-top: 10px;
-  text-align: center;
+	float: left;
+	width: 475px;
+	padding-top: 10px;
+	text-align: center;
 }
 #topArea #greetingArea {
-  float: right;
-  width: 475px;
+	float: right;
+	width: 475px;
 }
 #topArea #greetingArea #topNavArea {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #cccccc;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #cccccc;
 }
 #topArea #greetingArea h2 {
-  margin-bottom: 15px;
-  border-bottom: none;
-  color: #ff5a00;
+	margin-bottom: 15px;
+	border-bottom: none;
+	color: #ff5a00;
 }
 #topArea #greetingArea p {
-  margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 #topNavArea ul {
-  margin-left: 5px;
-  margin-right: -20px;
+	margin-left: 5px;
+	margin-right: -20px;
 }
 #topNavArea ul li {
-  float:left;
-  margin-right: 20px;
+	float:left;
+	margin-right: 20px;
 }
 #topNavArea ul li a {
-  display: block;
-  padding-left: 22px;
-  background: url(/assets/ic03.png) no-repeat 0 50%;
+	display: block;
+	padding-left: 22px;
+	background: url(../images/ic03.png) no-repeat 0 50%;
 }
 .login {
-  background: url(/assets/login.png) no-repeat 0 2px !important;
+	background: url(../images/login.png) no-repeat 0 2px !important;
 }
 .privay {
-  background: url(/assets/privacy.png) no-repeat 0 2px !important;
+	background: url(../images/privacy.png) no-repeat 0 2px !important;
 }
 .info {
-  padding-left: 15px !important;
-  background: url(/assets/info.png) no-repeat 0 2px !important;
+	padding-left: 15px !important;
+	background: url(../images/info.png) no-repeat 0 2px !important;
 }
 
 /* facebookbtn */
@@ -87,7 +94,7 @@
 .btn-auth:active {
     color: #222;
     text-decoration: none;
-  -webkit-box-shadow: 1px 1px 2px #666;
+	-webkit-box-shadow: 1px 1px 2px #666;
        -moz-box-shadow: 1px 1px 2px #666;
        -ms-box-shadow: 1px 1px 2px #666;
        box-shadow: 1px 1px 2px #666;
@@ -98,7 +105,7 @@
     float: left;
     width: 22px;
     height: 22px;
-    background: url(/assets/auth-icons.png) no-repeat 99px 99px;
+    background: url(../images/auth-icons.png) no-repeat 99px 99px;
 }
 
 .btn-auth.large {
@@ -159,89 +166,78 @@
 #bottomArea {
 }
 #bottomArea #recentStream {
-  float: left;
-  width: 475px;
+	float: left;
+	width: 475px;
 }
 #bottomArea #fbPlugin {
-  float: right;
-  width: 475px;
+	float: right;
+	width: 475px;
 }
 
 #bottomArea #recentStream h2 {
-  margin-bottom: 0;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #cccccc;
+	margin-bottom: 0;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #cccccc;
 }
 #bottomArea #recentStream .recentStreamBox {
-  padding: 20px 10px 10px;
-  border-bottom: 1px dotted #cccccc;
+	padding: 15px 10px 10px;
+	border-bottom: 1px dotted #cccccc;
 }
 #bottomArea #recentStream .recentStreamBox .imgArea {
-  float: left;
-  width: 210px;
-  /*border-top: 1px solid #D8DFEA;
-  background: url(../images/and.png) no-repeat 50% 28px;
-  text-align: center;*/
+	float: left;
+	width: 210px;
+	/*border-top: 1px solid #D8DFEA;
+	background: url(../images/and.png) no-repeat 50% 28px;
+	text-align: center;*/
 }
 .more {
-  clear: both;
-  padding-top: 5px;
-  text-align: center;
+	clear: both;
+	padding-top: 5px;
+	text-align: center;
 }
 #bottomArea #recentStream .recentStreamBox .detailArea {
-  float: right;
-  width: 220px;
+	float: right;
+	width: 220px;
 }
 #bottomArea #recentStream .recentStreamBox .detailArea p {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 #recentStream .recentStreamBox .imgArea .colBox {
-  float:left;
-  width: 210px;
-  /*border-bottom: 1px solid #D8DFEA;*/
+	float:left;
+	width: 70px;
+	/*border-bottom: 1px solid #D8DFEA;*/
 }
 #recentStream .recentStreamBox .imgArea .colBox a {
-  display: block;
-  text-align:left;
-  padding: 3px 10px;
+	display: block;
+	text-align: center;
+	padding: 3px 10px;
+	word-wrap: break-word;
 }
-#recentStream .recentStreamBox .imgArea .colBox a:hover {
-  background-color: #D8DFEA;
-}
-#recentStream .recentStreamBox .imgArea .colBox a img {
-  float:left;
-  margin-right: 10px;
-}
-#recentStream .recentStreamBox .imgArea .colBox a span {
-  display: block;
-  padding-top:7px;
-}
+/*#recentStream .recentStreamBox .imgArea .colBox a:hover {
+	background-color: #D8DFEA;
+}*/
 
-#recentStream .recentStreamBox .detailArea {
-  margin-top:10px;
-}
 
 
 #facebook .fbConnectWidgetTopmost {
-  -webkit-border-radius: 3px 3px 0 0;
-  -moz-border-radius: 3px 3px 0 0;
-  border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
 }
 /* clearfix */
 #topArea,
+#topNavArea ul,
 #bottomArea,
 #bottomArea #recentStream .recentStreamBox,
-#recentStream .recentStreamBox .imgArea,
-#recentStream .recentStreamBox .imgArea .colBox a {
-  zoom: 1;
+#recentStream .recentStreamBox .imgArea {
+	zoom: 1;
 }
 
 #topArea:after,
+#topNavArea ul:after,
 #bottomArea:after,
 #bottomArea #recentStream .recentStreamBox:after,
-#recentStream .recentStreamBox .imgArea:after,
-#recentStream .recentStreamBox .imgArea .colBox a:after {
+#recentStream .recentStreamBox .imgArea:after {
     content: ""; 
     display: block; 
     clear: both;}
-

@@ -1,12 +1,14 @@
 /* local.css */
 
 #findLocal {
-	margin: 0 110px;
+	width: 850px;
+	margin: 0 auto;
 }
 
 .interest {
-	float: right;
+	float: left;
 	margin-top: -5px;	
+	margin-left: 55px;
 	font-size: 10px;
 }
 .interest dd {
@@ -87,7 +89,7 @@
 }
 .findPeopleArea .detailArea {
 	float: right;
-	width: 545px;
+	width: 630px;
 }
 .findPeopleArea .btnArea {
 }

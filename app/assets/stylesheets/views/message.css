@@ -1,8 +1,8 @@
 /* conversation.css */
 
 #conversation {
-	margin-left: 110px;
-	margin-right: 110px;
+	width: 850px;
+	margin: 0 auto;
 }
 
 h3 {

@@ -1,7 +1,8 @@
 /* review.css */
 
 #reviewArea {
-	margin:0 110px;
+	width: 790px;
+	margin:0 auto;
 	padding: 15px 30px ;
 	border: 1px solid #cccccc;
 	-webkit-border-radius: 3px;
