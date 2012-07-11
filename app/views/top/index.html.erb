@@ -194,8 +194,7 @@
             <div class="imgArea">
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
-                  <% if idx == 1 %> <strong>&</strong> <% end %>
-                  <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"75", height:"75", alt:"picture"), user_path(user) %>
+                  <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"35", height:"35", alt:"picture"), user_path(user) %>
                 </div>
                 <% break if idx > 1 %>
               <% end %>
