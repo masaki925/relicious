@@ -13,11 +13,11 @@
     <div id="sortArea">
       <select name="sort" class="sort">
         <option value="" id="filter-none"><a href="#">All Conversations</a></option>
-        <option value="" id="filter-fixed"><a href="#">Fixed</a></option>
+        <!--<option value="" id="filter-fixed"><a href="#">Fixed</a></option>
         <option value="" id="filter-past"><a href="#">Past</a></option>
         <option value="" id="filter-pending"><a href="#">Pending</a></option>
         <option value="" id="filter-declined"><a href="#">Declined</a></option>
-        <option value="" id="filter-unread"><a href="#">Unread</a></option>
+        <option value="" id="filter-unread"><a href="#">Unread</a></option>-->
       </select>
     </div>
 
@@ -38,7 +38,8 @@
         <p class="name"><%= link_to @target_user.name, user_path(@target_user) %></p>
         <p class="data"><%= link_to meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup) %></p>
         <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
-        <p class="status fixed">FIXME: fixed</p>
+        <!-- FIXME -->
+        <p class="status fixed">fixed</p>
         </li>
       <% end %>
     </ul>

@@ -7,7 +7,7 @@
     </div>
 
     <div class="positiveArea">
-      <h5>Recommend: <%= user_review.recommend %></h5>
+      <h5>Recommend: <%= user_review.recommend ? "positive" : "negative" %></h5>
       <dl>
         <dt>About <%= @user.name %></dt>
         <dd><%= user_review.about_user %></dd>
