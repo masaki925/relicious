@@ -4,7 +4,7 @@
     Day: <%= f.select :day, optoins: ["anyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
   </div>
   <div class="field">
-    Area  : <%= f.collection_select(:area_id, Area.all, :id, :name) %>
+    Area  : <%= f.collection_select(:area_id, Area.all, :id, :name, include_blank: true ) %>
   </div>
   <div class="field">
     <%# Time's yyyy,mm,dd is dummy %>

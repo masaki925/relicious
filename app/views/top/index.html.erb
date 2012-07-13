@@ -24,6 +24,7 @@
           </ul>
         </div>
         <p class="textC"><%= link_to "Edit Profile", edit_user_path(@user) %></p>
+        <p class="textC"><%= link_to "invite friends", "https://www.facebook.com/dialog/send?app_id=266456056788979&name=Have%20LOCAL%20dining%20with%20LOCAL%20People&link=http://relicious.me/&redirect_uri=http://relicious.me/" %></p>
       </div>
       <div id="upcomingArea">
         <h3>Upcoming Dining</h3>
@@ -88,7 +89,6 @@
           </ul>
         <% end %>
       </div>
-      <%= link_to "invite friends", "https://www.facebook.com/dialog/send?app_id=266456056788979&name=Have%20LOCAL%20dining%20with%20LOCAL%20People&link=http://relicious.me/&redirect_uri=http://relicious.me/" %>
 
       <h2>Relicious dining around you</h2>
       <% if @recent_meetups %>
@@ -133,7 +133,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+    js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=285657531456327";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
   <!-- /Facebook plug in -->
@@ -220,7 +220,7 @@
   
     <!-- Facebook social plugin -->
     <div id="fbPlugin">
-      <div class="fb-activity" data-width="475" data-height="300" data-header="true" data-recommendations="false"></div>
+      <div class="fb-like-box" data-href="https://www.facebook.com/relicious.me" data-width="475" data-height="298" data-show-faces="true" data-stream="true" data-header="false"></div>
     </div>
     <!-- /Facebook social plugin -->
   

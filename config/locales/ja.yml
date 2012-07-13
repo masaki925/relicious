@@ -2,14 +2,14 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ja:
-  hello: "こんにちは"
+  users:
+    edit:
+      language: "こんにちは"
+      language_explain: "こんにちは"
 
-#  activerecord:
-#    models:
-#      user: ユーザー
-#    attributes:
-#      user:
-#        name: ユーザー名
+  meetups:
+    new:
+      public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
 
   date:
     formats:

@@ -2,4 +2,22 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  users:
+    edit:
+      location: "Where I live"
+      language: "Language"
+      language_explain: "Choose languages you can use and degree of skills of them"
+      locale: "Language environment"
+      locale_explain: "Choose language to use this website"
+      avail: "Availability"
+      avail_explain_01: "Choose dining you can have with foreign traveler"
+      avail_explain_02: "In your normal life, of course you can decline someone's request even though someone send request when you're available on this form"
+      avail_area_explain: "(If you're foreign traveler in Japan, you don't have to fill this items.)"
+      avail_wdays: ["anyday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
+      introduction: "Message to other users"
+
+  meetups:
+    new:
+      public_explain: "Do you wanna share your conversations with other users? If you do so, other users can join your conversation and meetup."
+

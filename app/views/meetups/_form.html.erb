@@ -11,15 +11,13 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag :member, params[:member] %>
+
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= label_tag :member %><br />
-    <%= select_tag :member, options_for_select(User.all.map {|u| next if u == current_user; [u.name, u.id]}, params[:member]) %>
-  </div>
   <div class="field">
     <%= f.label :begin_at %><br />
     <%= f.datetime_select :begin_at %>
@@ -40,8 +38,8 @@
     <%= f.text_field :url %>
   </div>
   <div class="field">
-    <%= f.label :public %><br />
-    <%= f.check_box :public %>
+    <%= t("meetups.new.public_explain") %><br/>
+    <%= f.select :public, options_for_select([["public", 1], ["private", 0]], 1) %>
   </div>
   <div class="actions">
     <%= f.submit %>

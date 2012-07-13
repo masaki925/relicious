@@ -31,13 +31,13 @@
       <td><%= f.date_select :birthday, start_year: Time.now.year - 100 %></td>
     </tr>
     <tr>
-      <th>location</th>
+      <th><%= t("users.edit.location") %></th>
       <td><%= f.text_field :location %></td>
     </tr>
     <tr>
-      <th>Language</th>
+      <th><%= t("users.edit.language") %></th>
       <td>
-        <p>Choose languages and skill you can use</p>
+        <p><%= t("users.edit.language_explain") %></p>
         <ul>
           <% (0..2).each do |i| %>
             <li>
@@ -53,35 +53,37 @@
       </td>
     </tr>
     <tr>
-      <th>locale</th>
-      <% if @user.locale.blank? %>
-        <td><label> <%= f.select :locale, options_for_select([["english", "en_US"], ["日本語", "ja_JP"]]) %></label>
-      <% else %>
-        <td><label> <%= f.select :locale, options_for_select([["english", "en_US"], ["日本語", "ja_JP"]], @user.locale) %></label>
-      <% end %>
+      <th><%= t("users.edit.locale") %></th>
+      <td>
+        <p><%= t("users.edit.locale_explain") %></p>
+        <% if @user.locale.blank? %>
+          <label> <%= f.select :locale, options_for_select([["english", "en_US"], ["日本語", "ja_JP"]]) %></label>
+        <% else %>
+          <label> <%= f.select :locale, options_for_select([["english", "en_US"], ["日本語", "ja_JP"]], @user.locale) %></label>
+        <% end %>
       </td>
     </tr>
     <tr>
       <th>Avaliability</th>
       <td>
-        <p>Choose dining you can have with foreign traveler <span class="notes">(In your normal life, of course you can decline someone's request even though someone send request when you're available on this form)</span></p>
+        <p><%= t("users.edit.avail_explain_01") %> <br><span class="notes">(<%= t("users.edit.avail_explain_02") %>)</span></p>
           <% (0..2).each do |i| %>
             <li>
             <% if @user_avails[i] %>
-              <label>Day: <%= select :user_avail, :day, options_for_select(["anyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], @user_avails[i].day), {include_blank: true}, {name: "user_avails[day][]"} %></label>
-              <label>Time: <%= select :user_avail, :option, options_for_select(["anytime", "Breakfast", "Lunch", "Dinner", "Cafe", "Drink"], @user_avails[i].avail_option), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label>
-              <label>Area  : <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, @user_avails[i].area_id), {}, {name: "user_avails[area_id][]"} %> </label>
+              <label>Day<%= i + 1 %>: <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays"), @user_avails[i].day), {include_blank: true}, {name: "user_avails[day][]"} %></label>
+              <label>Time<%= i + 1 %>: <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options"), @user_avails[i].avail_option), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label><br/>
+              <label>Area<%= i + 1 %>: <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, @user_avails[i].area_id), {include_blank: t("users.edit.avail_area_explain") }, {name: "user_avails[area_id][]"} %> </label>
             <% else %>
-              <label>Day: <%= select :user_avail, :day, options_for_select(["anyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]), {include_blank: true}, {name: "user_avails[day][]"} %></label>
-              <label>Time: <%= select :user_avail, :option, options_for_select(["anytime", "Breakfast", "Lunch", "Dinner", "Cafe", "Drink"]), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label>
-              <label>Area  : <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}), {}, {name: "user_avails[area_id][]"} %> </label>
+              <label>Day<%= i + 1 %>: <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays") ), {include_blank: true}, {name: "user_avails[day][]"} %></label>
+              <label>Time<%= i + 1 %>: <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options")), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label><br/>
+              <label>Area<%= i + 1 %>: <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}), {include_blank: t("users.edit.avail_area_explain") }, {name: "user_avails[area_id][]"} %> </label>
             <% end %>
             </li>
           <% end %>
       </td>
     </tr>
     <tr>
-      <th>Message</th>
+      <th><%= t("users.edit.introduction") %></th>
       <td>
         <p>Enter your message to other user!! e.g.)Explanation of yourself, when you hope for Relicious, etc...</p>
         <%= f.text_area :introduction, size: "40x5" %>
