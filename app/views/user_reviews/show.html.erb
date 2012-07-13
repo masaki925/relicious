@@ -1,40 +1,55 @@
+<%= stylesheet_link_tag "views/review", :media => "all" %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Received user:</b>
-  <%= @user_review.reviewed_user_id %>
-</p>
+<!-- reviewArea -->
+<div id="reviewArea">
+  <div class="reviewHead">
+    <%= link_to image_tag("http://graph.facebook.com/#{@reviewed_user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture"), user_path(@reviewed_user) %>
+    <h1><%= link_to @reviewed_user.name, user_path(@reviewed_user) %></h1>
+  </div>
 
-<p>
-  <b>Recommend:</b>
-  <%= @user_review.recommend %>
-</p>
+  <div>
+    <ul id="impression">
+      <li>
+      <h3><%= t("user_reviews.new.about_experience") %></h3>
+      <%= @user_review.about_experience %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.about_user") %></h3>
+      <%= @user_review.about_user %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.about_communication") %></h3>
+      <p><%= t("user_reviews.new.about_communication_explain") %></p>
+      <%= @user_review.eval_personal %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.recommend") %></h3>
+      <%= @user_review.recommend ? "positive" : "negative" %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.familiarity") %></h3>
+      <%= @user_review.familiarity_for_area %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.eval_personal") %></h3>
+      <%= @user_review.eval_personal %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.eval_language") %></h3>
+      <%= @user_review.eval_language %>
+      </li>
+      <li>
+      <h3><%= t("user_reviews.new.eval_groumet") %></h3>
+      <%= @user_review.eval_gourmet %>
+      </li>
+    </ul>
+  </div>
 
-<p>
-  <b>About user:</b>
-  <%= @user_review.about_user %>
-</p>
+  <% if @user_review.user_id == current_user.id %>
+    <%= link_to 'Edit', edit_user_review_path(user_id: @reviewed_user.id, id: @user_review) %> |
+  <% end %>
+  <%= link_to 'Back', user_path(id: @reviewed_user.id) %>
+</div>
 
-<p>
-  <b>About experience:</b>
-  <%= @user_review.about_experience %>
-</p>
-
-<p>
-  <b>Eval personal:</b>
-  <%= @user_review.eval_personal %>
-</p>
-
-<p>
-  <b>Eval language:</b>
-  <%= @user_review.eval_language %>
-</p>
-
-<p>
-  <b>Eval gourmet:</b>
-  <%= @user_review.eval_gourmet %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_review_path(user_id: @reviewed_user.id, id: @user_review) %> |
-<%= link_to 'Back', user_reviews_path(user_id: @reviewed_user.id) %>

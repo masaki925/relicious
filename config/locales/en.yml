@@ -17,6 +17,18 @@ en:
       avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
       introduction: "Message to other users"
 
+  user_reviews:
+    new:
+      about_experience: "What did you experience with the local person?"
+      about_user: "Please explain the person briefly!"
+      about_communication: "Communication"
+      about_communication_explain: "How clealy did the guest communicate their plans, questions, and concerns? (1: Low .. 5: Hi)"
+      recommend: "Would you recommend this guest?"
+      familiarity: "Situation"
+      eval_personal: "Personality"
+      eval_language: "Language"
+      eval_groumet: "Groumet"
+
   meetups:
     new:
       public_explain: "Do you wanna share your conversations with other users? If you do so, other users can join your conversation and meetup."
