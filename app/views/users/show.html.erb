@@ -63,11 +63,7 @@
       <% end %>
 
       <dt>Gender</dt>
-      <% if @user.gender.blank? %>
-        <dd>-</dd>
-      <% else %>
-        <dd><%= @user.gender %></dd>
-      <% end %>
+      <dd><%= @user.gender.blank? ? "-" : @user.gender %></dd>
 
       <dt>Age</dt>
       <% if @user.birthday.blank? %>
@@ -80,18 +76,10 @@
       <% end %>
 
       <dt>Birthdate</dt>
-      <% if @user.birthday.blank? %>
-        <dd>-</dd>
-      <% else %>
-        <dd><%= @user.birthday.strftime("%m/%d") %></dd>
-      <% end %>
+      <dd><%= @user.birthday.blank? ? "-" : @user.birthday.strftime("%m/%d") %></dd>
 
       <dt>Location</dt>
-      <% if @user.location.blank? %>
-        <dd>-</dd>
-      <% else %>
-        <dd><%= @user.location %></dd>
-      <% end %>
+      <dd><%= @user.location.blank? ? "-" : @user.location %></dd>
 
        <dt>Language</dt>
       <% if @user.languages.blank? %>
@@ -111,12 +99,14 @@
         <dd><%= render @user.user_avails %></dd>
       <% end %>
 
+      <dt><%= t("users.edit.favorite_food") %></dt>
+      <dd><%= @user.favorite_food.blank? ? "-" : @user.favorite_food %></dd>
+
+      <dt><%= t("users.edit.ng_food") %></dt>
+      <dd><%= @user.ng_food.blank? ? "-" : @user.ng_food %></dd>
+
       <dt>Message</dt>
-      <% if @user.introduction.blank? %>
-        <dd>-</dd>
-      <% else %>
-        <dd><%= @user.introduction %></dd>
-      <% end %>
+      <dd><%= @user.introduction.blank? ? "-" : @user.introduction %></dd>
 
       <dt>Interest</dt>
       <% if @user.likes.blank? %>
