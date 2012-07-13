@@ -1,5 +1,5 @@
 class UserReview < ActiveRecord::Base
-  attr_accessible :about_experience, :about_user, :eval_gourmet, :eval_language, :eval_personal, :reviewed_user_id, :recommend, :meetup_id, :familiarity_for_area
+  attr_accessible :about_experience, :about_user, :eval_communication, :eval_gourmet, :eval_language, :eval_personal, :reviewed_user_id, :recommend, :meetup_id, :familiarity_for_area
 
   belongs_to :user
   belongs_to :meetup

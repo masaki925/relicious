@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626223657) do
+ActiveRecord::Schema.define(:version => 20120713232556) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120626223657) do
     t.string   "familiarity_for_area"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.integer  "eval_communication"
   end
 
   add_index "user_reviews", ["meetup_id"], :name => "index_user_reviews_on_meetup_id"
