@@ -11,6 +11,19 @@ ja:
     new:
       public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
 
+  top:
+    introduction:
+      title: "現地の食べ物を、現地の人と。 さあ、いつものあなたのいつもの食事を文化交流の場に変えてみませんか？"
+      explain: "\"Relicious\" では海外の人が旅行先/留学先/滞在先/の現地の食事相手を探すことができます。 また、現地の人にはいつもと違った、普段の食事を海外の人と一緒に楽しんでもらうことで、外国語の実践や海外の友人を作る機会を提供します。"
+    header:
+      signup: "サインアップ/ログイン"
+      privacy: "プライバシーポリシー"
+      howitworks: "Reliciousって？"
+    signup:
+      explain: "Reliciousへの登録はFacebookのアカウントが必要です"
+    recent_meetups:
+      title: "最近のRelicious dining"
+
   date:
     formats:
       default: "%Y/%m/%d"

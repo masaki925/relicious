@@ -155,24 +155,26 @@
       <div id="topNavArea">
         <nav>
         <ul>
-          <li><a href="/auth/facebook" class="login">Sing Up / Log in</a></li>
-          <li><a href="/privacy.html" class="privay">Privcy Policy</a></li>
-          <li><a href="/howitworks.html" class="info">How it works</a></li>
-          <li><select name="language">
-            <option value="Japanese">日本語</option>
-            <option value="English">English</option>
-          </select></li>
+          <li><a href="/auth/facebook" class="login"><%= t("top.header.signup") %></a></li>
+          <li><a href="/privacy.html" class="privay"><%= t("top.header.privacy") %></a></li>
+          <li><a href="/howitworks.html" class="info"><%= t("top.header.howitworks") %></a></li>
+          <%= select_tag "language", options_for_select([["日本語", "ja"], ["English", "en"]], params[:lang]) %>
         </ul>
         </nav>
       </div>
+      <script>
+        $("#language").change ( function () {
+            window.location.replace('/?lang='+this.value);
+          });
+      </script>
       <!-- /topNavArea -->
   
       <!-- greeting -->
       <div id="greeting">
-        <h2>Have LOCAL dining with LOCAL people, make your daily dining intercultural.</h2>
-        <p>"Relicious" is a platform for foreign travelers to find the local people to have local food together, and for local people to find chances to communicate with foreign people through thier daily dinings.</p>
+        <h2><%= t("top.introduction.title") %></h2>
+        <p><%= t("top.introduction.explain") %></p>
         <p><a class="btn3 large" href="/auth/facebook">Sign up (Free)</a></p>
-        <p>You need a facebook account to start Relicious.</p>
+        <p><%= t("top.signup.explain") %></p>
       </div>
       <!-- /greeting -->
   
@@ -187,7 +189,7 @@
   
     <!-- recentStream -->
     <div id="recentStream">
-      <h2>Relicious dining in these days</h2>
+      <h2><%= t("top.recent_meetups.title") %></h2>
       <!-- recentStreamBox -->
       <% if @recent_meetups %>
         <% @recent_meetups.each do |meetup| %>

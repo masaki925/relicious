@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
       if current_user.locale =~ /ja/
         I18n.locale = :ja
       end
+    else
+      if params[:lang]
+        I18n.locale = params[:lang]
+      end
     end
   end
 end

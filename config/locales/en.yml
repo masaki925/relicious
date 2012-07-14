@@ -33,3 +33,16 @@ en:
     new:
       public_explain: "Do you wanna share your conversations with other users? If you do so, other users can join your conversation and meetup."
 
+  top:
+    introduction:
+      title: "Have LOCAL dining with LOCAL people, make your daily dining intercultural."
+      explain: "\"Relicious\" is a platform for foreign travelers to find the local people to have local food together, and for local people to find chances to communicate with foreign people through thier daily dinings."
+    header:
+      signup: "Sign up / Log in"
+      privacy: "Privacy Policy"
+      howitworks: "How it works"
+    signup:
+      explain: "You need a facebook account to start Relicious."
+    recent_meetups:
+      title: "Relicious dining in these days"
+
