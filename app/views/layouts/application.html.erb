@@ -18,28 +18,14 @@
   <%= render 'layouts/google_analytics' if Rails.env.production? %>
 </head>
 
-<body id="login">
-
-  <!-- header -->
-  <% if current_user %>
-    <% if current_user.locale and current_user.locale == "ja_JP" %>
-      <%= render 'layouts/header-ja' %>
-    <% else %>
-      <%= render 'layouts/header-en' %>
-    <% end %>
-  <% end %>
-  <!-- /header -->
-
-  <div id="contents">
-    <%= yield %>
-  </div>
-
-  <!-- footer -->
-  <div class='footer' id="footer">
+  <body id="login">
+  
+    <%= render 'layouts/header' %>
+  
+    <div id="contents"> <%= yield %> </div>
+  
     <%= render 'layouts/footer' %>
-  </div>
-  <!-- /footer -->
-
-  <%#= debug(params) if Rails.env.development? %>
-</body>
+  
+    <%= debug(params) if Rails.env.development? %>
+  </body>
 </html>

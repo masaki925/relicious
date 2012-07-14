@@ -4,7 +4,12 @@ class MeetupsController < ApplicationController
   # GET /meetups
   # GET /meetups.json
   def index
-    @meetups = Meetup.all
+    my_meetups = current_user.meetups
+    if params[:about] && params[:about] == 'me'
+      @meetups = my_meetups
+    else
+      @meetups = Meetup.all - my_meetups
+    end
 
     respond_to do |format|
       format.html # index.html.erb

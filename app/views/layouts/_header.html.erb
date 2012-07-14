@@ -3,19 +3,23 @@
   <div id="logo">
     <h1 id="logoTitle"><%= link_to image_tag("/assets/logo.jpg", width: "105", height: "60", alt: "Relicious"), root_path %></h1>
   </div>
+
   <nav>
   <ul id="nav">
-    <li><a href="/users"><br> <strong>Find</strong><br> People</a></li>
+    <li><%= link_to t("header.link.users_html"), users_path %></li>
   </ul>
   </nav>
+
   <div id="subInfo">
     <ul id="subInfoTop">
         <%= link_to current_user.name, user_path(current_user) %> |
         <%= link_to "logout", logout_path %>
     </ul>
+
     <ul id="subInfoBottom">
       <!--<li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li> -->
-      <li class="messageLink"><a href=<%= "/meetups" %> ></a></li>
+      <li class="messageLink"><a href=<%= "/meetups?about=me" %> ></a></li>
+
       <li>
       <%= form_tag users_path, :method => 'get', id: "searchHeader" do %>
         <ul class="findSearch">

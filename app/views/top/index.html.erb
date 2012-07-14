@@ -107,12 +107,11 @@
             </div>
             <div class="detailArea">
               <p><time ><%= meetup.begin_at %></time><br>
-              <% if meetup.public %>
-                <%= link_to meetup.title, meetup_path(meetup) %><br>
-              <% else %>
-                <%= meetup.title %><br>
-              <% end %>
+              <%= meetup.title %><br>
               <%= meetup.area.name %></p>
+              <% if meetup.public %>
+                <%= link_to "see their conversation", meetup_path(meetup), class: "btn1" %><br>
+              <% end %>
             </div>
           </div>
           <!-- /recentStreamBox -->
@@ -206,12 +205,11 @@
             </div>
             <div class="detailArea">
               <p><time ><%= meetup.begin_at %></time><br>
-              <% if meetup.public %>
-                <%= link_to meetup.title, meetup_path(meetup) %><br>
-              <% else %>
-                <%= meetup.title %><br>
-              <% end %>
+              <%= meetup.title %><br>
               <%= meetup.area.name %></p>
+              <% if meetup.public %>
+                <%= link_to "see their conversation", meetup_path(meetup), class: "btn1" %><br>
+              <% end %>
             </div>
           </div>
           <!-- /recentStreamBox -->

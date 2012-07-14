@@ -8,18 +8,25 @@
 
 <!-- conversation -->
 <div id="conversation">
-  <h2>Message</h2>
+  <% if params[:about] && params[:about] == 'me' %>
+    <h2>My Meetups</h2>
+  <% else %>
+    <h2>Other Meetups</h2>
+  <% end %>
+
   <div id="status-list">
+    <!--
     <div id="sortArea">
       <select name="sort" class="sort">
         <option value="" id="filter-none"><a href="#">All Conversations</a></option>
-        <!--<option value="" id="filter-fixed"><a href="#">Fixed</a></option>
+        <option value="" id="filter-fixed"><a href="#">Fixed</a></option>
         <option value="" id="filter-past"><a href="#">Past</a></option>
         <option value="" id="filter-pending"><a href="#">Pending</a></option>
         <option value="" id="filter-declined"><a href="#">Declined</a></option>
-        <option value="" id="filter-unread"><a href="#">Unread</a></option>-->
+        <option value="" id="filter-unread"><a href="#">Unread</a></option>
       </select>
     </div>
+    -->
 
     <ul class="list">
       <% @meetups.each do |meetup| %>
@@ -41,7 +48,7 @@
         <!-- FIXME -->
         <p class="status fixed">fixed</p>
         </li>
-      <% end %>
+      <% end if @meetups %>
     </ul>
   </div>
 

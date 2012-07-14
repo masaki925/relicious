@@ -24,6 +24,10 @@ ja:
     recent_meetups:
       title: "最近のRelicious dining"
 
+  header:
+    link:
+      users_html: "<br><strong>食事相手<br></strong>を探す"
+
   date:
     formats:
       default: "%Y/%m/%d"
