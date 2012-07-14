@@ -47,7 +47,7 @@
     </ul>
   </div>
 
-  <% if @user_review.user_id == current_user.id %>
+  <% if current_user and  @user_review.user_id == current_user.id %>
     <%= link_to 'Edit', edit_user_review_path(user_id: @reviewed_user.id, id: @user_review) %> |
   <% end %>
   <%= link_to 'Back', user_path(id: @reviewed_user.id) %>

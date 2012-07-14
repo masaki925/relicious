@@ -1,5 +1,5 @@
 class MeetupsController < ApplicationController
-  before_filter :require_authentication
+  before_filter :require_authentication, :except => [:show]
 
   # GET /meetups
   # GET /meetups.json

@@ -35,11 +35,12 @@
         <%= @meetup.area.name %><br>
         <%= @meetup.place %><br>
         <%= @meetup.url %><br>
+        <%= @meetup.public ? "public" : "private" %><br>
         <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</p>
         <% if @meetup.user == current_user %>
-          <%= link_to 'Edit', edit_meetup_path(@meetup) %>
+          <%= link_to 'update information', edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>
-        <% if @not_joined_yet %>
+        <% if current_user and @not_joined_yet %>
           | <%= link_to "join this meetup", join_meetups_path(@meetup) %>
         <% end %>
       </div>
@@ -104,8 +105,10 @@
     <% end %>
   <% end %>
 
-<h2>Send a Message:</h2>
-<%= render "meetup_comments/form" %>
+  <% if current_user and @meetup_users.include?(current_user) %>
+    <h2>Send a Message:</h2>
+    <%= render "meetup_comments/form" %>
+  <% end %>
 
 </div>
 <!-- /conversation -->

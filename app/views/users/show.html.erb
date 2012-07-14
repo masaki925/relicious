@@ -50,7 +50,7 @@
 
   <div id="rightArea">
     <h2>Hi, I'm <%= @user.name %>!
-      <% unless @user == current_user %>
+      <% if current_user and @user != current_user %>
         <a href=<%= "/meetups/new?member=#{@user.id}" %> class="btn1">Have dining with</a><span>Member since <%= @user.created_at %></span>
       <% end %>
     </h2>
