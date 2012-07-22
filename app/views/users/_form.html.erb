@@ -13,29 +13,30 @@
     </div>
   <% end %>
 
+  <p class="fontCR">* = Mandatory</p>
   <table>
     <tr>
-      <th>Name</th>
+      <th>Name<span class="fontCR">*</span></th>
       <td><%= f.text_field :name %></td>
     </tr>
     <tr>
-      <th>email</th>
-      <td><%= f.text_field :email %></td>
+      <th>email<span class="fontCR">*</span></th>
+      <td><%= t("users.edit.email_explain") %><br><%= f.text_field :email %></td>
     </tr>
     <tr>
-      <th>gender</th>
+      <th>gender<span class="fontCR">*</span></th>
       <td><%= f.text_field :gender %></td>
     </tr>
     <tr>
-      <th>Birthday</th>
+      <th>Birthday<span class="fontCR">*</span></th>
       <td><%= f.date_select :birthday, start_year: Time.now.year - 100 %></td>
     </tr>
     <tr>
-      <th><%= t("users.edit.location") %></th>
+      <th><%= t("users.edit.location") %><span class="fontCR">*</span></th>
       <td><%= f.text_field :location %></td>
     </tr>
     <tr>
-      <th><%= t("users.edit.language") %></th>
+      <th><%= t("users.edit.language") %><span class="fontCR">*</span></th>
       <td>
         <p><%= t("users.edit.language_explain") %></p>
         <ul>
@@ -53,7 +54,7 @@
       </td>
     </tr>
     <tr>
-      <th><%= t("users.edit.locale") %></th>
+      <th><%= t("users.edit.locale") %><span class="fontCR">*</span></th>
       <td>
         <p><%= t("users.edit.locale_explain") %></p>
         <% if @user.locale.blank? %>
@@ -64,7 +65,7 @@
       </td>
     </tr>
     <tr>
-      <th>Avaliability</th>
+      <th>Avaliability<span class="fontCR">*</span></th>
       <td>
         <p><%= t("users.edit.avail_explain_01") %> <br><span class="notes">(<%= t("users.edit.avail_explain_02") %>)</span></p>
           <% (0..2).each do |i| %>
@@ -93,7 +94,7 @@
     <tr>
       <th><%= t("users.edit.introduction") %></th>
       <td>
-        <p>Enter your message to other user!! e.g.)Explanation of yourself, when you hope for Relicious, etc...</p>
+        <p><%= t("users.edit.introduction_explain") %></p>
         <%= f.text_area :introduction, size: "40x5" %>
       </td>
     </tr>

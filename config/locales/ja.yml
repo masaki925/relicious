@@ -4,8 +4,33 @@
 ja:
   users:
     edit:
-      language: "こんにちは"
-      language_explain: "こんにちは"
+      language: "言語"
+      language_explain: "言語の説明"
+      language_explain: "Choose languages you can use and degree of skills of them"
+      locale: "Language environment"
+      locale_explain: "Choose language to use this website"
+      avail: "Availability"
+      avail_explain_01: "Choose dining you can have with foreign traveler"
+      avail_explain_02: "In your normal life, of course you can decline someone's request even though someone send request when you're available on this form"
+      avail_area_explain: "(If you're foreign traveler in Japan, you don't have to fill this items.)"
+      avail_wdays: ["anyday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
+      introduction: "Message to other users"
+
+  user_reviews:
+    new:
+      about_experience: "相手とあなたの体験を教えて下さい。"
+      about_user: "相手はどんな人だったかを簡単に教えてください。"
+      about_communication: "相手とはスムーズにコミュニケーションを取ることができましか？"
+      about_communication_explain: "相手とはスムーズにコミュニケーションができましたか？（５段階で教えてください。1:低い 5:高い）"
+      recommend: "この人との食事を他のユーザーにも勧めますか？"
+      familiarity: "今回の立場"
+      eval_personal: "相手の性格"
+      eval_personal_explain: "相手は良い性格だと思いましたか？（５段階で教えてください。1:低い 5:高い）"
+      eval_language: "相手の言語力"
+      eval_language_explain: "相手とのコミュニケーションに際して、言語レベル的に問題はありませんでしたか？（５段階で教えてください。1:低い 5:高い）"
+      eval_groumet: "会った場所での食事のおいしさ"
+      eval_groumet_explain: "相手と会った場所の食事はおいしかったですか？（５段階で教えてください。1:低い 5:高い）"
 
   meetups:
     new:

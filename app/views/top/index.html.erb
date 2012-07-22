@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  $(window).load(function() {
+      $('.flexslider').flexslider();
+      });
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <% if @user %>
@@ -74,11 +80,11 @@
       </div>
     </div>
 
-
     <div id="rightArea">
       <h2>Find People</h2>
       <!-- localSearch -->
       <div id="localSearch">
+        <p class="fontS"><%= t("user_top.search_explain") %></p>
         <%= form_tag users_path, :method => 'get' do %>
           <ul class="findSearch">
             <li><%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>

@@ -175,7 +175,7 @@ select {
 
 /* contents */
 #contents {
-	/*width: 980px;*/
+	width: 980px;
 	margin: 0 auto;
 	padding: 15px 0 30px;
 	background-color: #ffffff;

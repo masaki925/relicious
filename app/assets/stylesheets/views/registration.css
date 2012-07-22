@@ -78,3 +78,7 @@
     content: ""; 
     display: block; 
     clear: both;}
+.fontCB{
+	font-size:12px;
+	color:#999;
+}

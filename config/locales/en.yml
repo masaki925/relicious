@@ -3,7 +3,11 @@
 
 en:
   users:
+    index:
+      search_explain: "You can search by selecting at least 1 keyword"
+
     edit:
+      email_explain: "We're gonna send you notifications (e.g. \"Someone invite you to have local foods together.\",\"Someone replied to your message\") via this e-mail address, so we want you to enter an e-mail address which you check often."
       location: "Where I live"
       language: "Language"
       language_explain: "Choose languages you can use and degree of skills of them"
@@ -16,6 +20,7 @@ en:
       avail_wdays: ["anyday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
       introduction: "Message to other users"
+      introduction_explain: "Enter your message to other user!! e.g.)Explanation of yourself, when you hope for Relicious, etc..."
 
   user_reviews:
     new:
@@ -26,12 +31,20 @@ en:
       recommend: "Would you recommend this guest?"
       familiarity: "Situation"
       eval_personal: "Personality"
+      eval_personal_explain: "Was he (or she) was a nice person?(1: Low .. 5: Hi)"
       eval_language: "Language"
+      eval_language_explain: "Could you communicate with him (or her) smoothly?(1: Low .. 5: Hi)"
       eval_groumet: "Groumet"
+      eval_groumet_explain: "Were foods you ate where you met this person was delicious?(1: Low .. 5: Hi)"
 
   meetups:
     new:
-      public_explain: "Do you wanna share your conversations with other users? If you do so, other users can join your conversation and meetup."
+      header_explain: "You don't have to fill in all of items at this form, you can arrange these details with your partner in the next step."
+      title_explain: "Enter the theme of this meetup.(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)"
+      area_explain: "Choose area you wanna have local foods with this person."
+      place_explain: "Enter the name of the place where you guys will have local foods."  
+      url_explain: "Enter URL of the place where you guys will have local foods."
+      public_explain: "Will you allow other users to check your converstion about this meetup with this person and join you guys?"
     show:
       begin_at : "Begin at"
       end_at   : "End at"
@@ -39,6 +52,9 @@ en:
       place    : "Place"
       url      : "URL"
       public   : "Public"
+
+  user_top:
+    search_explain: "You can search by selecting at least 1 keyword"
 
   top:
     introduction:

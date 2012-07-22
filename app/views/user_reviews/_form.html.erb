@@ -31,6 +31,7 @@
       <%= link_to image_tag("http://graph.facebook.com/#{@reviewed_user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture"), user_path(@reviewed_user) %>
       <h1><%= link_to @reviewed_user.name, user_path(@reviewed_user) %></h1>
     </div>
+    <p class="fontCR">* = Mandatory</p>
     <form class="form">
       <ul id="impression">
         <li>
@@ -42,28 +43,31 @@
           <%= f.text_area :about_user %>
         </li>
         <li>
-          <h3><%= t("user_reviews.new.about_communication") %></h3>
+          <h3><%= t("user_reviews.new.about_communication") %><span class="fontCR">*</span></h3>
           <p><%= t("user_reviews.new.about_communication_explain") %></p>
         <%= f.select :eval_communication, [1,2,3,4,5] %>
         </li>
         <li>
-          <h3><%= t("user_reviews.new.recommend") %></h3>
+          <h3><%= t("user_reviews.new.recommend") %><span class="fontCR">*</span></h3>
           <%= f.select :recommend, [["yes", 1], ["no", 0]] %>
         </li>
         <li>
-          <h3><%= t("user_reviews.new.familiarity") %></h3>
+          <h3><%= t("user_reviews.new.familiarity") %><span class="fontCR">*</span></h3>
           <%= f.select :familiarity_for_area, ["stranger", "local person"] %>
         </li>
         <li>
-          <h3><%= t("user_reviews.new.eval_personal") %></h3>
+          <h3><%= t("user_reviews.new.eval_personal") %><span class="fontCR">*</span></h3>
+          <p><%= t("user_reviews.new.eval_personal_explain") %></p>
           <%= f.select :eval_personal, [1,2,3,4,5] %>
         </li>
         <li>
-          <h3><%= t("user_reviews.new.eval_language") %></h3>
+          <h3><%= t("user_reviews.new.eval_language") %><span class="fontCR">*</span></h3>
+          <p><%= t("user_reviews.new.eval_language_explain") %></p>
           <%= f.select :eval_language, [1,2,3,4,5] %>
         </li>
         <li>
-          <h3><%= t("user_reviews.new.eval_groumet") %></h3>
+          <h3><%= t("user_reviews.new.eval_groumet") %><span class="fontCR">*</span></h3>
+          <p><%= t("user_reviews.new.eval_groumet_explain") %></p>
           <%= f.select :eval_gourmet, [1,2,3,4,5] %>
         </li>
       </ul>

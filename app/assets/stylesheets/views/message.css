@@ -236,4 +236,7 @@ h3 {
 #status-list .list li:after {
     content: ""; 
     display: block; 
-    clear: both;}
+    clear: both;
+}
+
+	

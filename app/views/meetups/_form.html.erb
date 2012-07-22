@@ -13,10 +13,15 @@
 
   <%= hidden_field_tag :member, params[:member] %>
 
+  <p class="fontCR"><%= t("meetups.new.header_explain") %></p>
   <table>
     <tr>
       <th>Title</th>
-      <td><%= f.text_field :title %></td>
+      
+      <td>
+        <p><%= t("meetups.new.title_explain") %></p>
+        <%= f.text_field :title %>
+      </td>
     </tr>
     <tr>
       <th><%= f.label :begin_at %><br /></th>
@@ -28,19 +33,36 @@
     </tr>
     <tr>
       <th><%= t("meetups.new.area") %><br /></th>
-      <td><%= f.collection_select(:area_id, Area.all, :id, :name) %></td>
+      <td>
+        <p><%= t("meetups.new.area_explain") %></p>
+        <%= f.collection_select(:area_id, Area.all, :id, :name) %>
+      </td>
     </tr>
     <tr>
       <th><%= t("meetups.new.place") %><br /></th>
-      <td><%= f.text_field :place %></td>
+      <td>
+        <p><%= t("meetups.new._explain") %></p>
+        <%= f.text_field :place %>
+      </td>
     </tr>
     <tr>
       <th><%= t("meetups.new.url") %><br /></th>
-      <td><%= f.text_field :url %></td>
+      <td>
+        <p><%= t("meetups.new.url_explain") %></p>
+        <%= f.text_field :url %>
+      </td>
     </tr>
     <tr>
       <th>Publicness</th>
-      <td><%= t("meetups.new.public_explain") %><br><%= f.select :public, options_for_select([["public", 1], ["private", 0]], 1) %></td>
+      <td>
+        <%= t("meetups.new.public_explain") %><br>
+
+        <span class="fontCB">
+          public:Yes<br> private:No
+        </span><br>
+
+        <%= f.select :public, options_for_select([["public", 1], ["private", 0]], 1) %>
+      </td>
     </tr>
   </table>
 

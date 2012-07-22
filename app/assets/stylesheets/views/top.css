@@ -11,6 +11,7 @@
 #top #rightArea {
 	float: right;
 	width: 600px;
+
 }
 
 #top h2 {
@@ -34,7 +35,7 @@
 }
 
 #top #localSearch {
-	margin: 55px 0;
+	margin: 120px 0 120px;
 }
 
 #topImg {
