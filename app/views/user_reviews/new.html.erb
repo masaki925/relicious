@@ -1,10 +1,5 @@
-<!-- breadcrumb -->
 <nav id="breadcrumb">
-<p><a href="/" rel="index">TOP</a> > Review</p>
+  <p><a href="/" rel="index">TOP</a> > <%= t("general.review") %></p>
 </nav>
-<!-- /breadcrumb -->
-
 
 <%= render 'form' %>
-
-<%= link_to 'Back', user_reviews_path(user_id: @reviewed_user.id) %>

@@ -13,48 +13,48 @@
     </div>
   <% end %>
 
-  <p class="fontCR">* = Mandatory</p>
+  <p class="fontCR">* = <%= t("general.mandatory") %></p>
   <table>
     <tr>
-      <th>Name<span class="fontCR">*</span></th>
+      <th><%= t("general.user.name") %><span class="fontCR">*</span></th>
       <td><%= f.text_field :name %></td>
     </tr>
     <tr>
-      <th>email<span class="fontCR">*</span></th>
+      <th><%= t("general.user.email") %><span class="fontCR">*</span></th>
       <td><%= t("users.edit.email_explain") %><br><%= f.text_field :email %></td>
     </tr>
     <tr>
-      <th>gender<span class="fontCR">*</span></th>
+      <th><%= t("general.user.gender") %><span class="fontCR">*</span></th>
       <td><%= f.text_field :gender %></td>
     </tr>
     <tr>
-      <th>Birthday<span class="fontCR">*</span></th>
+      <th><%= t("general.user.birthday") %><span class="fontCR">*</span></th>
       <td><%= f.date_select :birthday, start_year: Time.now.year - 100 %></td>
     </tr>
     <tr>
-      <th><%= t("users.edit.location") %><span class="fontCR">*</span></th>
+      <th><%= t("general.user.location") %><span class="fontCR">*</span></th>
       <td><%= f.text_field :location %></td>
     </tr>
     <tr>
-      <th><%= t("users.edit.language") %><span class="fontCR">*</span></th>
+      <th><%= t("general.user.language") %><span class="fontCR">*</span></th>
       <td>
         <p><%= t("users.edit.language_explain") %></p>
         <ul>
           <% (0..2).each do |i| %>
             <li>
             <% if @user_languages[i] %>
-              <label> Languages : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, @user_languages[i].id), {include_blank: true}, { name: "languages[]" }  %></label>
+              <label> <%= t("general.user.language") %> : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, @user_languages[i].id), {include_blank: true}, { name: "languages[]" }  %></label>
             <% else %>
-              <label> Languages : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), {include_blank: true}, { name: "languages[]" }  %></label>
+              <label> <%= t("general.user.language") %> : <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}), {include_blank: true}, { name: "languages[]" }  %></label>
             <% end %>
-            <label>Skill:<%= select :user, :languages, options_for_select(["expert","Intermediate","beginner"]), {include_blank: true}, { name: "language_skills[]" } %> </label>
+            <label><%= t("general.user.language_skill") %> : <%= select :user, :languages, options_for_select( t("users.edit.language_skills")), {include_blank: true}, { name: "language_skills[]" } %> </label>
             </li>
           <% end %>
         </ul>
       </td>
     </tr>
     <tr>
-      <th><%= t("users.edit.locale") %><span class="fontCR">*</span></th>
+      <th><%= t("general.user.locale") %><span class="fontCR">*</span></th>
       <td>
         <p><%= t("users.edit.locale_explain") %></p>
         <% if @user.locale.blank? %>
@@ -65,41 +65,41 @@
       </td>
     </tr>
     <tr>
-      <th>Avaliability<span class="fontCR">*</span></th>
+      <th><%= t("users.edit.avail") %><span class="fontCR">*</span></th>
       <td>
-        <p><%= t("users.edit.avail_explain_01") %> <br><span class="notes">(<%= t("users.edit.avail_explain_02") %>)</span></p>
+        <p><%= t("users.edit.avail_explain_01") %> <br><span class="notes"><%= t("users.edit.avail_explain_02") %></span></p>
           <% (0..2).each do |i| %>
             <li>
             <% if @user_avails[i] %>
-              <label>Day<%= i + 1 %>: <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays"), @user_avails[i].day), {include_blank: true}, {name: "user_avails[day][]"} %></label>
-              <label>Time<%= i + 1 %>: <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options"), @user_avails[i].avail_option), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label><br/>
-              <label>Area<%= i + 1 %>: <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, @user_avails[i].area_id), {include_blank: t("users.edit.avail_area_explain") }, {name: "user_avails[area_id][]"} %> </label>
+              <label><%= t("general.wday") %><%= i + 1 %>: <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays"), @user_avails[i].day), {include_blank: true}, {name: "user_avails[day][]"} %></label>
+              <label><%= t("general.time") %><%= i + 1 %>: <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options"), @user_avails[i].avail_option), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label><br/>
+              <label><%= t("general.area") %><%= i + 1 %>: <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, @user_avails[i].area_id), {include_blank: t("users.edit.avail_area_explain") }, {name: "user_avails[area_id][]"} %> </label>
             <% else %>
-              <label>Day<%= i + 1 %>: <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays") ), {include_blank: true}, {name: "user_avails[day][]"} %></label>
-              <label>Time<%= i + 1 %>: <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options")), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label><br/>
-              <label>Area<%= i + 1 %>: <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}), {include_blank: t("users.edit.avail_area_explain") }, {name: "user_avails[area_id][]"} %> </label>
+              <label><%= t("general.wday") %><%= i + 1 %>: <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays") ), {include_blank: true}, {name: "user_avails[day][]"} %></label>
+              <label><%= t("general.time") %><%= i + 1 %>: <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options")), {include_blank: true}, {name: "user_avails[avail_option][]"} %> </label><br/>
+              <label><%= t("general.area") %><%= i + 1 %>: <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}), {include_blank: t("users.edit.avail_area_explain") }, {name: "user_avails[area_id][]"} %> </label>
             <% end %>
             </li>
           <% end %>
       </td>
     </tr>
     <tr>
-      <th><%= t("users.edit.favorite_food") %></th>
+      <th><%= t("general.user.favorite_food") %></th>
       <td> <%= f.text_field :favorite_food %> </td>
     </tr>
     <tr>
-      <th><%= t("users.edit.ng_food") %></th>
+      <th><%= t("general.user.ng_food") %></th>
       <td> <%= f.text_field :ng_food %> </td>
     </tr>
     <tr>
-      <th><%= t("users.edit.introduction") %></th>
+      <th><%= t("general.user.introduction") %></th>
       <td>
         <p><%= t("users.edit.introduction_explain") %></p>
         <%= f.text_area :introduction, size: "40x5" %>
       </td>
     </tr>
     <tr>
-      <th>Interest</th>
+      <th><%= t("general.user.likes") %></th>
       <td>
         <ul class="tagList">
           <% if @likes.blank? %>
@@ -111,14 +111,14 @@
       </td>
     </tr>
     <tr>
-      <th>School</th>
+      <th><%= t("general.user.school") %></th>
       <td> <%= f.text_field :education %> </td>
     </tr>
     <tr>
-      <th>Work</th>
+      <th><%= t("general.user.work") %></th>
       <td> <%= f.text_field :work %> </td>
     </tr>
   </table>
 
-  <p class="textC"><%= f.submit "Register", {class: "btn1"} %></p>
+  <p class="textC"><%= f.submit t("general.register"), {class: "btn1"} %></p>
 <% end %>

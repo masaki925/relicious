@@ -22,6 +22,7 @@
   <!-- top -->
   <div id="top">
     <div id="leftArea">
+
       <div id="profileImg">
         <h2>Hi <%= @user.name %>!! Welcome back!!</h2>
         <div class="flexslider">
@@ -29,10 +30,11 @@
             <li><%= image_tag @user_picture_url_normal, width:"175", height:"175", alt:"picture" %></li>
           </ul>
         </div>
-        <p class="textC"><%= link_to "Edit Profile", edit_user_path(@user) %></p>
+        <p class="textC"><%= link_to t("user_top.edit_profile"), edit_user_path(@user) %></p>
       </div>
+
       <div id="upcomingArea">
-        <h3>Upcoming Dining</h3>
+        <h3><%= t("user_top.upcoming_text") %></h3>
         <ul>
           <% @user_meetups.each do |meetup| %>
             <% meetup.users.each do |u|
@@ -66,14 +68,14 @@
         </ul>
       </div>
       <div id="doingArea">
-        <h3>Things to do</h3>
+        <h3><%= t("user_top.todo_text") %></h3>
         <ul>
           <% if @user.attributes.has_value?(nil) %>
-            <li><%= link_to "complete your profile", user_path(@user) %></li>
+            <li><%= link_to t("user_top.todo_profile"), user_path(@user) %></li>
           <% end %>
           <% if @review_to_write %>
             <% @review_to_write.each do |r| %>
-              <li><%= link_to "write review for #{r[2]}", new_user_review_path(user_id: r[1]) %></li>
+              <li><%= link_to t("user_top.todo_review", user: r[2]), new_user_review_path(user_id: r[1]) %></li>
             <% end %>
           <% end %>
         </ul>
@@ -81,21 +83,22 @@
     </div>
 
     <div id="rightArea">
-      <h2>Find People</h2>
+      <h2><%= t("user_top.user_search_text") %></h2>
+
       <!-- localSearch -->
       <div id="localSearch">
-        <p class="fontS"><%= t("user_top.search_explain") %></p>
+        <p class="fontS"><%= t("general.search.explain") %></p>
         <%= form_tag users_path, :method => 'get' do %>
           <ul class="findSearch">
-            <li><%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
-            <li class="date"><label>Date<br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
-            <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select(["Breakfast", "Lunch", "Tea time", "Dinner", "Drink"]), {include_blank: true} %> </label></li>
-            <li><%= submit_tag "Search", :name => nil, class: "btn1 searchBtn" %></li>
+            <li><%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textBox" %> </li>
+            <li class="date"><label><%= t("general.search.day") %><br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
+            <li class="time"><label><%= t("general.search.option") %><br><%= select_tag "search[time]", options_for_select( t("general.search.options") ), {include_blank: true} %> </label></li>
+            <li><%= submit_tag t("general.search.button"), :name => nil, class: "btn1 searchBtn" %></li>
           </ul>
         <% end %>
       </div>
 
-      <h2>Relicious dining around you</h2>
+      <h2><%= t("user_top.recent_meetup_text") %></h2>
       <% unless @recent_meetups_exceptme.blank? %>
         <% @recent_meetups_exceptme.each do |meetup| %>
           <!-- recentStreamBox -->

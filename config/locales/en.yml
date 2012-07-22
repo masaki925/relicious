@@ -2,28 +2,63 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  general:
+    mandatory: "Mondatory"
+    send: "send"
+    register: "register"
+    meetup_request: "Have dining with"
+    day: "day"
+    time: "time"
+    wday: "weekday"
+    area: "area"
+    review: "Review"
+    language: "Language"
+    user_search: "Find people"
+
+    search:
+      day: "Date"
+      option: "Time"
+      options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
+      button: "Search"
+      location_placeholder: "Area (e.g. Tokyo Kyoto)"
+      explain: "You can press \"Search\" even though all items are not filled with."
+
+    user:
+      email: "email"
+      school: "School"
+      work: "Work"
+      name: "Name"
+      gender: "Gender"
+      age: "Age"
+      birthday: "Birthday"
+      location: "Location"
+      language: "Language"
+      language_skill: "skill"
+      locale: "Locale"
+      availability: "Availability"
+      favorite_food: "Favorite food"
+      ng_food: "NG food"
+      introduction: "Message"
+      likes: "Interest"
+      about_prefix: "About"
+      about_postfix: ""
+
   users:
     index:
       search_greeting: "Find People you wanna have a dining together!!"
-      search_explain: "You can search by selecting at least 1 keyword"
-      search_location_placeholder: "Area (e.g. Tokyo Kyoto Osaka)"
-      search_date: "Date"
-      search_option: "Time"
-      search_button: "Search"
       feeling_explain: "We're gonna recommend person you may like!!"
-      user_area: "Area"
-      user_review_number: "Review"
       user_about: "About"
       user_basics: "Basics"
       user_avails: "Availability"
-      user_languages: "Language"
-      meetup_request: "Have dining with"
 
     edit:
+      breadcrumb: "Editing profile"
+      header_text: "Editing profile"
       email_explain: "We're gonna send you notifications (e.g. \"Someone invite you to have local foods together.\",\"Someone replied to your message\") via this e-mail address, so we want you to enter an e-mail address which you check often."
       location: "Where I live"
       language: "Language"
       language_explain: "Choose languages you can use and degree of skills of them"
+      language_skills: ["expert","intermediate","beginner"]
       locale: "Language environment"
       locale_explain: "Choose language to use this website"
       avail: "Availability"
@@ -49,15 +84,23 @@ en:
       eval_language_explain: "Could you communicate with him (or her) smoothly?(1: Low .. 5: Hi)"
       eval_groumet: "Groumet"
       eval_groumet_explain: "Were foods you ate where you met this person was delicious?(1: Low .. 5: Hi)"
+      familiarities: [["stranger"],["local"]]
 
   meetups:
     new:
       header_explain: "You don't have to fill in all of items at this form, you can arrange these details with your partner in the next step."
+      title: "Title"
       title_explain: "Enter the theme of this meetup.(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)"
+      begin_at: "Begin at"
+      end_at: "End at"
+      area: "Area"
       area_explain: "Choose area you wanna have local foods with this person."
+      place: "Place"
       place_explain: "Enter the name of the place where you guys will have local foods."  
       url_explain: "Enter URL of the place where you guys will have local foods."
+      public: "Public"
       public_explain: "Will you allow other users to check your converstion about this meetup with this person and join you guys?"
+
     show:
       conversation_prefix: "Conversation with"
       conversation_postfix: ""
@@ -78,7 +121,13 @@ en:
       send: "send"
 
   user_top:
-    search_explain: "You can search by selecting at least 1 keyword"
+    user_search_text: "Find Local People?"
+    upcoming_text: "Upcoming Dining"
+    edit_profile: "Edit profile"
+    todo_text: "Things to do"
+    todo_profile: "complete your profile"
+    todo_review: "write review for %{user}"
+    recent_meetup_text: "Relicious dining around you"
 
   top:
     introduction:

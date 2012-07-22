@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "views/registration", :media => "all" %>
+
 <%= form_for(@meetup, html: {id: "registration"}) do |f| %>
   <% if @meetup.errors.any? %>
     <div id="error_explanation">
@@ -16,21 +18,23 @@
   <p class="fontCR"><%= t("meetups.new.header_explain") %></p>
   <table>
     <tr>
-      <th>Title</th>
-      
+      <th><%= t("meetups.new.title") %></th>
       <td>
         <p><%= t("meetups.new.title_explain") %></p>
         <%= f.text_field :title %>
       </td>
     </tr>
+
     <tr>
-      <th><%= f.label :begin_at %><br /></th>
+      <th><%= t("meetups.new.begin_at") %></th>
       <td><%= f.datetime_select :begin_at %></td>
     </tr>
+
     <tr>
-      <th><%= f.label :end_at %><br /></th>
+      <th><%= t("meetups.new.end_at") %></th>
       <td><%= f.datetime_select :end_at %></td>
     </tr>
+
     <tr>
       <th><%= t("meetups.new.area") %><br /></th>
       <td>
@@ -38,10 +42,11 @@
         <%= f.collection_select(:area_id, Area.all, :id, :name) %>
       </td>
     </tr>
+
     <tr>
       <th><%= t("meetups.new.place") %><br /></th>
       <td>
-        <p><%= t("meetups.new._explain") %></p>
+        <p><%= t("meetups.new.place_explain") %></p>
         <%= f.text_field :place %>
       </td>
     </tr>
@@ -66,5 +71,5 @@
     </tr>
   </table>
 
-  <p class="textC"><%= f.submit "Send", {class: "btn1"} %></p>
+  <p class="textC"><%= f.submit t("general.send"), {class: "btn1"} %></p>
 <% end %>

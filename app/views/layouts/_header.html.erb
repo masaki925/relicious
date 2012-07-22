@@ -23,8 +23,8 @@
       <li>
       <%= form_tag users_path, :method => 'get', id: "searchHeader" do %>
         <ul class="findSearch">
-          <li> <%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textarea" %> </li>
-          <li><%= submit_tag "Search", :name => nil, class: "btn1" %></li>
+          <li> <%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textarea" %> </li>
+          <li><%= submit_tag t("general.search.button"), :name => nil, class: "btn1" %></li>
         </ul>
       <% end %>
       </li>

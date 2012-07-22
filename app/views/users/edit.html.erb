@@ -1,12 +1,10 @@
 <%= stylesheet_link_tag "views/registration", :media => "all" %>
 
-<!-- breadcrumb -->
 <nav id="breadcrumb">
-<p><a href="/" rel="index">TOP</a> > Registration</p>
+  <p><a href="/" rel="index">TOP</a> > <%= t("users.edit.breadcrumb") %></p>
 </nav>
-<!-- /breadcrumb -->
 
-<h2>Editing profile</h2>
+<h2><%= t("users.edit.header_text") %></h2>
 
 <%= render 'form' %>
 

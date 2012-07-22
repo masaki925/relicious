@@ -2,38 +2,69 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ja:
+  general:
+    mandatory: "必須入力項目"
+    send: "送信"
+    register: "登録"
+    meetup_request: "この人と一緒に食事をする！"
+    day: "日付"
+    wday: "曜日"
+    time: "時間"
+    area: "地域"
+    review: "レビュー"
+    language: "検索"
+    user_search: "ユーザ検索"
+
+    search:
+      day: "日付"
+      option: "食事の種類"
+      options: [["いつでも","anytime"], ["朝食(7:00-10:00)", "breakfast"], ["昼食(11:00-14:00)", "lunch"], ["夕食(17:00-21:00)", "dinner"], ["お茶(軽く喫茶店に行く)", "cafe"], ["お酒(22:00〜)", "drink"] ]
+      button: "検索"
+      location_placeholder: "地域 (例. 東京、京都)"
+      explain: "※全ての入力項目を入力しなくとも「検索」を実行することが可能です"
+
+    user:
+      email: "e-mailアドレス"
+      school: "学校"
+      work: "勤務先"
+      name: "名前"
+      gender: "性別"
+      age: "年齢"
+      birthday: "誕生日"
+      location: "居住地"
+      language: "言語"
+      language_skill: "習熟度"
+      locale: "言語環境"
+      availability: "空いている時間"
+      favorite_food: "好きな食べ物"
+      ng_food: "苦手な食べ物"
+      introduction: "メッセージ"
+      likes: "興味・関心"
+      about_prefix: ""
+      about_postfix: "について"
+
   users:
     index:
       search_greeting: "一緒に食事をする相手を見つけましょう！"
-      search_explain: "※全ての入力項目を入力しなくとも「検索」を実行することが可能です"
-      search_date: "日付"
-      search_option: "食事の種類"
-      search_location_placeholder: "地域 (例. 東京、京都、大阪)"
-      search_button: "検索"
       feeling_explain: "あなたの居住地や趣味などに合わせて、 おススメの相手を紹介します！"
-      user_area: "地域"
-      user_review_number: "レビュー"
       user_about: "この人について"
       user_basics: "基本情報"
       user_avails: "一緒に食事ができるとき"
-      user_languages: "言語"
-      meetup_request: "この人と一緒に食事をする！"
 
     edit:
-      email_explain: "We're gonna send you notifications (e.g. \"Someone invite you to have local foods together.\",\"Someone replied to your message\") via this e-mail address, so we want you to enter an e-mail address which you check often."
-      location: "Where I live"
-      language: "言語"
-      language_explain: "言語の説明"
-      locale: "Language environment"
-      locale_explain: "Choose language to use this website"
-      avail: "Availability"
-      avail_explain_01: "Choose dining you can have with foreign traveler"
-      avail_explain_02: "In your normal life, of course you can decline someone's request even though someone send request when you're available on this form"
+      breadcrumb: "プロフィール入力"
+      header_text: "プロフィールを入力"
+      email_explain: "こちらのメールアドレスには、Reliciousからのお知らせ（他のユーザーからの食事のお誘いやメッセージ受信のお知らせ）をお送りします。普段最も良く利用いただくe-mailアドレスを記入ください。"
+      language_explain: "あなたが使うことのできる言語と、その習熟度を入力してください"
+      language_skills: [["熟練者","expert"],["日常会話レベル", "intermediate"],["初心者", "beginner"]]
+      locale_explain: "本サービスで使用する言語を選択してください。"
+      avail: "あなたが通常、相手と食事をすることができる時間帯"
+      avail_explain_01: "あなたが相手と食事をすることができる曜日、時間帯帯を選択してください"
+      avail_explain_02: "(普段空いている曜日、時間帯帯を登録してください。もちろん、ここで「空いている」と登録したからといって、誰かからリクエストを受けた場合に必ずその相手と食事をしなければいけないというわけではありません。)"
       avail_area_explain: "(If you're foreign traveler in Japan, you don't have to fill this items.)"
-      avail_wdays: ["anyday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-      avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
-      introduction: "Message to other users"
-      introduction_explain: "FIXME"
+      avail_wdays: [["いつでも","anyday"], ["日曜","Sunday"], ["月曜","Monday"], ["火曜","Tuesday"], ["水曜","Wednesday"], ["木曜","Thursday"], ["金曜","Friday"], ["土曜","Saturday"]]
+      avail_options: [["いつでも","anytime"], ["朝食(7:00-10:00)", "breakfast"], ["昼食(11:00-14:00)", "lunch"], ["夕食(17:00-21:00)", "dinner"], ["お茶(軽く喫茶店に行く)", "cafe"], ["お酒(22:00〜)", "drink"] ]
+      introduction_explain: "他の皆へのメッセージを書きましょう。(自己紹介や、Reliciuosに登録した理由(Reliciuosに期待していること)などを自由に書きましょう)"
 
   user_reviews:
     new:
@@ -49,15 +80,23 @@ ja:
       eval_language_explain: "相手とのコミュニケーションに際して、言語レベル的に問題はありませんでしたか？（５段階で教えてください。1:低い 5:高い）"
       eval_groumet: "会った場所での食事のおいしさ"
       eval_groumet_explain: "相手と会った場所の食事はおいしかったですか？（５段階で教えてください。1:低い 5:高い）"
+      familiarities: [["旅行者","stranger"],["現地人","local"]]
 
   meetups:
     new:
-      header_explain: "You don't have to fill in all of items at this form, you can arrange these details with your partner in the next step."
-      title_explain: "Enter the theme of this meetup.(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)"
-      area_explain: "Choose area you wanna have local foods with this person."
-      place_explain: "Enter the name of the place where you guys will have local foods."  
-      url_explain: "Enter URL of the place where you guys will have local foods."
+      header_explain: "ここで全項目を記入する必要はありません。次の画面で相手と相談しながら決めることができます。"
+      title: "タイトル"
+      title_explain: "この食事のテーマを記入ください。(例： \"Wanna have local foods!!\",\"Eat Sushi!!\" などなど、この人に声かける目的に当たるものであれば何でも構いません)"
+      begin_at: "開始時間"
+      end_at: "終了時間"
+      area: "地域"
+      area_explain: "相手と食事をしたいエリアを記入してください。"
+      place: "食事をする場所"
+      place_explain: "相手と食事をするレストラン等の名前を記入してください。"
+      url_explain: "相手と食事をするレストラン等のURLを記入してください。"
+      public: "他のユーザーの参加可否"
       public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
+
     show:
       conversation_prefix: ""
       conversation_postfix: "と会話"
@@ -78,7 +117,13 @@ ja:
       send: "送信"
 
   user_top:
-    search_explain: "You can search by selecting at least 1 keyword"
+    user_search_text: "海外の食事相手を探す"
+    upcoming_text: "最近の予定"
+    edit_profile: "プロフィールを編集"
+    todo_text: "TO DO"
+    todo_profile: "プロフィールに見記入の項目があります"
+    todo_review: "%{user}さんのレビューを行なってください"
+    recent_meetup_text: "最近のRelicious dining"
 
   top:
     introduction:
