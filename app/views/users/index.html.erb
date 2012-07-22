@@ -55,15 +55,24 @@
         </div>
         <dl class="cotegory1">
           <dt>Area:</dt>
-          <dd>FIXME: Asakusa, Shibuya, Ikebukuro, Odaiba</dd>
+          <dd>
+          <% if user.user_avails.blank? %>
+            <dd>-</dd>
+          <% else %>
+            <% user.user_avails.each_with_index do |ua, idx| %>
+              <% if idx > 0 %>,<% end %>
+              <%= ua.area.name %>
+            <% end %>
+          <% end %>
+          </dd>
         </dl>
         <dl class="cotegory2">
           <dt>Review:</dt>
           <dd><%= user.received_reviews.size %></dd>
+          <!-- FIXME
           <dt>Pictures:</dt>
           <dt>Reply Rate:</dt>
-          <!-- FIXME -->
-          <dd>100%</dd>
+          <dd>100%</dd> -->
         </dl>
 
         <h3>About</h3>
@@ -90,10 +99,11 @@
           <% end %>
 
         </dl>
+        <% unless user == current_user %>
+          <p class="btnArea"><a href=<%= "/meetups/new?member=#{user.id}" %> class="btn1">Have dining with</a></p>
+        <% end %>
+        <p style="text-align:right;font-weight:bold;"><%= link_to 'see more', user_path(user), style: "text-align:right;" %></p>
       </div>
-      <% unless user == current_user %>
-        <p class="btnArea"><a href=<%= "/meetups/new?member=#{user.id}" %> class="btn1">Have dining with</a></p>
-      <% end %>
     </div>
   <% end if @users %>
   <!-- /findPeopleArea -->
