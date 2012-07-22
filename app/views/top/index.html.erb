@@ -94,7 +94,7 @@
         <% @recent_meetups_exceptme.each do |meetup| %>
           <!-- recentStreamBox -->
           <div class="recentStreamBox">
-            <h3><%= meetup.title %></h3>
+            <h3 class="stream"><%= meetup.title %></h3>
             <div class="imgArea">
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
@@ -197,7 +197,7 @@
           <!-- recentStreamBox -->
           <div class="recentStreamBox">
             <div class="imgArea">
-              <h3><%= meetup.title %></h3>
+              <h3 class="stream"><%= meetup.title %></h3>
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
                   <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"35", height:"35", alt:"picture"), user_path(user) %>

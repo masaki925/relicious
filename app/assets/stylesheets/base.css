@@ -28,11 +28,6 @@ h2 {
 	line-height: 28px;
 }
 h3 {
-   font-size: 18px;
-   line-height: 27px;
-   color: #FF5A00;
-   padding-left: 15px;
-	 margin-bottom: 5px;
 }
 h4 {
    font-size: 14px;
@@ -692,6 +687,14 @@ float:right;
 	border-radius: 0 3px 3px 0;
 	font-size: 14px;
 	box-shadow: none;
+}
+
+h3.stream {
+  font-size: 18px;
+  line-height: 27px;
+  color: #FF5A00;
+  padding-left: 15px;
+  margin-bottom: 5px;
 }
 
 /* clearfix */
