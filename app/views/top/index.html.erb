@@ -30,7 +30,6 @@
         <h3>Upcoming Dining</h3>
         <ul>
           <% @user_meetups.each do |meetup| %>
-            <% next unless meetup.public %>
             <% meetup.users.each do |u|
                  next if u == current_user
                  @target_user = u
@@ -49,12 +48,12 @@
                 <%= image_tag "http://graph.facebook.com/#{@target_user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture" %>
               </div>
               <div class="detailArea">
+                <%= link_to meetup.title, meetup_path(meetup) %><br>
                 With <%= link_to @target_user.name, user_path(@target_user) %><br>
                 <% if other_members_num > 0 %>
                   and <%= other_members_num %> pepole<br>
                 <% end %>
                 <time><%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time>
-                <%= link_to meetup.title, meetup_path(meetup) %>
               </div>
             </div>
             </li>
