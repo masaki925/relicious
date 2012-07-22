@@ -12,6 +12,9 @@ ja:
     time: "時間"
     area: "地域"
     review: "レビュー"
+    review_positive: "はい"
+    review_negative: "いいえ"
+    recommend: "おすすめ"
     language: "検索"
     user_search: "ユーザ検索"
 
@@ -81,6 +84,10 @@ ja:
       eval_groumet: "会った場所での食事のおいしさ"
       eval_groumet_explain: "相手と会った場所の食事はおいしかったですか？（５段階で教えてください。1:低い 5:高い）"
       familiarities: [["旅行者","stranger"],["現地人","local"]]
+
+    show:
+      about_user: "%{user}さん"
+      about_experience: "一緒にしたこと"
 
   meetups:
     new:

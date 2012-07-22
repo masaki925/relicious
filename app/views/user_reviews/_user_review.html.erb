@@ -7,14 +7,14 @@
     </div>
 
     <div class="positiveArea">
-      <h5>Recommend: <%= user_review.recommend ? "positive" : "negative" %></h5>
+      <h5><%= t("general.recommend") %>: <%= user_review.recommend ? t("general.review_positive") : t("general.review_negative") %></h5>
       <dl>
-        <dt>About <%= @user.name %></dt>
+        <dt><%= t("user_reviews.show.about_user", user: @user.name) %></dt>
         <dd><%= user_review.about_user %></dd>
-        <dt>What we did</dt>
+        <dt><%= t("user_reviews.show.about_experience") %></dt>
         <dd><%= user_review.about_experience %></dd>
       </dl>
     </div>
-    <%= link_to "see detail", user_review_path(user_id: @user.id, id: user_review.id) %>
+    <p style="text-align:right;"><%= link_to "see detail", user_review_path(user_id: @user.id, id: user_review.id) %></p>
   </div>
 </div>

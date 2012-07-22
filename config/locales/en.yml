@@ -12,6 +12,9 @@ en:
     wday: "weekday"
     area: "area"
     review: "Review"
+    review_positive: "positive"
+    review_negative: "negative"
+    recommend: "Recommend"
     language: "Language"
     user_search: "Find people"
 
@@ -85,6 +88,10 @@ en:
       eval_groumet: "Groumet"
       eval_groumet_explain: "Were foods you ate where you met this person was delicious?(1: Low .. 5: Hi)"
       familiarities: [["stranger"],["local"]]
+
+    show:
+      about_user: "About %{user}"
+      about_experience: "What we did"
 
   meetups:
     new:
