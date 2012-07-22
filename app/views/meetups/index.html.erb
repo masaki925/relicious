@@ -30,19 +30,21 @@
 
     <ul class="list">
       <% @meetups.each do |meetup| %>
-        <% meetup.users.each do |u|
+        <%
+            target_user = nil
+            meetup.users.each do |u|
              next if u == current_user
-             @target_user = u
+             target_user = u
              break
            end
-           if @target_user.blank?
-             @target_user = current_user
+           if target_user.blank?
+             target_user = current_user
            end
-           target_user_picture_url_square = "http://graph.facebook.com/#{@target_user.provider_uid}/picture?type=square"
+           target_user_picture_url_square = "http://graph.facebook.com/#{target_user.provider_uid}/picture?type=square"
          %>
         <li>
         <p class="thumb"><%= image_tag target_user_picture_url_square, width:"75", height:"75", alt:"" %></p>
-        <p class="name"><%= link_to @target_user.name, user_path(@target_user) %></p>
+        <p class="name"><%= link_to target_user.name, user_path(target_user) %></p>
         <p class="data"><%= link_to meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup) %></p>
         <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
         <!-- FIXME -->

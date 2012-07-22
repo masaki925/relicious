@@ -92,8 +92,8 @@
       </div>
 
       <h2>Relicious dining around you</h2>
-      <% if @recent_meetups %>
-        <% @recent_meetups.each do |meetup| %>
+      <% unless @recent_meetups_exceptme.blank? %>
+        <% @recent_meetups_exceptme.each do |meetup| %>
           <!-- recentStreamBox -->
           <div class="recentStreamBox">
             <div class="imgArea">
@@ -115,10 +115,10 @@
             </div>
           </div>
           <!-- /recentStreamBox -->
+          <div style="text-align: center;"><%= link_to "see more", meetups_path %></div>
         <% end %>
-        <div style="text-align: center;"><%= link_to "see more", meetups_path %></div>
       <% else %>
-        <p>meetup not found for now.</p>
+        <p>other meetups not found for now.</p>
       <% end %>
     </div>
   </div>
@@ -190,7 +190,7 @@
     <div id="recentStream">
       <h2><%= t("top.recent_meetups.title") %></h2>
       <!-- recentStreamBox -->
-      <% if @recent_meetups %>
+      <% unless @recent_meetups.blank? %>
         <% @recent_meetups.each do |meetup| %>
           <% next unless meetup.public %>
           <!-- recentStreamBox -->
@@ -215,7 +215,7 @@
           <!-- /recentStreamBox -->
         <% end %>
       <% else %>
-        <p>meetup not found for now.</p>
+        <p>meetups not found for now.</p>
       <% end %>
       <!-- /recentStreamBox -->
     </div>
