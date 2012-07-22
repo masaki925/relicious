@@ -25,8 +25,11 @@ class TopController < ApplicationController
       @review_to_write = Array.new
       check_list       = Array.new
       @user_meetups.each do |meetup|
+        next if meetup.begin_at > Time.now
+
         meetup.users.each do |user|
           next if user == current_user
+
           review = UserReview.find(:all, conditions: ["user_id = ? AND reviewed_user_id = ?", current_user.id, user.id])
           if review.blank? && ! check_list.include?(user.id)
             @review_to_write << [meetup.id, user.id, user.name]

@@ -39,12 +39,14 @@
           <%= t("meetups.show.public") %> : <%= @meetup.public ? "public" : "private" %><br>
           <%= t("meetups.show.begin_at") %> : <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
         </p>
+        <br>
         <% if @meetup.user == current_user %>
           <%= link_to 'update information', edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>
         <% if current_user and @not_joined_yet %>
-          | <%= link_to "join this meetup", join_meetups_path(@meetup) %>
+          <%= link_to "join this meetup", join_meetups_path(@meetup), class: "btn1" %>
         <% end %>
+
       </div>
     </div>
   </div>
