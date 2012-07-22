@@ -4,7 +4,7 @@ class MeetupsController < ApplicationController
   # GET /meetups
   # GET /meetups.json
   def index
-    my_meetups = current_user.meetups
+    my_meetups = current_user.meetups.order('id DESC')
     if params[:about] && params[:about] == 'me'
       @meetups = my_meetups
     else
