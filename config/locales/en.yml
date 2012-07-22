@@ -4,7 +4,20 @@
 en:
   users:
     index:
+      search_greeting: "Find People you wanna have a dining together!!"
       search_explain: "You can search by selecting at least 1 keyword"
+      search_location_placeholder: "Area (e.g. Tokyo Kyoto Osaka)"
+      search_date: "Date"
+      search_option: "Time"
+      search_button: "Search"
+      feeling_explain: "We're gonna recommend person you may like!!"
+      user_area: "Area"
+      user_review_number: "Review"
+      user_about: "About"
+      user_basics: "Basics"
+      user_avails: "Availability"
+      user_languages: "Language"
+      meetup_request: "Have dining with"
 
     edit:
       email_explain: "We're gonna send you notifications (e.g. \"Someone invite you to have local foods together.\",\"Someone replied to your message\") via this e-mail address, so we want you to enter an e-mail address which you check often."
@@ -46,12 +59,23 @@ en:
       url_explain: "Enter URL of the place where you guys will have local foods."
       public_explain: "Will you allow other users to check your converstion about this meetup with this person and join you guys?"
     show:
+      conversation_prefix: "Conversation with"
+      conversation_postfix: ""
+      payment_policy: "Our policy : You guys must split the cost of meals."
+      update_information: "update information"
+      title    : "Title"
       begin_at : "Begin at"
       end_at   : "End at"
       area_name: "Area"
       place    : "Place"
       url      : "URL"
       public   : "Public"
+      send_message: "Send a Message"
+
+  meetup_comment:
+    new:
+      placeholder: "Add a personal message here."
+      send: "send"
 
   user_top:
     search_explain: "You can search by selecting at least 1 keyword"
@@ -60,6 +84,7 @@ en:
     introduction:
       title: "Have LOCAL dining with LOCAL people, make your daily dining intercultural."
       explain: "\"Relicious\" is a platform for foreign travelers to find the local people to have local food together, and for local people to find chances to communicate with foreign people through thier daily dinings."
+      signup_button: "Sign up (free)"
     header:
       signup: "Sign up / Log in"
       privacy: "Privacy Policy"
@@ -72,6 +97,7 @@ en:
       area_name: "Area"
       place: "Place"
       url: "URL"
+      see_detail: "See their conversation"
 
   header:
     link:

@@ -18,24 +18,26 @@
 <!-- findLocal -->
 <div id="findLocal">
 
-  <h2>Find People you wanna have a dining together!!</h2>    
+  <h2><%= t("users.index.search_greeting") %></h2>    
   <!-- localSearch -->
   <div id="localSearch">
     <div id="localSearch">
       <p class="fontS"><%= t("users.index.search_explain") %></p>
       <%= form_tag users_path, :method => 'get' do %>
         <ul class="findSearch">
-          <li><%= text_field_tag "search[location]", "", placeholder: "Area (e.g. Tokyo Kyoto Osaka)", class: "textBox" %> </li>
-          <li class="date"><label>Date<br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
-          <li class="time"><label>Time<br><%= select_tag "search[time]", options_for_select(["Breakfast", "Lunch", "Tea time", "Dinner", "Drink"]), {include_blank: true} %> </label></li>
-          <li><%= submit_tag "Search", :name => nil, class: "btn1 searchBtn" %></li>
+          <li><%= text_field_tag "search[location]", "", placeholder: t("users.index.search_location_placeholder"), class: "textBox" %> </li>
+          <li class="date"><label><%= t("users.index.search_date") %><br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
+          <li class="time"><label><%= t("users.index.search_option") %><br><%= select_tag "search[time]", options_for_select(["Breakfast", "Lunch", "Tea time", "Dinner", "Drink"]), {include_blank: true} %> </label></li>
+          <li><%= submit_tag t("users.index.search_button"), :name => nil, class: "btn1 searchBtn" %></li>
         </ul>
       <% end %>
 
+      <!-- TODO
       <dl class="interest">
-        <dt>We're gonna recommend person you may like!!</dt>
+        <dt><%= t("users.index.feeling_explain") %></dt>
         <dd><a href="#" class="btn3">(coming soon)</a></dd>
       </dl>
+      -->
 
     </form>
   </div>
@@ -55,7 +57,7 @@
           <%= user.introduction %></p>
         </div>
         <dl class="cotegory1">
-          <dt>Area:</dt>
+          <dt><%= t("users.index.user_area") %>:</dt>
           <dd>
           <% if user.user_avails.blank? %>
             <dd>-</dd>
@@ -68,7 +70,7 @@
           </dd>
         </dl>
         <dl class="cotegory2">
-          <dt>Review:</dt>
+          <dt><%= t("users.index.user_review_number") %>:</dt>
           <dd><%= user.received_reviews.size %></dd>
           <!-- FIXME
           <dt>Pictures:</dt>
@@ -76,19 +78,19 @@
           <dd>100%</dd> -->
         </dl>
 
-        <h3>About</h3>
+        <h3><%= t("users.index.user_about") %></h3>
         <dl class="cotegory3">
-          <dt>Basics:</dt>
+          <dt><%= t("users.index.user_basics") %>:</dt>
           <dd><%= user.birthday%>, <%= user.gender %>, <%= user.location %></dd>
 
-          <dt>Availability:</dt>
+          <dt><%= t("users.index.user_avails") %>:</dt>
           <% if user.user_avails.blank? %>
             <dd>-</dd>
           <% else %>
             <dd><%= render user.user_avails %></dd>
           <% end %>
 
-          <dt>Language:</dt>
+          <dt><%= t("users.index.user_languages") %>:</dt>
           <% if user.languages.blank? %>
             <dd>-</dd>
           <% else %>
@@ -101,7 +103,9 @@
 
         </dl>
         <% unless user == current_user %>
-          <p class="btnArea"><a href=<%= "/meetups/new?member=#{user.id}" %> class="btn1">Have dining with</a></p>
+          <p class="btnArea">
+            <%= link_to t("users.index.meetup_request"), "/meetups/new?member=#{user.id}", class: "btn1" %>
+          </p>
         <% end %>
         <p style="text-align:right;font-weight:bold;"><%= link_to 'see more', user_path(user), style: "text-align:right;" %></p>
       </div>

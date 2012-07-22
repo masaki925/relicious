@@ -3,10 +3,27 @@
 
 ja:
   users:
+    index:
+      search_greeting: "一緒に食事をする相手を見つけましょう！"
+      search_explain: "※全ての入力項目を入力しなくとも「検索」を実行することが可能です"
+      search_date: "日付"
+      search_option: "食事の種類"
+      search_location_placeholder: "地域 (例. 東京、京都、大阪)"
+      search_button: "検索"
+      feeling_explain: "あなたの居住地や趣味などに合わせて、 おススメの相手を紹介します！"
+      user_area: "地域"
+      user_review_number: "レビュー"
+      user_about: "この人について"
+      user_basics: "基本情報"
+      user_avails: "一緒に食事ができるとき"
+      user_languages: "言語"
+      meetup_request: "この人と一緒に食事をする！"
+
     edit:
+      email_explain: "We're gonna send you notifications (e.g. \"Someone invite you to have local foods together.\",\"Someone replied to your message\") via this e-mail address, so we want you to enter an e-mail address which you check often."
+      location: "Where I live"
       language: "言語"
       language_explain: "言語の説明"
-      language_explain: "Choose languages you can use and degree of skills of them"
       locale: "Language environment"
       locale_explain: "Choose language to use this website"
       avail: "Availability"
@@ -16,6 +33,7 @@ ja:
       avail_wdays: ["anyday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
       introduction: "Message to other users"
+      introduction_explain: "FIXME"
 
   user_reviews:
     new:
@@ -34,12 +52,39 @@ ja:
 
   meetups:
     new:
+      header_explain: "You don't have to fill in all of items at this form, you can arrange these details with your partner in the next step."
+      title_explain: "Enter the theme of this meetup.(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)"
+      area_explain: "Choose area you wanna have local foods with this person."
+      place_explain: "Enter the name of the place where you guys will have local foods."  
+      url_explain: "Enter URL of the place where you guys will have local foods."
       public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
+    show:
+      conversation_prefix: ""
+      conversation_postfix: "と会話"
+      payment_policy: "*食事に係る支払は、必ず割り勘で行なっていただくようお願いいたします。"
+      update_information: "編集"
+      title    : "タイトル"
+      begin_at : "開始時間"
+      end_at   : "終了時間"
+      area_name: "地域"
+      place    : "食事をする場所"
+      url      : "食事をする場所のURL"
+      public   : "他のユーザの参加可否"
+      send_message: "メッセージを送る"
+
+  meetup_comment:
+    new:
+      placeholder: "相手へのメッセージをここに記入してください。"
+      send: "送信"
+
+  user_top:
+    search_explain: "You can search by selecting at least 1 keyword"
 
   top:
     introduction:
       title: "現地の食べ物を、現地の人と。 さあ、いつものあなたのいつもの食事を文化交流の場に変えてみませんか？"
       explain: "\"Relicious\" では海外の人が旅行先/留学先/滞在先/の現地の食事相手を探すことができます。 また、現地の人にはいつもと違った、普段の食事を海外の人と一緒に楽しんでもらうことで、外国語の実践や海外の友人を作る機会を提供します。"
+      signup_button: "新規登録(無料)"
     header:
       signup: "サインアップ/ログイン"
       privacy: "プライバシーポリシー"
@@ -47,7 +92,12 @@ ja:
     signup:
       explain: "Reliciousへの登録はFacebookのアカウントが必要です"
     recent_meetups:
-      title: "最近のRelicious dining"
+      header_title: "最近のRelicious dining"
+      begin_at: "日時"
+      area_name: "地域"
+      place: "場所"
+      url: "URL"
+      see_detail: "詳細をチェック"
 
   header:
     link:

@@ -1,8 +1,8 @@
 <%= form_for([@meetup, @meetup.meetup_comments.build]) do |f| %>
   <div class="field">
-    <%= f.text_area :body, :size => "30x5" %>
+    <%= f.text_area :body, :size => "30x5", placeholder: t("meetup_comment.new.placeholder") %>
   </div>
   <div class="actions">
-    <%= f.submit "send", class: "btn3"  %>
+    <%= f.submit t("meetup_comment.new.send"), class: "btn3"  %>
   </div>
 <% end %>

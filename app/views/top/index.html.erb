@@ -117,7 +117,7 @@
                 <%= t( "top.recent_meetups.place" ) %> : <%= meetup.place %><br>
               </p>
               <% if meetup.public %>
-                <%= link_to "see their conversation", meetup_path(meetup), class: "btn1" %><br>
+                <%= link_to t("top.recent_meetups.see_detail"), meetup_path(meetup), class: "btn1" %><br>
               <% end %>
             </div>
           </div>
@@ -179,7 +179,7 @@
       <div id="greeting">
         <h2><%= t("top.introduction.title") %></h2>
         <p><%= t("top.introduction.explain") %></p>
-        <p><a class="btn3 large" href="/auth/facebook">Sign up (Free)</a></p>
+        <p><%= link_to t("top.introduction.signup_button"), "/auth/facebook", class: "btn3 large" %></p>
         <p><%= t("top.signup.explain") %></p>
       </div>
       <!-- /greeting -->
@@ -218,7 +218,7 @@
                 <%= t( "top.recent_meetups.place" ) %> : <%= meetup.place %><br>
               </p>
               <% if meetup.public %>
-                <%= link_to "see their conversation", meetup_path(meetup), class: "btn1" %><br>
+                <%= link_to t("top.recent_meetups.see_detail"), meetup_path(meetup), class: "btn1" %><br>
               <% end %>
             </div>
           </div>

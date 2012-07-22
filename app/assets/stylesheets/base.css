@@ -737,6 +737,15 @@ float:right;
 	box-shadow: none;
 }
 
+/* meetup title */
+h3.stream {
+  font-size: 18px;
+  line-height: 27px;
+  color: #FF5A00;
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
 /* clearfix */
 .col2,
 #topNavArea ul,

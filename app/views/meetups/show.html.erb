@@ -15,11 +15,18 @@
 
 <!-- conversation -->
 <div id="conversation">
-  <h2>Conversation with
+  <h2>
+    <%= t("meetups.show.conversation_prefix") %>
+    <% comma_flag = false %>
     <% @meetup_users.each do |u| %>
       <% next if u == current_user %>
-      <%= link_to u.name, user_path(u) %>,
+
+      <% if comma_flag %>,<% end %>
+      <% commna_flag = true %>
+      <%= link_to u.name, user_path(u) %>
     <% end %>
+    <%= t("meetups.show.conversation_postfix") %>
+    <br><span class="fontCR"><%= t("meetups.show.payment_policy") %></span>
   </h2>
 
   <!-- addressee -->
@@ -41,7 +48,7 @@
         </p>
         <br>
         <% if @meetup.user == current_user %>
-          <%= link_to 'update information', edit_meetup_path(@meetup), class: "btn3" %>
+          <%= link_to t("meetups.show.update_information"), edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>
         <% if current_user and @not_joined_yet %>
           <%= link_to "join this meetup", join_meetups_path(@meetup), class: "btn1" %>
@@ -110,7 +117,7 @@
   <% end %>
 
   <% if current_user and @meetup_users.include?(current_user) %>
-    <h2>Send a Message:</h2>
+    <h2><%= t("meetups.show.send_message") %>:</h2>
     <%= render "meetup_comments/form" %>
   <% end %>
 
