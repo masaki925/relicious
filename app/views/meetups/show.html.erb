@@ -31,12 +31,14 @@
         <% end %>
       </div>
       <div class="detailArea">
-        <p><%= @meetup.title %><br>
-        <%= @meetup.area.name %><br>
-        <%= @meetup.place %><br>
-        <%= @meetup.url %><br>
-        <%= @meetup.public ? "public" : "private" %><br>
-        <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</p>
+        <p>
+          <%= t("meetups.show.title") %> : <%= @meetup.title %><br>
+          <%= t("meetups.show.area_name") %> : <%= @meetup.area.name %><br>
+          <%= t("meetups.show.place") %> : <%= @meetup.place %><br>
+          <%= t("meetups.show.url") %> : <%= link_to @meetup.url, @meetup.url %><br>
+          <%= t("meetups.show.public") %> : <%= @meetup.public ? "public" : "private" %><br>
+          <%= t("meetups.show.begin_at") %> : <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
+        </p>
         <% if @meetup.user == current_user %>
           <%= link_to 'update information', edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>
@@ -69,7 +71,7 @@
                 </ul>
               </div>
               <div class="rightCol">
-                <p><time><%= comment.created_at %></time></p>
+                <p><time><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></time></p>
               </div>
             </div>
           </div>
@@ -95,7 +97,7 @@
                 </ul>
               </div>
               <div class="rightCol">
-                <p><time><%= comment.created_at %></time></p>
+                <p><time><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></time></p>
               </div>
             </div>
           </div>

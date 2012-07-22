@@ -51,7 +51,7 @@
   <div id="rightArea">
     <h2>Hi, I'm <%= @user.name %>!
       <% if current_user and @user != current_user %>
-        <a href=<%= "/meetups/new?member=#{@user.id}" %> class="btn1">Have dining with</a><span>Member since <%= @user.created_at %></span>
+        <a href=<%= "/meetups/new?member=#{@user.id}" %> class="btn1">Have dining with</a><span>Member since <%= @user.created_at.strftime("%Y/%m/%d") %></span>
       <% end %>
     </h2>
     <dl class="dlStyle2">

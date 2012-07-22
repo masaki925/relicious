@@ -53,7 +53,7 @@
                 <% if other_members_num > 0 %>
                   and <%= other_members_num %> pepole<br>
                 <% end %>
-                <time><%= meetup.begin_at %></time>
+                <time><%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time>
                 <%= link_to meetup.title, meetup_path(meetup) %>
               </div>
             </div>
@@ -96,6 +96,7 @@
         <% @recent_meetups_exceptme.each do |meetup| %>
           <!-- recentStreamBox -->
           <div class="recentStreamBox">
+            <h3><%= meetup.title %></h3>
             <div class="imgArea">
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
@@ -106,17 +107,19 @@
               <% end %>
             </div>
             <div class="detailArea">
-              <p><time ><%= meetup.begin_at %></time><br>
-              <%= meetup.title %><br>
-              <%= meetup.area.name %></p>
+              <p>
+              <time ><%= t( "top.recent_meetups.begin_at" ) %> : <%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time><br>
+                <%= t( "top.recent_meetups.area_name" ) %> : <%= meetup.area.name %><br>
+                <%= t( "top.recent_meetups.place" ) %> : <%= meetup.place %><br>
+              </p>
               <% if meetup.public %>
                 <%= link_to "see their conversation", meetup_path(meetup), class: "btn1" %><br>
               <% end %>
             </div>
           </div>
           <!-- /recentStreamBox -->
-          <div style="text-align: center;"><%= link_to "see more", meetups_path %></div>
         <% end %>
+        <div style="text-align: center;"><%= link_to "see more", meetups_path %></div>
       <% else %>
         <p>other meetups not found for now.</p>
       <% end %>
@@ -188,7 +191,7 @@
   
     <!-- recentStream -->
     <div id="recentStream">
-      <h2><%= t("top.recent_meetups.title") %></h2>
+      <h2><%= t("top.recent_meetups.header_title") %></h2>
       <!-- recentStreamBox -->
       <% unless @recent_meetups.blank? %>
         <% @recent_meetups.each do |meetup| %>
@@ -196,6 +199,7 @@
           <!-- recentStreamBox -->
           <div class="recentStreamBox">
             <div class="imgArea">
+              <h3><%= meetup.title %></h3>
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
                   <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"35", height:"35", alt:"picture"), user_path(user) %>
@@ -204,9 +208,11 @@
               <% end %>
             </div>
             <div class="detailArea">
-              <p><time ><%= meetup.begin_at %></time><br>
-              <%= meetup.title %><br>
-              <%= meetup.area.name %></p>
+              <p>
+              <time ><%= t( "top.recent_meetups.begin_at" ) %> : <%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time><br>
+                <%= t( "top.recent_meetups.area_name" ) %> : <%= meetup.area.name %><br>
+                <%= t( "top.recent_meetups.place" ) %> : <%= meetup.place %><br>
+              </p>
               <% if meetup.public %>
                 <%= link_to "see their conversation", meetup_path(meetup), class: "btn1" %><br>
               <% end %>

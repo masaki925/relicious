@@ -32,6 +32,13 @@ en:
   meetups:
     new:
       public_explain: "Do you wanna share your conversations with other users? If you do so, other users can join your conversation and meetup."
+    show:
+      begin_at : "Begin at"
+      end_at   : "End at"
+      area_name: "Area"
+      place    : "Place"
+      url      : "URL"
+      public   : "Public"
 
   top:
     introduction:
@@ -44,7 +51,11 @@ en:
     signup:
       explain: "You need a facebook account to start Relicious."
     recent_meetups:
-      title: "Relicious dining in these days"
+      header_title: "Relicious dining in these days"
+      begin_at: "Date"
+      area_name: "Area"
+      place: "Place"
+      url: "URL"
 
   header:
     link:
