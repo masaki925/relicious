@@ -41,12 +41,12 @@ class User < ActiveRecord::Base
   def self.search(queries)
     if queries
       if !queries[:time].blank?
-        find(:all, joins: :user_avails, conditions: ["user_avails.avail_option = ? or user_avails.avail_option = ?", queries[:time], "anyday"] )
+        find(:all, include: :user_avails, conditions: ["user_avails.avail_option = ? or user_avails.avail_option = ?", queries[:time], "anyday"] )
       elsif !queries[:date].blank?
         m,d,y = queries[:date].split('/')
         weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         w_index = Date.new(y.to_i,m.to_i,d.to_i).wday
-        find(:all, joins: :user_avails, conditions: ["user_avails.day = ? or user_avails.day = ?", weekdays[w_index], "anyday"] )
+        find(:all, include: :user_avails, conditions: ["user_avails.day = ? or user_avails.day = ?", weekdays[w_index], "anyday"] )
       elsif !queries[:location].blank?
         find(:all, conditions: [ 'location LIKE ?', "%#{queries[:location]}%" ] )
       else

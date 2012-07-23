@@ -3,6 +3,8 @@ class TopController < ApplicationController
     if @user = current_user
       @user_avails  = @user.user_avails 
       @user_meetups = @user.meetups
+      @recent_my_meetups = @user_meetups.where('begin_at > ?', Time.now)
+      @past_my_meetups = @user_meetups - @recent_my_meetups
 
       # pick up meetups except me
       @recent_meetups_exceptme  = Array.new
@@ -24,9 +26,8 @@ class TopController < ApplicationController
       ### FIXME: performance problem will occurs
       @review_to_write = Array.new
       check_list       = Array.new
-      @user_meetups.each do |meetup|
-        next if meetup.begin_at > Time.now
 
+      @past_my_meetups.each do |meetup|
         meetup.users.each do |user|
           next if user == current_user
 

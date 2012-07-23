@@ -55,7 +55,7 @@
   <div id="rightArea">
     <h2>Hi, I'm <%= @user.name %>!
       <% if current_user and @user != current_user %>
-        <%= link_to t("general.meetup_request"), "/meetups/new?member=#{@user.id}", class: "btn1" %>
+        <%= link_to t("general.meetup_request"), "/meetups/new?member=#{@user.id}", class: "btn3" %>
         <span>Member since <%= @user.created_at.strftime("%Y/%m/%d") %></span>
       <% end %>
     </h2>

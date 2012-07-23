@@ -36,7 +36,7 @@
       <div id="upcomingArea">
         <h3><%= t("user_top.upcoming_text") %></h3>
         <ul>
-          <% @user_meetups.each do |meetup| %>
+          <% @recent_my_meetups.each do |meetup| %>
             <% meetup.users.each do |u|
                  next if u == current_user
                  @target_user = u
@@ -64,7 +64,7 @@
               </div>
             </div>
             </li>
-          <% end if @user_meetups %>
+          <% end if @recent_my_meetups %>
         </ul>
       </div>
       <div id="doingArea">
@@ -153,7 +153,7 @@
   
     <!-- topTitle -->
     <div id="topTitle">
-      <h1><%= link_to image_tag("logo.jpg", width:"315", height:"200", alt:"Relicious"), root_path %></h1>
+      <h1><%= link_to image_tag("logo.jpg", width:"335", height:"210", alt:"Relicious"), root_path %></h1>
     </div>
     <!-- /topTitle -->
   
@@ -164,10 +164,10 @@
       <div id="topNavArea">
         <nav>
         <ul>
+          <li><%= select_tag "language", options_for_select([["English", "en"], ["日本語", "ja"]], params[:lang]) %></li>
           <li><a href="/auth/facebook" class="login"><%= t("top.header.signup") %></a></li>
           <li><a href="/privacy.html" class="privay"><%= t("top.header.privacy") %></a></li>
           <li><a href="/howitworks.html" class="info"><%= t("top.header.howitworks") %></a></li>
-          <%= select_tag "language", options_for_select([["日本語", "ja"], ["English", "en"]], params[:lang]) %>
         </ul>
         </nav>
       </div>

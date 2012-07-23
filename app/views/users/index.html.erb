@@ -52,24 +52,29 @@
         <%= user.name %><br>
         (<%= user.gender %>)</p>
       </div>
+
       <div class="detailArea">
         <div class="arrowBoxL">
           <p><strong>Hey,I'm <%= user.name %>!!</strong><br>
           <%= user.introduction %></p>
         </div>
+
         <dl class="cotegory1">
           <dt><%= t("general.area") %>:</dt>
-          <dd>
-          <% if user.user_avails.blank? %>
+          <% 
+            area_names = Array.new
+            user.user_avails.each_with_index do |ua, idx|
+              next if ua.area.blank?
+              area_names << ua.area.name
+            end
+          %>
+          <% if area_names.blank? %>
             <dd>-</dd>
           <% else %>
-            <% user.user_avails.each_with_index do |ua, idx| %>
-              <% if idx > 0 %>,<% end %>
-              <%= ua.area.name %>
-            <% end %>
+            <dd><%= area_names.join(',') %></dd>
           <% end %>
-          </dd>
         </dl>
+
         <dl class="cotegory2">
           <dt><%= t("general.review") %>:</dt>
           <dd><%= user.received_reviews.size %></dd>
@@ -105,7 +110,7 @@
         </dl>
         <% unless user == current_user %>
           <p class="btnArea">
-            <%= link_to t("general.meetup_request"), "/meetups/new?member=#{user.id}", class: "btn1" %>
+            <%= link_to t("general.meetup_request"), "/meetups/new?member=#{user.id}", class: "btn3" %>
           </p>
         <% end %>
         <p style="text-align:right;font-weight:bold;"><%= link_to 'see more', user_path(user), style: "text-align:right;" %></p>
