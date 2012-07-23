@@ -18,13 +18,14 @@ ja:
     language: "検索"
     user_search: "ユーザ検索"
 
+    # 日本語でプロフィール入力する人がいなさそうだから、search だけは一旦全部英語にしておく。
     search:
-      day: "日付"
-      option: "食事の種類"
-      options: [["いつでも","anytime"], ["朝食(7:00-10:00)", "breakfast"], ["昼食(11:00-14:00)", "lunch"], ["夕食(17:00-21:00)", "dinner"], ["お茶(軽く喫茶店に行く)", "cafe"], ["お酒(22:00〜)", "drink"] ]
-      button: "検索"
-      location_placeholder: "地域 (例. 東京、京都)"
-      explain: "※全ての入力項目を入力しなくとも「検索」を実行することが可能です"
+      day: "Date" #"日付"
+      option: "Time" #"食事の種類"
+      options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ] #[["いつでも","anytime"], ["朝食(7:00-10:00)", "breakfast"], ["昼食(11:00-14:00)", "lunch"], ["夕食(17:00-21:00)", "dinner"], ["お茶(軽く喫茶店に行く)", "cafe"], ["お酒(22:00〜)", "drink"] ]
+      button: "Search" #"検索"
+      location_placeholder: "Area (e.g. Tokyo Kyoto)" #"地域 (例. 東京、京都)"
+      explain: "You can press \"Search\" even though all items are not filled with." #"※全ての入力項目を入力しなくとも「検索」を実行することが可能です"
 
     user:
       email: "e-mailアドレス"
