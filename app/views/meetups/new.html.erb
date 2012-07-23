@@ -1,6 +1,16 @@
 <%= stylesheet_link_tag "views/registration", :media => "all" %>
 
-<h2>New meetup</h2>
+<%
+  member = nil
+  if params[:member]
+    member = User.find(params[:member])
+  end
+%>
+<h2>New meetup
+  <% if member %>
+    with <%= link_to image_tag("http://graph.facebook.com/#{member.provider_uid}/picture?type=square"), user_path(member) %>
+  <% end %>
+</h2>
 
 <%= render 'form' %>
 
