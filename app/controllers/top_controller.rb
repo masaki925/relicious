@@ -11,7 +11,7 @@ class TopController < ApplicationController
       offset = 0
       loop do
         break if @recent_meetups_exceptme.size >= 3
-        recent_meetup_candidates = Meetup.all(limit: 10, order: 'id DESC', offset: offset)
+        recent_meetup_candidates = Meetup.all(limit: 10, conditions: ['begin_at > ?', Time.now], order: 'id DESC', offset: offset)
         break if recent_meetup_candidates.size <= 0
 
         recent_meetup_candidates -= @user_meetups
