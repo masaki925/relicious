@@ -87,7 +87,7 @@
 
       <!-- localSearch -->
       <div id="localSearch">
-        <p class="fontS"><%= t("general.search.explain") %></p>
+        <p class="fontS"><%= t("general.search.explain") %></p><br>
         <%= form_tag users_path, :method => 'get' do %>
           <ul class="findSearch">
             <li><%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textBox" %> </li>

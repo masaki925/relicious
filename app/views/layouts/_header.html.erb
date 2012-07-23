@@ -12,9 +12,15 @@
 
   <div id="subInfo">
     <ul id="subInfoTop">
-        <%= link_to current_user.name, user_path(current_user) %> |
-        <%= link_to "logout", logout_path %>
+        <li><%= link_to "logout", logout_path %></li>
+        <li><%= link_to current_user.name, user_path(current_user) %></li>
+        <li><%= select_tag "language", options_for_select([["English", "en"], ["日本語", "ja"]], params[:lang]) %></li>
     </ul>
+    <script>
+      $("#language").change ( function () {
+        window.location.replace('/?lang='+this.value);
+      });
+    </script>
 
     <ul id="subInfoBottom">
       <!--<li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li> -->

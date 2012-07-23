@@ -23,15 +23,15 @@ class ApplicationController < ActionController::Base
   end 
 
   def set_locale
-    if current_user
-      if current_user.locale =~ /ja/
-        I18n.locale = :ja
-      else
-        I18n.locale = :en
-      end
+    if params[:lang]
+      I18n.locale = params[:lang]
     else
-      if params[:lang]
-        I18n.locale = params[:lang]
+      if current_user
+        if current_user.locale =~ /ja/
+          I18n.locale = :ja
+        else
+          I18n.locale = :en
+        end
       else
         I18n.locale = :en
       end
