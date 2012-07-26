@@ -68,7 +68,7 @@ ja:
       avail_area_explain: "(If you're foreign traveler in Japan, you don't have to fill this items.)"
       avail_wdays: [["いつでも","anyday"], ["日曜","Sunday"], ["月曜","Monday"], ["火曜","Tuesday"], ["水曜","Wednesday"], ["木曜","Thursday"], ["金曜","Friday"], ["土曜","Saturday"]]
       avail_options: [["いつでも","anytime"], ["朝食(7:00-10:00)", "breakfast"], ["昼食(11:00-14:00)", "lunch"], ["夕食(17:00-21:00)", "dinner"], ["お茶(軽く喫茶店に行く)", "cafe"], ["お酒(22:00〜)", "drink"] ]
-      introduction_explain: "他の皆へのメッセージを書きましょう。(自己紹介や、Reliciuosに登録した理由(Reliciuosに期待していること)などを自由に書きましょう)"
+      introduction_explain: "他の皆へのメッセージを書きましょう。自己紹介や、Reliciuosに期待していること(あるいは、Reliciuosを使ってどんなことを実現したいか) などを自由にお書きください。"
 
   user_reviews:
     new:
@@ -107,7 +107,9 @@ ja:
 
     show:
       conversation_prefix: ""
+      conversation_prefix_sole: ""
       conversation_postfix: "と会話"
+      conversation_postfix_sole: "会話"
       payment_policy: "*食事に係る支払は、必ず割り勘で行なっていただくようお願いいたします。"
       update_information: "編集"
       title    : "タイトル"

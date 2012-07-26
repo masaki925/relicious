@@ -72,6 +72,7 @@ en:
       avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
       introduction: "Message to other users"
       introduction_explain: "Enter your message to other user!! e.g.)Explanation of yourself, when you hope for Relicious, etc..."
+      introduction_explain: "Enter your message for (the) other users!! Explain yourself, what you hope for Relicious (or even better \"what you try to achieve using Relicious\"), etc…"
 
   user_reviews:
     new:
@@ -110,6 +111,7 @@ en:
 
     show:
       conversation_prefix: "Conversation with"
+      conversation_prefix_sole: "Conversation"
       conversation_postfix: ""
       payment_policy: "Our policy : You guys must split the cost of meals."
       update_information: "update information"

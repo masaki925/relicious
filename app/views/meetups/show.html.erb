@@ -4,7 +4,8 @@
 
 <!-- breadcrumb -->
 <nav id="breadcrumb">
-<p><a href="/" rel="index up">TOP</a> > <a href="/meetups" rel="up">Message</a> > Conversation with
+<p><a href="/" rel="index up">TOP</a> > <a href="/meetups" rel="up">Message</a> > Conversation
+<%= 'with' if @meetup_users.size > 1 %>
 <% @meetup_users.each do |u| %>
   <% next if u == current_user %>
   <%= link_to u.name, user_path(u) %>,
@@ -16,7 +17,12 @@
 <!-- conversation -->
 <div id="conversation">
   <h2>
-    <%= t("meetups.show.conversation_prefix") %>
+    <% if @meetup_users.size > 1 %>
+      <%= t("meetups.show.conversation_prefix") %>
+    <% else %>
+      <%= t("meetups.show.conversation_prefix_sole") %>
+    <% end %>
+
     <% comma_flag = false %>
     <% @meetup_users.each do |u| %>
       <% next if u == current_user %>
@@ -25,7 +31,12 @@
       <% commna_flag = true %>
       <%= link_to u.name, user_path(u) %>
     <% end %>
-    <%= t("meetups.show.conversation_postfix") %>
+
+    <% if @meetup_users.size > 1 %>
+      <%= t("meetups.show.conversation_postfix") %>
+    <% else %>
+      <%= t("meetups.show.conversation_postfix_sole") %>
+    <% end %>
     <br><span class="fontCR"><%= t("meetups.show.payment_policy") %></span>
   </h2>
 
