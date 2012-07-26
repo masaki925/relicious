@@ -6,9 +6,12 @@
 <nav id="breadcrumb">
 <p><a href="/" rel="index up">TOP</a> > <a href="/meetups" rel="up">Message</a> > Conversation
 <%= 'with' if @meetup_users.size > 1 %>
+<% comma_flag1 = false %>
 <% @meetup_users.each do |u| %>
   <% next if u == current_user %>
-  <%= link_to u.name, user_path(u) %>,
+  <%= ',' if comma_flag1 %>
+  <% comma_flag1 = true %>
+  <%= link_to u.name, user_path(u) %>
 <% end %>
 </p>
 </nav>
@@ -23,12 +26,12 @@
       <%= t("meetups.show.conversation_prefix_sole") %>
     <% end %>
 
-    <% comma_flag = false %>
+    <% comma_flag2 = false %>
     <% @meetup_users.each do |u| %>
       <% next if u == current_user %>
 
-      <% if comma_flag %>,<% end %>
-      <% commna_flag = true %>
+      <%= ',' if comma_flag2 %>
+      <% commna_flag2 = true %>
       <%= link_to u.name, user_path(u) %>
     <% end %>
 
