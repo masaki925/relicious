@@ -21,7 +21,7 @@ set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 #set :environment, 'development'
 
 #every 5.minutes do
-every "36 0 * * *" do
+every "00 08 * * *" do
   rake 'analytics'
 end
 
