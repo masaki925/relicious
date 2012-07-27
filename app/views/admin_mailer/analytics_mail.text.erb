@@ -1,0 +1,7 @@
+<%= Time.now.strftime("%Y-%m-%d %H:%M") %>
+
+<% @data.each_pair do |k,v| %>
+  <%= "#{k.to_s}: " %>
+  <%= v %>
+  --------
+<% end %>

@@ -61,3 +61,5 @@ gem 'therubyracer'
 
 gem 'mail'
 
+gem 'whenever', :require => false
+
