@@ -30,7 +30,8 @@ views/profile.css: views/profile-d35877ffdf23316febbdabcd98109213.css
 views/registration.css: views/registration-1fabd071dc9b6e4d77db73c15550c4f7.css
 views/review.css: views/review-05961bec9b0f863b193a394709ad5082.css
 views/search.css: views/search-0d50182a200fc938785696a3741289cf.css
-views/top.css: views/top-6013122fe23c44c9cb2f62d34a97abd0.css
+views/top.css: views/top-c66bc0bb250aef12fdc2f573a03b59d7.css
+tooltip/tip-yellowsimple_arrows.gif: tooltip/tip-yellowsimple_arrows-970e023df4b32045a91406c5a9ccc982.gif
 ui-bg_diagonals-thick_18_b81900_40x40.png: ui-bg_diagonals-thick_18_b81900_40x40-b0e23cae0dcdeafcc266120b5880b2be.png
 ui-bg_diagonals-thick_20_666666_40x40.png: ui-bg_diagonals-thick_20_666666_40x40-f7a8f6efeb8ab26a26161942fd679b9e.png
 ui-bg_flat_10_000000_40x100.png: ui-bg_flat_10_000000_40x100-f42b3c756e6e975074e882bd4052bea3.png
