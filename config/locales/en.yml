@@ -2,6 +2,23 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      user:
+        name: "Name"
+        email: "E-mail"
+        birthday: "Birthday"
+        gender: "Gender"
+        school: "School"
+        work: "Work"
+        location: "Location"
+        locale: "Locale"
+        language: "Language"
+        likes: "Interest"
+        introduction: "Message"
+        favorite_food: "Favorite food"
+        ng_food: "NG food"
+
   general:
     mandatory: "Mondatory"
     send: "send"
@@ -27,22 +44,9 @@ en:
       explain: "You can press \"Search\" even though all items are not filled with."
 
     user:
-      email: "email"
-      school: "School"
-      work: "Work"
-      name: "Name"
-      gender: "Gender"
       age: "Age"
-      birthday: "Birthday"
-      location: "Location"
-      language: "Language"
       language_skill: "skill"
-      locale: "Locale"
       availability: "Availability"
-      favorite_food: "Favorite food"
-      ng_food: "NG food"
-      introduction: "Message"
-      likes: "Interest"
       about_prefix: "About"
       about_postfix: ""
 
@@ -67,7 +71,7 @@ en:
       avail: "Availability"
       avail_explain_01: "Choose dining you can have with foreign traveler"
       avail_explain_02: "In your normal life, of course you can decline someone's request even though someone send request when you're available on this form"
-      avail_area_explain: "(If you're foreign traveler in Japan, you don't have to fill this items.)"
+      avail_area_explain: "If you're foreign traveler in Japan, you don't have to fill this items."
       avail_wdays: ["anyday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       avail_options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
       introduction: "Message to other users"
@@ -185,4 +189,38 @@ en:
 #      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
 #    am: "午前"
 #    pm: "午後"
+
+  errors: &errors
+    validates:
+      presence_language: "at least 1 languages must be registered."
+      presence_avail: "at least 1 availability must be registered."
+
+#    format: ! '%{attribute}%{message}'
+#    messages:
+#      accepted: を受諾してください。
+#      blank: を入力してください。
+#      confirmation: と確認の入力が一致しません。
+#      empty: を入力してください。
+#      equal_to: は%{count}にしてください。
+#      even: は偶数にしてください。
+#      exclusion: は予約されています。
+#      greater_than: は%{count}より大きい値にしてください。
+#      greater_than_or_equal_to: は%{count}以上の値にしてください。
+#      inclusion: は一覧にありません。
+#      invalid: は不正な値です。
+#      less_than: は%{count}より小さい値にしてください。
+#      less_than_or_equal_to: は%{count}以下の値にしてください。
+#      not_a_number: は数値で入力してください。
+#      not_an_integer: は整数で入力してください。
+#      odd: は奇数にしてください。
+#      record_invalid: バリデーションに失敗しました。 %{errors}
+#      taken: はすでに存在します。
+#      too_long: は%{count}文字以内で入力してください。
+#      too_short: は%{count}文字以上で入力してください。
+#      wrong_length: は%{count}文字で入力してください。
+#    template:
+#      body: 次の項目を確認してください。
+#      header:
+#        one: ! '%{model}にエラーが発生しました。'
+#        other: ! '%{model}に%{count}つのエラーが発生しました。'
 

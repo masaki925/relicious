@@ -2,6 +2,23 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ja:
+  activerecord:
+    attributes:
+      user:
+        name: "名前"
+        email: "e-mailアドレス"
+        birthday: "誕生日"
+        gender: "性別"
+        school: "学校"
+        work: "勤務先"
+        location: "居住地"
+        locale: "言語環境"
+        language: "言語"
+        likes: "興味・関心"
+        introduction: "メッセージ"
+        favorite_food: "好きな食べ物"
+        ng_food: "苦手な食べ物"
+
   general:
     mandatory: "必須入力項目"
     send: "送信"
@@ -15,7 +32,7 @@ ja:
     review_positive: "はい"
     review_negative: "いいえ"
     recommend: "おすすめ"
-    language: "検索"
+    language: "言語"
     user_search: "ユーザ検索"
 
     # 日本語でプロフィール入力する人がいなさそうだから、search だけは一旦全部英語にしておく。
@@ -28,22 +45,9 @@ ja:
       explain: "You can press \"Search\" even though all items are not filled with." #"※全ての入力項目を入力しなくとも「検索」を実行することが可能です"
 
     user:
-      email: "e-mailアドレス"
-      school: "学校"
-      work: "勤務先"
-      name: "名前"
-      gender: "性別"
       age: "年齢"
-      birthday: "誕生日"
-      location: "居住地"
-      language: "言語"
       language_skill: "習熟度"
-      locale: "言語環境"
       availability: "空いている時間"
-      favorite_food: "好きな食べ物"
-      ng_food: "苦手な食べ物"
-      introduction: "メッセージ"
-      likes: "興味・関心"
       about_prefix: ""
       about_postfix: "について"
 
@@ -65,7 +69,7 @@ ja:
       avail: "あなたが通常、相手と食事をすることができる時間帯"
       avail_explain_01: "あなたが相手と食事をすることができる曜日、時間帯帯を選択してください"
       avail_explain_02: "(普段空いている曜日、時間帯帯を登録してください。もちろん、ここで「空いている」と登録したからといって、誰かからリクエストを受けた場合に必ずその相手と食事をしなければいけないというわけではありません。)"
-      avail_area_explain: "(If you're foreign traveler in Japan, you don't have to fill this items.)"
+      avail_area_explain: "もしあなたが日本に来ている旅行者であれば, 必ずしもエリアを限定する必要はありません。"
       avail_wdays: [["いつでも","anyday"], ["日曜","Sunday"], ["月曜","Monday"], ["火曜","Tuesday"], ["水曜","Wednesday"], ["木曜","Thursday"], ["金曜","Friday"], ["土曜","Saturday"]]
       avail_options: [["いつでも","anytime"], ["朝食(7:00-10:00)", "breakfast"], ["昼食(11:00-14:00)", "lunch"], ["夕食(17:00-21:00)", "dinner"], ["お茶(軽く喫茶店に行く)", "cafe"], ["お酒(22:00〜)", "drink"] ]
       introduction_explain: "他の皆へのメッセージを書きましょう。自己紹介や、Reliciuosに期待していること(あるいは、Reliciuosを使ってどんなことを実現したいか) などを自由にお書きください。"
@@ -182,4 +186,38 @@ ja:
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
     am: "午前"
     pm: "午後"
+
+  errors: &errors
+    validates:
+      presence_language: "あなたが話せる言語を最低1つ入力してください。"
+      presence_avail: "あなたが食事できる日程を最低1つ入力してください。"
+
+    format: ! '%{attribute}%{message}'
+    messages:
+      accepted: を受諾してください。
+      blank: を入力してください。
+      confirmation: と確認の入力が一致しません。
+      empty: を入力してください。
+      equal_to: は%{count}にしてください。
+      even: は偶数にしてください。
+      exclusion: は予約されています。
+      greater_than: は%{count}より大きい値にしてください。
+      greater_than_or_equal_to: は%{count}以上の値にしてください。
+      inclusion: は一覧にありません。
+      invalid: は不正な値です。
+      less_than: は%{count}より小さい値にしてください。
+      less_than_or_equal_to: は%{count}以下の値にしてください。
+      not_a_number: は数値で入力してください。
+      not_an_integer: は整数で入力してください。
+      odd: は奇数にしてください。
+      record_invalid: バリデーションに失敗しました。 %{errors}
+      taken: はすでに存在します。
+      too_long: は%{count}文字以内で入力してください。
+      too_short: は%{count}文字以上で入力してください。
+      wrong_length: は%{count}文字で入力してください。
+    template:
+      body: 次の項目を確認してください。
+      header:
+        one: ! '%{model}にエラーが発生しました。'
+        other: ! '%{model}に%{count}つのエラーが発生しました。'
 
