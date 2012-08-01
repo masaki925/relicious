@@ -40,7 +40,7 @@ en:
       option: "Time"
       options: ["anytime", ["Breakfast(7:00-10:00)", "breakfast"], ["Lunch(11:00-14:00)", "lunch"], ["Dinner(17:00-21:00)", "dinner"], ["Cafe(just drink coffee or tea)", "cafe"], ["Drink(22:00〜)", "drink"] ]
       button: "Search"
-      location_placeholder: "Area (e.g. Tokyo Kyoto)"
+      location_placeholder: "Area (e.g. Tokyo)"
       explain: "You can press \"Search\" even though all items are not filled with."
 
     user:

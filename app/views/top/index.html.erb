@@ -90,8 +90,8 @@
         <p class="fontS"><%= t("general.search.explain") %></p><br>
         <%= form_tag users_path, :method => 'get' do %>
           <ul class="findSearch">
-            <li><%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textBox" %> </li>
-            <li class="date"><label><%= t("general.search.day") %><br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
+            <li><%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textBox", size: 20 %> </li>
+            <li class="date"><label><%= t("general.search.day") %><br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy", size: 12 %> </label></li>
             <li class="time"><label><%= t("general.search.option") %><br><%= select_tag "search[time]", options_for_select( t("general.search.options") ), {include_blank: true} %> </label></li>
             <li><%= submit_tag t("general.search.button"), :name => nil, class: "btn1 searchBtn" %></li>
           </ul>
