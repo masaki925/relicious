@@ -13,7 +13,7 @@ headerIc02.png: headerIc02-f085610f1a4738a56a5aa4a65809cf4b.png
 info.png: info-2b2854e6a1605c2d5281324e22eec948.png
 linkedin.png: linkedin-30a486154ad19be245755430e657980d.png
 login.png: login-18fabb1ecb434262bf72ad2e3ef23ef9.png
-logo.jpg: logo-97cb01d2bcb0ead07689ddeb88128aab.jpg
+logo.jpg: logo-d5d861dc08ede2bb6eb34c7798252744.jpg
 logout.png: logout-41cca969455243ab096d3f1d343690a0.png
 lunch.png: lunch-1adb5a111cce568840b73f7c66f372f7.png
 privacy.png: privacy-76c377534b9c9790fbfeb4ed324664f2.png
@@ -23,7 +23,7 @@ tea.png: tea-c626099cd9eb5a23c3bec9c5de587946.png
 twitter.png: twitter-87d79d54f9bf2f2906a48743d4fbd998.png
 under_construction.jpg: under_construction-835682492e7bbee2a1adcfab2cdf3832.jpg
 application.js: application-158bfab82b2b2cd4b5e0ecaf49a2608e.js
-application.css: application-f9677ffcd109952c40cf26687d8aabba.css
+application.css: application-d4188ee33544fcb45246f4c525e416a1.css
 views/login.css: views/login-d5f34360975774fdc540b4b4e3eb9f4c.css
 views/message.css: views/message-fb6ed9820b4721858b173509fa4a0d01.css
 views/profile.css: views/profile-d35877ffdf23316febbdabcd98109213.css

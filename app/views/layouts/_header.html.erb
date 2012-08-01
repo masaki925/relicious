@@ -24,7 +24,7 @@
 
     <ul id="subInfoBottom">
       <!--<li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li> -->
-      <li class="messageLink"><a href=<%= "/meetups?about=me" %> ></a></li>
+      <li class="messageLink"><p>your meetups</p><a href=<%= "/meetups?about=me" %> ></a></li>
 
       <li>
       <%= form_tag users_path, :method => 'get', id: "searchHeader" do %>
