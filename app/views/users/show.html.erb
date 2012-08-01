@@ -37,14 +37,14 @@
     </div>
 
     <div id="school">
-      <h3><%= t("general.user.school") %></h3>
+      <h3><%= User.human_attribute_name(:school) %></h3>
       <div class="detail">
         <ul> <li><%= @user.education %></li> </ul>
       </div>
     </div>
 
     <div id="work">
-      <h3><%= t("general.user.work") %></h3>
+      <h3><%= User.human_attribute_name(:work) %></h3>
       <div class="detail">
         <ul> <li><%= @user.work %></li> </ul>
       </div>
@@ -61,14 +61,14 @@
     </h2>
 
     <dl class="dlStyle2">
-      <dt><%= t("general.user.name") %></dt>
+      <dt><%= User.human_attribute_name(:name) %></dt>
       <% if @user.name.blank? %>
         <dd>-</dd>
       <% else %>
         <dd><%= @user.name %> | <%= link_to image_tag('social_balloon-14.png', size: "20x20"), "https://facebook.com/#{@user.provider_uid}" %></dd>
       <% end %>
 
-      <dt><%= t("general.user.gender") %></dt>
+      <dt><%= User.human_attribute_name(:gender) %></dt>
       <dd><%= @user.gender.blank? ? "-" : @user.gender %></dd>
 
       <dt><%= t("general.user.age") %></dt>
@@ -81,13 +81,13 @@
         <dd><%= @years %></dd>
       <% end %>
 
-      <dt><%= t("general.user.birthday") %></dt>
+      <dt><%= User.human_attribute_name(:birthday) %></dt>
       <dd><%= @user.birthday.blank? ? "-" : @user.birthday.strftime("%m/%d") %></dd>
 
-      <dt><%= t("general.user.location") %></dt>
+      <dt><%= User.human_attribute_name(:location) %></dt>
       <dd><%= @user.location.blank? ? "-" : @user.location %></dd>
 
-      <dt><%= t("general.user.language") %></dt>
+      <dt><%= User.human_attribute_name(:language) %></dt>
       <% if @user.languages.blank? %>
         <dd>-</dd>
       <% else %>
@@ -105,16 +105,16 @@
         <dd><%= render @user.user_avails %></dd>
       <% end %>
 
-      <dt><%= t("general.user.favorite_food") %></dt>
+      <dt><%= User.human_attribute_name(:favorite_food) %></dt>
       <dd><%= @user.favorite_food.blank? ? "-" : @user.favorite_food %></dd>
 
-      <dt><%= t("general.user.ng_food") %></dt>
+      <dt><%= User.human_attribute_name(:ng_food) %></dt>
       <dd><%= @user.ng_food.blank? ? "-" : @user.ng_food %></dd>
 
-      <dt><%= t("general.user.introduction") %></dt>
+      <dt><%= User.human_attribute_name(:introduction) %></dt>
       <dd><%= @user.introduction.blank? ? "-" : @user.introduction %></dd>
 
-      <dt><%= t("general.user.likes") %></dt>
+      <dt><%= User.human_attribute_name(:likes) %></dt>
       <% if @user.likes.blank? %>
         <dd>-</dd>
       <% else %>

@@ -125,6 +125,10 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path, notice: 'User profile was successfully updated.' }
         format.json { head :no_content }
       else
+        @user_languages = @user.languages
+        @user_avails = @user.user_avails
+        @all_languages = Language.all
+
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

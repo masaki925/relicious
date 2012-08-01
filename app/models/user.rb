@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   validates :auth_token,   presence: true
   validates :email,        presence: true, uniqueness: true, format: { with: email_regex }
 
+  #validates_with UserLanguageValidator
+  #validates_with UserAvailValidator
+
   has_many :meetup_comments
   has_many :user_avails
   has_many :user_languages
