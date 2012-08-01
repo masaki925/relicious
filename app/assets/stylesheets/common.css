@@ -115,12 +115,17 @@ select {
 	margin-right: 5px;
 	padding-top: 1px;
 }
+.messageLink p {
+  color: #ff5a00;
+}
 .messageLink a {
 	display: block;
+	margin-left: 25px;
 	width: 25px;
 	height: 25px;
 	background: url(/assets/headerIc02.png) no-repeat 0 0;
 	text-indent: -9999px;
+  color: #ff5a00;
 }
 .messageLink a:hover {
 	background: url(/assets/headerIc02on.png) no-repeat 0 0;
