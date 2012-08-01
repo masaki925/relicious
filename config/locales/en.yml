@@ -20,7 +20,7 @@ en:
         ng_food: "NG food"
 
   general:
-    mandatory: "Mondatory"
+    mandatory: "Mandatory"
     send: "send"
     register: "register"
     meetup_request: "Have dining with"
