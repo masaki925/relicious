@@ -15,10 +15,26 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_reviews = @user.received_reviews
+    @user_languages = @user.user_languages
     @positive_reviews = @user_reviews.find(:all, conditions: ["recommend = ?", true]) || []
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render json: @user }
+    end
+  end
+
+  def new
+    unless session[:oauth_user_id]
+      redirect_to root_path, notice: "please sign up with OAuth connect"
+    end
+    oauth_user = OauthUser.find(session[:oauth_user_id])
+    fb_user = FbGraph::User.fetch('me', access_token: oauth_user.auth_token)
+
+    @user = User.new_with_graph(fb_user)
+
+    respond_to do |format|
+      format.html # new.html.erb
       format.json { render json: @user }
     end
   end
@@ -30,54 +46,59 @@ class UsersController < ApplicationController
     end
 
     @user = User.find(params[:id])
-    @user_languages = @user.languages
+    @user_languages = @user.user_languages
     @user_avails = @user.user_avails
-    @all_languages = Language.all
-
-    fb_user = FbGraph::User.fetch('me', access_token: @user.auth_token)
-
-    if @user.gender.blank? and !fb_user.gender.blank?
-      @user.gender = fb_user.gender
-    end
-
-    if @user.birthday.blank? and !fb_user.birthday.blank?
-      m,d,y = fb_user.raw_attributes[:birthday].split('/')
-      @user.birthday = Time.new(y,m,d,0,0,0)
-    end
-
-    if @user.location.blank? and !fb_user.location.blank?
-      @user.location = fb_user.location.name
-    end
-
-    likes = Array.new
-    if @user.likes.blank? and !fb_user.likes.blank?
-      fb_user.likes.each do |like|
-        likes << like.name
-      end 
-    end 
-    @likes = likes.join(',')
-
-    if @user.education.blank? and !fb_user.education.blank?
-      fb_user.education.each do |edu_graph|
-        @user.education = edu_graph.school.name if edu_graph.type == "College" 
-      end 
-    end 
-
-    if @user.work.blank? and !fb_user.work.blank?
-      @user.work = fb_user.work[0].employer.name
-    end
-
-    if @user.locale.blank? and !fb_user.locale.blank?
-      @user.locale = fb_user.locale
-    end
   end
 
   # POST /users
   # POST /users.json
   def create
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'please sign up from Facebook OAuth' }
-      format.json { head :no_content }
+    unless session[:oauth_user_id]
+      redirect_to root_path, notice: "you need to connect with Facebook account"
+      return
+    end
+
+    unless oauth_user = OauthUser.find(session[:oauth_user_id])
+      redirect_to root_path, notice: "you need to connect with Facebook account"
+      return
+    end
+
+    unless oauth_user.user_id.blank?
+      redirect_to root_path, notice: "you already signed up."
+      return
+    end
+
+    @user = User.new(params[:user])
+
+    begin
+      ActiveRecord::Base.transaction do
+        @user.save or raise
+
+        oauth_user.update_attributes(user_id: @user.id)
+        
+        params[:user_languages].each do |ul|
+          next if ul[:language_id].blank?
+          @user.user_languages << UserLanguage.new(ul)
+        end unless params[:user_languages].blank?
+
+        params[:user_avails].each do |ua|
+          next if ua[:day].blank? or ua[:avail_option].blank?
+          @user.user_avails << UserAvail.new(ua)
+        end unless params[:user_avails].blank?
+
+        session[:user_id] = @user.id
+        UserMailer.welcome_email(@user).deliver
+        redirect_to root_path
+        return
+      end
+    rescue => e
+      debugger
+      @user_languages = @user.user_languages
+      @user_avails    = @user.user_avails
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -86,15 +107,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    unless params[:languages].blank?
+    unless params[:user_languages].blank?
       @user.languages.clear
-      params[:languages].each do |lang_id|
-        next if lang_id.blank?
-        if @user.languages.include? Language.find(lang_id)
+      params[:user_languages].each do |ul|
+        next if ul[:language_id].blank?
+        if @user.languages.include? Language.find(ul[:language_id])
           redirect_to edit_user_path(@user), notice: "ERROR: Language data invalid"
           return
         else
-          @user.languages << Language.find(lang_id)
+          UserLanguage.create(user_id: @user.id, language_id: ul[:language_id], skill: ul[:skill])
         end
       end
     end
@@ -102,20 +123,17 @@ class UsersController < ApplicationController
     unless params[:user_avails].blank?
       @user.user_avails.clear
 
-      unless params[:user_avails][:day].blank?
-        params[:user_avails][:day].each_with_index do |avail_day, idx|
-          next if avail_day.blank?
-          next if params[:user_avails][:avail_option][idx].blank?
+      params[:user_avails].each_with_index do |ua, idx|
+        next if ua[:day].blank? or ua[:avail_option].blank?
 
-          user_avail = UserAvail.new(
-            day:          avail_day,
-            area_id:      params[:user_avails][:area_id][idx],
-            avail_option: params[:user_avails][:avail_option][idx]
-          )
-          unless @user.user_avails << user_avail
-            redirect_to user_path(@user), notice: "ERROR: invalid params"
-            return
-          end
+        user_avail = UserAvail.new(
+          day:          ua[:day],
+          area_id:      ua[:area_id],
+          avail_option: ua[:avail_option]
+        )
+        unless @user.user_avails << user_avail
+          redirect_to user_path(@user), notice: "ERROR: invalid params"
+          return
         end
       end
     end
@@ -125,9 +143,8 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path, notice: 'User profile was successfully updated.' }
         format.json { head :no_content }
       else
-        @user_languages = @user.languages
-        @user_avails = @user.user_avails
-        @all_languages = Language.all
+        @user_languages = @user.user_languages
+        @user_avails    = @user.user_avails
 
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

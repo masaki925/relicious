@@ -8,15 +8,13 @@
 </nav>
 <!-- /breadcrumb -->
 
-<% @user_picture_url_normal = "http://graph.facebook.com/#{@user.provider_uid}/picture?type=normal" %>
-
 <div id="profile">
   <div id="leftArea">
 
     <div id="profileImg">
       <div class="flexslider">
         <ul class="slides">
-          <li><%= image_tag @user_picture_url_normal, width:"175", height:"175", alt:"picture" %></li>
+          <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", height:"175", alt:"picture" %></li>
         </ul>
       </div>
       <% if @user == current_user %>
@@ -87,16 +85,18 @@
       <dt><%= User.human_attribute_name(:location) %></dt>
       <dd><%= @user.location.blank? ? "-" : @user.location %></dd>
 
+      <%
+        languages = []
+        if @user.user_languages.blank?
+          languages << '-'
+        else
+          @user.user_languages.each do |ul|
+            languages << "#{ul.language.name}<sup>#{ul.skill.to_s}</sup>"
+          end
+        end
+      %>
       <dt><%= User.human_attribute_name(:language) %></dt>
-      <% if @user.languages.blank? %>
-        <dd>-</dd>
-      <% else %>
-        <dd>
-        <% @user.languages.each do |l| %>
-          <%= l.name %>,
-        <% end %>
-        </dd>
-      <% end %>
+      <dd><%= languages.join(',').html_safe %> </dd>
 
       <dt><%= t("general.user.availability") %></dt>
       <% if @user.user_avails.blank? %>

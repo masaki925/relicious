@@ -16,9 +16,6 @@
         });
   </script>
 
-  <% @user_picture_url_square = "http://graph.facebook.com/#{@user.provider_uid}/picture?type=square" %>
-  <% @user_picture_url_normal = "http://graph.facebook.com/#{@user.provider_uid}/picture?type=normal" %>
-
   <!-- top -->
   <div id="top">
     <div id="leftArea">
@@ -27,7 +24,7 @@
         <h2>Hi <%= @user.name %>!! Welcome back!!</h2>
         <div class="flexslider">
           <ul class="slides">
-            <li><%= image_tag @user_picture_url_normal, width:"175", height:"175", alt:"picture" %></li>
+            <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", height:"175", alt:"picture" %></li>
           </ul>
         </div>
         <p class="textC"><%= link_to t("user_top.edit_profile"), edit_user_path(@user) %></p>
@@ -45,14 +42,13 @@
                if @target_user.blank?
                  @target_user = current_user
                end
-               target_user_picture_url_square = "http://graph.facebook.com/#{@target_user.provider_uid}/picture?type=square"
                other_members_num = meetup.users.size - 2
             %>
 
             <li>
             <div class="recentStreamBox">
               <div class="imgArea">
-                <%= image_tag "http://graph.facebook.com/#{@target_user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture" %>
+                <%= image_tag facebook_image_url( @target_user.id, 'square'), width:"50", height:"50", alt:"picture" %>
               </div>
               <div class="detailArea">
                 <%= link_to meetup.title, meetup_path(meetup) %><br>
@@ -108,7 +104,7 @@
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
                   <% if idx == 1 %> <strong>&</strong> <% end %>
-                  <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"75", height:"75", alt:"picture"), user_path(user) %>
+                  <%= link_to image_tag( facebook_image_url(user.id, 'square') , width:"75", height:"75", alt:"picture"), user_path(user) %>
                 </div>
                 <% break if idx > 1 %>
               <% end %>
@@ -209,7 +205,7 @@
               <h3 class="stream"><%= meetup.title %></h3>
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
-                  <%= link_to image_tag("http://graph.facebook.com/#{user.provider_uid}/picture?type=square", width:"35", height:"35", alt:"picture"), user_path(user) %>
+                  <%= link_to image_tag( facebook_image_url(user.id, 'square') , width:"35", height:"35", alt:"picture"), user_path(user) %>
                 </div>
                 <% break if idx > 1 %>
               <% end %>

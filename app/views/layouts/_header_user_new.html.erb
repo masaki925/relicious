@@ -1,0 +1,18 @@
+<header id="header">
+<div id="headerArea">
+  <div id="logo">
+    <h1 id="logoTitle"><%= link_to image_tag("/assets/logo.jpg", width: "105", height: "60", alt: "Relicious"), root_path %></h1>
+  </div>
+
+  <div id="subInfo">
+    <ul id="subInfoTop">
+        <li><%= select_tag "language", options_for_select([["English", "en"], ["日本語", "ja"]], params[:lang]) %></li>
+    </ul>
+    <script>
+      $("#language").change ( function () {
+        window.location.replace('/users/new?lang='+this.value);
+      });
+    </script>
+  </div>
+</div>
+</header>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713232916) do
+ActiveRecord::Schema.define(:version => 20120807134816) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(:version => 20120713232916) do
 
   add_index "meetups", ["user_id"], :name => "index_meetups_on_user_id"
 
+  create_table "oauth_users", :force => true do |t|
+    t.string   "provider",                  :null => false
+    t.integer  "provider_uid", :limit => 8, :null => false
+    t.string   "auth_token",                :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "user_avails", :force => true do |t|
     t.integer  "user_id"
     t.integer  "area_id"
@@ -73,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120713232916) do
     t.integer  "language_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "skill"
   end
 
   add_index "user_languages", ["language_id"], :name => "index_user_languages_on_language_id"
@@ -109,12 +119,12 @@ ActiveRecord::Schema.define(:version => 20120713232916) do
   add_index "user_reviews", ["user_id"], :name => "index_user_reviews_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name",                       :null => false
+    t.string   "name",          :null => false
     t.string   "screen_name"
     t.string   "email"
-    t.string   "provider",                   :null => false
-    t.integer  "provider_uid",  :limit => 8, :null => false
-    t.string   "auth_token",                 :null => false
+    t.string   "provider"
+    t.integer  "provider_uid"
+    t.string   "auth_token"
     t.date     "birthday"
     t.text     "introduction"
     t.string   "education"
@@ -123,8 +133,8 @@ ActiveRecord::Schema.define(:version => 20120713232916) do
     t.string   "locale"
     t.string   "location"
     t.text     "likes"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "favorite_food"
     t.string   "ng_food"
   end
