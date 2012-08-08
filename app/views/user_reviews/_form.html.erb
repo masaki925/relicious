@@ -28,7 +28,7 @@
   <!-- reviewArea -->
   <div id="reviewArea">
     <div class="reviewHead">
-      <%= link_to image_tag("http://graph.facebook.com/#{@reviewed_user.provider_uid}/picture?type=normal", width:"150", height:"150", alt:"picture"), user_path(@reviewed_user) %>
+      <%= link_to image_tag( facebook_image_url(@reviewed_user.id, 'normal'), width:"150", height:"150", alt:"picture"), user_path(@reviewed_user) %>
       <h1><%= link_to @reviewed_user.name, user_path(@reviewed_user) %></h1>
     </div>
     <p class="fontCR">* = Mandatory</p>
@@ -45,11 +45,11 @@
         <li>
           <h3><%= t("user_reviews.new.about_communication") %><span class="fontCR">*</span></h3>
           <p><%= t("user_reviews.new.about_communication_explain") %></p>
-        <%= f.select :eval_communication, [1,2,3,4,5] %>
+        <%= f.select :eval_communication, [1,2,3,4,5], selected: 5 %>
         </li>
         <li>
           <h3><%= t("user_reviews.new.recommend") %><span class="fontCR">*</span></h3>
-          <%= f.select :recommend, [["yes", 1], ["no", 0]] %>
+          <%= f.select :recommend, [["yes", 1], ["no", 0]], selected: 1 %>
         </li>
         <li>
           <h3><%= t("user_reviews.new.familiarity") %><span class="fontCR">*</span></h3>
@@ -58,17 +58,17 @@
         <li>
           <h3><%= t("user_reviews.new.eval_personal") %><span class="fontCR">*</span></h3>
           <p><%= t("user_reviews.new.eval_personal_explain") %></p>
-          <%= f.select :eval_personal, [1,2,3,4,5] %>
+          <%= f.select :eval_personal, [1,2,3,4,5], selected: 5 %>
         </li>
         <li>
           <h3><%= t("user_reviews.new.eval_language") %><span class="fontCR">*</span></h3>
           <p><%= t("user_reviews.new.eval_language_explain") %></p>
-          <%= f.select :eval_language, [1,2,3,4,5] %>
+          <%= f.select :eval_language, [1,2,3,4,5], selected: 5 %>
         </li>
         <li>
           <h3><%= t("user_reviews.new.eval_groumet") %><span class="fontCR">*</span></h3>
           <p><%= t("user_reviews.new.eval_groumet_explain") %></p>
-          <%= f.select :eval_gourmet, [1,2,3,4,5] %>
+          <%= f.select :eval_gourmet, [1,2,3,4,5], selected: 5 %>
         </li>
       </ul>
         

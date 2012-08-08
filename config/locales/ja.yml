@@ -46,6 +46,9 @@ ja:
 
     user:
       age: "年齢"
+      gender:
+        male: "男性"
+        female: "女性"
       language_skill: "習熟度"
       availability: "空いている時間"
       about_prefix: ""
@@ -58,6 +61,9 @@ ja:
       user_about: "この人について"
       user_basics: "基本情報"
       user_avails: "一緒に食事ができるとき"
+
+    new:
+      header_text: "新規登録"
 
     edit:
       breadcrumb: "プロフィール入力"
@@ -135,7 +141,7 @@ ja:
     upcoming_text: "最近の予定"
     edit_profile: "プロフィールを編集"
     todo_text: "TO DO"
-    todo_profile: "プロフィールに見記入の項目があります"
+    todo_profile: "プロフィールに未記入の項目があります"
     todo_review: "%{user}さんのレビューを行なってください"
     recent_meetup_text: "最近のRelicious dining"
 
@@ -189,8 +195,8 @@ ja:
 
   errors: &errors
     validates:
-      presence_language: "あなたが話せる言語を最低1つ入力してください。"
-      presence_avail: "あなたが食事できる日程を最低1つ入力してください。"
+      presence_user_langs: "あなたが話せる言語を最低1つ入力してください。"
+      presence_user_avails: "あなたが食事できる日程を最低1つ入力してください。"
 
     format: ! '%{attribute}%{message}'
     messages:

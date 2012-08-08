@@ -48,7 +48,7 @@
     <div class="addresseeDetail">
       <div class="imgArea">
         <% @meetup_users.each do |u| %>
-          <%= link_to image_tag("http://graph.facebook.com/#{u.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture"), user_path(u) %>
+          <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(u) %>
         <% end %>
       </div>
       <div class="detailArea">
@@ -79,7 +79,7 @@
       <div class="yourArea">
         <div class="imgArea">
           <figure>
-          <%= link_to image_tag("http://graph.facebook.com/#{comment.user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
+          <%= link_to image_tag( facebook_image_url(comment.user.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
           <figcaption>you</figcaption>
           </figure>
         </div>
@@ -106,7 +106,7 @@
       <div class="addresseeArea">
         <div class="imgArea">
           <figure>
-          <%= link_to image_tag("http://graph.facebook.com/#{comment.user.provider_uid}/picture?type=square", width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
+          <%= link_to image_tag( facebook_image_url(comment.user.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
           <figcaption><%= comment.user.name %></figcaption>
           </figure>
         </div>

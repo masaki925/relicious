@@ -9,7 +9,7 @@
 
 <h2>New meetup
   <% if member %>
-    with <%= link_to image_tag("http://graph.facebook.com/#{member.provider_uid}/picture?type=square"), user_path(member) %>
+    with <%= link_to image_tag( facebook_image_url(member.id, 'square') ), user_path(member) %>
   <% end %>
 </h2>
 

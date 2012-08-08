@@ -45,6 +45,9 @@ en:
 
     user:
       age: "Age"
+      gender:
+        male: "male"
+        female: "female"
       language_skill: "skill"
       availability: "Availability"
       about_prefix: "About"
@@ -57,6 +60,9 @@ en:
       user_about: "About"
       user_basics: "Basics"
       user_avails: "Availability"
+
+    new:
+      header_text: "Sign up"
 
     edit:
       breadcrumb: "Editing profile"
@@ -192,8 +198,8 @@ en:
 
   errors: &errors
     validates:
-      presence_language: "at least 1 languages must be registered."
-      presence_avail: "at least 1 availability must be registered."
+      presence_user_langs: "at least 1 languages must be registered."
+      presence_user_avails: "at least 1 availability must be registered."
 
 #    format: ! '%{attribute}%{message}'
 #    messages:

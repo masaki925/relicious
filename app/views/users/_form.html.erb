@@ -14,6 +14,10 @@
   <% end %>
 
   <p class="fontCR">* = <%= t("general.mandatory") %></p>
+  <% if params[:lang] %>
+    <%= hidden_field_tag :lang, params[:lang] %>
+  <% end %>
+
   <table>
     <tr>
       <th><%= User.human_attribute_name(:name) %><span class="fontCR">*</span></th>
@@ -25,7 +29,7 @@
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:gender) %><span class="fontCR">*</span></th>
-      <td><%= f.text_field :gender %></td>
+      <td><%= f.select :gender, options_for_select([[t("general.user.gender.male"), "male"], [t("general.user.gender.female"), "female"]], @user.gender) %></td>
     </tr>
     <tr>
       <th><%= User.human_attribute_name(:birthday) %><span class="fontCR">*</span></th>
@@ -42,15 +46,15 @@
         <ul>
           <% (0..2).each do |i| %>
             <% 
-              registered_lang = ''
-              registered_lang = @user_languages[i].id if @user_languages and @user_languages[i]
+              registered_user_lang = UserLanguage.new
+              registered_user_lang = @user_languages[i] if @user_languages and @user_languages[i]
             %>
             <li>
             <label> <%= User.human_attribute_name(:language) %></label>:
-            <%= select :user, :languages, options_for_select(@all_languages.map {|l| [ l.name, l.id ]}, registered_lang), {include_blank: true}, { name: "languages[]" }  %>
+            <%= select :user_language, :language_id, options_for_select(Language.all.map {|l| [ l.name, l.id ]}, registered_user_lang.language_id), {include_blank: true}, { name: "user_languages[][language_id]" }  %>
 
             <label><%= t("general.user.language_skill") %></label>:
-            <%= select :user, :languages, options_for_select( t("users.edit.language_skills")), {include_blank: true}, { name: "language_skills[]" } %>
+            <%= select :user_language, :skill, options_for_select( t("users.edit.language_skills"), registered_user_lang.skill), {include_blank: true}, { name: "user_languages[][skill]" } %>
             </li>
           <% end %>
         </ul>
@@ -74,21 +78,18 @@
         <span class="notes"><%= t("users.edit.avail_explain_02") %></span></p>
         <% (0..2).each do |i| %>
           <%
-            if @user_avails[i]
-              registered_day          = @user_avails[i].day
-              registered_avail_option = @user_avails[i].avail_option
-              registered_area_id      = @user_avails[i].area_id
-            end
+            registered_user_avail     = UserAvail.new
+            registered_user_avail     = @user_avails[i] if @user_avails and @user_avails[i]
           %>
           <li>
           <label><%= t("general.wday") %><%= i + 1 %></label>:
-          <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays"), registered_day), {include_blank: true}, {name: "user_avails[day][]"} %>
+          <%= select :user_avail, :day, options_for_select( t("users.edit.avail_wdays"), registered_user_avail.day), {include_blank: true}, {name: "user_avails[][day]"} %>
 
           <label><%= t("general.time") %><%= i + 1 %></label>:
-          <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options"), registered_avail_option), {include_blank: true}, {name: "user_avails[avail_option][]"} %>
+          <%= select :user_avail, :option, options_for_select( t("users.edit.avail_options"), registered_user_avail.avail_option), {include_blank: true}, {name: "user_avails[][avail_option]"} %>
 
           <label><%= t("general.area") %><%= i + 1 %></label>:
-          <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, registered_area_id), {include_blank: true }, {name: "user_avails[area_id][]", title: t("users.edit.avail_area_explain"), class: "tooltip" } %>
+          <%= select :user_avail, :area_id, options_for_select(Area.all.map {|a| [ a.name, a.id ]}, registered_user_avail.area_id), {include_blank: true }, {name: "user_avails[][area_id]", title: t("users.edit.avail_area_explain"), class: "tooltip" } %>
           </li>
         <% end %>
       </td>

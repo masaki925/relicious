@@ -19,6 +19,7 @@
 </head>
 
   <body id="login">
+    <%= "<h1>開発環境だよ〜ん。</h1>".html_safe if Rails.env.development? %>
   
     <% if current_user %>
       <%= render 'layouts/header' %>

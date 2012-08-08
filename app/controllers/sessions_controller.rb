@@ -6,27 +6,31 @@ class SessionsController < ApplicationController
     end
     auth = request.env["omniauth.auth"]
 
-    # Registered user
-    if @user = User.find_by_provider_and_provider_uid(auth["provider"], auth["uid"])
-      @user.auth_token = auth["credentials"]["token"]
-      if @user.save
+    # already connected OAuth
+    if @oauth_user = OauthUser.find_by_provider_and_provider_uid(auth["provider"], auth["uid"])
+      @oauth_user.auth_token = auth["credentials"]["token"]
+      # already registered user
+      if @oauth_user.user_id and @user = User.find(@oauth_user.user_id)
         session[:user_id] = @user.id
         redirect_to root_path
         return
+      # connected but not registered
       else
-        redirect_to root_path, :notice => "error: cannot update auth token"
+        session[:oauth_user_id] = @oauth_user.id
+        redirect_to new_user_path
+        return
       end
-    # New user
+    # not yet connected OAuth
     else
-      if @user = User.create_with_omniauth(auth)
-        session[:user_id] = @user.id
-        UserMailer.welcome_email(@user).deliver
-        redirect_to edit_user_path(@user)
+      if @oauth_user = OauthUser.create_with_omniauth(auth)
+        session[:oauth_user_id] = @oauth_user.id
+        redirect_to new_user_path
         return
       else
-        redirect_to root_path, :notice => "error: cannot sign up"
+        redirect_to root_path, :notice => "error: could not connect OAuth. please try it later."
+        return
       end
-    end 
+    end
   end
 
   def destroy

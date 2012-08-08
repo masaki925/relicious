@@ -3,14 +3,17 @@ class User < ActiveRecord::Base
   email_regex    = /\A([\w+\-.]+@[a-z\d\-.]+\.[a-z]+|)\z/i
 
   validates :name,         presence: true
-  validates :provider,     presence: true
-  validates :provider_uid, presence: true
-  validates :auth_token,   presence: true
   validates :email,        presence: true, uniqueness: true, format: { with: email_regex }
+  validates :gender,       presence: true
+  validates :birthday,     presence: true
+  validates :location,     presence: true
+  validates :locale,     presence: true
+  validates :introduction,  presence: true
 
   #validates_with UserLanguageValidator
   #validates_with UserAvailValidator
 
+  has_many :oauth_users
   has_many :meetup_comments
   has_many :user_avails
   has_many :user_languages
@@ -21,23 +24,42 @@ class User < ActiveRecord::Base
   has_many :received_reviews, :foreign_key => 'reviewed_user_id', :class_name => "UserReview"
 
 
-  def self.create_with_omniauth(auth)
+  def self.new_with_graph(fb_user)
     user = User.new(
-      name:        auth["info"]["name"],
-      screen_name: auth["info"]["username"],
-      email:       auth["info"]["email"],
-      birthday:    auth["info"]["birthday"],
-      screen_name: auth["info"]["nickname"],
-      location:    auth["info"]["location"],
-      screen_name: auth["info"]["nickname"],
+      name:        fb_user.name,
+      screen_name: fb_user.username,
+      email:       fb_user.email,
+      gender:      fb_user.gender,
+      locale:      fb_user.locale
     )
-    user.provider      = auth["provider"]
-    user.provider_uid  = auth["uid"]
-    user.auth_token    = auth["credentials"]["token"]
 
-    raise user.errors.messages.to_s unless user.save
+    unless fb_user.location.blank?
+      user.location = fb_user.location.name
+    end
 
-    #update_notifications_newcomer(user)
+    unless fb_user.birthday.blank?
+      m,d,y = fb_user.raw_attributes[:birthday].split('/')
+      user.birthday = Time.new(y,m,d,0,0,0)
+    end
+
+    likes = Array.new
+    unless fb_user.likes.blank?
+      fb_user.likes.each do |like|
+        likes << like.name
+      end 
+    end 
+    user.likes = likes.join(',')
+
+    unless fb_user.education.blank?
+      fb_user.education.each do |edu_graph|
+        user.education = edu_graph.school.name if edu_graph.type == "College" 
+      end 
+    end 
+
+    unless fb_user.work.blank?
+      user.work = fb_user.work[0].employer.name
+    end 
+
     user
   end
 
