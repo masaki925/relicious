@@ -1,20 +1,5 @@
 <%= stylesheet_link_tag "views/message", :media => "all" %>
 
-<!-- breadcrumb -->
-<nav id="breadcrumb">
-<p><a href="/" rel="index up">TOP</a> > <a href="/meetups" rel="up">Message</a> > Conversation
-<%= 'with' if @meetup_users.size > 1 %>
-<% comma_flag1 = false %>
-<% @meetup_users.each do |u| %>
-  <% next if u == current_user %>
-  <%= ',' if comma_flag1 %>
-  <% comma_flag1 = true %>
-  <%= link_to u.name, user_path(u) %>
-<% end %>
-</p>
-</nav>
-<!-- /breadcrumb -->
-
 <p id="notice"><%= notice %></p>
 
 <!-- conversation -->

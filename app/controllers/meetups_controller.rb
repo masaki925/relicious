@@ -4,6 +4,8 @@ class MeetupsController < ApplicationController
   # GET /meetups
   # GET /meetups.json
   def index
+    add_breadcrumb "Meetups", meetups_path
+
     my_meetups = current_user.meetups.order('id DESC')
     if params[:about] && params[:about] == 'me'
       @meetups = my_meetups
@@ -20,6 +22,9 @@ class MeetupsController < ApplicationController
   # GET /meetups/1
   # GET /meetups/1.json
   def show
+    add_breadcrumb "Meetups", meetups_path
+    add_breadcrumb "Conversation", meetup_path
+
     @meetup = Meetup.find(params[:id])
     @meetup_users = @meetup.users
     @meetup_comments = @meetup.meetup_comments
@@ -34,6 +39,9 @@ class MeetupsController < ApplicationController
   # GET /meetups/new
   # GET /meetups/new.json
   def new
+    add_breadcrumb "Meetups", meetups_path
+    add_breadcrumb "new", new_meetup_path
+
     @meetup = Meetup.new
 
     respond_to do |format|
@@ -44,6 +52,9 @@ class MeetupsController < ApplicationController
 
   # GET /meetups/1/edit
   def edit
+    add_breadcrumb "Meetups", meetups_path
+    add_breadcrumb "Edit", edit_meetup_path
+
     @meetup = Meetup.find(params[:id])
   end
 

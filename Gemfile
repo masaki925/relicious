@@ -63,3 +63,5 @@ gem 'mail'
 
 gem 'whenever', :require => false
 
+gem 'breadcrumbs_on_rails'
+

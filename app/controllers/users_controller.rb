@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
+  before_filter :redirect_unless_new_user, only: [:new, :create]
+
   # GET /users
   # GET /users.json
   def index
+    add_breadcrumb "Find people", users_path
+
     @users = User.search(params[:search])
 
     respond_to do |format|
@@ -13,6 +17,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    add_breadcrumb "Profile", user_path
+
     @user = User.find(params[:id])
     @user_reviews = @user.received_reviews
     @user_languages = @user.user_languages
@@ -25,6 +31,8 @@ class UsersController < ApplicationController
   end
 
   def new
+    add_breadcrumb "Sign up", new_user_path
+
     unless session[:oauth_user_id]
       redirect_to root_path, notice: "please sign up with OAuth connect"
     end
@@ -41,6 +49,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    add_breadcrumb "Profile", user_path
+    add_breadcrumb "Edit", edit_user_path
+
     unless params[:id].to_i == current_user.id
       redirect_to users_path, notice: "Forbidden access"
     end
@@ -92,7 +103,6 @@ class UsersController < ApplicationController
         return
       end
     rescue => e
-      debugger
       @user_languages = @user.user_languages
       @user_avails    = @user.user_avails
       respond_to do |format|
@@ -162,5 +172,10 @@ class UsersController < ApplicationController
       format.html { redirect_to root_path }
       format.json { head :no_content }
     end
+  end
+
+  protected
+  def redirect_unless_new_user
+    redirect_to root_path if current_user
   end
 end

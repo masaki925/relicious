@@ -15,6 +15,8 @@ class UserReviewsController < ApplicationController
   # GET /user_reviews/1
   # GET /user_reviews/1.json
   def show
+    add_breadcrumb "Review", user_review_path
+
     @user_review = UserReview.find(params[:id])
 
     respond_to do |format|
@@ -26,6 +28,8 @@ class UserReviewsController < ApplicationController
   # GET /user_reviews/new
   # GET /user_reviews/new.json
   def new
+    add_breadcrumb "Write Review", new_user_review_path
+
     @user_review = UserReview.new
     @meetup_candidates = current_user.meetups and @reviewed_user.meetups
     redirect_to user_path(@reviewe_user) if @meetup_candidates.blank?

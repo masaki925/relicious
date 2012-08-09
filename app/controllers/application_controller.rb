@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  add_breadcrumb 'Top', :root_path
+
   def require_authentication
     unless current_user
       redirect_to root_path, notice: 'please login to use this application'

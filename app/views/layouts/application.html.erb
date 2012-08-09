@@ -23,9 +23,13 @@
   
     <% if current_user %>
       <%= render 'layouts/header' %>
+    <% elsif params[:controller] == 'users' and params[:action] == 'new' %>
+      <%= render('layouts/header_user_new') %>
     <% end %>
   
-    <div id="contents"> <%= yield %> </div>
+    <nav id="breadcrumb"><p><%= render_breadcrumbs %></p></nav>
+
+    <div id="contents"><%= yield %></div>
   
     <%= render 'layouts/footer' %>
   
