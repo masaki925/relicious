@@ -6,9 +6,6 @@
         <li><a href="/aboutus.html">About US</a></li>
         <li><a href="/privacy.html">Privacy policy</a></li>
         <li><a href="mailto:relicious.help@gmail.com?bcc=funkastar.1985@gmail.com">Contact</a></li>
-        <% if current_user and current_user.provider_uid.to_s =~ /(1067512316|100001513437149|100002679172593|1487030623)/ %>
-          <li><%= link_to "withdraw", user_path(current_user), confirm: 'Are you sure?', method: :delete %></li>
-        <% end %>
       </ul>
     </div>
   </div>

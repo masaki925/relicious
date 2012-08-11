@@ -81,4 +81,8 @@ class User < ActiveRecord::Base
       find(:all)
     end
   end
+
+  def provider_uid
+    OauthUser.find(self.id).provider_uid
+  end
 end
