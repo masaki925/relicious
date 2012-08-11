@@ -8,9 +8,6 @@ FactoryGirl.define do
   factory :user do
     name         "username"
     email        { generate(:email) }
-    provider     "facebook"
-    provider_uid 100
-    auth_token   "MyString"
     birthday     "2012-06-10"
     introduction "MyText"
     education    "Education"
@@ -18,5 +15,7 @@ FactoryGirl.define do
     gender       "male"
     locale       "en_US"
     location     "Tokyo"
+    favorite_food "favorite food"
+    ng_food      "ng food"
   end
 end
