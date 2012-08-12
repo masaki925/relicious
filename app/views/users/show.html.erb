@@ -77,7 +77,7 @@
       <dd><%= @user.birthday.blank? ? "-" : @user.birthday.strftime("%m/%d") %></dd>
 
       <dt><%= User.human_attribute_name(:nationality) %></dt>
-      <dd><%= NATIONALITIES[@user.nationality][:name][:en]  %></dd>
+      <dd><%= @user.nationality.blank? ? "-" : NATIONALITIES[@user.nationality][:name][:en]  %></dd>
 
       <dt><%= User.human_attribute_name(:location) %></dt>
       <dd><%= @user.location.blank? ? "-" : @user.location %></dd>
