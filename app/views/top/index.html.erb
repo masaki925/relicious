@@ -21,47 +21,13 @@
     <div id="leftArea">
 
       <div id="profileImg">
-        <h2>Hi <%= @user.name %>!! Welcome back!!</h2>
+        <h2><strong>Hi <%= @user.name %>!!</strong><br>Welcome back!!</h2>
         <div class="flexslider">
           <ul class="slides">
-            <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", height:"175", alt:"picture" %></li>
+            <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", alt:"picture" %></li>
           </ul>
         </div>
         <p class="textC"><%= link_to t("user_top.edit_profile"), edit_user_path(@user) %></p>
-      </div>
-
-      <div id="upcomingArea">
-        <h3><%= t("user_top.upcoming_text") %></h3>
-        <ul>
-          <% @recent_my_meetups.each do |meetup| %>
-            <% meetup.users.each do |u|
-                 next if u == current_user
-                 @target_user = u
-                 break
-               end
-               if @target_user.blank?
-                 @target_user = current_user
-               end
-               other_members_num = meetup.users.size - 2
-            %>
-
-            <li>
-            <div class="recentStreamBox">
-              <div class="imgArea">
-                <%= image_tag facebook_image_url( @target_user.id, 'square'), width:"50", height:"50", alt:"picture" %>
-              </div>
-              <div class="detailArea">
-                <%= link_to meetup.title, meetup_path(meetup) %><br>
-                With <%= link_to @target_user.name, user_path(@target_user) %><br>
-                <% if other_members_num > 0 %>
-                  and <%= other_members_num %> pepole<br>
-                <% end %>
-                <time><%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time>
-              </div>
-            </div>
-            </li>
-          <% end if @recent_my_meetups %>
-        </ul>
       </div>
       <div id="doingArea">
         <h3><%= t("user_top.todo_text") %></h3>
@@ -93,6 +59,47 @@
           </ul>
         <% end %>
       </div>
+      
+      <div id="upcomingArea">
+        <h2><%= t("user_top.upcoming_text") %></h2>
+        <ul>
+          <% unless @recent_my_meetups.blank? %>
+            <% @recent_my_meetups.each do |meetup| %>
+              <% meetup.users.each do |u|
+                 next if u == current_user
+                 @target_user = u
+                 break
+               end
+               if @target_user.blank?
+                 @target_user = current_user
+               end
+               other_members_num = meetup.users.size - 2
+              %>
+
+            <li>
+            <div class="recentStreamBox">
+              <div class="imgArea">
+              	<div class="colBox">
+                <%= link_to image_tag facebook_image_url( @target_user.id, 'square'), width:"75", height:"75", alt:"picture" %>
+              	<%= link_to @target_user.name, user_path(@target_user) %>
+              	</div>
+              </div>
+              <div class="detailArea">
+                <%= link_to meetup.title, meetup_path(meetup) %><br>
+                <% if other_members_num > 0 %>
+                  and <%= other_members_num %> pepole<br>
+                <% end %>
+                <time><%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time>
+              </div>
+            </div>
+            </li>
+            <% end %>
+          <% else %>
+          	<li>Let's find someone to have local food together</li>
+          <% end %>
+            
+        </ul>
+      </div>
 
       <h2><%= t("user_top.recent_meetup_text") %></h2>
       <% unless @recent_meetups_exceptme.blank? %>
@@ -103,8 +110,8 @@
             <div class="imgArea">
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
-                  <% if idx == 1 %> <strong>&</strong> <% end %>
                   <%= link_to image_tag( facebook_image_url(user.id, 'square') , width:"75", height:"75", alt:"picture"), user_path(user) %>
+                  <%= link_to user.name, user_path(user) %>
                 </div>
                 <% break if idx > 1 %>
               <% end %>
@@ -122,7 +129,7 @@
           </div>
           <!-- /recentStreamBox -->
         <% end %>
-        <div style="text-align: center;"><%= link_to "see more", meetups_path %></div>
+        <div class="textC mt10"><%= link_to "see more", meetups_path %></div>
       <% else %>
         <p>other meetups not found for now.</p>
       <% end %>

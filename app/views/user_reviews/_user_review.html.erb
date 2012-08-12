@@ -13,7 +13,7 @@
         <dt><%= t("user_reviews.show.about_experience") %></dt>
         <dd><%= user_review.about_experience %></dd>
       </dl>
+      <p class="textR"><%= link_to "see detail", user_review_path(user_id: @user.id, id: user_review.id) %></p>
     </div>
-    <p style="text-align:right;"><%= link_to "see detail", user_review_path(user_id: @user.id, id: user_review.id) %></p>
   </div>
 </div>

@@ -16,23 +16,22 @@
 
   <!-- localSearch -->
   <div id="localSearch">
-    <div id="localSearch">
-      <p class="fontS"><%= t("general.search.explain") %></p>
-      <%= form_tag users_path, :method => 'get' do %>
-        <ul class="findSearch">
-          <li><%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textBox" %> </li>
-          <li class="date"><label><%= t("general.search.day") %><br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
-          <li class="time"><label><%= t("general.search.option") %><br><%= select_tag "search[time]", options_for_select( t("general.search.options") ), {include_blank: true} %> </label></li>
-          <li><%= submit_tag t("general.search.button"), :name => nil, class: "btn1 searchBtn" %></li>
-        </ul>
-      <% end %>
+    <p class="fontS"><%= t("general.search.explain") %></p>
+    <%= form_tag users_path, :method => 'get' do %>
+      <ul class="findSearch">
+        <li><%= text_field_tag "search[location]", "", placeholder: t("general.search.location_placeholder"), class: "textBox" %> </li>
+        <li class="date"><label><%= t("general.search.day") %><br><%= text_field_tag "search[date]", "", id: 'datepicker', placeholder: "mm/dd/yyyy" %> </label></li>
+        <li class="time"><label><%= t("general.search.option") %><br><%= select_tag "search[time]", options_for_select( t("general.search.options") ), {include_blank: true} %> </label></li>
+        <li><%= submit_tag t("general.search.button"), :name => nil, class: "btn1 searchBtn" %></li>
+      </ul>
+    <% end %>
 
-      <!-- TODO
-      <dl class="interest">
-        <dt><%= t("users.index.feeling_explain") %></dt>
-        <dd><a href="#" class="btn3">(coming soon)</a></dd>
-      </dl>
-      -->
+    <!-- TODO
+    <dl class="interest">
+      <dt><%= t("users.index.feeling_explain") %></dt>
+      <dd><a href="#" class="btn3">(coming soon)</a></dd>
+    </dl>
+    -->
 
     </form>
   </div>
@@ -42,7 +41,7 @@
   <% @users.each do |user| %>
     <div class="findPeopleArea">
       <div class="imgArea">
-        <p><%= link_to image_tag( facebook_image_url(user.id, 'normal'), width:"150", height:"150", alt:"picture"), user_path(user) %></p>
+        <p><%= link_to image_tag( facebook_image_url(user.id, 'normal'), width:"150", alt:"picture"), user_path(user) %></p>
         <%= user.name %><br>
         (<%= user.gender %>)</p>
       </div>

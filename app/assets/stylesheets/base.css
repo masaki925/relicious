@@ -612,7 +612,7 @@ float:right;
 /* profile */
 #profileImg {
 	margin-bottom: 10px;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 	border: 1px solid #cccccc;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -688,8 +688,10 @@ float:right;
 	background: url(/assets/dinner.png) no-repeat 0 0;
 }
 
-
-
+.slides {
+	margin-top: 10px;
+	text-align: center;
+}
 
 #localSearch {
 	margin-bottom: 30px;

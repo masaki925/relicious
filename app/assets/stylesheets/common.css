@@ -48,7 +48,7 @@
 #nav li a {
 	display: block;
 	width: 100px;
-	padding: 11px 0;
+	padding: 21px 0;
 	color: #666666;
 	border-right: 1px solid #eeeeee;
 	/*border: solid 1px #ffffff;
@@ -115,20 +115,17 @@ select {
 	margin-right: 5px;
 	padding-top: 1px;
 }
-.messageLink p {
-  color: #ff5a00;
-}
 .messageLink a {
 	display: block;
-	margin-left: 25px;
-	width: 25px;
+	padding-right: 23px;
 	height: 25px;
-	background: url(/assets/headerIc02.png) no-repeat 0 0;
-	text-indent: -9999px;
+	background: url(/assets/headerIc02.png) no-repeat 100% 0;
   color: #ff5a00;
+	text-shadow: 1px 0 0 #fff;
 }
 .messageLink a:hover {
-	background: url(/assets/headerIc02on.png) no-repeat 0 0;
+	background: url(/assets/headerIc02on.png) no-repeat 100% 0;
+	text-decoration: none;
 }
 .messageLink a span {
 	position: absolute;

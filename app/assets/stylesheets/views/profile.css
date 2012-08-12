@@ -107,10 +107,45 @@
 #profile #leftArea .detail {
 	overflow: hidden;
 }
+
+a#fblogin {
+	display: block;
+}
+
+a#fblogin > div {
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 120%;
+    height: 32px;
+}
+a#fblogin > div:hover {
+    opacity: 0.8;
+}
+a#fblogin > div > div {
+    background: none no-repeat scroll center center transparent;
+    float: left;
+    height: 32px;
+    line-height: 32px;
+}
+a#fblogin > div .left {
+    background: url("/assets/facebook_32_l.png") repeat scroll 0 0 transparent;
+    width: 26px;
+}
+a#fblogin > div .center {
+    background: url("/assets/facebook_32_c.png") repeat-x scroll 0 0 transparent;
+    padding: 0 10px;
+    text-align: center;
+    width: auto;
+		font-size: 12px;
+}
+a#fblogin > div .right {
+    background: url("/assets/facebook_32_r.png") repeat scroll 0 0 transparent;
+    width: 6px;
+}
 	 
 
 #aboutArea .box1 {
-	padding: 10px 20px 0;
+	padding: 10px 20px;
 }
 #aboutArea .aboutBox {
 }

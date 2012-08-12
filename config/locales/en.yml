@@ -140,8 +140,8 @@ en:
       send: "send"
 
   user_top:
-    user_search_text: "Find Local People?"
-    upcoming_text: "Upcoming Dining"
+    user_search_text: "Let's find people to have local food together!!"
+    upcoming_text: "Your meetups(Upcoming)"
     edit_profile: "Edit profile"
     todo_text: "Things to do"
     todo_profile: "complete your profile"
@@ -169,7 +169,7 @@ en:
 
   header:
     link:
-      users_html: "<br> <strong>Find</strong><br> People"
+      users_html: "<strong>Find</strong><br> People"
 
 #  date:
 #    formats:
