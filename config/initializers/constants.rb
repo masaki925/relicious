@@ -7,3 +7,7 @@ FB_PERMISSIONS = 'email,
                   read_stream,
                   publish_stream'
 
+MEETUP_STATUS_INVITED  = 0
+MEETUP_STATUS_ACCEPTED = 1
+MEETUP_STATUS_DECLINED = 2
+

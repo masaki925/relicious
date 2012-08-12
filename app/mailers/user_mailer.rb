@@ -17,4 +17,22 @@ class UserMailer < ActionMailer::Base
     mail(:to => @user.email,
          :subject => "[Relicious]You got a message from #{@commented_user.name} about #{@meetup.title}")
   end
+
+  def info_email(user)
+    @user = user
+    set_locale(@user)
+  
+    mail(:to => user.email,
+         :subject => "[Relicious] information")
+  end
+
+  private
+  def set_locale(user)
+    case user.locale
+    when /^ja/
+      I18n.locale = :ja
+    else
+      I18n.locale = :en
+    end
+  end
 end
