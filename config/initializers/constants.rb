@@ -11,3 +11,5 @@ MEETUP_STATUS_INVITED  = 0
 MEETUP_STATUS_ACCEPTED = 1
 MEETUP_STATUS_DECLINED = 2
 
+NATIONALITIES = YAML.load_file("#{Rails.root}/config/nationalities.yml")
+

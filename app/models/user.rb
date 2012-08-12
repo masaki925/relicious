@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :screen_name, :email, :birthday, :gender, :locale, :favorite_food, :ng_food, :introduction, :education, :work, :location, :likes
+  attr_accessible :name, :screen_name, :email, :birthday, :gender, :locale, :favorite_food, :ng_food, :introduction, :education, :work, :location, :likes, :nationality
   email_regex    = /\A([\w+\-.]+@[a-z\d\-.]+\.[a-z]+|)\z/i
 
   validates :name,         presence: true
@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates :location,     presence: true
   validates :locale,     presence: true
   validates :introduction,  presence: true
+  validates :nationality,  presence: true
 
   #validates_with UserLanguageValidator
   #validates_with UserAvailValidator
