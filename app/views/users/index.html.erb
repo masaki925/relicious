@@ -44,6 +44,7 @@
       <div class="imgArea">
         <p><%= link_to image_tag( facebook_image_url(user.id, 'normal'), width:"150", height:"150", alt:"picture"), user_path(user) %></p>
         <%= user.name %><br>
+        <%= user.nationality %> 
         (<%= user.gender %>)</p>
       </div>
 

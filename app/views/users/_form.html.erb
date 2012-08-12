@@ -36,6 +36,12 @@
       <td><%= f.date_select :birthday, start_year: Time.now.year - 100, end_year: Time.now.year - 18 %></td>
     </tr>
     <tr>
+      <th><%= User.human_attribute_name(:nationality) %><span class="fontCR">*</span></th>
+      <td>
+        <%= f.select :nationality, options_for_select(NATIONALITIES.each_pair.map {|n| [ n[1][:name][:en], n[0] ]}, @user.nationality), {include_blank: true} %>
+      </td>
+    </tr>
+    <tr>
       <th><%= User.human_attribute_name(:location) %><span class="fontCR">*</span></th>
       <td><%= f.text_field :location %></td>
     </tr>

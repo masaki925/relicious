@@ -1,0 +1,718 @@
+--- 
+AF: 
+  :name: 
+    :en: Afghanistan
+AL: 
+  :name: 
+    :en: Albania
+DZ: 
+  :name: 
+    :en: Algeria
+AS: 
+  :name: 
+    :en: American Samoa
+AD: 
+  :name: 
+    :en: Andorra
+AO: 
+  :name: 
+    :en: Angola
+AI: 
+  :name: 
+    :en: Anguilla
+AQ: 
+  :name: 
+    :en: Antarctica
+AG: 
+  :name: 
+    :en: Antigua and Barbuda
+AR: 
+  :name: 
+    :en: Argentina
+AM: 
+  :name: 
+    :en: Armenia
+AW: 
+  :name: 
+    :en: Aruba
+AU: 
+  :name: 
+    :en: Australia
+AT: 
+  :name: 
+    :en: Austria
+AZ: 
+  :name: 
+    :en: Azerbaijan
+BS: 
+  :name: 
+    :en: Bahamas
+BH: 
+  :name: 
+    :en: Bahrain
+BD: 
+  :name: 
+    :en: Bangladesh
+BB: 
+  :name: 
+    :en: Barbados
+BY: 
+  :name: 
+    :en: Belarus
+BE: 
+  :name: 
+    :en: Belgium
+BZ: 
+  :name: 
+    :en: Belize
+BJ: 
+  :name: 
+    :en: Benin
+BM: 
+  :name: 
+    :en: Bermuda
+BT: 
+  :name: 
+    :en: Bhutan
+BO: 
+  :name: 
+    :en: Bolivia
+BA: 
+  :name: 
+    :en: Bosnia and Herzegovina
+BW: 
+  :name: 
+    :en: Botswana
+BV: 
+  :name: 
+    :en: Bouvet Island
+BR: 
+  :name: 
+    :en: Brazil
+IO: 
+  :name: 
+    :en: British Indian Ocean Territory
+BN: 
+  :name: 
+    :en: Brunei Darussalam
+BG: 
+  :name: 
+    :en: Bulgaria
+BF: 
+  :name: 
+    :en: Burkina Faso
+BI: 
+  :name: 
+    :en: Burundi
+KH: 
+  :name: 
+    :en: Cambodia
+CM: 
+  :name: 
+    :en: Cameroon
+CA: 
+  :name: 
+    :en: Canada
+CV: 
+  :name: 
+    :en: Cape Verde
+KY: 
+  :name: 
+    :en: Cayman Islands
+CF: 
+  :name: 
+    :en: Central African Republic
+TD: 
+  :name: 
+    :en: Chad
+CL: 
+  :name: 
+    :en: Chile
+CN: 
+  :name: 
+    :en: China
+CX: 
+  :name: 
+    :en: Christmas Island
+CC: 
+  :name: 
+    :en: Cocos (Keeling Islands)
+CO: 
+  :name: 
+    :en: Colombia
+KM: 
+  :name: 
+    :en: Comoros
+CG: 
+  :name: 
+    :en: Congo
+CK: 
+  :name: 
+    :en: Cook Islands
+CR: 
+  :name: 
+    :en: Costa Rica
+CI: 
+  :name: 
+    :en: "Cote D'Ivoire (Ivory Coast)"
+HR: 
+  :name: 
+    :en: Croatia (Hrvatska
+CU: 
+  :name: 
+    :en: Cuba
+CY: 
+  :name: 
+    :en: Cyprus
+CZ: 
+  :name: 
+    :en: Czech Republic
+DK: 
+  :name: 
+    :en: Denmark
+DJ: 
+  :name: 
+    :en: Djibouti
+DM: 
+  :name: 
+    :en: Dominica
+DO: 
+  :name: 
+    :en: Dominican Republic
+TP: 
+  :name: 
+    :en: East Timor
+EC: 
+  :name: 
+    :en: Ecuador
+EG: 
+  :name: 
+    :en: Egypt
+SV: 
+  :name: 
+    :en: El Salvador
+GQ: 
+  :name: 
+    :en: Equatorial Guinea
+ER: 
+  :name: 
+    :en: Eritrea
+EE: 
+  :name: 
+    :en: Estonia
+ET: 
+  :name: 
+    :en: Ethiopia
+FK: 
+  :name: 
+    :en: Falkland Islands (Malvinas)
+FO: 
+  :name: 
+    :en: Faroe Islands
+FJ: 
+  :name: 
+    :en: Fiji
+FI: 
+  :name: 
+    :en: Finland
+FR: 
+  :name: 
+    :en: France
+FX: 
+  :name: 
+    :en: France, Metropolitan
+GF: 
+  :name: 
+    :en: French Guiana
+PF: 
+  :name: 
+    :en: French Polynesia
+TF: 
+  :name: 
+    :en: French Southern Territories
+GA: 
+  :name: 
+    :en: Gabon
+GM: 
+  :name: 
+    :en: Gambia
+GE: 
+  :name: 
+    :en: Georgia
+DE: 
+  :name: 
+    :en: Germany
+GH: 
+  :name: 
+    :en: Ghana
+GI: 
+  :name: 
+    :en: Gibraltar
+GR: 
+  :name: 
+    :en: Greece
+GL: 
+  :name: 
+    :en: Greenland
+GD: 
+  :name: 
+    :en: Grenada
+GP: 
+  :name: 
+    :en: Guadeloupe
+GU: 
+  :name: 
+    :en: Guam
+GT: 
+  :name: 
+    :en: Guatemala
+GN: 
+  :name: 
+    :en: Guinea
+GW: 
+  :name: 
+    :en: Guinea-Bissau
+GY: 
+  :name: 
+    :en: Guyana
+HT: 
+  :name: 
+    :en: Haiti
+HM: 
+  :name: 
+    :en: Heard and McDonald Islands
+HN: 
+  :name: 
+    :en: Honduras
+HK: 
+  :name: 
+    :en: Hong Kong
+HU: 
+  :name: 
+    :en: Hungary
+IS: 
+  :name: 
+    :en: Iceland
+IN: 
+  :name: 
+    :en: India
+ID: 
+  :name: 
+    :en: Indonesia
+IR: 
+  :name: 
+    :en: Iran
+IQ: 
+  :name: 
+    :en: Iraq
+IE: 
+  :name: 
+    :en: Ireland
+IL: 
+  :name: 
+    :en: Israel
+IT: 
+  :name: 
+    :en: Italy
+JM: 
+  :name: 
+    :en: Jamaica
+JP: 
+  :name: 
+    :en: Japan
+JO: 
+  :name: 
+    :en: Jordan
+KZ: 
+  :name: 
+    :en: Kazakhstan
+KE: 
+  :name: 
+    :en: Kenya
+KI: 
+  :name: 
+    :en: Kiribati
+KP: 
+  :name: 
+    :en: Korea (North)
+KR: 
+  :name: 
+    :en: Korea (South)
+KW: 
+  :name: 
+    :en: Kuwait
+KG: 
+  :name: 
+    :en: Kyrgyzstan
+LA: 
+  :name: 
+    :en: Laos
+LV: 
+  :name: 
+    :en: Latvia
+LB: 
+  :name: 
+    :en: Lebanon
+LS: 
+  :name: 
+    :en: Lesotho
+LR: 
+  :name: 
+    :en: Liberia
+LY: 
+  :name: 
+    :en: Libya
+LI: 
+  :name: 
+    :en: Liechtenstein
+LT: 
+  :name: 
+    :en: Lithuania
+LU: 
+  :name: 
+    :en: Luxembourg
+MO: 
+  :name: 
+    :en: Macau
+MK: 
+  :name: 
+    :en: Macedonia
+MG: 
+  :name: 
+    :en: Madagascar
+MW: 
+  :name: 
+    :en: Malawi
+MY: 
+  :name: 
+    :en: Malaysia
+MV: 
+  :name: 
+    :en: Maldives
+ML: 
+  :name: 
+    :en: Mali
+MT: 
+  :name: 
+    :en: Malta
+MH: 
+  :name: 
+    :en: Marshall Islands
+MQ: 
+  :name: 
+    :en: Martinique
+MR: 
+  :name: 
+    :en: Mauritania
+MU: 
+  :name: 
+    :en: Mauritius
+YT: 
+  :name: 
+    :en: Mayotte
+MX: 
+  :name: 
+    :en: Mexico
+FM: 
+  :name: 
+    :en: Micronesia
+MD: 
+  :name: 
+    :en: Moldova
+MC: 
+  :name: 
+    :en: Monaco
+MN: 
+  :name: 
+    :en: Mongolia
+MS: 
+  :name: 
+    :en: Montserrat
+MA: 
+  :name: 
+    :en: Morocco
+MZ: 
+  :name: 
+    :en: Mozambique
+MM: 
+  :name: 
+    :en: Myanmar
+NA: 
+  :name: 
+    :en: Namibia
+NR: 
+  :name: 
+    :en: Nauru
+NP: 
+  :name: 
+    :en: Nepal
+NL: 
+  :name: 
+    :en: Netherlands
+AN: 
+  :name: 
+    :en: Netherlands Antilles
+NC: 
+  :name: 
+    :en: New Caledonia
+NZ: 
+  :name: 
+    :en: New Zealand
+NI: 
+  :name: 
+    :en: Nicaragua
+NE: 
+  :name: 
+    :en: Niger
+NG: 
+  :name: 
+    :en: Nigeria
+NU: 
+  :name: 
+    :en: Niue
+NF: 
+  :name: 
+    :en: Norfolk Island
+MP: 
+  :name: 
+    :en: Northern Mariana Islands
+"NO": 
+  :name: 
+    :en: Norway
+OM: 
+  :name: 
+    :en: Oman
+PK: 
+  :name: 
+    :en: Pakistan
+PW: 
+  :name: 
+    :en: Palau
+PA: 
+  :name: 
+    :en: Panama
+PG: 
+  :name: 
+    :en: Papua New Guinea
+PY: 
+  :name: 
+    :en: Paraguay
+PE: 
+  :name: 
+    :en: Peru
+PH: 
+  :name: 
+    :en: Philippines
+PN: 
+  :name: 
+    :en: Pitcairn
+PL: 
+  :name: 
+    :en: Poland
+PT: 
+  :name: 
+    :en: Portugal
+PR: 
+  :name: 
+    :en: Puerto Rico
+QA: 
+  :name: 
+    :en: Qatar
+RE: 
+  :name: 
+    :en: Reunion
+RO: 
+  :name: 
+    :en: Romania
+RU: 
+  :name: 
+    :en: Russian Federation
+RW: 
+  :name: 
+    :en: Rwanda
+KN: 
+  :name: 
+    :en: Saint Kitts and Nevis
+LC: 
+  :name: 
+    :en: Saint Lucia
+VC: 
+  :name: 
+    :en: Saint Vincent and The Grenadines
+WS: 
+  :name: 
+    :en: Samoa
+SM: 
+  :name: 
+    :en: San Marino
+ST: 
+  :name: 
+    :en: Sao Tome and Principe
+SA: 
+  :name: 
+    :en: Saudi Arabia
+SN: 
+  :name: 
+    :en: Senegal
+SC: 
+  :name: 
+    :en: Seychelles
+SL: 
+  :name: 
+    :en: Sierra Leone
+SG: 
+  :name: 
+    :en: Singapore
+SK: 
+  :name: 
+    :en: Slovak Republic
+SI: 
+  :name: 
+    :en: Slovenia
+SB: 
+  :name: 
+    :en: Solomon Islands
+SO: 
+  :name: 
+    :en: Somalia
+ZA: 
+  :name: 
+    :en: South Africa
+GS: 
+  :name: 
+    :en: S. Georgia and S. Sandwich Isls.
+ES: 
+  :name: 
+    :en: Spain
+LK: 
+  :name: 
+    :en: Sri Lanka
+SH: 
+  :name: 
+    :en: St. Helena
+PM: 
+  :name: 
+    :en: St. Pierre and Miquelon
+SD: 
+  :name: 
+    :en: Sudan
+SR: 
+  :name: 
+    :en: Suriname
+SJ: 
+  :name: 
+    :en: Svalbard and Jan Mayen Islands
+SZ: 
+  :name: 
+    :en: Swaziland
+SE: 
+  :name: 
+    :en: Sweden
+CH: 
+  :name: 
+    :en: Switzerland
+SY: 
+  :name: 
+    :en: Syria
+TW: 
+  :name: 
+    :en: Taiwan
+TJ: 
+  :name: 
+    :en: Tajikistan
+TZ: 
+  :name: 
+    :en: Tanzania
+TH: 
+  :name: 
+    :en: Thailand
+TG: 
+  :name: 
+    :en: Togo
+TK: 
+  :name: 
+    :en: Tokelau
+TO: 
+  :name: 
+    :en: Tonga
+TT: 
+  :name: 
+    :en: Trinidad and Tobago
+TN: 
+  :name: 
+    :en: Tunisia
+TR: 
+  :name: 
+    :en: Turkey
+TM: 
+  :name: 
+    :en: Turkmenistan
+TC: 
+  :name: 
+    :en: Turks and Caicos Islands
+TV: 
+  :name: 
+    :en: Tuvalu
+UG: 
+  :name: 
+    :en: Uganda
+UA: 
+  :name: 
+    :en: Ukraine
+AE: 
+  :name: 
+    :en: United Arab Emirates
+UK: 
+  :name: 
+    :en: United Kingdom
+US: 
+  :name: 
+    :en: United States
+UM: 
+  :name: 
+    :en: US Minor Outlying Islands
+UY: 
+  :name: 
+    :en: Uruguay
+UZ: 
+  :name: 
+    :en: Uzbekistan
+VU: 
+  :name: 
+    :en: Vanuatu
+VA: 
+  :name: 
+    :en: Vatican City State (Holy See)
+VE: 
+  :name: 
+    :en: Venezuela
+VN: 
+  :name: 
+    :en: Viet Nam
+VG: 
+  :name: 
+    :en: Virgin Islands (British)
+VI: 
+  :name: 
+    :en: Virgin Islands (US)
+WF: 
+  :name: 
+    :en: Wallis and Futuna Islands
+EH: 
+  :name: 
+    :en: Western Sahara
+YE: 
+  :name: 
+    :en: Yemen
+YU: 
+  :name: 
+    :en: Yugoslavia
+ZR: 
+  :name: 
+    :en: Zaire
+ZM: 
+  :name: 
+    :en: Zambia
+ZW: 
+  :name: 
+    :en: Zimbabwe
