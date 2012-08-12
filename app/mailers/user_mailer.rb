@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class UserMailer < ActionMailer::Base
   default from: "noreply@relicious.me"
 
@@ -21,9 +23,17 @@ class UserMailer < ActionMailer::Base
   def info_email(user)
     @user = user
     set_locale(@user)
-  
+
+    subject = String.new
+    case I18n.locale
+    when :ja
+      subject = '[Relicious] 言語スキルをアップデートしてください！'
+    else
+      subject = '[Relicious] Please update your language skill !!'
+    end
+
     mail(:to => user.email,
-         :subject => "[Relicious] information")
+         :subject => subject)
   end
 
   private
