@@ -8,7 +8,7 @@
     <div id="profileImg">
       <div class="flexslider">
         <ul class="slides">
-          <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", height:"175", alt:"picture" %></li>
+          <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", alt:"picture" %></li>
         </ul>
       </div>
       <% if @user == current_user %>
@@ -57,7 +57,7 @@
       <% if @user.name.blank? %>
         <dd>-</dd>
       <% else %>
-        <dd><%= @user.name %> | <%= link_to image_tag('social_balloon-14.png', size: "20x20"), "https://facebook.com/#{@user.provider_uid}" %></dd>
+        <dd><%= @user.name %><a id="fblogin" class="mt10" href="https://facebook.com/#{@user.provider_uid}"><div class="clearfix"><div class="left"></div><div class="center">この人のfacebookプロフィールを見る</div><div class="right"></div></div></a></dd>
       <% end %>
 
       <dt><%= User.human_attribute_name(:gender) %></dt>
