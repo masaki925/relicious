@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :redirect_unless_new_user, only: [:new, :create]
+  before_filter :require_authentication, except: [:new, :create, :index]
 
   # GET /users
   # GET /users.json
@@ -150,7 +151,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to root_path, notice: 'User profile was successfully updated.' }
+        format.html { redirect_to user_path(@user), notice: 'User profile was successfully updated.' }
         format.json { head :no_content }
       else
         @user_languages = @user.user_languages
