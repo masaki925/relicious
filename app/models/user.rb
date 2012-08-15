@@ -84,6 +84,6 @@ class User < ActiveRecord::Base
   end
 
   def provider_uid
-    OauthUser.find(self.id).provider_uid
+    OauthUser.find_by_user_id(self.id).provider_uid
   end
 end

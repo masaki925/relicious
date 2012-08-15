@@ -57,7 +57,16 @@
       <% if @user.name.blank? %>
         <dd>-</dd>
       <% else %>
-        <dd><%= @user.name %><a id="fblogin" class="mt10" href="https://facebook.com/#{@user.provider_uid}"><div class="clearfix"><div class="left"></div><div class="center">この人のfacebookプロフィールを見る</div><div class="right"></div></div></a></dd>
+        <dd>
+          <%= @user.name %>
+          <a id="fblogin" class="mt10" href="https://facebook.com/<%= @user.provider_uid %>">
+            <div class="clearfix">
+              <div class="left"></div>
+              <div class="center">この人のfacebookプロフィールを見る</div>
+              <div class="right"></div>
+            </div>
+          </a>
+        </dd>
       <% end %>
 
       <dt><%= User.human_attribute_name(:gender) %></dt>
