@@ -2,12 +2,13 @@ require 'spec_helper'
 
 describe "user_reviews/new" do
   before(:each) do
-    @user       = FactoryGirl.create(:user)
-    @other_user = assign(:reviewed_user, FactoryGirl.create(:user))
-    @meetup = FactoryGirl.create(:meetup)
+    @user         = FactoryGirl.create(:user)
+    @other_user   = assign(:reviewed_user, FactoryGirl.create(:user))
+    @meetup       = FactoryGirl.create(:meetup)
     @user.meetups << @meetup
     @other_user.meetups << @meetup
     @meetup_candidates = @user.meetups and @other_user.meetups
+    @user_review  = FactoryGirl.create(:user_review, user_id: @user.id, meetup_id: @meetup.id)
     assign(:meetup_candidates, @meetup_candidates)
   end
 

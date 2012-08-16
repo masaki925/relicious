@@ -3,9 +3,7 @@ require 'spec_helper'
 describe "users/edit" do
   before(:each) do
     @user = FactoryGirl.create(:user)
-    @all_languages = FactoryGirl.create_list(:language, 2)
-    @user.languages = @all_languages
-    @user_languages = @user.languages
+    @user_languages = @user.user_languages
     assign(:user, @user)
     assign(:all_languages, @all_languages)
   end
@@ -20,12 +18,11 @@ describe "users/edit" do
       assert_select "textarea#user_introduction", :name => "user[introduction]"
       assert_select "input#user_education", :name => "user[education]"
       assert_select "input#user_work", :name => "user[work]"
-      assert_select "input#user_gender", :name => "user[gender]"
-      assert_select "input#user_locale", :name => "user[locale]"
-      assert_select "select#user_languages", :name => "languages[]"
-      assert_select "select#user_avail_avail_from_4i", :name => "user_avail[avail_from]"
-      assert_select "select#user_avail_avail_to_4i", :name => "user_avail[avail_to]"
-      assert_select "select#user_avail_avail_option", :name => "user_avail[avail_option]"
+      assert_select "select#user_gender", :name => "user[gender]"
+      assert_select "select#user_locale", :name => "user[locale]"
+      assert_select "select#user_language_language_id", :name => "user_languages[][language_id]"
+      assert_select "select#user_avail_day", :name => "user_avails[][day]"
+      assert_select "select#user_avail_option", :name => "user_avails[][avail_option]"
     end
   end
 end

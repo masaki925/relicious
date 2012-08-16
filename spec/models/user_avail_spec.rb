@@ -12,11 +12,6 @@ describe UserAvail do
       before { @user_avail.day = '' }
       specify { @user_avail.should have(1).errors_on(:day) }
     end
-
-    context 'without area_id' do
-      before { @user_avail.area_id = '' }
-      specify { @user_avail.should have(1).errors_on(:area_id) }
-    end
   end
 
   describe 'UserAvail#user' do

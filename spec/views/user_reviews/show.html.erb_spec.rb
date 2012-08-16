@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe "user_reviews/show" do
   before(:each) do
+    @user = FactoryGirl.create(:user)
     @reviewed_user = assign(:reviewed_user, FactoryGirl.create(:user))
     @meetup      = assign(:meetup     , FactoryGirl.create(:meetup))
     @user_review = assign(:user_review, FactoryGirl.create(:user_review))
+    view.stub(:current_user) { @user }
   end
 
   it "renders attributes in <p>" do

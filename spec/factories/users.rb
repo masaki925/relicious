@@ -17,5 +17,6 @@ FactoryGirl.define do
     location     "Tokyo"
     favorite_food "favorite food"
     ng_food      "ng food"
+    nationality  "JP"
   end
 end

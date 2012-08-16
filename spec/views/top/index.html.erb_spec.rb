@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "top/index.html.erb" do
   context "when user is NOT logged in" do
-    it "renders log in bar" do
+    it "renders log in button" do
       render
-      rendered.should match(/Relicious Top/)
+      rendered.should match(/\/auth\/facebook/)
     end
   end
 
@@ -14,10 +14,9 @@ describe "top/index.html.erb" do
       assign(:user, @user)
     end
 
-    it "render user home" do
+    it "render user top" do
       render
-      rendered.should match(/User Home/)
-      rendered.should match(/Availability/)
+      rendered.should match(/Welcome/)
     end
   end
 end

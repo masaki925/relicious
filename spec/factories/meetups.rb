@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :meetup do
-    title "MyString"
+    title "Title"
     user
     begin_at "2012-06-11 08:26:45"
     end_at "2012-06-11 08:26:45"

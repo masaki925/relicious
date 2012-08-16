@@ -32,89 +32,88 @@
       <dd><a href="#" class="btn3">(coming soon)</a></dd>
     </dl>
     -->
-
-    </form>
   </div>
   <!-- /localSearch -->
 
   <!-- findPeopleArea -->
-  <% @users.each do |user| %>
-    <div class="findPeopleArea">
-      <div class="imgArea">
-        <p><%= link_to image_tag( facebook_image_url(user.id, 'normal'), width:"150", alt:"picture"), user_path(user) %></p>
-        <%= user.name %><br>
-        <%= user.nationality %> 
-        (<%= user.gender %>)</p>
-      </div>
-
-      <div class="detailArea">
-        <div class="arrowBoxL">
-          <p><strong>Hey,I'm <%= user.name %>!!</strong><br>
-          <%= user.introduction %></p>
+  <% if @users %>
+    <% @users.each do |user| %>
+      <div class="findPeopleArea">
+        <div class="imgArea">
+          <p><%= link_to image_tag( facebook_image_url(user.id, 'normal'), width:"150", alt:"picture"), user_path(user) %></p>
+          <%= user.name %><br>
+          <%= user.nationality %> 
+          (<%= user.gender %>)
         </div>
 
-        <dl class="cotegory1">
-          <dt><%= t("general.area") %>:</dt>
-          <% 
-            area_names = Array.new
-            user.user_avails.each_with_index do |ua, idx|
-              next if ua.area.blank?
-              area_names << ua.area.name
-            end
-          %>
-          <% if area_names.blank? %>
-            <dd>-</dd>
-          <% else %>
-            <dd><%= area_names.join(',') %></dd>
-          <% end %>
-        </dl>
+        <div class="detailArea">
+          <div class="arrowBoxL">
+            <p><strong>Hey,I'm <%= user.name %>!!</strong><br>
+            <%= user.introduction %></p>
+          </div>
 
-        <dl class="cotegory2">
-          <dt><%= t("general.review") %>:</dt>
-          <dd><%= user.received_reviews.size %></dd>
-          <!-- FIXME
-          <dt>Pictures:</dt>
-          <dt>Reply Rate:</dt>
-          <dd>100%</dd> -->
-        </dl>
-
-        <h3><%= t("users.index.user_about") %></h3>
-        <dl class="cotegory3">
-          <dt><%= t("users.index.user_basics") %>:</dt>
-          <dd><%= user.birthday%>, <%= user.gender %>, <%= user.location %></dd>
-
-          <dt><%= t("users.index.user_avails") %>:</dt>
-          <% if user.user_avails.blank? %>
-            <dd>-</dd>
-          <% else %>
-            <dd><%= render user.user_avails %></dd>
-          <% end %>
-
-          <%
-            languages = []
-            if user.user_languages.blank?
-              languages << '-'
-            else
-              user.user_languages.each do |ul|
-                languages << "#{ul.language.name}<sup>#{ul.skill.to_s}</sup>"
+          <dl class="cotegory1">
+            <dt><%= t("general.area") %>:</dt>
+            <% 
+              area_names = Array.new
+              user.user_avails.each_with_index do |ua, idx|
+                next if ua.area.blank?
+                area_names << ua.area.name
               end
-            end
-          %>
-          <dt><%= User.human_attribute_name(:language) %></dt>
-          <dd><%= languages.join(',').html_safe %> </dd>
+            %>
+            <% if area_names.blank? %>
+              <dd>-</dd>
+            <% else %>
+              <dd><%= area_names.join(',') %></dd>
+            <% end %>
+          </dl>
 
-        </dl>
-        <% unless user == current_user %>
-          <p class="btnArea">
-            <%= link_to t("general.meetup_request"), "/meetups/new?member=#{user.id}", class: "btn3" %>
-          </p>
-        <% end %>
-        <p style="text-align:right;font-weight:bold;"><%= link_to 'see more', user_path(user), style: "text-align:right;" %></p>
+          <dl class="cotegory2">
+            <dt><%= t("general.review") %>:</dt>
+            <dd><%= user.received_reviews.size %></dd>
+            <!-- FIXME
+            <dt>Pictures:</dt>
+            <dt>Reply Rate:</dt>
+            <dd>100%</dd> -->
+          </dl>
+
+          <h3><%= t("users.index.user_about") %></h3>
+          <dl class="cotegory3">
+            <dt><%= t("users.index.user_basics") %>:</dt>
+            <dd><%= user.birthday%>, <%= user.gender %>, <%= user.location %></dd>
+
+            <dt><%= t("users.index.user_avails") %>:</dt>
+            <% if user.user_avails.blank? %>
+              <dd>-</dd>
+            <% else %>
+              <dd><%= render user.user_avails %></dd>
+            <% end %>
+
+            <%
+              languages = []
+              if user.user_languages.blank?
+                languages << '-'
+              else
+                user.user_languages.each do |ul|
+                  languages << "#{ul.language.name}<sup>#{ul.skill.to_s}</sup>"
+                end
+              end
+            %>
+            <dt><%= User.human_attribute_name(:language) %></dt>
+            <dd><%= languages.join(',').html_safe %> </dd>
+
+          </dl>
+          <% unless user == current_user %>
+            <p class="btnArea">
+              <%= link_to t("general.meetup_request"), "/meetups/new?member=#{user.id}", class: "btn3" %>
+            </p>
+          <% end %>
+          <p style="text-align:right;font-weight:bold;"><%= link_to 'see more', user_path(user), style: "text-align:right;" %></p>
+        </div>
       </div>
-    </div>
-  <% end if @users %>
+    <% end %>
+  <% end %>
   <!-- /findPeopleArea -->
 </div>
 <!-- /findLocal -->
-</table>
 

@@ -86,9 +86,9 @@ describe UserReviewsController do
         assigns(:user_review).should be_persisted
       end
 
-      it "redirects to the created user_review" do
+      it "redirects to the reviewd user page" do
         post :create, {user_review: FactoryGirl.attributes_for(:user_review, meetup_id: @meetup.id), user_id: @reviewed_user.id}, {user_id: @user.id}
-        response.should redirect_to( user_reviews_path(user_id: @reviewed_user.id, id: assigns(:user_review).id) )
+        response.should redirect_to( user_path(id: @reviewed_user.id) )
       end
     end
 
