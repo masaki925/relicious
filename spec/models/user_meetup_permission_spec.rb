@@ -13,5 +13,10 @@ describe UserMeetupPermission do
       before { @user_meetup_permission.meetup_id = nil }
       specify { @user_meetup_permission.should have(1).errors_on(:meetup_id) }
     end
+
+    context "without status" do
+      before { @user_meetup_permission.status = nil }
+      specify { @user_meetup_permission.should have(1).errors_on(:status) }
+    end
   end
 end
