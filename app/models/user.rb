@@ -83,6 +83,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def meetup_status(meetup)
+    UserMeetupPermission.find_by_user_id_and_meetup_id(self.id, meetup.id).try(:status)
+  end
+
   def provider_uid
     OauthUser.find_by_user_id(self.id).provider_uid
   end

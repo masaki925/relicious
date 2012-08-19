@@ -11,14 +11,7 @@
       <%= t("meetups.show.conversation_prefix_sole") %>
     <% end %>
 
-    <% comma_flag2 = false %>
-    <% @meetup_users.each do |u| %>
-      <% next if u == current_user %>
-
-      <%= ',' if comma_flag2 %>
-      <% commna_flag2 = true %>
-      <%= link_to u.name, user_path(u) %>
-    <% end %>
+    <%= @meetup_users_except_me.map {|u| link_to u.name, user_path(u) }.join(',').html_safe %>
 
     <% if @meetup_users.size > 1 %>
       <%= t("meetups.show.conversation_postfix") %>
@@ -32,18 +25,51 @@
   <div id="addressee">
     <div class="addresseeDetail">
       <div class="imgArea">
-        <% @meetup_users.each do |u| %>
-          <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(u) %>
+        <% if @attend_users.present? %>
+          <p style="line-height: 150%; color: #FF5A00;">Attend</p>
+          <% @attend_users.each do |u| %>
+            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+          <% end %>
+        <% end %>
+        <% if @invited_users.present? %>
+          <p style="line-height: 150%; color: #FF5A00;">Invited</p>
+          <% @invited_users.each do |u| %>
+            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+          <% end %>
+        <% end %>
+        <% if @declined_users.present? %>
+          <p style="line-height: 150%; color: #FF5A00;">Declined<p>
+          <% @declined_users.each do |u| %>
+            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+          <% end %>
         <% end %>
       </div>
+
       <div class="detailArea">
+        <% if @meetup_users.include? current_user %>
+          <%
+            meetup_status_for_select = nil
+            if @user.meetup_status(@meetup) != MEETUP_STATUS_INVITED
+              meetup_status_for_select = @user.meetup_status(@meetup)
+            end
+          %>
+          <li><%= select_tag 'Attend', options_for_select([["Attend", MEETUP_STATUS_ATTEND], ["Decline", MEETUP_STATUS_DECLINED]], meetup_status_for_select ), {include_blank: true} %></li>
+          <script>
+            hoge = <%= @meetup.id %>;
+            $("#Attend").change ( function () {
+            window.location.replace(hoge + "/status?stat="+this.value);
+            });
+          </script>
+        <% end %>
+
         <p>
-          <%= t("meetups.show.title") %> : <%= @meetup.title %><br>
-          <%= t("meetups.show.area_name") %> : <%= @meetup.area.name %><br>
-          <%= t("meetups.show.place") %> : <%= @meetup.place %><br>
-          <%= t("meetups.show.url") %> : <%= link_to @meetup.url, @meetup.url %><br>
-          <%= t("meetups.show.public") %> : <%= @meetup.public ? "public" : "private" %><br>
-          <%= t("meetups.show.begin_at") %> : <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
+          <%= t("meetups.show.title") %>      : <%= @meetup.title.blank?       ? '-' : @meetup.title %><br>
+          <%= t("meetups.show.description") %>: <%= @meetup.description.blank? ? '-' : @meetup.description %><br>
+          <%= t("meetups.show.area_name") %>  : <%= @meetup.area.blank?        ? '-' : @meetup.area.name %><br>
+          <%= t("meetups.show.place") %>      : <%= @meetup.place.blank?       ? '-' : @meetup.place %><br>
+          <%= t("meetups.show.url") %>        : <%= @meetup.url.blank?         ? '-' : link_to(@meetup.url, @meetup.url) %><br>
+          <%= t("meetups.show.public") %>     : <%= @meetup.public             ? "public" : "private" %><br>
+          <%= t("meetups.show.begin_at") %>   : <%= @meetup.begin_at.blank?    ? '????/??/?? ??:??' : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
         </p>
         <br>
         <% if @meetup.user == current_user %>
@@ -52,7 +78,6 @@
         <% if current_user and @not_joined_yet %>
           <%= link_to "join this meetup", join_meetups_path(@meetup), class: "btn1" %>
         <% end %>
-
       </div>
     </div>
   </div>
@@ -115,7 +140,7 @@
     <% end %>
   <% end %>
 
-  <% if current_user and @meetup_users.include?(current_user) %>
+  <% if current_user and @attend_users.include?(current_user) %>
     <h2><%= t("meetups.show.send_message") %>:</h2>
     <%= render "meetup_comments/form" %>
   <% end %>

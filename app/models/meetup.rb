@@ -1,5 +1,5 @@
 class Meetup < ActiveRecord::Base
-  attr_accessible :begin_at, :end_at, :public, :title, :area_id, :place, :url
+  attr_accessible :public, :title, :area_id, :place, :url, :description, :begin_at, :end_at
 
   belongs_to :user
   belongs_to :area
@@ -10,7 +10,6 @@ class Meetup < ActiveRecord::Base
   has_many   :user_reviews
 
   validates :user_id, :presence => true
-  validates :area_id, :presence => true
-  validates :begin_at, :presence => true
-  validates :end_at, :presence => true
+  validates :title, :presence => true
+  validates :description, :presence => true
 end

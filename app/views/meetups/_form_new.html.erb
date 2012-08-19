@@ -3,11 +3,11 @@
 <%= form_for(@meetup, html: {id: "registration"}) do |f| %>
   <% if @meetup.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@meetup.errors.count, "error") %> prohibited this meetup from being saved:</h2>
+      <h3><%= pluralize(@meetup.errors.count, "error") %> prohibited this meetup from being saved:</h3>
 
       <ul>
       <% @meetup.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li><p class="fontCR"><%= msg %></p></li>
       <% end %>
       </ul>
     </div>
@@ -15,6 +15,7 @@
 
   <%= hidden_field_tag :member, params[:member] %>
 
+  <p class="fontCR"><%= t("meetups.new.header_explain") %></p>
   <table>
     <tr>
       <th><%= t("meetups.new.title") %></th>
@@ -25,37 +26,10 @@
     </tr>
 
     <tr>
-      <th><%= t("meetups.new.begin_at") %></th>
-      <td><%= f.datetime_select :begin_at %></td>
+      <th><%= t("meetups.new.description") %></th>
+      <td><%= f.text_area :description, size: "40x5" %></td>
     </tr>
 
-    <tr>
-      <th><%= t("meetups.new.end_at") %></th>
-      <td><%= f.datetime_select :end_at %></td>
-    </tr>
-
-    <tr>
-      <th><%= t("meetups.new.area") %><br /></th>
-      <td>
-        <p><%= t("meetups.new.area_explain") %></p>
-        <%= f.collection_select(:area_id, Area.all, :id, :name) %>
-      </td>
-    </tr>
-
-    <tr>
-      <th><%= t("meetups.new.place") %><br /></th>
-      <td>
-        <p><%= t("meetups.new.place_explain") %></p>
-        <%= f.text_field :place %>
-      </td>
-    </tr>
-    <tr>
-      <th><%= t("meetups.new.url") %><br /></th>
-      <td>
-        <p><%= t("meetups.new.url_explain") %></p>
-        <%= f.text_field :url %>
-      </td>
-    </tr>
     <tr>
       <th>Publicness</th>
       <td>

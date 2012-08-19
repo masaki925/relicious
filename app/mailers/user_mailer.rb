@@ -10,6 +10,16 @@ class UserMailer < ActionMailer::Base
          :subject => "[Relicious]Thank your for your registration in Relicious!!")
   end
 
+  def meetup_new_email(invited_user, created_user, meetup)
+    @invited_user   = invited_user
+    @created_user   = created_user
+    @meetup         = meetup
+    @meetup_url     = meetup_url(@meetup)
+
+    mail(:to => @invited_user.email,
+         :subject => "[Relicious]You got a message from #{@created_user.name} about #{@meetup.title}")
+  end
+
   def meetup_comment_email(user, commented_user, meetup)
     @user           = user
     @meetup         = meetup

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120812072036) do
+ActiveRecord::Schema.define(:version => 20120819032400) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(:version => 20120812072036) do
     t.integer  "area_id"
     t.datetime "begin_at"
     t.datetime "end_at"
-    t.boolean  "public",     :default => true
+    t.boolean  "public",      :default => true
     t.string   "place"
     t.string   "url"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.text     "description"
   end
 
   add_index "meetups", ["user_id"], :name => "index_meetups_on_user_id"
@@ -91,8 +92,9 @@ ActiveRecord::Schema.define(:version => 20120812072036) do
   create_table "user_meetup_permissions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "meetup_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "status",     :limit => 2
   end
 
   add_index "user_meetup_permissions", ["meetup_id"], :name => "index_user_meetup_permissions_on_meetup_id"

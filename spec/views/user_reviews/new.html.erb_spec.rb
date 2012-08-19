@@ -5,8 +5,8 @@ describe "user_reviews/new" do
     @user         = FactoryGirl.create(:user)
     @other_user   = assign(:reviewed_user, FactoryGirl.create(:user))
     @meetup       = FactoryGirl.create(:meetup)
-    @user.meetups << @meetup
-    @other_user.meetups << @meetup
+    FactoryGirl.create(:user_meetup_permission, user_id: @user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
+    FactoryGirl.create(:user_meetup_permission, user_id: @other_user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
     @meetup_candidates = @user.meetups and @other_user.meetups
     @user_review  = FactoryGirl.create(:user_review, user_id: @user.id, meetup_id: @meetup.id)
     assign(:meetup_candidates, @meetup_candidates)

@@ -80,7 +80,7 @@
             <div class="recentStreamBox">
               <div class="imgArea">
               	<div class="colBox">
-                <%= link_to image_tag facebook_image_url( @target_user.id, 'square'), width:"75", height:"75", alt:"picture" %>
+                <%= link_to image_tag(facebook_image_url( @target_user.id, 'square'), width:"75", height:"75", alt:"picture"), user_path(@target_user) %>
               	<%= link_to @target_user.name, user_path(@target_user) %>
               	</div>
               </div>

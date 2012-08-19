@@ -106,7 +106,7 @@ en:
 
   meetups:
     new:
-      header_explain: "You don't have to fill in all of items at this form, you can arrange these details with your partner in the next step."
+      header_explain: "you can set more details with your partner in the next step."
       title: "Title"
       title_explain: "Enter the theme of this meetup.(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)"
       begin_at: "Begin at"
@@ -125,13 +125,14 @@ en:
       conversation_postfix: ""
       payment_policy: "Our policy : You guys must split the cost of meals."
       update_information: "update information"
-      title    : "Title"
-      begin_at : "Begin at"
-      end_at   : "End at"
-      area_name: "Area"
-      place    : "Place"
-      url      : "URL"
-      public   : "Public"
+      title       : "Title"
+      description : "Description"
+      begin_at    : "Begin at"
+      end_at      : "End at"
+      area_name   : "Area"
+      place       : "Place"
+      url         : "URL"
+      public      : "Public"
       send_message: "Send a Message"
 
   meetup_comment:
