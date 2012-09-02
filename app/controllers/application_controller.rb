@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
 
   def require_authentication
     unless current_user
+      session[:redirect_to] = request.url
       redirect_to root_path, notice: 'please login to use this application'
-      #render :text => {:result => 'ng', :message => 'please login to use this application'}.to_json, :status => 401 
-      #response.headers['x-ll-requireauth'] = 'true'
     end
   end
 

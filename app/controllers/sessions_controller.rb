@@ -12,7 +12,12 @@ class SessionsController < ApplicationController
       # already registered user
       if @oauth_user.user_id and @user = User.find(@oauth_user.user_id)
         session[:user_id] = @user.id
-        redirect_to root_path
+        if session[:redirect_to].present?
+          redirect_to session[:redirect_to]
+          session[:redirect_to] = nil
+        else
+          redirect_to root_path
+        end
         return
       # connected but not registered
       else
