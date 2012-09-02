@@ -19,6 +19,12 @@ en:
         favorite_food: "Favorite food"
         ng_food: "NG food"
 
+  user_mailer:
+    info_email:
+      subject: '[Relicious] Please update your language skill !!'
+    invite_email:
+      subject: "[Relicious]You\'ve been invited to %{meetup_title} by %{created_user_name}"
+
   general:
     mandatory: "Mandatory"
     send: "send"

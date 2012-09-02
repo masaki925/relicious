@@ -19,6 +19,12 @@ ja:
         favorite_food: "好きな食べ物"
         ng_food: "苦手な食べ物"
 
+  user_mailer:
+    info_email:
+      subject: '[Relicious] 言語スキルをアップデートしてください！'
+    invite_email:
+      subject: '[Relicious] %{created_user_name} さんから%{meetup_title} へのお誘いが届いています！'
+
   general:
     mandatory: "必須入力項目"
     send: "送信"

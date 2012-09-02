@@ -27,7 +27,7 @@ describe MeetupsController do
   context "when user logged in" do
     before { @user = FactoryGirl.create(:user) }
 
-    context "the meetup is public" do
+    context "when the meetup is public" do
       before do
         @meetup = FactoryGirl.create(:meetup, public: true)
       end
@@ -37,6 +37,46 @@ describe MeetupsController do
 
         specify { assigns(:meetups).should eq([@meetup]) }
         specify { response.should be_success }
+      end
+
+      describe "POST invite" do
+        before do
+          UserMailer.any_instance.stub(:deliver).and_return(true)
+        end
+
+        describe "with valid params" do
+          before { @invited_user = FactoryGirl.create(:user) }
+
+          it "creates a new Permission" do
+            expect {
+              post :invite, { :id => @meetup.id, :invited_user_id => @invited_user.id  }, {:user_id => @user.id}
+            }.to change(UserMeetupPermission, :count).by(1)
+          end
+
+          it "send mail to invited member" do
+            pending "check mail send log from RDB or somewhere"
+          end
+
+          it "redirects to the meetup" do
+            post :invite, { :id => @meetup.id, :invited_user_id => @invited_user.id }, {:user_id => @user.id}
+            response.should redirect_to( meetup_path(@meetup) )
+          end
+        end
+
+        describe "with invalid params" do
+          before { FactoryGirl.create(:user_meetup_permission, user_id: @user.id, meetup_id: @meetup.id) }
+
+          it "reject invitee is already invited" do
+            expect {
+              post :invite, { :id => @meetup.id, :invited_user_id => @user.id }, {:user_id => @user.id}
+            }.to change(UserMeetupPermission, :count).by(0)
+          end
+
+          it "redirects to the meetup" do
+            post :invite, { :id => @meetup.id, :invited_user_id => nil }, {:user_id => @user.id}
+            response.should redirect_to( meetup_path(@meetup) )
+          end
+        end
       end
 
       describe "GET show" do
@@ -249,7 +289,7 @@ describe MeetupsController do
 
         describe "POST status" do
           it "change user status" do
-            post :status, {:id => @meetup.id, status: MEETUP_STATUS_ATTEND }, { :user_id => @user.id }
+            post :status, {:id => @meetup.id, meetup_status_select: MEETUP_STATUS_ATTEND }, { :user_id => @user.id }
             assigns(:meetup_permission).status.should_not eq(MEETUP_STATUS_INVITED)
           end
 

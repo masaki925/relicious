@@ -5,5 +5,5 @@ class UserMeetupPermission < ActiveRecord::Base
   belongs_to :meetup
 
   validates_presence_of :user_id, :meetup_id, :status
-  validates_uniqueness_of :meetup_id, :scope => [:user_id]
+  validates_uniqueness_of :meetup_id, :scope => [:user_id], :message => "specified user is already assigned into this meetup"
 end

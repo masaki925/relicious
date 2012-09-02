@@ -8,5 +8,6 @@ FactoryGirl.define do
     end_at "2012-06-11 08:26:45"
     area
     public false
+    description "description"
   end
 end

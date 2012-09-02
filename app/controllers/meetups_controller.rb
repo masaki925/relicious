@@ -21,6 +21,21 @@ class MeetupsController < ApplicationController
     end
   end
 
+  # POST /meetups/1/invite
+  def invite
+    @ump = UserMeetupPermission.new(user_id: params[:invited_user_id],
+                                    meetup_id: params[:id],
+                                    status: MEETUP_STATUS_INVITED)
+
+    if @ump.save
+      UserMailer.invite_email( User.find(params[:invited_user_id]), current_user, Meetup.find(params[:id]) ).deliver
+    else
+      flash[:notice] = @ump.errors.messages.each_value {|m| m[0]} 
+    end
+
+    redirect_to meetup_path(params[:id])
+  end
+
   # GET /meetups/1
   # GET /meetups/1.json
   def show
@@ -118,22 +133,21 @@ class MeetupsController < ApplicationController
     end
   end
 
-  # GET /meetups/1/status?v=xxx
-  # GET /meetups/1/status.json?v=xxx
+  # GET /meetups/1/status
+  # GET /meetups/1/status.json
   def status
-    @meetup = Meetup.find(params[:id])
     unless @meetup_permission = UserMeetupPermission.find_by_user_id_and_meetup_id(current_user.id, @meetup.id)
       redirect_to root_path, notice: "you don't have permission to do it"
       return
     end
 
-    if params[:stat].blank?
+    if params[:meetup_status_select].blank?
       redirect_to meetup_path(@meetup), notice: "invalid post data"
       return
     end
 
     respond_to do |format|
-      if @meetup_permission.update_attributes(status: params[:stat])
+      if @meetup_permission.update_attributes(status: params[:meetup_status_select])
         format.html { redirect_to @meetup, notice: 'Meetup status was successfully updated.' }
         format.json { head :no_content }
       else

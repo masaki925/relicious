@@ -1,8 +1,9 @@
 Relicious::Application.routes.draw do
   resources :meetups do
     collection do
-      get ":id/join"   => "meetups#join",   :as => :join
-      get ":id/status" => "meetups#status", :as => :status
+      post ":id/invite" => "meetups#invite", :as => :invite
+      get  ":id/join"   => "meetups#join",   :as => :join
+      post ":id/status" => "meetups#status", :as => :status
     end
     resources :meetup_comments
   end
