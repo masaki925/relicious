@@ -137,6 +137,7 @@ ja:
       url         : "食事をする場所のURL"
       public      : "他のユーザの参加可否"
       send_message: "メッセージを送る"
+      login       : "ログイン/登録 して参加する"
 
   meetup_comment:
     new:

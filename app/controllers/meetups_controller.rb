@@ -1,6 +1,7 @@
 class MeetupsController < ApplicationController
   before_filter :require_authentication, :except => [:show]
   before_filter :if_private_require_member, :except => [:index, :new, :create]
+  before_filter :set_redirect_to_session, :only => [:show]
 
   # GET /meetups
   # GET /meetups.json
@@ -99,11 +100,12 @@ class MeetupsController < ApplicationController
 
     @meetup = Meetup.new(params[:meetup])
     @meetup.user_id = current_user.id
+    @meetup.fixed   = false
 
     respond_to do |format|
       if @meetup.save
         @my_meetup_permission = UserMeetupPermission.create(user_id: current_user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
-        unless params[:member].blank?
+        if params[:member].present?
           if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
             UserMailer.meetup_new_email(User.find(params[:member]), @user, @meetup).deliver
           end
@@ -133,8 +135,8 @@ class MeetupsController < ApplicationController
     end
   end
 
-  # GET /meetups/1/status
-  # GET /meetups/1/status.json
+  # POST /meetups/1/status
+  # POST /meetups/1/status.json
   def status
     unless @meetup_permission = UserMeetupPermission.find_by_user_id_and_meetup_id(current_user.id, @meetup.id)
       redirect_to root_path, notice: "you don't have permission to do it"
@@ -148,6 +150,12 @@ class MeetupsController < ApplicationController
 
     respond_to do |format|
       if @meetup_permission.update_attributes(status: params[:meetup_status_select])
+        unless @meetup.fixed
+          attend_perms = UserMeetupPermission.find_all_by_meetup_id_and_status(@meetup.id, MEETUP_STATUS_ATTEND)
+          @meetup.fixed = true if attend_perms.size > 1
+          @meetup.save
+        end
+
         format.html { redirect_to @meetup, notice: 'Meetup status was successfully updated.' }
         format.json { head :no_content }
       else
@@ -175,12 +183,21 @@ class MeetupsController < ApplicationController
   end
 
   private
+  def set_redirect_to_session
+    session[:redirect_to] = request.url
+  end
+
   def if_private_require_member
     @meetup = Meetup.find(params[:id])
     return if @meetup.public
 
     return if @meetup.users.include? current_user
 
-    redirect_to root_path, notice: "you have no permission to do it"
+    unless current_user
+      flash[:notice] = 'please login to use this application'
+    else
+      flash[:notice] = 'you don\'t have permission to do it'
+    end
+    redirect_to root_path
   end
 end

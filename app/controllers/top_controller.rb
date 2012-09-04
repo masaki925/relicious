@@ -7,6 +7,7 @@ class TopController < ApplicationController
       @past_my_meetups = @user_meetups - @recent_my_meetups
 
       # pick up meetups except me
+      #@recent_meetups_exceptme  = Meetup.get_meetups_except_me(current_user, 3)
       @recent_meetups_exceptme  = Array.new
       offset = 0
       loop do

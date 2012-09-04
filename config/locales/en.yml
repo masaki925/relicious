@@ -140,6 +140,7 @@ en:
       url         : "URL"
       public      : "Public"
       send_message: "Send a Message"
+      login       : "Login/Sign up and join the meetup"
 
   meetup_comment:
     new:

@@ -64,8 +64,7 @@
         <span class="fontCB">
           public:Yes<br> private:No
         </span><br>
-
-        <%= f.select :public, options_for_select([["public", 1], ["private", 0]], 1) %>
+        <%= f.select :public, options_for_select([["public", true], ["private", false]], @meetup.public) %>
       </td>
     </tr>
   </table>

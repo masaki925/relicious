@@ -14,7 +14,7 @@
   <!-- addressee -->
   <div id="addressee">
     <div class="addresseeDetail">
-      <% if @attend_users.include? current_user %>
+      <% if @meetup.fixed and @attend_users.include? current_user %>
         <div id="invite_friend">
           <button id='invite_friend_button'>Invite Friends</button>
       
@@ -85,6 +85,7 @@
 
       <div class="detailArea">
         <p>
+          <%= t("meetups.show.status") %>      : <%= @meetup.fixed              ? 'FIXED' : 'NOT FIXED' %><br>
           <%= t("meetups.show.title") %>      : <%= @meetup.title.blank?       ? '-' : @meetup.title %><br>
           <%= t("meetups.show.description") %>: <%= @meetup.description.blank? ? '-' : @meetup.description %><br>
           <%= t("meetups.show.area_name") %>  : <%= @meetup.area.blank?        ? '-' : @meetup.area.name %><br>
@@ -162,9 +163,15 @@
     <% end %>
   <% end %>
 
-  <% if current_user and @meetup_users.include?(current_user) %>
-    <h2><%= t("meetups.show.send_message") %>:</h2>
-    <%= render "meetup_comments/form" %>
+  <% if current_user %>
+    <% if @meetup_users.include?(current_user) %>
+      <h2><%= t("meetups.show.send_message") %>:</h2>
+      <%= render "meetup_comments/form" %>
+    <% end %>
+  <% else %>
+    <% if @meetup.public %>
+      <li style="text-align:center;"><a href="/auth/facebook" class="login"><%= t("meetups.show.login") %></a></li>
+    <% end %>
   <% end %>
 
 </div>
