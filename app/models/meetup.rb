@@ -11,8 +11,14 @@ class Meetup < ActiveRecord::Base
 
   validates :user_id,     :presence => true
   validates :title,       :presence => true
-  validates :description, :presence => true
   validates_inclusion_of :fixed, :in => [true, false]
+
+  def self.new_without_mass_asign(params, user)
+    m = self.new(params)
+    m.user_id = user.id
+    m.fixed = false
+    return m
+  end
 
   #def get_meetups_except_me(user, size=3)
   #  offset = 0

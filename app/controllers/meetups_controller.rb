@@ -66,6 +66,8 @@ class MeetupsController < ApplicationController
     add_breadcrumb "new", new_meetup_path
 
     @meetup = Meetup.new
+    @meetup_comment = MeetupComment.new
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -96,23 +98,32 @@ class MeetupsController < ApplicationController
   # POST /meetups
   # POST /meetups.json
   def create
-    @user = current_user if current_user
+    @user = current_user
 
-    @meetup = Meetup.new(params[:meetup])
-    @meetup.user_id = current_user.id
-    @meetup.fixed   = false
+    @meetup = Meetup.new_without_mass_asign(params[:meetup], @user)
+    @meetup_comment = MeetupComment.new_without_mass_asign(params[:meetup_comment], @user)
 
-    respond_to do |format|
-      if @meetup.save
-        @my_meetup_permission = UserMeetupPermission.create(user_id: current_user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
-        if params[:member].present?
-          if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
-            UserMailer.meetup_new_email(User.find(params[:member]), @user, @meetup).deliver
+    begin
+      ActiveRecord::Base.transaction do
+        if @meetup.save or raise
+          @meetup_comment.meetup_id = @meetup.id
+          if @meetup_comment.save or raise
+            @my_meetup_permission = UserMeetupPermission.create(user_id: @user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
+            if params[:member].present?
+              if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
+                UserMailer.meetup_new_email(User.find(params[:member]), @user, @meetup).deliver
+              end
+            end
+
+            respond_to do |format|
+              format.html { redirect_to @meetup, notice: 'Meetup was successfully created.' }
+              format.json { render json: @meetup, status: :created, location: @meetup }
+            end
           end
         end
-        format.html { redirect_to @meetup, notice: 'Meetup was successfully created.' }
-        format.json { render json: @meetup, status: :created, location: @meetup }
-      else
+      end
+    rescue => e
+      respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @meetup.errors, status: :unprocessable_entity }
       end

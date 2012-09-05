@@ -120,6 +120,7 @@ ja:
       url_explain: "相手と食事をするレストラン等のURLを記入してください。"
       public: "他のユーザーの参加可否"
       public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
+      comment: "メッセージ"
 
     show:
       conversation_prefix: ""

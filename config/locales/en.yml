@@ -124,6 +124,7 @@ en:
       url_explain: "Enter URL of the place where you guys will have local foods."
       public: "Public"
       public_explain: "Will you allow other users to check your converstion about this meetup with this person and join you guys?"
+      comment: "Message"
 
     show:
       conversation_prefix: "Conversation with"
