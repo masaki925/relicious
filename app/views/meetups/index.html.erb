@@ -1,5 +1,29 @@
 <%= stylesheet_link_tag "views/message", :media => "all" %>
 
+<article class="tabs">
+  <section>
+    <h3>Documents</h3>
+    <div>
+        <p>A documents tab content1</p>
+        <p>A documents tab content2</p>
+    </div>
+  </section>
+  <section class="current">
+    <h3>Info</h3>
+    <div>
+        <p>A info tab content1</p>
+        <p>A info tab content2</p>
+    </div>
+  </section>
+  <section>
+    <h3>Credentials</h3>
+    <div>
+        <p>A credentials tab content1</p>
+        <p>A credentials tab content2</p>
+    </div>
+  </section>
+</article> <!-- /class="tabs" -->
+
 <!-- conversation -->
 <div id="conversation">
   <% if params[:about] && params[:about] == 'me' %>
