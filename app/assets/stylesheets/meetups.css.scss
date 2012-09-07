@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.detailArea {
+  .dlStyle1 {
+    background: white;
+    dd {
+	   border-bottom: 1px dotted #cccccc;
+    }
+  }
+}
+
+// test start -------------------
 .tabs {
   height: 120px;
   overflow: hidden;

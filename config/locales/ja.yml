@@ -18,6 +18,8 @@ ja:
         introduction: "メッセージ"
         favorite_food: "好きな食べ物"
         ng_food: "苦手な食べ物"
+      meetup_comment:
+        body: "Message"
 
   user_mailer:
     info_email:
@@ -59,6 +61,10 @@ ja:
       availability: "空いている時間"
       about_prefix: ""
       about_postfix: "について"
+
+    meetup:
+      fixed_html: "<font color='green'>FIXED</font>"
+      not_fixed_html: "<font color='red'>NOT FIXED</font>"
 
   users:
     index:
@@ -110,7 +116,7 @@ ja:
     new:
       header_explain: "ここで全項目を記入する必要はありません。次の画面で相手と相談しながら決めることができます。"
       title: "タイトル"
-      title_explain: "この食事のテーマを記入ください。(例： \"Wanna have local foods!!\",\"Eat Sushi!!\" などなど、この人に声かける目的に当たるものであれば何でも構いません)"
+      title_explain_html: "この食事のテーマを記入ください。<br>(例： \"Wanna have local foods!!\",\"Eat Sushi!!\" などなど、この人に声かける目的に当たるものであれば何でも構いません)<br>"
       begin_at: "開始時間"
       end_at: "終了時間"
       area: "地域"
@@ -119,8 +125,10 @@ ja:
       place_explain: "相手と食事をするレストラン等の名前を記入してください。"
       url_explain: "相手と食事をするレストラン等のURLを記入してください。"
       public: "他のユーザーの参加可否"
-      public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
+      public_explain: "相手があなたのリクエストを承認した後、あなたと相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
       comment: "メッセージ"
+      comment_explain_html: "一緒に食事に行きたい方へのメッセージを入力してください。<br>(例. 自己紹介やあなたが相手に期待していること、スケジュール、またあなたが相手と話したいと思っていることなどを自由に入力してください。)<br>"
+      not_decided_html: "<font color='red'>未入力</font>"
 
     show:
       conversation_prefix: ""

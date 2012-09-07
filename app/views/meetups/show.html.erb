@@ -61,7 +61,7 @@
 
       <div class="imgArea">
         <% if @attend_users.present? %>
-          <p style="line-height: 150%; color: #FF5A00;">Attend</p>
+          <p style="line-height: 150%; color: #FF5A00;"><%= @meetup.fixed? ? "Attend" : "Pending" %></p>
           <% @attend_users.each do |u| %>
             <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
           <% end %>
@@ -80,21 +80,28 @@
             <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
           <% end %>
         <% end %>
-        
-        </div>
+      </div>
 
       <div class="detailArea">
-        <p>
-          <%= t("meetups.show.status") %>      : <%= @meetup.fixed              ? 'FIXED' : 'NOT FIXED' %><br>
-          <%= t("meetups.show.title") %>      : <%= @meetup.title.blank?       ? '-' : @meetup.title %><br>
-          <%= t("meetups.show.description") %>: <%= @meetup.description.blank? ? '-' : @meetup.description %><br>
-          <%= t("meetups.show.area_name") %>  : <%= @meetup.area.blank?        ? '-' : @meetup.area.name %><br>
-          <%= t("meetups.show.place") %>      : <%= @meetup.place.blank?       ? '-' : @meetup.place %><br>
-          <%= t("meetups.show.url") %>        : <%= @meetup.url.blank?         ? '-' : link_to(@meetup.url, @meetup.url) %><br>
-          <%= t("meetups.show.public") %>     : <%= @meetup.public             ? "public" : "private" %><br>
-          <%= t("meetups.show.begin_at") %>   : <%= @meetup.begin_at.blank?    ? '????/??/?? ??:??' : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
-        </p>
-        <br>
+          <dl class="dlStyle1">
+            <dt><%= t("meetups.show.status") %></dt>
+            <dd><%= @meetup.fixed              ? t("general.meetup.fixed_html") : t("general.meetup.not_fixed_html") %></dd>
+            <dt><%= t("meetups.show.title") %></dt>
+            <dd><%= @meetup.title.blank?       ? t("meetups.new.not_decided_html") : @meetup.title %></dd>
+            <dt><%= t("meetups.show.description") %></dt>
+            <dd><%= @meetup.description.blank? ? t("meetups.new.not_decided_html") : @meetup.description %></dd>
+            <dt><%= t("meetups.show.area_name") %></dt>
+            <dd><%= @meetup.area.blank?        ? t("meetups.new.not_decided_html") : @meetup.area.name %></dd>
+            <dt><%= t("meetups.show.place") %></dt>
+            <dd><%= @meetup.place.blank?       ? t("meetups.new.not_decided_html") : @meetup.place %></dd>
+            <dt><%= t("meetups.show.url") %></dt>
+            <dd><%= @meetup.url.blank?         ? t("meetups.new.not_decided_html") : link_to(@meetup.url, @meetup.url) %></dd>
+            <dt><%= t("meetups.show.public") %></dt>
+            <dd><%= @meetup.public             ? "public" : "private" %></dd>
+            <dt><%= t("meetups.show.begin_at") %></dt>
+            <dd><%= @meetup.begin_at.blank?    ? t("meetups.new.not_decided_html") : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</dd>
+          </dl>
+             
         <% if @meetup.user == current_user %>
           <%= link_to t("meetups.show.update_information"), edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>

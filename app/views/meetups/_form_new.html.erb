@@ -23,7 +23,7 @@
     <tr>
       <th><%= t("meetups.new.title") %></th>
       <td>
-        <p><%= t("meetups.new.title_explain") %></p>
+        <p><%= t("meetups.new.title_explain_html") %></p>
         <%= f.text_field :title %>
       </td>
     </tr>
@@ -31,7 +31,10 @@
     <%= fields_for :meetup_comment, @meetup_comment do |mc_field| %>
       <tr>
         <th><%= t("meetups.new.comment") %></th>
-        <td><%= mc_field.text_area :body, size: '40x5' %></td>
+        <td>
+          <%= t("meetups.new.comment_explain_html") %>
+          <%= mc_field.text_area :body, size: '40x5' %>
+        </td>
       </tr>
     <% end %>
 

@@ -191,26 +191,24 @@ h3 {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+
 }
-.fixed {
-	background: #95c033;
+
+.invited {
+	background: orange;
+	border: 1px solid orange;
+}
+.attend {
+	background: #95C033;
 	border: 1px solid #95c033;
 }
-.past {
-	background: #cccccc;
-	border: 1px solid #cccccc;
-}
 .pending {
-	background: #FF5A00;
-	border: 1px solid #FF5A00;
+	background: rgba(255, 214, 0, 0.9);
+	border: 1px solid rgba(255, 214, 0, 0.9);
 }
 .declined {
 	background: #666666;
 	border: 1px solid #666666;
-}
-.unread {
-	background: #0088cc;
-	border: 1px solid #0088cc;
 }
 
 /* clearfix */
