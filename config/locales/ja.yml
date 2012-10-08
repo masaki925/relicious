@@ -128,7 +128,7 @@ ja:
       public_explain: "相手があなたのリクエストを承認した後、あなたと相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
       comment: "メッセージ"
       comment_explain_html: "一緒に食事に行きたい方へのメッセージを入力してください。<br>(例. 自己紹介やあなたが相手に期待していること、スケジュール、またあなたが相手と話したいと思っていることなどを自由に入力してください。)<br>"
-      not_decided_html: "<font color='red'>未入力</font>"
+      not_decided_html: "<font color='red'>まだ決まっていません</font>"
 
     show:
       conversation_prefix: ""

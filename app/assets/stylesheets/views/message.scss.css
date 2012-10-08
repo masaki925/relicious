@@ -195,8 +195,8 @@ h3 {
 }
 
 .invited {
-	background: orange;
-	border: 1px solid orange;
+	background: rgb(80, 129, 253);
+	border: 1px solid rgb(80, 129, 253);
 }
 .attend {
 	background: #95C033;
