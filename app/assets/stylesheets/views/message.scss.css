@@ -100,7 +100,7 @@ h3 {
 }
 
 #addressee .imgArea {
-	-webkit-box-shadow: 1px 1px 1px #666666;
+	/* -webkit-box-shadow: 1px 1px 1px #666666; */
 	-moz-box-shadow: 1px 1px 1px #666666;
 	-ms-box-shadow: 1px 1px 1p #666666;
 	box-shadow: 1px 1px 1p #666666;

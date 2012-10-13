@@ -101,6 +101,7 @@
             <dt><%= t("meetups.show.begin_at") %></dt>
             <dd><%= @meetup.begin_at.blank?    ? t("meetups.new.not_decided_html") : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</dd>
           </dl>
+          <br>
              
         <% if @meetup.user == current_user %>
           <%= link_to t("meetups.show.update_information"), edit_meetup_path(@meetup), class: "btn3" %>
@@ -183,5 +184,3 @@
 
 </div>
 <!-- /conversation -->
-
-<%= link_to 'Back', meetups_path %>

@@ -132,7 +132,7 @@ en:
       public_explain: "After this person accept your request, will you allow other users to check your converstion about this meetup with this person and join you guys?"
       comment: "Message"
       comment_explain_html: "Enter a message for the person you wanna eat local food together.<br>(e.g. Introducing your self, What you expect and want to do, dates you're gonna be available, and anything you want to talk about with this person.)<br>"
-      not_decided_html: "<font color='red'>NOT DECIDED</font>"
+      not_decided_html: "<font color='lightgray'>(fix this item)</font>"
 
     show:
       conversation_prefix: "Conversation with"

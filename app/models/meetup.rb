@@ -19,4 +19,35 @@ class Meetup < ActiveRecord::Base
     m.fixed = false
     return m
   end
+
+  def self.find_with_conditions(user, params)
+    meetups = Meetup.order(:updated_at).reverse_order
+
+    # exceptme の場合、ユーザが選べない条件
+    public_only = true
+    fixed       = true
+
+    # 自分のmeetup のみ
+    if params[:about] && params[:about] == 'me'
+      params[:fixed] ? ( fixed = params[:fixed] ) : ( fixed = false )
+      public_only = false
+
+      meetups = meetups.joins(:user_meetup_permissions).where('user_meetup_permissions.user_id = ?', user.id)
+
+      if params[:status]
+        if [ MEETUP_STATUS_INVITED, MEETUP_STATUS_ATTEND, MEETUP_STATUS_DECLINED ].include? params[:status].to_i
+          meetups = meetups.joins(:user_meetup_permissions).where('status = ?', params[:status])
+        end
+      end
+    else
+      # meetups except the user
+      meetups = meetups.joins( :user_meetup_permissions ).group( "user_meetup_permissions.meetup_id" ).having(
+        "COUNT(*) = SUM( CASE WHEN user_meetup_permissions.user_id = #{user.id} THEN 0 ELSE 1 END)" )
+    end
+
+    meetups = meetups.where( 'fixed = ?', fixed ) if fixed
+    meetups = meetups.where( 'public = ?', true ) if public_only
+
+    meetups
+  end
 end

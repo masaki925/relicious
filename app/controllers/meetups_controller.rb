@@ -9,12 +9,7 @@ class MeetupsController < ApplicationController
     add_breadcrumb "Meetups", meetups_path
 
     @user = current_user if current_user
-    my_meetups = @user.meetups.order('id DESC')
-    if params[:about] && params[:about] == 'me'
-      @meetups = my_meetups
-    else
-      @meetups = Meetup.all - my_meetups
-    end
+    @meetups = Meetup.find_with_conditions(@user, params)
 
     respond_to do |format|
       format.html # index.html.erb

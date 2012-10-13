@@ -17,6 +17,12 @@
   </section>
 </article> <!-- /class="tabs" -->
 
+<li><a href="/meetups?about=me">mine</a></li>
+<li><a href="/meetups?about=me&past=true">mine && inlude past</a></li>
+<li><a href="/meetups?about=me&past=true&status=2">mine && inlude past declined</a></li>
+<li><a href="/meetups?about=me&past=true&status=1">mine && inlude past attending</a></li>
+<li><a href="/meetups">exceptme</a></li>
+
 <!-- conversation -->
 <div id="conversation">
   <% if params[:about] && params[:about] == 'me' %>
