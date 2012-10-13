@@ -2,11 +2,8 @@ require 'spec_helper'
 
 describe "meetups/new" do
   before(:each) do
-    assign(:meetup, stub_model(Meetup,
-      :title => "MyString",
-      :user => nil,
-      :public => false
-    ).as_new_record)
+    @meetup         = FactoryGirl.build( :meetup )
+    @meetup_comment = FactoryGirl.build( :meetup_comment, meetup_id: @meetup.id )
   end
 
   it "renders new meetup form" do

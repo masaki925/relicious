@@ -11,17 +11,17 @@ describe Meetup do
 
     context 'without begin_at' do
       before { @meetup.begin_at = '' }
-      specify { @meetup.should have(1).errors_on(:begin_at) }
+      specify { @meetup.should have(0).errors_on(:begin_at) }
     end
 
     context 'without end_at' do
       before { @meetup.end_at = '' }
-      specify { @meetup.should have(1).errors_on(:end_at) }
+      specify { @meetup.should have(0).errors_on(:end_at) }
     end
 
     context 'without area_id' do
       before { @meetup.area_id = '' }
-      specify { @meetup.should have(1).errors_on(:area_id) }
+      specify { @meetup.should have(0).errors_on(:area_id) }
     end
   end
 end
