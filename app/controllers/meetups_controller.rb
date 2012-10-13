@@ -1,6 +1,7 @@
 class MeetupsController < ApplicationController
   before_filter :require_authentication, :except => [:show]
   before_filter :if_private_require_member, :except => [:index, :new, :create]
+  before_filter :set_redirect_to_session, :only => [:show]
 
   # GET /meetups
   # GET /meetups.json
@@ -65,6 +66,8 @@ class MeetupsController < ApplicationController
     add_breadcrumb "new", new_meetup_path
 
     @meetup = Meetup.new
+    @meetup_comment = MeetupComment.new
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -95,22 +98,32 @@ class MeetupsController < ApplicationController
   # POST /meetups
   # POST /meetups.json
   def create
-    @user = current_user if current_user
+    @user = current_user
 
-    @meetup = Meetup.new(params[:meetup])
-    @meetup.user_id = current_user.id
+    @meetup = Meetup.new_without_mass_asign(params[:meetup], @user)
+    @meetup_comment = MeetupComment.new_without_mass_asign(params[:meetup_comment], @user)
 
-    respond_to do |format|
-      if @meetup.save
-        @my_meetup_permission = UserMeetupPermission.create(user_id: current_user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
-        unless params[:member].blank?
-          if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
-            UserMailer.meetup_new_email(User.find(params[:member]), @user, @meetup).deliver
+    begin
+      ActiveRecord::Base.transaction do
+        if @meetup.save or raise
+          @meetup_comment.meetup_id = @meetup.id
+          if @meetup_comment.save or raise
+            @my_meetup_permission = UserMeetupPermission.create(user_id: @user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
+            if params[:member].present?
+              if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
+                UserMailer.meetup_new_email(User.find(params[:member]), @user, @meetup).deliver
+              end
+            end
+
+            respond_to do |format|
+              format.html { redirect_to @meetup, notice: 'Meetup was successfully created.' }
+              format.json { render json: @meetup, status: :created, location: @meetup }
+            end
           end
         end
-        format.html { redirect_to @meetup, notice: 'Meetup was successfully created.' }
-        format.json { render json: @meetup, status: :created, location: @meetup }
-      else
+      end
+    rescue => e
+      respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @meetup.errors, status: :unprocessable_entity }
       end
@@ -133,8 +146,8 @@ class MeetupsController < ApplicationController
     end
   end
 
-  # GET /meetups/1/status
-  # GET /meetups/1/status.json
+  # POST /meetups/1/status
+  # POST /meetups/1/status.json
   def status
     unless @meetup_permission = UserMeetupPermission.find_by_user_id_and_meetup_id(current_user.id, @meetup.id)
       redirect_to root_path, notice: "you don't have permission to do it"
@@ -148,6 +161,12 @@ class MeetupsController < ApplicationController
 
     respond_to do |format|
       if @meetup_permission.update_attributes(status: params[:meetup_status_select])
+        unless @meetup.fixed
+          attend_perms = UserMeetupPermission.find_all_by_meetup_id_and_status(@meetup.id, MEETUP_STATUS_ATTEND)
+          @meetup.fixed = true if attend_perms.size > 1
+          @meetup.save
+        end
+
         format.html { redirect_to @meetup, notice: 'Meetup status was successfully updated.' }
         format.json { head :no_content }
       else
@@ -175,12 +194,21 @@ class MeetupsController < ApplicationController
   end
 
   private
+  def set_redirect_to_session
+    session[:redirect_to] = request.url
+  end
+
   def if_private_require_member
     @meetup = Meetup.find(params[:id])
     return if @meetup.public
 
     return if @meetup.users.include? current_user
 
-    redirect_to root_path, notice: "you have no permission to do it"
+    unless current_user
+      flash[:notice] = 'please login to use this application'
+    else
+      flash[:notice] = 'you don\'t have permission to do it'
+    end
+    redirect_to root_path
   end
 end

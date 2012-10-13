@@ -83,6 +83,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  # return [User1, User2, ...] or []
+  def self.get_users_to_review(user)
+    meetups_thesedays      = user.meetups.where('begin_at BETWEEN ? AND ?', Time.now - 60*60*24*30, Time.now)
+    users_met_thesedays    = meetups_thesedays.map {|m| m.users - [user]}.flatten.uniq
+    already_reviewed_users = user.sent_reviews.map {|sr| User.find(sr.reviewed_user_id)}
+
+    users_met_thesedays - already_reviewed_users
+  end
+
   def meetup_status(meetup)
     UserMeetupPermission.find_by_user_id_and_meetup_id(self.id, meetup.id).try(:status)
   end

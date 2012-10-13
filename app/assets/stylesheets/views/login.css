@@ -1,15 +1,6 @@
 /* login.css */
 
 
-
-#login {
-	background-color: #ffffff;
-	/*background: url(/assets/food-world.png) no-repeat 50% 50%;*/
-}
-
-#login #contents {
-	width: 980px;
-}
 #topArea {
 	margin-bottom: 30px;
 }

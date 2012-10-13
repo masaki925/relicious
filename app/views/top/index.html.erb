@@ -35,9 +35,9 @@
           <% if @user.attributes.has_value?(nil) %>
             <li><%= link_to t("user_top.todo_profile"), user_path(@user) %></li>
           <% end %>
-          <% if @review_to_write %>
-            <% @review_to_write.each do |r| %>
-              <li><%= link_to t("user_top.todo_review", user: r[2]), new_user_review_path(user_id: r[1]) %></li>
+          <% if @users_to_review %>
+            <% @users_to_review.each do |u| %>
+              <li><%= link_to t("user_top.todo_review", user: u.name), new_user_review_path(user_id: u.id) %></li>
             <% end %>
           <% end %>
         </ul>

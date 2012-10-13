@@ -5,7 +5,7 @@
   <meta name="keywords" content="Relicious, lunch" />
   <meta name="description" content="Relicious Connect to the foreign local over the dining table!" />
 
-  <title>Relicious - log in / Sign in -</title>
+  <title>Relicious</title>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
@@ -18,7 +18,7 @@
   <%= render 'layouts/google_analytics' if Rails.env.production? %>
 </head>
 
-  <body id="login">
+  <body>
     <%= "<h1>開発環境だよ〜ん。</h1>".html_safe if Rails.env.development? %>
   
     <% if current_user %>

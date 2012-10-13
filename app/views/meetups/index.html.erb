@@ -1,5 +1,22 @@
 <%= stylesheet_link_tag "views/message", :media => "all" %>
 
+<article class="tabs">
+  <section class="current">
+    <h3>My Meetups</h3>
+    <div>
+        <p>my meetup1</p>
+        <p>my meetup2</p>
+    </div>
+  </section>
+  <section>
+    <h3>Other Meetups</h3>
+    <div>
+        <p>other meetup1</p>
+        <p>other meetup2</p>
+    </div>
+  </section>
+</article> <!-- /class="tabs" -->
+
 <!-- conversation -->
 <div id="conversation">
   <% if params[:about] && params[:about] == 'me' %>
@@ -36,24 +53,23 @@
            end
          %>
         <li>
-        <p class="thumb"><%= image_tag facebook_image_url(target_user.id, 'square'), width:"75", height:"75", alt:"" %></p>
-        <p class="name"><%= link_to target_user.name, user_path(target_user) %></p>
-        <p class="data"><%= meetup.begin_at.blank? ? link_to('????/??/??', meetup_path(meetup)) : link_to(meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup)) %></p>
-        <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
-        <!-- FIXME -->
-        <%
-          status = String.new
-          case @user.meetup_status(meetup)
-          when 0
-            status = "INVITED"
-          when 1
-            status = "ATTEND"
-          when 2
-            status = "DECLINED"
-          else
-          end
-        %>
-        <p class="status fixed"><%= status %></p>
+          <p class="thumb"><%= image_tag facebook_image_url(target_user.id, 'square'), width:"75", height:"75", alt:"" %></p>
+          <p class="name"><%= link_to target_user.name, user_path(target_user) %></p>
+          <p class="data"><%= meetup.begin_at.blank? ? link_to('????/??/??', meetup_path(meetup)) : link_to(meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup)) %></p>
+          <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
+          <!-- FIXME -->
+          <% case @user.meetup_status(meetup) %>
+          <% when MEETUP_STATUS_INVITED %>
+            <p class='status invited'>INVITED</p>
+          <% when MEETUP_STATUS_ATTEND %>
+            <% if meetup.fixed %>
+              <p class='status attend'>ATTEND</p>
+            <% else %>
+              <p class='status pending'>PENDING</p>
+            <% end %>
+          <% when MEETUP_STATUS_DECLINED %>
+            <p class='status declined'>DECLINED</p>
+          <% end %>
         </li>
       <% end if @meetups %>
     </ul>

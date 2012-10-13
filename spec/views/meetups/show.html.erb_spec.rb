@@ -15,6 +15,7 @@ describe "meetups/show" do
       @meetup_comments = FactoryGirl.create_list(:meetup_comment, 2, meetup_id: @meetup.id)
       @meetup_users    = @meetup.users
       view.stub(:current_user) { @user }
+      @meetup_users_except_me = []
     end
 
     it "renders attributes in renered HTML" do

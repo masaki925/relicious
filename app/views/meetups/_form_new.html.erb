@@ -1,16 +1,19 @@
 <%= stylesheet_link_tag "views/registration", :media => "all" %>
 
+<% @meetup_comments = @meetup.meetup_comments.build %>
 <%= form_for(@meetup, html: {id: "registration"}) do |f| %>
-  <% if @meetup.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(@meetup.errors.count, "error") %> prohibited this meetup from being saved:</h3>
+  <% [@meetup, @meetup_comment].each do |object| %>
+    <% if object.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(object.errors.count, "error") %> prohibited this meetup from being saved:</h3>
 
-      <ul>
-      <% @meetup.errors.full_messages.each do |msg| %>
-        <li><p class="fontCR"><%= msg %></p></li>
-      <% end %>
-      </ul>
-    </div>
+        <ul>
+        <% object.errors.full_messages.each do |msg| %>
+          <li><p class="fontCR"><%= msg %></p></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
 
   <%= hidden_field_tag :member, params[:member] %>
@@ -20,15 +23,20 @@
     <tr>
       <th><%= t("meetups.new.title") %></th>
       <td>
-        <p><%= t("meetups.new.title_explain") %></p>
+        <p><%= t("meetups.new.title_explain_html") %></p>
         <%= f.text_field :title %>
       </td>
     </tr>
 
-    <tr>
-      <th><%= t("meetups.new.description") %></th>
-      <td><%= f.text_area :description, size: "40x5" %></td>
-    </tr>
+    <%= fields_for :meetup_comment, @meetup_comment do |mc_field| %>
+      <tr>
+        <th><%= t("meetups.new.comment") %></th>
+        <td>
+          <%= t("meetups.new.comment_explain_html") %>
+          <%= mc_field.text_area :body, size: '40x5' %>
+        </td>
+      </tr>
+    <% end %>
 
     <tr>
       <th>Publicness</th>

@@ -18,6 +18,8 @@ en:
         introduction: "Message"
         favorite_food: "Favorite food"
         ng_food: "NG food"
+      meetup_comment:
+        body: "Message"
 
   user_mailer:
     info_email:
@@ -58,6 +60,10 @@ en:
       availability: "Availability"
       about_prefix: "About"
       about_postfix: ""
+
+    meetup:
+      fixed_html: "<font color='green'>FIXED</font>"
+      not_fixed_html: "<font color='red'>NOT FIXED</font>"
 
   users:
     index:
@@ -114,7 +120,7 @@ en:
     new:
       header_explain: "you can set more details with your partner in the next step."
       title: "Title"
-      title_explain: "Enter the theme of this meetup.(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)"
+      title_explain_html: "Enter the theme of this meetup.<br>(e.g. \"Wanna have local foods!!\",\"Eat Sushi!!\" and anything which shows the purpose you create this)<br>"
       begin_at: "Begin at"
       end_at: "End at"
       area: "Area"
@@ -123,7 +129,10 @@ en:
       place_explain: "Enter the name of the place where you guys will have local foods."  
       url_explain: "Enter URL of the place where you guys will have local foods."
       public: "Public"
-      public_explain: "Will you allow other users to check your converstion about this meetup with this person and join you guys?"
+      public_explain: "After this person accept your request, will you allow other users to check your converstion about this meetup with this person and join you guys?"
+      comment: "Message"
+      comment_explain_html: "Enter a message for the person you wanna eat local food together.<br>(e.g. Introducing your self, What you expect and want to do, dates you're gonna be available, and anything you want to talk about with this person.)<br>"
+      not_decided_html: "<font color='red'>NOT DECIDED</font>"
 
     show:
       conversation_prefix: "Conversation with"
@@ -140,6 +149,7 @@ en:
       url         : "URL"
       public      : "Public"
       send_message: "Send a Message"
+      login       : "Login/Sign up and join the meetup"
 
   meetup_comment:
     new:

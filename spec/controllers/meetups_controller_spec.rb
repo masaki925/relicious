@@ -128,37 +128,46 @@ describe MeetupsController do
 
       describe "POST create" do
         before do
-          UserMailer.any_instance.stub(:deliver).and_return(true)
+          UserMailer.any_instance.stub( :deliver ).and_return( true )
         end
 
         context "with member" do
-          before { @invited_user = FactoryGirl.create(:user) }
+          before { @invited_user = FactoryGirl.create( :user ) }
 
           describe "with valid params" do
             it "creates a new Meetup" do
               expect {
-                post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id) }, {:user_id => @user.id}
-              }.to change(Meetup, :count).by(1)
+                post :create, { :meetup         => FactoryGirl.attributes_for( :meetup_without_mass_assign, area_id: @area.id ),
+                                :meetup_comment => FactoryGirl.attributes_for( :meetup_comment ) },
+                              { :user_id => @user.id }
+              }.to change( Meetup, :count ).by( 1 )
             end
 
             it "add meetup to user.meetups" do
               expect {
-                post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id) }, {:user_id => @user.id}
-              }.to change(@user.meetups, :count).by(1)
+                post :create, { meetup: FactoryGirl.attributes_for( :meetup_without_mass_assign, area_id: @area.id ),
+                                meetup_comment: FactoryGirl.attributes_for( :meetup_comment ) },
+                              { user_id: @user.id }
+              }.to change( @user.meetups, :count ).by( 1 )
             end
 
             it "set user_meetup_permissions status to attend for user" do
-              post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id) }, {:user_id => @user.id}
-              assigns(:my_meetup_permission).should be_a(UserMeetupPermission)
-              assigns(:my_meetup_permission).should be_persisted
-              assigns(:my_meetup_permission).status.should eq(MEETUP_STATUS_ATTEND)
+              post :create, { meetup: FactoryGirl.attributes_for( :meetup_without_mass_assign, area_id: @area.id ),
+                              meetup_comment: FactoryGirl.attributes_for( :meetup_comment ) },
+                            { user_id: @user.id }
+              assigns( :my_meetup_permission ).should be_a( UserMeetupPermission )
+              assigns( :my_meetup_permission ).should be_persisted
+              assigns( :my_meetup_permission ).status.should eq( MEETUP_STATUS_ATTEND )
             end
 
             it "set user_meetup_permissions status to invited for invitee" do
-              post :create, { :meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id), member: @invited_user.id }, {:user_id => @user.id}
-              assigns(:invitee_meetup_permission).should be_a(UserMeetupPermission)
-              assigns(:invitee_meetup_permission).should be_persisted
-              assigns(:invitee_meetup_permission).status.should eq(MEETUP_STATUS_INVITED)
+              post :create, { meetup: FactoryGirl.attributes_for(:meetup_without_mass_assign, area_id: @area.id),
+                              member: @invited_user.id,
+                              meetup_comment: FactoryGirl.attributes_for( :meetup_comment ) },
+                            { user_id: @user.id }
+              assigns( :invitee_meetup_permission ).should be_a( UserMeetupPermission )
+              assigns( :invitee_meetup_permission ).should be_persisted
+              assigns( :invitee_meetup_permission ).status.should eq( MEETUP_STATUS_INVITED )
             end
 
             it "send mail to invited member" do
@@ -166,14 +175,18 @@ describe MeetupsController do
             end
 
             it "assigns a newly created meetup as @meetup" do
-              post :create, {:meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id)}, {:user_id => @user.id}
-              assigns(:meetup).should be_a(Meetup)
-              assigns(:meetup).should be_persisted
+              post :create, { meetup: FactoryGirl.attributes_for( :meetup_without_mass_assign, area_id: @area.id ),
+                              meetup_comment: FactoryGirl.attributes_for( :meetup_comment ) },
+                            { :user_id => @user.id }
+              assigns( :meetup ).should be_a( Meetup )
+              assigns( :meetup ).should be_persisted
             end
 
             it "redirects to the created meetup" do
-              post :create, {:meetup => FactoryGirl.attributes_for(:meetup, area_id: @area.id)}, {:user_id => @user.id}
-              response.should redirect_to(Meetup.last)
+              post :create, { meetup: FactoryGirl.attributes_for( :meetup_without_mass_assign, area_id: @area.id ),
+                              meetup_comment: FactoryGirl.attributes_for( :meetup_comment ) },
+                            { :user_id => @user.id }
+              response.should redirect_to( Meetup.last )
             end
           end
 
