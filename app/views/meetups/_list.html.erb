@@ -1,0 +1,38 @@
+<ul class="list">
+  <% if @meetups.empty? %>
+    <br><br><p>no meetups found.</p><br><br>
+  <% else %>
+    <% @meetups.each do |meetup| %>
+      <%
+         target_user = nil
+         meetup.users.each do |u|
+           next if u == current_user
+           target_user = u
+           break
+         end
+         if target_user.blank?
+           target_user = current_user
+         end
+       %>
+      <li>
+        <p class="thumb"><%= image_tag facebook_image_url(target_user.id, 'square'), width:"75", height:"75", alt:"" %></p>
+        <p class="name"><%= link_to target_user.name, user_path(target_user) %></p>
+        <p class="data"><%= meetup.begin_at.blank? ? link_to('????/??/??', meetup_path(meetup)) : link_to(meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup)) %></p>
+        <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
+        <!-- FIXME -->
+        <% case @user.meetup_status(meetup) %>
+        <% when MEETUP_STATUS_INVITED %>
+          <p class='status invited'>INVITED</p>
+        <% when MEETUP_STATUS_ATTEND %>
+          <% if meetup.fixed %>
+            <p class='status attend'>ATTEND</p>
+          <% else %>
+            <p class='status pending'>PENDING</p>
+          <% end %>
+        <% when MEETUP_STATUS_DECLINED %>
+          <p class='status declined'>DECLINED</p>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

@@ -2,7 +2,7 @@ class TopController < ApplicationController
   def index
     if @user = current_user
       @user_avails  = @user.user_avails 
-      @recent_my_meetups = @user.meetups.where('begin_at > ? AND status != ?',
+      @meetups = @user.meetups.where('begin_at > ? AND status != ?',
                                                Time.now, MEETUP_STATUS_DECLINED).limit(3).order(:updated_at).reverse_order
 
       # FIXME: performance problem

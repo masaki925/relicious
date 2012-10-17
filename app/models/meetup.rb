@@ -20,33 +20,38 @@ class Meetup < ActiveRecord::Base
     return m
   end
 
-  def self.find_with_conditions(user, params)
-    meetups = Meetup.order(:updated_at).reverse_order
+  def self.find_user_meetups(user, param)
+    meetups     = Meetup.order(:updated_at).reverse_order
+    fixed  = nil
+    status = MEETUP_STATUS_ATTEND
 
-    # exceptme の場合、ユーザが選べない条件
-    public_only = true
-    fixed       = true
-
-    # 自分のmeetup のみ
-    if params[:about] && params[:about] == 'me'
-      params[:fixed] ? ( fixed = params[:fixed] ) : ( fixed = false )
-      public_only = false
-
-      meetups = meetups.joins(:user_meetup_permissions).where('user_meetup_permissions.user_id = ?', user.id)
-
-      if params[:status]
-        if [ MEETUP_STATUS_INVITED, MEETUP_STATUS_ATTEND, MEETUP_STATUS_DECLINED ].include? params[:status].to_i
-          meetups = meetups.joins(:user_meetup_permissions).where('status = ?', params[:status])
-        end
-      end
+    param = 'attend' if param.nil?
+    case(param)
+    when 'attend'
+      fixed = true
+    when 'pending'
+      fixed = false
+    when 'invited'
+      status = MEETUP_STATUS_INVITED
+    when 'declined'
+      status = MEETUP_STATUS_DECLINED
     else
-      # meetups except the user
-      meetups = meetups.joins( :user_meetup_permissions ).group( "user_meetup_permissions.meetup_id" ).having(
-        "COUNT(*) = SUM( CASE WHEN user_meetup_permissions.user_id = #{user.id} THEN 0 ELSE 1 END)" )
+      return []
     end
 
-    meetups = meetups.where( 'fixed = ?', fixed ) if fixed
-    meetups = meetups.where( 'public = ?', true ) if public_only
+    meetups = meetups.where('fixed = ?', fixed) unless fixed.nil?
+    meetups = meetups.where('status = ?', status)
+    meetups = meetups.joins(:user_meetup_permissions).where('user_meetup_permissions.user_id = ?', user.id)
+
+    meetups
+  end
+
+  def self.find_except(user)
+    meetups = Meetup.where('fixed = ? AND public = ?', true, true).order('meetups.updated_at').reverse_order
+
+    # meetups except the user
+    meetups = Meetup.joins( :user_meetup_permissions ).group( "user_meetup_permissions.meetup_id" ).having(
+      "COUNT(*) = SUM( CASE WHEN user_meetup_permissions.user_id = #{user.id} THEN 0 ELSE 1 END)" )
 
     meetups
   end

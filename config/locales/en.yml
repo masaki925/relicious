@@ -187,6 +187,7 @@ en:
   header:
     link:
       users_html: "<strong>Find</strong><br> People"
+      meetups_html: "<strong>Find</strong><br> Meetup"
 
 #  date:
 #    formats:

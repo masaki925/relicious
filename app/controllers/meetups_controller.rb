@@ -8,8 +8,8 @@ class MeetupsController < ApplicationController
   def index
     add_breadcrumb "Meetups", meetups_path
 
-    @user = current_user if current_user
-    @meetups = Meetup.find_with_conditions(@user, params)
+    @user    = current_user if current_user
+    @meetups = Meetup.find_except(@user)
 
     respond_to do |format|
       format.html # index.html.erb

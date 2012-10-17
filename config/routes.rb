@@ -17,6 +17,9 @@ Relicious::Application.routes.draw do
 
     post   "languages"     => "user_languages#create"
     delete "languages/:id" => "user_languages#destroy"
+
+    get "meetups"         => "users#meetups"
+    get "meetups/:status" => "users#meetups"
   end
 
   get "top/index"

@@ -1,86 +1,9 @@
 <%= stylesheet_link_tag "views/message", :media => "all" %>
 
-<article class="tabs">
-  <section class="current">
-    <h3>My Meetups</h3>
-    <div>
-        <p>my meetup1</p>
-        <p>my meetup2</p>
-    </div>
-  </section>
-  <section>
-    <h3>Other Meetups</h3>
-    <div>
-        <p>other meetup1</p>
-        <p>other meetup2</p>
-    </div>
-  </section>
-</article> <!-- /class="tabs" -->
-
-<li><a href="/meetups?about=me">mine</a></li>
-<li><a href="/meetups?about=me&past=true">mine && inlude past</a></li>
-<li><a href="/meetups?about=me&past=true&status=2">mine && inlude past declined</a></li>
-<li><a href="/meetups?about=me&past=true&status=1">mine && inlude past attending</a></li>
-<li><a href="/meetups">exceptme</a></li>
-
-<!-- conversation -->
 <div id="conversation">
-  <% if params[:about] && params[:about] == 'me' %>
-    <h2>My Meetups</h2>
-  <% else %>
-    <h2>Other Meetups</h2>
-  <% end %>
-
+  <h2>Other Meetups</h2>
   <div id="status-list">
-    <!--
-    <div id="sortArea">
-      <select name="sort" class="sort">
-        <option value="" id="filter-none"><a href="#">All Conversations</a></option>
-        <option value="" id="filter-fixed"><a href="#">Fixed</a></option>
-        <option value="" id="filter-past"><a href="#">Past</a></option>
-        <option value="" id="filter-pending"><a href="#">Pending</a></option>
-        <option value="" id="filter-declined"><a href="#">Declined</a></option>
-        <option value="" id="filter-unread"><a href="#">Unread</a></option>
-      </select>
-    </div>
-    -->
-
-    <ul class="list">
-      <% @meetups.each do |meetup| %>
-        <%
-           target_user = nil
-           meetup.users.each do |u|
-             next if u == current_user
-             target_user = u
-             break
-           end
-           if target_user.blank?
-             target_user = current_user
-           end
-         %>
-        <li>
-          <p class="thumb"><%= image_tag facebook_image_url(target_user.id, 'square'), width:"75", height:"75", alt:"" %></p>
-          <p class="name"><%= link_to target_user.name, user_path(target_user) %></p>
-          <p class="data"><%= meetup.begin_at.blank? ? link_to('????/??/??', meetup_path(meetup)) : link_to(meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup)) %></p>
-          <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
-          <!-- FIXME -->
-          <% case @user.meetup_status(meetup) %>
-          <% when MEETUP_STATUS_INVITED %>
-            <p class='status invited'>INVITED</p>
-          <% when MEETUP_STATUS_ATTEND %>
-            <% if meetup.fixed %>
-              <p class='status attend'>ATTEND</p>
-            <% else %>
-              <p class='status pending'>PENDING</p>
-            <% end %>
-          <% when MEETUP_STATUS_DECLINED %>
-            <p class='status declined'>DECLINED</p>
-          <% end %>
-        </li>
-      <% end if @meetups %>
-    </ul>
+    <%= render 'list' %>
   </div>
-
 </div>
-<!-- /conversation -->
 
