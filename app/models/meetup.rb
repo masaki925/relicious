@@ -21,9 +21,9 @@ class Meetup < ActiveRecord::Base
   end
 
   def self.find_user_meetups(user, param)
-    meetups     = Meetup.order(:updated_at).reverse_order
-    fixed  = nil
-    status = MEETUP_STATUS_ATTEND
+    meetups = Meetup.order(:updated_at).reverse_order
+    fixed   = nil
+    status  = MEETUP_STATUS_ATTEND
 
     param = 'attend' if param.nil?
     case(param)
