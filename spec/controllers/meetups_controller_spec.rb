@@ -29,13 +29,15 @@ describe MeetupsController do
 
     context "when the meetup is public" do
       before do
-        @meetup = FactoryGirl.create(:meetup, public: true)
+        @meetup          = FactoryGirl.create( :meetup, public: true, fixed: true )
+        @meetup_exceptme = FactoryGirl.create( :meetup, public: true, fixed: true )
+        @permission      = FactoryGirl.create( :user_meetup_permission, :user_id => @meetup_exceptme.user_id, :meetup_id => @meetup_exceptme.id )
       end
 
       describe "GET index" do
         before { get :index, {}, { :user_id => @user.id } }
 
-        specify { assigns(:meetups).should eq([@meetup]) }
+        specify { assigns(:meetups).should eq([@meetup_exceptme]) }
         specify { response.should be_success }
       end
 
