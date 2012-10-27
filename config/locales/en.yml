@@ -62,7 +62,7 @@ en:
       about_postfix: ""
 
     meetup:
-      fixed_html: "<font color='green'>FIXED</font>"
+      fixed_html: "<font color='lime'>FIXED</font>"
       not_fixed_html: "<font color='red'>NOT FIXED</font>"
 
   users:

@@ -88,8 +88,6 @@
             <dd><%= @meetup.fixed              ? t("general.meetup.fixed_html") : t("general.meetup.not_fixed_html") %></dd>
             <dt><%= t("meetups.show.title") %></dt>
             <dd><%= @meetup.title.blank?       ? t("meetups.new.not_decided_html") : @meetup.title %></dd>
-            <dt><%= t("meetups.show.description") %></dt>
-            <dd><%= @meetup.description.blank? ? t("meetups.new.not_decided_html") : @meetup.description %></dd>
             <dt><%= t("meetups.show.area_name") %></dt>
             <dd><%= @meetup.area.blank?        ? t("meetups.new.not_decided_html") : @meetup.area.name %></dd>
             <dt><%= t("meetups.show.place") %></dt>

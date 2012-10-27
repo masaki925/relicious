@@ -63,7 +63,7 @@ ja:
       about_postfix: "について"
 
     meetup:
-      fixed_html: "<font color='green'>FIXED</font>"
+      fixed_html: "<font color='lime'>FIXED</font>"
       not_fixed_html: "<font color='red'>NOT FIXED</font>"
 
   users:
@@ -184,6 +184,7 @@ ja:
   header:
     link:
       users_html: "<strong>食事相手<br></strong>を探す"
+      meetups_html: "<strong>イベント<br></strong>を探す"
 
   date:
     formats:

@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if params[:status]
       @meetups = Meetup.find_user_meetups(current_user, params[:status])
     else
-      @meetups = @user.meetups.order(:updated_at)
+      @meetups = @user.meetups.order(:updated_at).reverse_order
     end
 
     respond_to do |format|
