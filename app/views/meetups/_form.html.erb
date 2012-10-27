@@ -26,12 +26,12 @@
 
     <tr>
       <th><%= t("meetups.new.begin_at") %></th>
-      <td><%= f.datetime_select :begin_at %></td>
+      <td><%= f.datetime_select :begin_at, :minute_step => 10 %></td>
     </tr>
 
     <tr>
       <th><%= t("meetups.new.end_at") %></th>
-      <td><%= f.datetime_select :end_at %></td>
+      <td><%= f.datetime_select :end_at, :minute_step => 10 %></td>
     </tr>
 
     <tr>
@@ -69,5 +69,5 @@
     </tr>
   </table>
 
-  <p class="textC"><%= f.submit t("general.send"), {class: "btn1"} %></p>
+  <p class="textC"><%= f.submit t("general.save"), {class: "btn1"} %></p>
 <% end %>

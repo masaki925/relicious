@@ -30,6 +30,7 @@ ja:
   general:
     mandatory: "必須入力項目"
     send: "送信"
+    save: "保存"
     register: "登録"
     meetup_request: "この人と一緒に食事をする！"
     day: "日付"
@@ -63,7 +64,7 @@ ja:
       about_postfix: "について"
 
     meetup:
-      fixed_html: "<font color='green'>FIXED</font>"
+      fixed_html: "<font color='lime'>FIXED</font>"
       not_fixed_html: "<font color='red'>NOT FIXED</font>"
 
   users:
@@ -184,6 +185,7 @@ ja:
   header:
     link:
       users_html: "<strong>食事相手<br></strong>を探す"
+      meetups_html: "<strong>イベント<br></strong>を探す"
 
   date:
     formats:

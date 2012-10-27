@@ -211,40 +211,56 @@ describe MeetupsController do
       end
 
       describe "PUT update" do
-        describe "with valid params" do
-          it "updates the requested meetup" do
-            # Assuming there are no other meetups in the database, this
-            # specifies that the Meetup created on the previous line
-            # receives the :update_attributes message with whatever params are
-            # submitted in the request.
-            Meetup.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-            put :update, {:id => @meetup.id, :meetup => {'these' => 'params'}}, {:user_id => @user.id}
-          end
+        context "when user is NOT attending the meetup" do
+          before { @new_user = FactoryGirl.create(:user) }
 
-          it "assigns the requested meetup as @meetup" do
-            put :update, {:id => @meetup.id, :meetup => valid_attributes}, {:user_id => @user.id}
-            assigns(:meetup).should eq(@meetup)
-          end
-
-          it "redirects to the meetup" do
-            put :update, {:id => @meetup.id, :meetup => valid_attributes}, {:user_id => @user.id}
-            response.should redirect_to(@meetup)
+          it "deny update the meetup" do
+            put :update, { :id => @meetup.id, :meetup => { 'these' => 'params' } }, { :user_id => @new_user.id }
+            response.should redirect_to( @meetup )
           end
         end
 
-        describe "with invalid params" do
-          it "assigns the meetup as @meetup" do
-            # Trigger the behavior that occurs when invalid params are submitted
-            Meetup.any_instance.stub(:save).and_return(false)
-            put :update, {:id => @meetup.id, :meetup => {}}, {:user_id => @user.id}
-            assigns(:meetup).should eq(@meetup)
+        context "when user is attending the meetup" do
+          before do
+            @new_user = FactoryGirl.create( :user )
+            FactoryGirl.create( :user_meetup_permission, :user_id => @new_user.id, :meetup_id => @meetup.id, :status => MEETUP_STATUS_ATTEND )
           end
 
-          it "re-renders the 'edit' template" do
-            # Trigger the behavior that occurs when invalid params are submitted
-            Meetup.any_instance.stub(:save).and_return(false)
-            put :update, {:id => @meetup.id, :meetup => {}}, {:user_id => @user.id}
-            response.should render_template("edit")
+          describe "with valid params" do
+            it "updates the requested meetup" do
+              # Assuming there are no other meetups in the database, this
+              # specifies that the Meetup created on the previous line
+              # receives the :update_attributes message with whatever params are
+              # submitted in the request.
+              Meetup.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+              put :update, { :id => @meetup.id, :meetup => {'these' => 'params'}}, {:user_id => @new_user.id }
+            end
+            
+            it "assigns the requested meetup as @meetup" do
+              put :update, { :id => @meetup.id, :meetup => valid_attributes}, {:user_id => @new_user.id }
+              assigns(:meetup).should eq(@meetup)
+            end
+            
+            it "redirects to the meetup" do
+              put :update, { :id => @meetup.id, :meetup => valid_attributes}, {:user_id => @new_user.id }
+              response.should redirect_to(@meetup)
+            end
+          end
+          
+          describe "with invalid params" do
+            it "assigns the meetup as @meetup" do
+              # Trigger the behavior that occurs when invalid params are submitted
+              Meetup.any_instance.stub(:save).and_return(false)
+              put :update, {:id => @meetup.id, :meetup => {}}, {:user_id => @new_user.id}
+              assigns(:meetup).should eq(@meetup)
+            end
+          
+            it "re-renders the 'edit' template" do
+              # Trigger the behavior that occurs when invalid params are submitted
+              Meetup.any_instance.stub(:save).and_return(false)
+              put :update, {:id => @meetup.id, :meetup => {}}, {:user_id => @new_user.id}
+              response.should render_template("edit")
+            end
           end
         end
       end

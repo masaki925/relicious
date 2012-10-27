@@ -26,7 +26,8 @@ class MeetupsController < ApplicationController
     if @ump.save
       UserMailer.invite_email( User.find(params[:invited_user_id]), current_user, Meetup.find(params[:id]) ).deliver
     else
-      flash[:notice] = @ump.errors.messages.each_value {|m| m[0]} 
+      # @ump.errors.messages.first #=> [:meetup_id, ["specified user is already assigned into this meetup"]]
+      flash[:notice] = @ump.errors.messages.first[1][0]
     end
 
     redirect_to meetup_path(params[:id])
@@ -129,6 +130,11 @@ class MeetupsController < ApplicationController
   # PUT /meetups/1.json
   def update
     @meetup = Meetup.find(params[:id])
+
+    unless @meetup.editable?(current_user)
+      redirect_to meetup_path(@meetup), notice: "you don't have permission to do it"
+      return
+    end
 
     respond_to do |format|
       if @meetup.update_attributes(params[:meetup])
