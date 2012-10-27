@@ -46,7 +46,7 @@ Relicious::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( tooltip/* views/login.css views/message.css views/profile.css views/registration.css views/review.css views/search.css views/top.css jquery-ui-1.7.3.custom.css views/message_for_top.scss.css )
+  config.assets.precompile += %w( tooltip/* views/login.css views/message.scss.css views/profile.css views/registration.css views/review.css views/search.css views/top.css jquery-ui-1.7.3.custom.css views/message_for_top.scss.css views/message.scss.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

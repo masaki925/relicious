@@ -31,6 +31,7 @@ under_construction.jpg: under_construction-835682492e7bbee2a1adcfab2cdf3832.jpg
 application.js: application-158bfab82b2b2cd4b5e0ecaf49a2608e.js
 application.css: application-ef4a8d7f9354a22ebb0640c3060a99d2.css
 views/login.css: views/login-7cfd791ef79e4c84fc53c79edd147278.css
+views/message.scss.css: views/message.scss-274bc507467cf26fa92bea7f886254f5.css
 views/message_for_top.scss.css: views/message_for_top.scss-d3ed12d55deca32e19b2201a0faba7c1.css
 views/profile.css: views/profile-1b6b729be46dc7fdc81fe65b9b3b4a9e.css
 views/registration.css: views/registration-1fabd071dc9b6e4d77db73c15550c4f7.css
