@@ -6,7 +6,7 @@ class TopController < ApplicationController
                                                Time.now, MEETUP_STATUS_DECLINED).limit(3).order(:updated_at).reverse_order
 
       # FIXME: performance problem
-      @recent_meetups_exceptme  = Meetup.where('fixed = ? AND begin_at > ?', true, Time.now).order(:updated_at).reverse_order.find_all {|a| a.users.include?(@user) == false}
+      @recent_meetups_exceptme  = Meetup.where('fixed = ? AND begin_at > ?', true, Time.now).limit(3).order(:updated_at).reverse_order.find_all {|a| a.users.include?(@user) == false}
 
       # FIXME: performance problem
       @users_to_review = User.get_users_to_review(@user)
