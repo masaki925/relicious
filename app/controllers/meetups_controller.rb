@@ -130,6 +130,11 @@ class MeetupsController < ApplicationController
   def update
     @meetup = Meetup.find(params[:id])
 
+    unless @meetup.editable?(current_user)
+      redirect_to meetup_path(@meetup), notice: "you don't have permission to do it"
+      return
+    end
+
     respond_to do |format|
       if @meetup.update_attributes(params[:meetup])
         format.html { redirect_to @meetup, notice: 'Meetup was successfully updated.' }
