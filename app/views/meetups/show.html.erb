@@ -95,7 +95,7 @@
             <dt><%= t("meetups.show.place") %></dt>
             <dd><%= @meetup.place.blank?       ? t("meetups.new.not_decided_html") : @meetup.place %></dd>
             <dt><%= t("meetups.show.url") %></dt>
-            <dd><%= @meetup.url.blank?         ? t("meetups.new.not_decided_html") : link_to(@meetup.url, @meetup.url) %></dd>
+            <dd><%= @meetup.url.blank?         ? t("meetups.new.not_decided_html") : link_to(@meetup.url, @meetup.url, :target => "blank") %></dd>
             <dt><%= t("meetups.show.public") %></dt>
             <dd><%= @meetup.public             ? "public" : "private" %></dd>
             <dt><%= t("meetups.show.begin_at") %></dt>
