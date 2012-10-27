@@ -30,6 +30,7 @@ ja:
   general:
     mandatory: "必須入力項目"
     send: "送信"
+    save: "保存"
     register: "登録"
     meetup_request: "この人と一緒に食事をする！"
     day: "日付"

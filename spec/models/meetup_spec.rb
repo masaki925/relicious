@@ -49,4 +49,23 @@ describe Meetup do
       it { should_not be_nil }
     end
   end
+
+  describe "Meetup#answered?" do
+    before do
+      @meetup = FactoryGirl.create( :meetup )
+      @user   = FactoryGirl.create( :user )
+    end
+
+    context "when user's status is just invited but not answered yet" do
+      before { FactoryGirl.create( :user_meetup_permission, meetup_id: @meetup.id, user_id: @user.id ) }
+      subject { @meetup.answered?(@user) }
+      it { should_not be_true }
+    end
+
+    context "when user's status is fixed ether ATTEND or DECLINED" do
+      before { FactoryGirl.create( :user_meetup_permission, meetup_id: @meetup.id, user_id: @user.id, status: MEETUP_STATUS_ATTEND ) }
+      subject { @meetup.answered?(@user) }
+      it { should be_true }
+    end
+  end
 end

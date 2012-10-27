@@ -30,6 +30,7 @@ en:
   general:
     mandatory: "Mandatory"
     send: "send"
+    save: "save"
     register: "register"
     meetup_request: "Have dining with"
     day: "day"

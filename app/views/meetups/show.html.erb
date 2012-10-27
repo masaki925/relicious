@@ -27,7 +27,7 @@
         </div>
       <% end %>
 
-      <% if @meetup_users.include? current_user %>
+      <% unless @meetup.answered?( current_user ) %>
         <div id="meetup_status">
           <button id='meetup_status_button'>Change your meetup status</button>
 
@@ -41,7 +41,7 @@
           <div id='meetup_status_form' style='display: none;'>
             <%= form_tag "/meetups/#{@meetup.id}/status" do %>
               <%= select_tag 'meetup_status_select', options_for_select([["Attend", MEETUP_STATUS_ATTEND], ["Decline", MEETUP_STATUS_DECLINED]], meetup_status_for_select ), {prompt: '(set your status)'} %>
-              <%= submit_tag 'meetup_status_submit', class: 'btn1', value: 'send' %>
+              <%= submit_tag 'meetup_status_submit', class: 'btn1', value: 'save' %>
             <% end %>
           </div>
 

@@ -26,7 +26,8 @@ class MeetupsController < ApplicationController
     if @ump.save
       UserMailer.invite_email( User.find(params[:invited_user_id]), current_user, Meetup.find(params[:id]) ).deliver
     else
-      flash[:notice] = @ump.errors.messages.each_value {|m| m[0]} 
+      # @ump.errors.messages.first #=> [:meetup_id, ["specified user is already assigned into this meetup"]]
+      flash[:notice] = @ump.errors.messages.first[1][0]
     end
 
     redirect_to meetup_path(params[:id])

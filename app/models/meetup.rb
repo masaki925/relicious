@@ -59,4 +59,9 @@ class Meetup < ActiveRecord::Base
   def editable?(user)
     UserMeetupPermission.where('meetup_id = ? AND user_id = ? AND status = ?', self.id, user.id, MEETUP_STATUS_ATTEND).first
   end
+
+  def answered?(user)
+    UserMeetupPermission.where('meetup_id = ? AND user_id = ? AND ( status = ? OR status = ? )',
+                               self.id, user.id, MEETUP_STATUS_ATTEND, MEETUP_STATUS_DECLINED).first
+  end
 end

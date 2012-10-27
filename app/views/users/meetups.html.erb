@@ -10,9 +10,10 @@
       <div class="well sidebar-nav ds-component" data-componentid="sidebarnav1">
         <ul class="nav nav-list">
           <li class="nav-header">Status</li>
-          <li><%= "> " if params[:status] == 'attend'   %><%= link_to "ATTEND", "/users/#{@user.id}/meetups/attend"     %></li>
-          <li><%= "> " if params[:status] == 'pending'  %><%= link_to "PENDING", "/users/#{@user.id}/meetups/pending"   %></li>
-          <li><%= "> " if params[:status] == 'invited'  %><%= link_to "INVITED", "/users/#{@user.id}/meetups/invited"   %></li>
+          <li><%= "> " unless params[:status]           %><%= link_to "ALL",      "/users/#{@user.id}/meetups"          %></li>
+          <li><%= "> " if params[:status] == 'attend'   %><%= link_to "ATTEND",   "/users/#{@user.id}/meetups/attend"   %></li>
+          <li><%= "> " if params[:status] == 'pending'  %><%= link_to "PENDING",  "/users/#{@user.id}/meetups/pending"  %></li>
+          <li><%= "> " if params[:status] == 'invited'  %><%= link_to "INVITED",  "/users/#{@user.id}/meetups/invited"  %></li>
           <li><%= "> " if params[:status] == 'declined' %><%= link_to "DECLINED", "/users/#{@user.id}/meetups/declined" %></li>
         </ul>
       </div>
