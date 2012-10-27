@@ -27,25 +27,27 @@
         </div>
       <% end %>
 
-      <% unless @meetup.answered?( current_user ) %>
-        <div id="meetup_status">
-          <button id='meetup_status_button'>Change your meetup status</button>
-
-          <%
-            meetup_status_for_select = nil
-            if @user.meetup_status(@meetup) != MEETUP_STATUS_INVITED
-              meetup_status_for_select = @user.meetup_status(@meetup)
-            end
-          %>
-
-          <div id='meetup_status_form' style='display: none;'>
-            <%= form_tag "/meetups/#{@meetup.id}/status" do %>
-              <%= select_tag 'meetup_status_select', options_for_select([["Attend", MEETUP_STATUS_ATTEND], ["Decline", MEETUP_STATUS_DECLINED]], meetup_status_for_select ), {prompt: '(set your status)'} %>
-              <%= submit_tag 'meetup_status_submit', class: 'btn1', value: 'save' %>
-            <% end %>
+      <% if current_user %>
+        <% if @meetup.answered?( current_user ) %>
+          <div id="meetup_status">
+            <button id='meetup_status_button'>Change your meetup status</button>
+      
+            <%
+              meetup_status_for_select = nil
+              if @user.meetup_status(@meetup) != MEETUP_STATUS_INVITED
+                meetup_status_for_select = @user.meetup_status(@meetup)
+              end
+            %>
+      
+            <div id='meetup_status_form' style='display: none;'>
+              <%= form_tag "/meetups/#{@meetup.id}/status" do %>
+                <%= select_tag 'meetup_status_select', options_for_select([["Attend", MEETUP_STATUS_ATTEND], ["Decline", MEETUP_STATUS_DECLINED]], meetup_status_for_select ), {prompt: '(set your status)'} %>
+                <%= submit_tag 'meetup_status_submit', class: 'btn1', value: 'save' %>
+              <% end %>
+            </div>
+      
           </div>
-
-        </div>
+        <% end %>
       <% end %>
 
 
@@ -101,7 +103,7 @@
           </dl>
           <br>
              
-        <% if @meetup.editable?( current_user ) %>
+        <% if current_user and @meetup.editable?( current_user ) %>
           <%= link_to t("meetups.show.update_information"), edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>
 
