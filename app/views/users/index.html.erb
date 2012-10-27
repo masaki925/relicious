@@ -42,7 +42,9 @@
         <div class="imgArea">
           <p><%= link_to image_tag( facebook_image_url(user.id, 'normal'), width:"150", alt:"picture"), user_path(user) %></p>
           <%= user.name %><br>
-          <%= image_tag( "flags/#{user.nationality.downcase}.gif", :size => "15x15", :title => user.nationality ) if user.nationality %>
+          <% if user.nationality and File.exist?("#{Rails.root}/app/assets/images/flags/#{user.nationality}.gif") %>
+            <%= image_tag( "flags/#{user.nationality.downcase}.gif", :size => "20x15", :title => user.nationality ) if user.nationality %>
+          <% end %>
           (<%= user.gender %>)
         </div>
 

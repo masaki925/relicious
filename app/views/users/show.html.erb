@@ -87,7 +87,9 @@
 
       <dt><%= User.human_attribute_name(:nationality) %></dt>
       <dd>
-      <%= @user.nationality.blank? ? "-" : image_tag("flags/#{@user.nationality.downcase}.gif", :size => "15x15") %>
+        <% if @user.nationality and File.exist?("#{Rails.root}/app/assets/images/flags/#{@user.nationality}.gif") %>
+          <%= image_tag("flags/#{@user.nationality.downcase}.gif", :size => "20x15") %>
+        <% end %>
         <%= @user.nationality.blank? ? "-" : NATIONALITIES[@user.nationality][:name][:en]  %>
       </dd>
 
