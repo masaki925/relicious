@@ -1,58 +1,115 @@
 <%= stylesheet_link_tag "views/message", :media => "all" %>
 
-<p id="notice"><%= notice %></p>
+<p id="notice" style='color: red;'><%= notice %></p>
 
 <!-- conversation -->
 <div id="conversation">
   <h2>
-    <% if @meetup_users.size > 1 %>
-      <%= t("meetups.show.conversation_prefix") %>
-    <% else %>
-      <%= t("meetups.show.conversation_prefix_sole") %>
-    <% end %>
-
-    <% comma_flag2 = false %>
-    <% @meetup_users.each do |u| %>
-      <% next if u == current_user %>
-
-      <%= ',' if comma_flag2 %>
-      <% commna_flag2 = true %>
-      <%= link_to u.name, user_path(u) %>
-    <% end %>
-
-    <% if @meetup_users.size > 1 %>
-      <%= t("meetups.show.conversation_postfix") %>
-    <% else %>
-      <%= t("meetups.show.conversation_postfix_sole") %>
-    <% end %>
+    <%= @meetup_users.size > 1 ? t("meetups.show.conversation_prefix") : t("meetups.show.conversation_prefix_sole") %>
+    <%= @meetup_users_except_me.map {|u| link_to u.name, user_path(u) }.join(',').html_safe %>
+    <%= @meetup_users.size > 1 ? t("meetups.show.conversation_postfix") : t("meetups.show.conversation_postfix_sole") %>
     <br><span class="fontCR"><%= t("meetups.show.payment_policy") %></span>
   </h2>
 
   <!-- addressee -->
   <div id="addressee">
     <div class="addresseeDetail">
+      <% if @meetup.fixed and @attend_users.include? current_user %>
+        <div id="invite_friend">
+          <button id='invite_friend_button'>Invite Friends</button>
+      
+          <div id='invite_friend_box' style='display: none;'>
+            <%= form_tag "/meetups/#{@meetup.id}/invite" do %>
+              <%= select_tag 'invited_user_id', options_for_select(User.all.map {|n| [ n.name, n.id ] }) %>
+              <%= submit_tag 'invite_friend_submit', class: 'btn2', value: 'send' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if current_user %>
+        <% if @meetup.answered?( current_user ) %>
+          <div id="meetup_status">
+            <button id='meetup_status_button'>Change your meetup status</button>
+      
+            <%
+              meetup_status_for_select = nil
+              if @user.meetup_status(@meetup) != MEETUP_STATUS_INVITED
+                meetup_status_for_select = @user.meetup_status(@meetup)
+              end
+            %>
+      
+            <div id='meetup_status_form' style='display: none;'>
+              <%= form_tag "/meetups/#{@meetup.id}/status" do %>
+                <%= select_tag 'meetup_status_select', options_for_select([["Attend", MEETUP_STATUS_ATTEND], ["Decline", MEETUP_STATUS_DECLINED]], meetup_status_for_select ), {prompt: '(set your status)'} %>
+                <%= submit_tag 'meetup_status_submit', class: 'btn1', value: 'save' %>
+              <% end %>
+            </div>
+      
+          </div>
+        <% end %>
+      <% end %>
+
+
+      <script>
+        $('#invite_friend_button').click(function () {
+          $('#invite_friend_box').toggle();
+        });
+
+        $('#meetup_status_button').click(function () {
+          $('#meetup_status_form').toggle();
+        });
+      </script>
+
       <div class="imgArea">
-        <% @meetup_users.each do |u| %>
-          <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(u) %>
+        <% if @attend_users.present? %>
+          <p style="line-height: 150%; color: #FF5A00;"><%= @meetup.fixed? ? "Attend" : "Pending" %></p>
+          <% @attend_users.each do |u| %>
+            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+          <% end %>
+        <% end %>
+
+        <% if @invited_users.present? %>
+          <p style="line-height: 150%; color: #FF5A00;">Invited</p>
+          <% @invited_users.each do |u| %>
+            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+          <% end %>
+        <% end %>
+
+        <% if @declined_users.present? %>
+          <p style="line-height: 150%; color: #FF5A00;">Declined<p>
+          <% @declined_users.each do |u| %>
+            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+          <% end %>
         <% end %>
       </div>
+
       <div class="detailArea">
-        <p>
-          <%= t("meetups.show.title") %> : <%= @meetup.title %><br>
-          <%= t("meetups.show.area_name") %> : <%= @meetup.area.name %><br>
-          <%= t("meetups.show.place") %> : <%= @meetup.place %><br>
-          <%= t("meetups.show.url") %> : <%= link_to @meetup.url, @meetup.url %><br>
-          <%= t("meetups.show.public") %> : <%= @meetup.public ? "public" : "private" %><br>
-          <%= t("meetups.show.begin_at") %> : <%= @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
-        </p>
-        <br>
-        <% if @meetup.user == current_user %>
+          <dl class="dlStyle1">
+            <dt><%= t("meetups.show.status") %></dt>
+            <dd><%= @meetup.fixed              ? t("general.meetup.fixed_html") : t("general.meetup.not_fixed_html") %></dd>
+            <dt><%= t("meetups.show.title") %></dt>
+            <dd><%= @meetup.title.blank?       ? t("meetups.new.not_decided_html") : @meetup.title %></dd>
+            <dt><%= t("meetups.show.area_name") %></dt>
+            <dd><%= @meetup.area.blank?        ? t("meetups.new.not_decided_html") : @meetup.area.name %></dd>
+            <dt><%= t("meetups.show.place") %></dt>
+            <dd><%= @meetup.place.blank?       ? t("meetups.new.not_decided_html") : @meetup.place %></dd>
+            <dt><%= t("meetups.show.url") %></dt>
+            <dd><%= @meetup.url.blank?         ? t("meetups.new.not_decided_html") : link_to(@meetup.url, @meetup.url) %></dd>
+            <dt><%= t("meetups.show.public") %></dt>
+            <dd><%= @meetup.public             ? "public" : "private" %></dd>
+            <dt><%= t("meetups.show.begin_at") %></dt>
+            <dd><%= @meetup.begin_at.blank?    ? t("meetups.new.not_decided_html") : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</dd>
+          </dl>
+          <br>
+             
+        <% if current_user and @meetup.editable?( current_user ) %>
           <%= link_to t("meetups.show.update_information"), edit_meetup_path(@meetup), class: "btn3" %>
         <% end %>
+
         <% if current_user and @not_joined_yet %>
           <%= link_to "join this meetup", join_meetups_path(@meetup), class: "btn1" %>
         <% end %>
-
       </div>
     </div>
   </div>
@@ -115,12 +172,16 @@
     <% end %>
   <% end %>
 
-  <% if current_user and @meetup_users.include?(current_user) %>
-    <h2><%= t("meetups.show.send_message") %>:</h2>
-    <%= render "meetup_comments/form" %>
+  <% if current_user %>
+    <% if @meetup_users.include?(current_user) %>
+      <h2><%= t("meetups.show.send_message") %>:</h2>
+      <%= render "meetup_comments/form" %>
+    <% end %>
+  <% else %>
+    <% if @meetup.public %>
+      <li style="text-align:center;"><a href="/auth/facebook" class="btn3"><%= t("meetups.show.login") %></a></li>
+    <% end %>
   <% end %>
 
 </div>
 <!-- /conversation -->
-
-<%= link_to 'Back', meetups_path %>

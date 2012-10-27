@@ -18,10 +18,19 @@ ja:
         introduction: "メッセージ"
         favorite_food: "好きな食べ物"
         ng_food: "苦手な食べ物"
+      meetup_comment:
+        body: "Message"
+
+  user_mailer:
+    info_email:
+      subject: '[Relicious] 言語スキルをアップデートしてください！'
+    invite_email:
+      subject: '[Relicious] %{created_user_name} さんから%{meetup_title} へのお誘いが届いています！'
 
   general:
     mandatory: "必須入力項目"
     send: "送信"
+    save: "保存"
     register: "登録"
     meetup_request: "この人と一緒に食事をする！"
     day: "日付"
@@ -53,6 +62,10 @@ ja:
       availability: "空いている時間"
       about_prefix: ""
       about_postfix: "について"
+
+    meetup:
+      fixed_html: "<font color='lime'>FIXED</font>"
+      not_fixed_html: "<font color='red'>NOT FIXED</font>"
 
   users:
     index:
@@ -104,7 +117,7 @@ ja:
     new:
       header_explain: "ここで全項目を記入する必要はありません。次の画面で相手と相談しながら決めることができます。"
       title: "タイトル"
-      title_explain: "この食事のテーマを記入ください。(例： \"Wanna have local foods!!\",\"Eat Sushi!!\" などなど、この人に声かける目的に当たるものであれば何でも構いません)"
+      title_explain_html: "この食事のテーマを記入ください。<br>(例： \"Wanna have local foods!!\",\"Eat Sushi!!\" などなど、この人に声かける目的に当たるものであれば何でも構いません)<br>"
       begin_at: "開始時間"
       end_at: "終了時間"
       area: "地域"
@@ -113,7 +126,10 @@ ja:
       place_explain: "相手と食事をするレストラン等の名前を記入してください。"
       url_explain: "相手と食事をするレストラン等のURLを記入してください。"
       public: "他のユーザーの参加可否"
-      public_explain: "相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
+      public_explain: "相手があなたのリクエストを承認した後、あなたと相手との会話を他のユーザーにも見せるようにしますか？そうすることで、あなたの会話や食事に他のユーザーも参加できるようになります。"
+      comment: "メッセージ"
+      comment_explain_html: "一緒に食事に行きたい方へのメッセージを入力してください。<br>(例. 自己紹介やあなたが相手に期待していること、スケジュール、またあなたが相手と話したいと思っていることなどを自由に入力してください。)<br>"
+      not_decided_html: "<font color='lightgray'>(入力してください)</font>"
 
     show:
       conversation_prefix: ""
@@ -122,14 +138,16 @@ ja:
       conversation_postfix_sole: "会話"
       payment_policy: "*食事に係る支払は、必ず割り勘で行なっていただくようお願いいたします。"
       update_information: "編集"
-      title    : "タイトル"
-      begin_at : "開始時間"
-      end_at   : "終了時間"
-      area_name: "地域"
-      place    : "食事をする場所"
-      url      : "食事をする場所のURL"
-      public   : "他のユーザの参加可否"
+      title       : "タイトル"
+      description : "概要"
+      begin_at    : "開始時間"
+      end_at      : "終了時間"
+      area_name   : "地域"
+      place       : "食事をする場所"
+      url         : "食事をする場所のURL"
+      public      : "他のユーザの参加可否"
       send_message: "メッセージを送る"
+      login       : "ログイン/登録 して参加する"
 
   meetup_comment:
     new:
@@ -167,6 +185,7 @@ ja:
   header:
     link:
       users_html: "<strong>食事相手<br></strong>を探す"
+      meetups_html: "<strong>イベント<br></strong>を探す"
 
   date:
     formats:

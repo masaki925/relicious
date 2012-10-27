@@ -38,7 +38,7 @@ describe UserReviewsController do
     @user       = FactoryGirl.create(:user)
     @reviewed_user = FactoryGirl.create(:user)
     @meetup     = FactoryGirl.create(:meetup)
-    @user.meetups << @meetup
+    FactoryGirl.create(:user_meetup_permission, user_id: @user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
     @user_review = FactoryGirl.create(:user_review, user_id: @user.id, meetup_id: @meetup.id, reviewed_user_id: @reviewed_user.id)
   end
 

@@ -1,7 +1,9 @@
 Relicious::Application.routes.draw do
   resources :meetups do
     collection do
-      get ":id/join" => "meetups#join", :as => :join
+      post ":id/invite" => "meetups#invite", :as => :invite
+      get  ":id/join"   => "meetups#join",   :as => :join
+      post ":id/status" => "meetups#status", :as => :status
     end
     resources :meetup_comments
   end
@@ -15,6 +17,9 @@ Relicious::Application.routes.draw do
 
     post   "languages"     => "user_languages#create"
     delete "languages/:id" => "user_languages#destroy"
+
+    get "meetups"         => "users#meetups"
+    get "meetups/:status" => "users#meetups"
   end
 
   get "top/index"

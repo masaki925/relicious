@@ -1,5 +1,6 @@
 class MeetupCommentsController < ApplicationController
   before_filter :require_authentication
+  before_filter :require_member
 
   # POST /meetup_comments
   # POST /meetup_comments.json
@@ -12,11 +13,7 @@ class MeetupCommentsController < ApplicationController
       if @meetup_comment.save
         @commented_user    = current_user
         @meetup  = @meetup_comment.meetup
-        @members = Array.new
-        @meetup.users.each do |m|
-          next if m == current_user
-          @members << m
-        end
+        @members = @meetup.users.select {|u| u != current_user}
 
         @members.each do |user_to_email|
           UserMailer.meetup_comment_email(user_to_email, @commented_user, @meetup).deliver
@@ -59,6 +56,14 @@ class MeetupCommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to meetup_path(id: params[:meetup_id]), notice: 'Meetup comment was successfully deleted.' }
       format.json { head :no_content }
+    end
+  end
+
+  private
+  def require_member
+    unless UserMeetupPermission.find_by_user_id_and_meetup_id(current_user.id, params[:meetup_id])
+      redirect_to root_path, notice: "you don't have permission to do it"
+      return
     end
   end
 end

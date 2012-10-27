@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "views/message_for_top", :media => "all" %>
+
 <script type="text/javascript">
   $(window).load(function() {
       $('.flexslider').flexslider();
@@ -35,9 +37,9 @@
           <% if @user.attributes.has_value?(nil) %>
             <li><%= link_to t("user_top.todo_profile"), user_path(@user) %></li>
           <% end %>
-          <% if @review_to_write %>
-            <% @review_to_write.each do |r| %>
-              <li><%= link_to t("user_top.todo_review", user: r[2]), new_user_review_path(user_id: r[1]) %></li>
+          <% if @users_to_review %>
+            <% @users_to_review.each do |u| %>
+              <li><%= link_to t("user_top.todo_review", user: u.name), new_user_review_path(user_id: u.id) %></li>
             <% end %>
           <% end %>
         </ul>
@@ -63,37 +65,10 @@
       <div id="upcomingArea">
         <h2><%= t("user_top.upcoming_text") %></h2>
         <ul>
-          <% unless @recent_my_meetups.blank? %>
-            <% @recent_my_meetups.each do |meetup| %>
-              <% meetup.users.each do |u|
-                 next if u == current_user
-                 @target_user = u
-                 break
-               end
-               if @target_user.blank?
-                 @target_user = current_user
-               end
-               other_members_num = meetup.users.size - 2
-              %>
-
-            <li>
-            <div class="recentStreamBox">
-              <div class="imgArea">
-              	<div class="colBox">
-                <%= link_to image_tag facebook_image_url( @target_user.id, 'square'), width:"75", height:"75", alt:"picture" %>
-              	<%= link_to @target_user.name, user_path(@target_user) %>
-              	</div>
-              </div>
-              <div class="detailArea">
-                <%= link_to meetup.title, meetup_path(meetup) %><br>
-                <% if other_members_num > 0 %>
-                  and <%= other_members_num %> pepole<br>
-                <% end %>
-                <time><%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time>
-              </div>
+          <% unless @meetups.blank? %>
+            <div id="status-list">
+              <%= render 'meetups/list' %>
             </div>
-            </li>
-            <% end %>
           <% else %>
           	<li>Let's find someone to have local food together</li>
           <% end %>

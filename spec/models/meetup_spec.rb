@@ -11,17 +11,61 @@ describe Meetup do
 
     context 'without begin_at' do
       before { @meetup.begin_at = '' }
-      specify { @meetup.should have(1).errors_on(:begin_at) }
+      specify { @meetup.should have(0).errors_on(:begin_at) }
     end
 
     context 'without end_at' do
       before { @meetup.end_at = '' }
-      specify { @meetup.should have(1).errors_on(:end_at) }
+      specify { @meetup.should have(0).errors_on(:end_at) }
     end
 
     context 'without area_id' do
       before { @meetup.area_id = '' }
-      specify { @meetup.should have(1).errors_on(:area_id) }
+      specify { @meetup.should have(0).errors_on(:area_id) }
+    end
+  end
+  
+  # the meetup information should be edited by only attending users.
+  describe "Meetup#editable?" do
+    before do
+      @meetup = FactoryGirl.create( :meetup )
+      @user   = FactoryGirl.create( :user )
+    end
+
+    context "when user is NOT attending" do
+      subject { @meetup.editable?(@user) }
+      it { should be_nil }
+    end
+
+    context "when user is being invited the meetup" do
+      before { FactoryGirl.create( :user_meetup_permission, meetup_id: @meetup.id, user_id: @user.id ) }
+      subject { @meetup.editable?(@user) }
+      it { should be_nil }
+    end
+
+    context "when user is attending the meetup" do
+      before { FactoryGirl.create( :user_meetup_permission, meetup_id: @meetup.id, user_id: @user.id, status: MEETUP_STATUS_ATTEND ) }
+      subject { @meetup.editable?(@user) }
+      it { should_not be_nil }
+    end
+  end
+
+  describe "Meetup#answered?" do
+    before do
+      @meetup = FactoryGirl.create( :meetup )
+      @user   = FactoryGirl.create( :user )
+    end
+
+    context "when user's status is just invited but not answered yet" do
+      before { FactoryGirl.create( :user_meetup_permission, meetup_id: @meetup.id, user_id: @user.id ) }
+      subject { @meetup.answered?(@user) }
+      it { should_not be_true }
+    end
+
+    context "when user's status is fixed ether ATTEND or DECLINED" do
+      before { FactoryGirl.create( :user_meetup_permission, meetup_id: @meetup.id, user_id: @user.id, status: MEETUP_STATUS_ATTEND ) }
+      subject { @meetup.answered?(@user) }
+      it { should be_true }
     end
   end
 end

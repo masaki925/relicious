@@ -15,6 +15,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/:id/meetups
+  # GET /users/:id/meetups/:status
+  def meetups
+    add_breadcrumb "My Meetups", "/users/#{current_user.id}/meetups"
+
+    @user    = User.find(params[:user_id])
+    if params[:status]
+      @meetups = Meetup.find_user_meetups(current_user, params[:status])
+    else
+      @meetups = @user.meetups.order(:updated_at).reverse_order
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @meetups }
+    end
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show

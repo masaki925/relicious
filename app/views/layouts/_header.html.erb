@@ -7,6 +7,7 @@
   <nav>
   <ul id="nav">
     <li><%= link_to t("header.link.users_html"), users_path %></li>
+    <li><%= link_to t("header.link.meetups_html"), meetups_path %></li>
   </ul>
   </nav>
 
@@ -24,7 +25,7 @@
 
     <ul id="subInfoBottom">
       <!--<li class="messageLink"><a href=<%= "/meetups" %> >Message<span>2</span></a></li> -->
-      <li class="messageLink"><a href=<%= "/meetups?about=me" %> >your meetups</a></li>
+      <li class="messageLink"><a href=<%= "/users/#{current_user.id}/meetups" %> >your meetups</a></li>
 
       <li>
       <%= form_tag users_path, :method => 'get', id: "searchHeader" do %>

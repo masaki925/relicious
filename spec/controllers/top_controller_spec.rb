@@ -27,13 +27,13 @@ describe TopController do
       context "when user has joined meetup which other user was created" do
         before do
           @other_user = FactoryGirl.create(:user)
-          @meetup     = FactoryGirl.create(:meetup, user_id: @other_user.id)
+          @meetup     = FactoryGirl.create(:meetup, user_id: @other_user.id, begin_at: Time.now + 3600)
           @user_meetup_permission = FactoryGirl.create(:user_meetup_permission, user_id: @user.id, meetup_id: @meetup.id)
           get 'index', {}, {:user_id => @user.id}
         end
 
         specify { @user.meetups.should eq Meetup.all }
-        specify { assigns(:user_meetups).should eq @user.meetups }
+        specify { assigns(:meetups).should eq [@meetup] }
       end
     end
   end
