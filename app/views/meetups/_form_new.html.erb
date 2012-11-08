@@ -5,11 +5,10 @@
   <% [@meetup, @meetup_comment].each do |object| %>
     <% if object.errors.any? %>
       <div id="error_explanation">
-        <h3><%= pluralize(object.errors.count, "error") %> prohibited this meetup from being saved:</h3>
-
+        <h3><%= t("errors.template.body") %></h3>
         <ul>
         <% object.errors.full_messages.each do |msg| %>
-          <li><p class="fontCR"><%= msg %></p></li>
+          <li><strong><p class="fontCR"><%= msg %></p></strong></li>
         <% end %>
         </ul>
       </div>
