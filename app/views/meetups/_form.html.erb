@@ -3,11 +3,10 @@
 <%= form_for(@meetup, html: {id: "registration"}) do |f| %>
   <% if @meetup.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@meetup.errors.count, "error") %> prohibited this meetup from being saved:</h2>
-
+      <h3><%= t("errors.template.body") %></h3>
       <ul>
       <% @meetup.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li><strong><p class="fontCR"><%= msg %></p></strong></li>
       <% end %>
       </ul>
     </div>
@@ -19,7 +18,7 @@
     <tr>
       <th><%= t("meetups.new.title") %></th>
       <td>
-        <p><%= t("meetups.new.title_explain") %></p>
+        <p><%= t("meetups.new.title_explain_html") %></p>
         <%= f.text_field :title %>
       </td>
     </tr>
@@ -57,7 +56,7 @@
       </td>
     </tr>
     <tr>
-      <th>Publicness</th>
+      <th><%= t("meetups.new.public") %></th>
       <td>
         <%= t("meetups.new.public_explain") %><br>
 
