@@ -28,7 +28,7 @@
       <% end %>
 
       <% if current_user %>
-        <% if @meetup.answered?( current_user ) %>
+        <% unless @meetup.answered?( current_user ) %>
           <div id="meetup_status">
             <button id='meetup_status_button'>Change your meetup status</button>
       
