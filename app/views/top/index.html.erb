@@ -70,7 +70,7 @@
               <%= render 'meetups/list' %>
             </div>
           <% else %>
-          	<li>Let's find someone to have local food together</li>
+            <li>Let's find someone to have local food together</li>
           <% end %>
             
         </ul>
@@ -125,24 +125,12 @@
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
   <!-- /Facebook plug in -->
-  
-  <!-- topArea -->
-  <div id="topArea">
-  
-    <!-- topTitle -->
-    <div id="topTitle">
-      <h1><%= link_to image_tag("logo.jpg", width:"335", height:"210", alt:"Relicious"), root_path %></h1>
-    </div>
-    <!-- /topTitle -->
-  
-    <!-- greetingArea -->
-    <div id="greetingArea">
-  
-      <!-- topNavArea -->
+
+  <!-- topNavArea -->
       <div id="topNavArea">
         <nav>
         <ul>
-          <li><%= select_tag "language", options_for_select([["English", "en"], ["日本語", "ja"]], params[:lang]) %></li>
+          <li>Language <%= select_tag "language", options_for_select([["English", "en"], ["日本語", "ja"]], params[:lang]) %></li>
           <li><a href="/auth/facebook" class="login"><%= t("top.header.signup") %></a></li>
           <li><a href="/privacy.html" class="privay"><%= t("top.header.privacy") %></a></li>
           <li><a href="/howitworks.html" class="info"><%= t("top.header.howitworks") %></a></li>
@@ -154,13 +142,22 @@
             window.location.replace('/?lang='+this.value);
           });
       </script>
-      <!-- /topNavArea -->
+      <!-- /topNavArea -->  
+  
+      <!-- topTitle -->
+      <div id="topTitle">
+        <h1><%= link_to image_tag("logo.jpg", width:"335", height:"210", alt:"Relicious"), root_path %></h1>
+      </div>
+      <!-- /topTitle -->
+  
+      <!-- greetingArea -->
+      <div id="greetingArea">
   
       <!-- greeting -->
       <div id="greeting">
         <h2><%= t("top.introduction.title") %></h2>
-        <p><%= t("top.introduction.explain") %></p>
-        <p><%= link_to t("top.introduction.signup_button"), "/auth/facebook", class: "btn3 large" %></p>
+        <p class="mb30"><%= t("top.introduction.explain") %></p>
+        <p class="textC mb20"><%= link_to t("top.introduction.signup_button"), "/auth/facebook", class: "btn3 large" %></p>
         <p><%= t("top.signup.explain") %></p>
       </div>
       <!-- /greeting -->
@@ -168,14 +165,8 @@
     </div>
     <!-- /greetingArea -->
   
-  </div>
-  <!-- topArea -->
-  
-  <!-- bottomArea -->
-  <div id="bottomArea">
-  
     <!-- recentStream -->
-    <div id="recentStream">
+    <div id="recentStream" class="mb30">
       <h2><%= t("top.recent_meetups.header_title") %></h2>
       <!-- recentStreamBox -->
       <% unless @recent_meetups.blank? %>
@@ -183,23 +174,23 @@
           <% next unless meetup.public %>
           <!-- recentStreamBox -->
           <div class="recentStreamBox">
-            <div class="imgArea">
-              <h3 class="stream"><%= meetup.title %></h3>
+            <h3 class="stream"><%= meetup.title %></h3>
+            <div class="imgArea mr30">
               <% meetup.users.each_with_index do |user, idx| %>
                 <div class="colBox">
-                  <%= link_to image_tag( facebook_image_url(user.id, 'square') , width:"35", height:"35", alt:"picture"), user_path(user) %>
+                  <%= link_to image_tag( facebook_image_url(user.id, 'square') , width:"75", height:"75", alt:"picture"), user_path(user) %>
                 </div>
                 <% break if idx > 1 %>
               <% end %>
             </div>
-            <div class="detailArea">
-              <p>
+            <div class="detailArea clear">
+              <p class="floatL mr30">
               <time ><%= t( "top.recent_meetups.begin_at" ) %> : <%= meetup.begin_at ? meetup.begin_at.strftime("%Y/%m/%d %H:%M") : '-' %></time><br>
                 <%= t( "top.recent_meetups.area_name" ) %>     : <%= meetup.area ? meetup.area.name : '-' %><br>
                 <%= t( "top.recent_meetups.place" ) %>         : <%= meetup.place ? meetup.place : '-' %><br>
               </p>
               <% if meetup.public %>
-                <%= link_to t("top.recent_meetups.see_detail"), meetup_path(meetup), class: "btn1" %><br>
+                <p class="floatL"><%= link_to t("top.recent_meetups.see_detail"), meetup_path(meetup), class: "btn1" %></p>
               <% end %>
             </div>
           </div>
@@ -214,11 +205,9 @@
   
     <!-- Facebook social plugin -->
     <div id="fbPlugin">
-      <div class="fb-like-box" data-href="https://www.facebook.com/relicious.me" data-width="475" data-height="298" data-show-faces="true" data-stream="true" data-header="false"></div>
+      <div class="fb-like-box" data-href="https://www.facebook.com/relicious.me" data-width="850" data-height="298" data-show-faces="true" data-stream="true" data-header="false"></div>
     </div>
     <!-- /Facebook social plugin -->
   
-  </div>
-  <!-- /bottomArea -->
 <% end %>
 
