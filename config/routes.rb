@@ -17,12 +17,13 @@ Relicious::Application.routes.draw do
 
     post   "languages"     => "user_languages#create"
     delete "languages/:id" => "user_languages#destroy"
-
-    get "meetups"         => "users#meetups"
-    get "meetups/:status" => "users#meetups"
   end
 
-  get "top/index"
+  get  "users/:id/meetups"         => "users#meetups"
+  get  "users/:id/meetups/:status" => "users#meetups"
+  post "users/:id/withdraw"        => "users#withdraw", :as => :user_withdraw
+
+  get  "top/index"
 
   match "/auth/:provider/callback" => "sessions#callback"
   match "/logout" => "sessions#destroy", :as => :logout

@@ -24,7 +24,8 @@ class MeetupsController < ApplicationController
                                     status: MEETUP_STATUS_INVITED)
 
     if @ump.save
-      UserMailer.invite_email( User.find(params[:invited_user_id]), current_user, Meetup.find(params[:id]) ).deliver
+      user_to_mail = User.find( params[:invited_user_id] )
+      UserMailer.invite_email( user_to_mail, current_user, Meetup.find(params[:id]) ).deliver if user_to_mail.active
     else
       # @ump.errors.messages.first #=> [:meetup_id, ["specified user is already assigned into this meetup"]]
       flash[:notice] = @ump.errors.messages.first[1][0]
@@ -107,7 +108,8 @@ class MeetupsController < ApplicationController
             @my_meetup_permission = UserMeetupPermission.create(user_id: @user.id, meetup_id: @meetup.id, status: MEETUP_STATUS_ATTEND)
             if params[:member].present?
               if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
-                UserMailer.meetup_new_email(User.find(params[:member]), @user, @meetup).deliver
+                user_to_mail = User.find(params[:member])
+                UserMailer.meetup_new_email( user_to_mail, @user, @meetup ).deliver if user_to_mail.active
               end
             end
 

@@ -78,6 +78,10 @@ ja:
     new:
       header_text: "新規登録"
 
+    withdraw:
+      header_text: "退会が完了しました。気が向いたら戻ってきて下さいね。ではまた!"
+      confirm: '退会しますか？'
+
     edit:
       breadcrumb: "プロフィール入力"
       header_text: "プロフィールを入力"

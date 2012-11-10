@@ -28,8 +28,8 @@
   <!-- reviewArea -->
   <div id="reviewArea">
     <div class="reviewHead">
-      <%= link_to image_tag( facebook_image_url(@reviewed_user.id, 'normal'), width:"150", height:"150", alt:"picture"), user_path(@reviewed_user) %>
-      <h1><%= link_to @reviewed_user.name, user_path(@reviewed_user) %></h1>
+      <%= facebook_image_link(@reviewed_user, 'normal', 150) %>
+      <h1><%= @reviewed_user.name %></h1>
     </div>
     <p class="fontCR">* = Mandatory</p>
     <form class="form">

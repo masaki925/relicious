@@ -21,9 +21,7 @@ describe "meetups/show" do
     it "renders attributes in renered HTML" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Title/)
       rendered.should match(/username/)
-      rendered.should match(/Begin at/)
       rendered.should match(/Area/)
       rendered.should match(/Public/)
       rendered.should match(/MyText/)

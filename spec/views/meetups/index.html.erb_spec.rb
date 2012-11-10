@@ -9,10 +9,10 @@ describe "meetups/index" do
   end
 
   it "renders a list of meetups" do
-    render
+    puts render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
+    assert_select "p > a", :text => "2012/06/11", :count => 2
     assert_select "p > a", :text => "Title", :count => 2
-    assert_select "p > a", :text => "username", :count => 2
   end
 end

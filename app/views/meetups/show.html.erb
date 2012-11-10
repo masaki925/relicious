@@ -6,7 +6,7 @@
 <div id="conversation">
   <h2>
     <%= @meetup_users.size > 1 ? t("meetups.show.conversation_prefix") : t("meetups.show.conversation_prefix_sole") %>
-    <%= @meetup_users_except_me.map {|u| link_to u.name, user_path(u) }.join(',').html_safe %>
+    <%= @meetup_users_except_me.map {|u| u.active? ? ( link_to u.name, user_path(u) ) : ( u.name ) }.join(',').html_safe %>
     <%= @meetup_users.size > 1 ? t("meetups.show.conversation_postfix") : t("meetups.show.conversation_postfix_sole") %>
     <br><span class="fontCR"><%= t("meetups.show.payment_policy") %></span>
   </h2>
@@ -69,21 +69,21 @@
         <% if @attend_users.present? %>
           <p style="line-height: 150%; color: #FF5A00;"><%= @meetup.fixed? ? "Attend" : "Pending" %></p>
           <% @attend_users.each do |u| %>
-            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+            <%= facebook_image_link(u, 'square', 40) %>
           <% end %>
         <% end %>
 
         <% if @invited_users.present? %>
           <p style="line-height: 150%; color: #FF5A00;">Invited</p>
           <% @invited_users.each do |u| %>
-            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+            <%= facebook_image_link(u, 'square', 40) %>
           <% end %>
         <% end %>
 
         <% if @declined_users.present? %>
           <p style="line-height: 150%; color: #FF5A00;">Declined<p>
           <% @declined_users.each do |u| %>
-            <%= link_to image_tag( facebook_image_url(u.id, 'square'), width:"40", height:"40", alt:"picture"), user_path(u) %>
+            <%= facebook_image_link(u, 'square', 40) %>
           <% end %>
         <% end %>
       </div>
@@ -121,7 +121,7 @@
       <div class="yourArea">
         <div class="imgArea">
           <figure>
-          <%= link_to image_tag( facebook_image_url(comment.user.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
+          <%= facebook_image_link(comment.user, 'square', 50) %>
           <figcaption>you</figcaption>
           </figure>
         </div>
@@ -148,7 +148,7 @@
       <div class="addresseeArea">
         <div class="imgArea">
           <figure>
-          <%= link_to image_tag( facebook_image_url(comment.user.id, 'square'), width:"50", height:"50", alt:"picture"), user_path(comment.user) %>
+          <%= facebook_image_link(comment.user, 'square', 50) %>
           <figcaption><%= comment.user.name %></figcaption>
           </figure>
         </div>

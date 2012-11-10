@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if @oauth_user = OauthUser.find_by_provider_and_provider_uid(auth["provider"], auth["uid"])
       @oauth_user.auth_token = auth["credentials"]["token"]
       # already registered user
-      if @oauth_user.user_id and @user = User.find(@oauth_user.user_id)
+      if @oauth_user.user_id and @user = User.find_by_id_and_active(@oauth_user.user_id, true)
         session[:user_id] = @user.id
         if session[:redirect_to].present?
           redirect_to session[:redirect_to]

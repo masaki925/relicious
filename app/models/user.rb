@@ -67,27 +67,29 @@ class User < ActiveRecord::Base
   def self.search(queries)
     if queries
       if !queries[:time].blank?
-        find(:all, include: :user_avails, conditions: ["user_avails.avail_option = ? or user_avails.avail_option = ?", queries[:time], "anyday"] )
+        find(:all, include: :user_avails, conditions: ["(user_avails.avail_option = ? OR user_avails.avail_option = ?) AND active = ?", queries[:time], "anyday", true] )
       elsif !queries[:date].blank?
         m,d,y = queries[:date].split('/')
         weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         w_index = Date.new(y.to_i,m.to_i,d.to_i).wday
-        find(:all, include: :user_avails, conditions: ["user_avails.day = ? or user_avails.day = ?", weekdays[w_index], "anyday"] )
+        find( :all, include: :user_avails, conditions: ["(user_avails.day = ? OR user_avails.day = ?) AND active = ?", weekdays[w_index], "anyday", true] )
       elsif !queries[:location].blank?
-        find(:all, conditions: [ 'location LIKE ?', "%#{queries[:location]}%" ] )
+        find( :all, conditions: [ 'location LIKE ? AND active = ?', "%#{queries[:location]}%", true ] )
       else
-        find(:all)
+        find( :all, conditions: [ 'active = ?', true ] )
       end
     else
-      find(:all)
+      find( :all, conditions: [ 'active = ?', true ] )
     end
   end
 
   # return [User1, User2, ...] or []
+  # NOTE: it should be replaced with others such as KVS
   def self.get_users_to_review(user)
-    meetups_thesedays      = user.meetups.where('begin_at BETWEEN ? AND ?', Time.now - 60*60*24*30, Time.now)
-    users_met_thesedays    = meetups_thesedays.map {|m| m.users - [user]}.flatten.uniq
-    already_reviewed_users = user.sent_reviews.map {|sr| User.find(sr.reviewed_user_id)}
+    meetups_thesedays      = user.meetups.where( 'begin_at BETWEEN ? AND ?', Time.now - 60*60*24*30, Time.now )
+    users_met_thesedays    = meetups_thesedays.map { |m| m.users - [user] }.flatten.uniq
+    users_met_thesedays    = users_met_thesedays.select { |u| u.active }
+    already_reviewed_users = user.sent_reviews.map { |sr| User.find( sr.reviewed_user_id ) }
 
     users_met_thesedays - already_reviewed_users
   end
@@ -98,5 +100,11 @@ class User < ActiveRecord::Base
 
   def provider_uid
     OauthUser.find_by_user_id(self.id).provider_uid
+  end
+
+  def withdraw
+    self.active = false
+    self.email  = self.email.sub( /^/, Time.now.strftime('%Y%m%d%H%M') + "DELETE_" )
+    self.save
   end
 end

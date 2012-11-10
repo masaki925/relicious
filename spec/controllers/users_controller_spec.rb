@@ -47,6 +47,13 @@ describe UsersController do
         response.should redirect_to root_path
       end
     end
+
+    describe "GET users/:id/meetups" do
+      it "reject" do
+        get :meetups
+        response.should redirect_to root_path
+      end
+    end
   end
 
   context "when user is logged in" do
@@ -68,11 +75,38 @@ describe UsersController do
       end
     end
 
-    describe "GET show" do
-      before { get :show, {:id => @user.to_param}, {user_id: @user.id} }
+    describe "GET meetups" do
+      context "request by user own" do
+        it "success request" do
+          get :meetups, { id: @user.id }, { user_id: @user.id }
+          response.should be_success
+        end
+      end
 
-      specify { assigns(:user).should eq(@user) }
-      specify { response.should be_success }
+      context "request for other user" do
+        before { @other_user = FactoryGirl.create(:user) }
+        it "reject" do
+          get :meetups, { id: @user.id }, { user_id: @other_user.id }
+          response.should redirect_to root_path
+        end
+      end
+    end
+
+    describe "GET show" do
+      context "when the user is active" do
+        before { get :show, {:id => @user.to_param}, {user_id: @user.id} }
+        specify { assigns(:user).should eq(@user) }
+        specify { response.should be_success }
+      end
+
+      context "when the user is NOT active" do
+        before do
+          @non_active_user = FactoryGirl.create( :user, active: false )
+          get :show, { :id => @non_active_user.to_param }, { user_id: @user.id }
+        end
+
+        specify { response.should redirect_to root_path }
+      end
     end
 
     describe "GET edit" do
@@ -153,6 +187,19 @@ describe UsersController do
       it "redirects to the users list" do
         delete :destroy, {:id => @user.to_param}, {user_id: @user.id}
         response.should redirect_to(root_path)
+      end
+    end
+
+    describe "POST withdraw" do
+      it "change user's active flag" do
+        User.find(@user.id).active.should be true
+        post :withdraw, {}, {user_id: @user.id}
+        User.find(@user.id).active.should be false
+      end
+
+      it "should be 200 ok" do
+        post :withdraw, {}, {user_id: @user.id}
+        response.should be_success
       end
     end
   end
