@@ -10,6 +10,10 @@
     <%= @meetup_users.size > 1 ? t("meetups.show.conversation_postfix") : t("meetups.show.conversation_postfix_sole") %>
     <br><span class="fontCR"><%= t("meetups.show.payment_policy") %></span>
   </h2>
+  <h3>
+    <%= @meetup.title.blank? ? t("meetups.new.not_decided_html") : @meetup.title %>　
+    <%= @meetup.begin_at.blank? ? t("meetups.new.not_decided_html") : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜
+  </h3>
 
   <!-- addressee -->
   <div id="addressee">
@@ -88,8 +92,6 @@
           <dl class="dlStyle1">
             <dt><%= t("meetups.show.status") %></dt>
             <dd><%= @meetup.fixed              ? t("general.meetup.fixed_html") : t("general.meetup.not_fixed_html") %></dd>
-            <dt><%= t("meetups.show.title") %></dt>
-            <dd><%= @meetup.title.blank?       ? t("meetups.new.not_decided_html") : @meetup.title %></dd>
             <dt><%= t("meetups.show.area_name") %></dt>
             <dd><%= @meetup.area.blank?        ? t("meetups.new.not_decided_html") : @meetup.area.name %></dd>
             <dt><%= t("meetups.show.place") %></dt>
@@ -98,8 +100,6 @@
             <dd><%= @meetup.url.blank?         ? t("meetups.new.not_decided_html") : link_to(@meetup.url, @meetup.url, :target => "blank") %></dd>
             <dt><%= t("meetups.show.public") %></dt>
             <dd><%= @meetup.public             ? "public" : "private" %></dd>
-            <dt><%= t("meetups.show.begin_at") %></dt>
-            <dd><%= @meetup.begin_at.blank?    ? t("meetups.new.not_decided_html") : @meetup.begin_at.strftime("%Y/%m/%d %H:%M:%S") %>〜</dd>
           </dl>
           <br>
              
@@ -179,7 +179,7 @@
     <% end %>
   <% else %>
     <% if @meetup.public %>
-      <li style="text-align:center;"><a href="/auth/facebook" class="btn3"><%= t("meetups.show.login") %></a></li>
+      <li style="text-align:center;"><a href="/auth/facebook" class="btn1"><%= t("meetups.show.login") %></a></li>
     <% end %>
   <% end %>
 
