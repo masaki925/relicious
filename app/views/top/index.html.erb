@@ -93,9 +93,9 @@
             </div>
             <div class="detailArea">
               <p>
-              <time ><%= t( "top.recent_meetups.begin_at" ) %> : <%= meetup.begin_at.strftime("%Y/%m/%d %H:%M") %></time><br>
-                <%= t( "top.recent_meetups.area_name" ) %> : <%= meetup.area.name %><br>
-                <%= t( "top.recent_meetups.place" ) %> : <%= meetup.place %><br>
+              <time ><%= t( "top.recent_meetups.begin_at" ) %> : <%= meetup.begin_at ? meetup.begin_at.strftime("%Y/%m/%d %H:%M") : '-' %></time><br>
+                <%= t( "top.recent_meetups.area_name" ) %>     : <%= meetup.area ? meetup.area.name : '-' %><br>
+                <%= t( "top.recent_meetups.place" ) %>         : <%= meetup.place ? meetup.place : '-' %><br>
               </p>
               <% if meetup.public %>
                 <%= link_to t("top.recent_meetups.see_detail"), meetup_path(meetup), class: "btn1" %><br>
