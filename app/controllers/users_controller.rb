@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_filter :redirect_unless_new_user, only: [:new, :create]
   before_filter :require_authentication, except: [:new, :create, :index]
+  before_filter :require_owner, only: [:meetups, :edit]
+  before_filter :require_active_user, only: [:show, :edit, :update, :withdraw]
 
   # GET /users
   # GET /users.json
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
   def meetups
     add_breadcrumb "My Meetups", "/users/#{current_user.id}/meetups"
 
-    @user    = User.find(params[:user_id])
+    @user    = User.find(params[:id])
     if params[:status]
       @meetups = Meetup.find_user_meetups(current_user, params[:status])
     else
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # meetups.html.erb
       format.json { render json: @meetups }
     end
   end
@@ -71,10 +73,6 @@ class UsersController < ApplicationController
     add_breadcrumb "Profile", user_path
     add_breadcrumb "Edit", edit_user_path
 
-    unless params[:id].to_i == current_user.id
-      redirect_to users_path, notice: "Forbidden access"
-    end
-
     @user = User.find(params[:id])
     @user_languages = @user.user_languages
     @user_avails = @user.user_avails
@@ -94,8 +92,10 @@ class UsersController < ApplicationController
     end
 
     unless oauth_user.user_id.blank?
-      redirect_to root_path, notice: "you already signed up."
-      return
+      if User.find(oauth_user.user_id).active
+        redirect_to root_path, notice: "you already signed up."
+        return
+      end
     end
 
     @user = User.new(params[:user])
@@ -193,8 +193,37 @@ class UsersController < ApplicationController
     end
   end
 
+  # POST /users/withdraw
+  def withdraw
+    if current_user.withdraw
+      reset_session
+
+      respond_to do |format|
+        format.html # withdraw.html.erb
+        format.json { render json: { 'status' => 'ok' }, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user), notice: "could not complete withdraw process. please inform it to the service team." }
+        format.json { render json: { 'status' => 'ng' }, status: :ok }
+      end
+    end
+  end
+
   protected
   def redirect_unless_new_user
     redirect_to root_path if current_user
+  end
+
+  def require_owner
+    unless params[:id].to_i == current_user.id.to_i
+      redirect_to root_path, notice: 'Forbidden Access'
+      return
+    end
+  end
+
+  def require_active_user
+    return true if user = User.find( params[:id] ) and user.active
+    redirect_to root_path, notice: "Forbidden Access"
   end
 end
