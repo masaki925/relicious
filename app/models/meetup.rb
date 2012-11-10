@@ -47,11 +47,11 @@ class Meetup < ActiveRecord::Base
   end
 
   def self.find_except(user)
-    meetups = Meetup.where('fixed = ? AND public = ?', true, true).order('meetups.updated_at').reverse_order
+    meetups = Meetup.where('fixed = ? AND public = ?', true, true)
 
     # meetups except the user
     meetups = Meetup.joins( :user_meetup_permissions ).group( "user_meetup_permissions.meetup_id" ).having(
-      "COUNT(*) = SUM( CASE WHEN user_meetup_permissions.user_id = #{user.id} THEN 0 ELSE 1 END)" )
+      "COUNT(*) = SUM( CASE WHEN user_meetup_permissions.user_id = #{user.id} THEN 0 ELSE 1 END)" ).order('meetups.updated_at').reverse_order
 
     meetups
   end
