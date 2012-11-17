@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903225344) do
+ActiveRecord::Schema.define(:version => 20121110061356) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20120903225344) do
   add_index "user_reviews", ["user_id"], :name => "index_user_reviews_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name",                        :null => false
+    t.string   "name",                                          :null => false
     t.string   "screen_name"
     t.string   "email"
     t.date     "birthday"
@@ -133,11 +133,12 @@ ActiveRecord::Schema.define(:version => 20120903225344) do
     t.string   "locale"
     t.string   "location"
     t.text     "likes"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "favorite_food"
     t.string   "ng_food"
     t.string   "nationality",   :limit => 10
+    t.boolean  "active",                      :default => true, :null => false
   end
 
 end

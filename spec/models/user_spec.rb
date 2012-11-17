@@ -41,5 +41,19 @@ describe User do
     before { @user_languages = FactoryGirl.create_list(:user_language, 2, user_id: @user.id) }
     specify { @user.user_languages.should eq @user_languages }
   end
+
+  describe "User#withdraw" do
+    it "change user active flag" do
+      @user.active.should eq true
+      @user.withdraw
+      @user.active.should eq false
+    end
+
+    it "change user email" do
+      email_org = @user.email
+      @user.withdraw
+      @user.email.should_not eq email_org
+    end
+  end
 end
 

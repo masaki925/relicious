@@ -1,8 +1,8 @@
 <div class="box1">
-  <h4>From <%= link_to user_review.user.name, user_path(user_review.user) %></a></h4>
+  <h4>From <%= user_review.user.name %></a></h4>
   <div class="aboutBox">
     <div class="imgArea">
-      <%= image_tag facebook_image_url(user_review.user.id, 'square'), width:"100", height:"100", alt:"" %>
+      <%= facebook_image_link(user_review.user, 'square', 100) %>
     </div>
 
     <div class="positiveArea">
