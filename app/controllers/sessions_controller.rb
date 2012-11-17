@@ -8,21 +8,25 @@ class SessionsController < ApplicationController
 
     # already connected OAuth
     if @oauth_user = OauthUser.find_by_provider_and_provider_uid(auth["provider"], auth["uid"])
-      @oauth_user.auth_token = auth["credentials"]["token"]
-      # already registered user
-      if @oauth_user.user_id and @user = User.find_by_id_and_active(@oauth_user.user_id, true)
-        session[:user_id] = @user.id
-        if session[:redirect_to].present?
-          redirect_to session[:redirect_to]
-          session[:redirect_to] = nil
+      if @oauth_user.update_attribute( :auth_token, auth["credentials"]["token"] )
+        # already registered user
+        if @oauth_user.user_id and @user = User.find_by_id_and_active(@oauth_user.user_id, true)
+          session[:user_id] = @user.id
+          if session[:redirect_to].present?
+            redirect_to session[:redirect_to]
+            session[:redirect_to] = nil
+          else
+            redirect_to root_path
+          end
+          return
+        # connected but not registered
         else
-          redirect_to root_path
+          session[:oauth_user_id] = @oauth_user.id
+          redirect_to new_user_path
+          return
         end
-        return
-      # connected but not registered
       else
-        session[:oauth_user_id] = @oauth_user.id
-        redirect_to new_user_path
+        redirect_to root_path, notice: "We are sorry but OAuth process failed. please contact to service administrator."
         return
       end
     # not yet connected OAuth
