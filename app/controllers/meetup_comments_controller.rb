@@ -16,7 +16,7 @@ class MeetupCommentsController < ApplicationController
         @members = @meetup.users.select {|u| u != current_user}
 
         @members.each do |user_to_email|
-          UserMailer.meetup_comment_email(user_to_email, @commented_user, @meetup).deliver
+          UserMailer.meetup_comment_email(user_to_email, @commented_user, @meetup).deliver if user_to_email.active
         end
 
         format.html { redirect_to meetup_path(id: params[:meetup_id]) }

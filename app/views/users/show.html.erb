@@ -8,7 +8,7 @@
     <div id="profileImg">
       <div class="flexslider">
         <ul class="slides">
-          <li><%= image_tag facebook_image_url(@user.id, 'normal'), width:"175", alt:"picture" %></li>
+          <li><%= facebook_image_link(@user, 'normal', 175) %></li>
         </ul>
       </div>
       <% if @user == current_user %>

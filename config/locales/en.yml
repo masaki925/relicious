@@ -77,6 +77,10 @@ en:
     new:
       header_text: "Sign up"
 
+    withdraw:
+      header_text: "Complete withdraw. please come back again if you would like to. see ya!"
+      confirm: 'do you want to delete your account?'
+
     edit:
       breadcrumb: "Editing profile"
       header_text: "Editing profile"
@@ -139,6 +143,7 @@ en:
       conversation_prefix: "Conversation with"
       conversation_prefix_sole: "Conversation"
       conversation_postfix: ""
+      conversation_postfix_sole: ""
       payment_policy: "Our policy : You guys must split the cost of meals."
       update_information: "update information"
       title       : "Title"

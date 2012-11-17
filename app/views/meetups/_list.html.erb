@@ -15,8 +15,8 @@
          end
        %>
       <li>
-        <p class="thumb"><%= image_tag facebook_image_url(target_user.id, 'square'), width:"75", height:"75", alt:"" %></p>
-        <p class="name"><%= link_to target_user.name, user_path(target_user) %></p>
+        <p class="thumb"><%= facebook_image_link(target_user, 'square', 75) %></p>
+        <p class="name"><%= target_user.name %></p>
         <p class="data"><%= meetup.begin_at.blank? ? link_to('????/??/??', meetup_path(meetup)) : link_to(meetup.begin_at.strftime("%Y/%m/%d"), meetup_path(meetup)) %></p>
         <p class="description"><%= link_to meetup.title, meetup_path(meetup) %></p>
         <!-- FIXME -->

@@ -18,5 +18,6 @@ FactoryGirl.define do
     favorite_food "favorite food"
     ng_food      "ng food"
     nationality  "JP"
+    active       true
   end
 end
