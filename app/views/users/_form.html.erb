@@ -156,5 +156,10 @@
     </tr>
   </table>
 
-  <p class="textC"><%= f.submit t("general.register"), {class: "btn1"} %></p>
+  <% if params[:action] == 'new' %>
+    <p><%= t("users.new.ask_privacy") %> <%= link_to 'Privacy & Terms', '/privacy.html', target: '_blank' %></p>
+    <p class="textC"><%= f.submit t("users.new.register"), {class: "btn1"} %></p>
+  <% else %>
+    <p class="textC"><%= f.submit t("general.save"), {class: "btn1"} %></p>
+  <% end %>
 <% end %>

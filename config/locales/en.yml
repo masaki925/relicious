@@ -76,6 +76,8 @@ en:
 
     new:
       header_text: "Sign up"
+      ask_privacy: "*Attention : Before registration, please confirm our Privacy & Terms for registration."
+      register: "Agree with Relicious Privacy & Trems and Register"
 
     withdraw:
       header_text: "Complete withdraw. please come back again if you would like to. see ya!"
