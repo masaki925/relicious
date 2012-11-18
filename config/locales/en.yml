@@ -26,6 +26,14 @@ en:
       subject: '[Relicious] Please update your language skill !!'
     invite_email:
       subject: "[Relicious]You\'ve been invited to %{meetup_title} by %{created_user_name}"
+    meetup_new_email:
+      subject: "[Relicious]%{created_user_name} invited you to a Relicious meetup %{meetup_title}!"
+    meetup_accept_email:
+      subject: "[Relicious]%{created_user_name} has accepted your invitation to %{meetup_title}!"
+    meetup_declined_email:
+      subject: "[Relicious]%{created_user_name} has declined your invitation to %{meetup_title}."
+    meetup_update_info_email:
+      subject: "[Relicious]%{created_user_name} has updated information about %{meetup_title}!"
 
   general:
     mandatory: "Mandatory"

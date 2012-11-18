@@ -26,6 +26,14 @@ ja:
       subject: '[Relicious] 言語スキルをアップデートしてください！'
     invite_email:
       subject: '[Relicious] %{created_user_name} さんから%{meetup_title} へのお誘いが届いています！'
+    meetup_new_email:
+      subject: "[Relicious]%{created_user_name} さんがあなたを%{meetup_title} に招待しています!"
+    meetup_accept_email:
+      subject: "[Relicious]%{created_user_name} さんがあなたの%{meetup_title} への招待を承認しました!"
+    meetup_declined_email:
+      subject: "[Relicious]%{created_user_name} さんがあなたの%{meetup_title} への招待を拒否しました。"
+    meetup_update_info_email:
+      subject: "[Relicious]%{created_user_name} さんが%{meetup_title} に関する情報を更新しました!"
 
   general:
     mandatory: "必須入力項目"

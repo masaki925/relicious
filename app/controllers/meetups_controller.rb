@@ -109,7 +109,7 @@ class MeetupsController < ApplicationController
             if params[:member].present?
               if @invitee_meetup_permission = UserMeetupPermission.create(user_id: params[:member], meetup_id: @meetup.id, status: MEETUP_STATUS_INVITED)
                 user_to_mail = User.find(params[:member])
-                UserMailer.meetup_new_email( user_to_mail, @user, @meetup ).deliver if user_to_mail.active
+                UserMailer.meetup_new_email( user_to_mail, @user, @meetup, @meetup_comment ).deliver if user_to_mail.active
               end
             end
 
@@ -140,6 +140,12 @@ class MeetupsController < ApplicationController
 
     respond_to do |format|
       if @meetup.update_attributes(params[:meetup])
+
+        @members = @meetup.users.select {|u| u != current_user}
+        @members.each do |user_to_email|
+          UserMailer.meetup_update_info_email(user_to_email, @commented_user, @meetup).deliver if user_to_email.active
+        end 
+
         format.html { redirect_to @meetup, notice: 'Meetup was successfully updated.' }
         format.json { head :no_content }
       else
@@ -170,10 +176,16 @@ class MeetupsController < ApplicationController
           @meetup.save
         end
 
+        user_to_mail = @meetup.user
+        if @meetup_permission.status == MEETUP_STATUS_ATTEND
+          UserMailer.meetup_accept_email( user_to_mail, current_user, @meetup ).deliver
+        elsif @meetup_permission.status == MEETUP_STATUS_DECLINED
+          UserMailer.meetup_declined_email( user_to_mail, current_user, @meetup ).deliver
+        end
+
         format.html { redirect_to @meetup, notice: 'Meetup status was successfully updated.' }
         format.json { head :no_content }
       else
-        debugger
         format.html { redirect_to @meetup, notice: 'failed to change Meetup status.' }
         format.json { render json: @meetup.errors, status: :unprocessable_entity }
       end
