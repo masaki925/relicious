@@ -178,8 +178,8 @@ en:
       signup_button: "Sign up (free)"
     header:
       signup: "Sign up / Log in"
-      privacy: "Privacy Policy"
-      howitworks: "How it works"
+      privacy: "Privacy & Terms"
+      howitworks: "About Relicious"
     signup:
       explain: "You need a facebook account to start Relicious."
     recent_meetups:
