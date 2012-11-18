@@ -23,6 +23,10 @@
       <td><%= f.text_field :name %></td>
     </tr>
     <tr>
+      <th><%= User.human_attribute_name(:screen_name) %></th>
+      <td><%= f.text_field :screen_name %></td>
+    </tr>
+    <tr>
       <th><%= User.human_attribute_name(:email) %><span class="fontCR">*</span></th>
       <td><%= t("users.edit.email_explain") %><br><%= f.text_field :email %></td>
     </tr>
