@@ -77,6 +77,8 @@ ja:
 
     new:
       header_text: "新規登録"
+      ask_privacy: "Relicious のプライバシーポリシーと利用規約についてご確認のうえ登録をお願いします。"
+      register: "Relicious のプライバシーポリシーと利用規約に同意し、登録する"
 
     withdraw:
       header_text: "退会が完了しました。気が向いたら戻ってきて下さいね。ではまた!"
