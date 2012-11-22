@@ -143,7 +143,7 @@ class MeetupsController < ApplicationController
 
         @members = @meetup.users.select {|u| u != current_user}
         @members.each do |user_to_email|
-          UserMailer.meetup_update_info_email(user_to_email, @commented_user, @meetup).deliver if user_to_email.active
+          UserMailer.meetup_update_info_email(user_to_email, current_user, @meetup).deliver if user_to_email.active
         end 
 
         format.html { redirect_to @meetup, notice: 'Meetup was successfully updated.' }
@@ -178,9 +178,9 @@ class MeetupsController < ApplicationController
 
         user_to_mail = @meetup.user
         if @meetup_permission.status == MEETUP_STATUS_ATTEND
-          UserMailer.meetup_accept_email( user_to_mail, current_user, @meetup ).deliver
+          UserMailer.meetup_accept_email( user_to_mail, current_user, @meetup ).deliver if user_to_mail.active
         elsif @meetup_permission.status == MEETUP_STATUS_DECLINED
-          UserMailer.meetup_declined_email( user_to_mail, current_user, @meetup ).deliver
+          UserMailer.meetup_declined_email( user_to_mail, current_user, @meetup ).deliver if user_to_mail.active
         end
 
         format.html { redirect_to @meetup, notice: 'Meetup status was successfully updated.' }
