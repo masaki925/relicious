@@ -34,6 +34,8 @@ en:
       subject: "[Relicious]%{created_user_name} has declined your invitation to %{meetup_title}."
     meetup_update_info_email:
       subject: "[Relicious]%{created_user_name} has updated information about %{meetup_title}!"
+    remind_review_mail:
+      subject: "[Relicious] Please review %{review_target_user_name} about %{meetup_title}!"
 
   general:
     mandatory: "Mandatory"
