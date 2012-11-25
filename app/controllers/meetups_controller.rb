@@ -192,22 +192,6 @@ class MeetupsController < ApplicationController
     end
   end
 
-  # DELETE /meetups/1
-  # DELETE /meetups/1.json
-  def destroy
-    @meetup = Meetup.find(params[:id])
-    if @meetup.user_id == current_user.id
-      @meetup.destroy
-    else
-      flash[:notice] = "ERROR: you are not meetup's owner"
-    end
-
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { head :no_content }
-    end
-  end
-
   private
   def set_redirect_to_session
     session[:redirect_to] = request.url

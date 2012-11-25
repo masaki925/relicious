@@ -16,13 +16,19 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
+# every 5.minutes do
+# end
+#
+# Learn more: http://github.com/javan/whenever
 
 set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 #set :environment, 'development'
 
-#every 5.minutes do
 every "00 08 * * *" do
   rake 'analytics'
 end
 
-# Learn more: http://github.com/javan/whenever
+every "00 20 * * *" do
+  rake 'remind_review_mail'
+end
+

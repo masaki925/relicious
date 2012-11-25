@@ -43,6 +43,12 @@ class UserReviewsController < ApplicationController
   # GET /user_reviews/1/edit
   def edit
     @user_review = UserReview.find(params[:id])
+
+    if @user_review.user != current_user
+      redirect_to root_path, notice: "You don't have a permission to do it"
+      return
+    end
+
     @meetup_candidates = current_user.meetups and @reviewed_user.meetups
     redirect_to user_path(@reviewe_user) if @meetup_candidates.blank?
   end
@@ -70,6 +76,11 @@ class UserReviewsController < ApplicationController
   def update
     @user_review = UserReview.find(params[:id])
 
+    if @user_review.user != current_user
+      redirect_to root_path, notice: "You don't have a permission to do it"
+      return
+    end
+
     respond_to do |format|
       if @user_review.update_attributes(params[:user_review])
         format.html { redirect_to user_reviews_path(user_id: @reviewed_user.id, id: @user_review.id), notice: 'User review was successfully updated.' }
@@ -81,18 +92,6 @@ class UserReviewsController < ApplicationController
     end
   end
 
-  # DELETE /user_reviews/1
-  # DELETE /user_reviews/1.json
-  def destroy
-    @user_review = UserReview.find(params[:id])
-    @user_review.destroy
-
-    respond_to do |format|
-      format.html { redirect_to user_reviews_path }
-      format.json { head :no_content }
-    end
-  end
-  
   private
   def load_reviewed_user
     @reviewed_user = User.find(params[:user_id])

@@ -34,6 +34,8 @@ ja:
       subject: "[Relicious]%{created_user_name} さんがあなたの%{meetup_title} への招待を拒否しました。"
     meetup_update_info_email:
       subject: "[Relicious]%{created_user_name} さんが%{meetup_title} に関する情報を更新しました!"
+    remind_review_mail:
+      subject: "[Relicious]%{meetup_title} に関して、%{review_target_user_name} さんのレビューを書いて下さるようお願いします!"
 
   general:
     mandatory: "必須入力項目"

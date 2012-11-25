@@ -10,7 +10,7 @@ class TopController < ApplicationController
                                                   true, Time.now ).limit(3).order(:updated_at).reverse_order.find_all {|a| a.users.include?(@user) == false}
 
       # FIXME: performance problem
-      @users_to_review = User.get_users_to_review(@user)
+      @users_to_review = User.get_users_to_review(@user, 60*60*24*30)
     else
       @recent_meetups = Meetup.where('public = ? AND fixed = ?', true, true).limit(3).order(:id).reverse_order
     end

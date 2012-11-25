@@ -91,6 +91,18 @@ class UserMailer < ActionMailer::Base
          :subject => "[Relicious]Thank your for your registration in Relicious!!")
   end
 
+  def remind_review_mail( user_to_mail, review_target_user, meetup )
+    @user_to_mail       = user_to_mail
+    @review_target_user = review_target_user
+    @meetup             = meetup
+    @review_url         = new_user_review_url( @review_target_user )
+
+    set_locale( @user_to_mail )
+
+    mail( :to => @user_to_mail.email,
+          :subject => I18n.t( "user_mailer.remind_review_mail.subject", review_target_user_name: review_target_user.name, meetup_title: meetup.title ) )
+  end
+
   private
   def set_locale(user)
     case user.locale

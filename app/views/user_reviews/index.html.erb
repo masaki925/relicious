@@ -22,12 +22,6 @@
     <td><%= user_review.eval_language %></td>
     <td><%= user_review.eval_gourmet %></td>
     <td><%= link_to 'Show', user_review_path(user_id: @reviewed_user.id, id: user_review.id) %></td>
-    <td><%= link_to 'Edit', edit_user_review_path(user_id: @reviewed_user.id, id: user_review.id) %></td>
-    <td><%= link_to 'Destroy', user_review_path(user_id: @reviewed_user.id, id: user_review.id), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New User review', new_user_review_path(user_id: @reviewed_user.id) %>
