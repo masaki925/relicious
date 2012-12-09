@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def index
     add_breadcrumb "Find people", users_path
 
-    @users = User.search(params[:search])
+    @users = Kaminari.paginate_array( User.search(params[:search]) ).page( params[:page] )
 
     respond_to do |format|
       format.html # index.html.erb
