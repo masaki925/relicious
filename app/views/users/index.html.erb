@@ -37,6 +37,8 @@
 
   <!-- findPeopleArea -->
   <% if @users %>
+    <%= paginate @users %>
+
     <% @users.each do |user| %>
       <div class="findPeopleArea">
         <div class="imgArea">
@@ -114,6 +116,8 @@
         </div>
       </div>
     <% end %>
+
+    <%= paginate @users %>
   <% end %>
   <!-- /findPeopleArea -->
 </div>
