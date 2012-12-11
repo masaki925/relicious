@@ -18,21 +18,21 @@
   <!-- addressee -->
   <div id="addressee">
     <div class="addresseeDetail">
-      <% if @meetup.fixed and @attend_users.include? current_user %>
-        <div id="invite_friend">
-          <button id='invite_friend_button'>Invite Friends</button>
-      
-          <div id='invite_friend_box' style='display: none;'>
-            <%= form_tag "/meetups/#{@meetup.id}/invite" do %>
-              <%= select_tag 'invited_user_id', options_for_select(User.all.map {|n| [ n.name, n.id ] }) %>
-              <%= submit_tag 'invite_friend_submit', class: 'btn2', value: 'send' %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-
       <% if current_user %>
-        <% unless @meetup.answered?( current_user ) %>
+        <% if @meetup.fixed and @attend_users.include? current_user %>
+          <div id="invite_friend">
+            <button id='invite_friend_button'>Invite Friends</button>
+        
+            <div id='invite_friend_box' style='display: none;'>
+              <%= form_tag "/meetups/#{@meetup.id}/invite" do %>
+                <%= select_tag 'invited_user_id', options_for_select(User.where('active = 1').map {|n| [ n.name, n.id ] }) %>
+                <%= submit_tag 'invite_friend_submit', class: 'btn2', value: 'send' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if @meetup_users.include? current_user and not @meetup.answered?( current_user ) %>
           <div id="meetup_status">
             <button id='meetup_status_button'>Change your meetup status</button>
       
